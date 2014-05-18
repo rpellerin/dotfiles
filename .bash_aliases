@@ -81,7 +81,7 @@ function git? {
     echo "git clone http://... [repo-name]"
     echo "git init [repo-name]"
     echo "-------------------------------------------------------------------------------"
-    echo "git add -A <==> git add . ; git add -u"
+    echo "git add -A <==> git add . ; git add -u" # Add to the staging area (index)
     echo "-------------------------------------------------------------------------------"
     echo "git commit -m 'message' -a"
     echo "git commit -m 'message' -a --amend"
@@ -91,10 +91,9 @@ function git? {
     echo "git ls-files"
     echo "-------------------------------------------------------------------------------"
     echo "git push origin master"
+    echo "git push origin master:master"
     echo "-------------------------------------------------------------------------------"
     echo "git remote add origin http://..."
-    echo "-------------------------------------------------------------------------------"
-    echo "git pull origin master"
     echo "-------------------------------------------------------------------------------"
     echo "git pull origin master"
     echo "-------------------------------------------------------------------------------"
@@ -103,6 +102,9 @@ function git? {
     echo "-------------------------------------------------------------------------------"
     echo "git checkout -b new-branch <==> git branch new-branch ; git checkout new-branch"
     echo "git merge old-branch"
+    echo "-------------------------------------------------------------------------------"
+    echo "git update-index --assume-unchanged <file>" # Ignore changes
+    echo "git rm --cached <file>" # Untrack a file
     echo "-------------------------------------------------------------------------------"
 
 }
