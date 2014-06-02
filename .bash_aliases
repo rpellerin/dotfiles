@@ -87,7 +87,7 @@ function git? {
     echo "git commit -m 'message' -a --amend"
     echo "-------------------------------------------------------------------------------"
     echo "git status"
-    echo "git log"
+    echo "git log --stat" # Last commits, --stat optional
     echo "git ls-files"
     echo "-------------------------------------------------------------------------------"
     echo "git push origin master"
