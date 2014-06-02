@@ -94,6 +94,7 @@ function git? {
     echo "git push origin master:master"
     echo "-------------------------------------------------------------------------------"
     echo "git remote add origin http://..."
+    echo "git remote set-url origin git://..."
     echo "-------------------------------------------------------------------------------"
     echo "git pull origin master"
     echo "-------------------------------------------------------------------------------"
