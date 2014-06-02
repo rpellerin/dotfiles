@@ -96,7 +96,9 @@ function git? {
     echo "git remote add origin http://..."
     echo "git remote set-url origin git://..."
     echo "-------------------------------------------------------------------------------"
+    echo "git stash"
     echo "git pull origin master"
+    echo "git stash list ; git stash pop"
     echo "-------------------------------------------------------------------------------"
     echo "git submodule add /absolute/path repo-name"
     echo "git submodule add http://... repo-name"
@@ -111,9 +113,9 @@ function git? {
 }
 
 
-#########
-# ALIAS #
-#########
+###########
+# ALIASES #
+###########
 
 # Overriding default commands
 alias ls='ls --color=auto'
