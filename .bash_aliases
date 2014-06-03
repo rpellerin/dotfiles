@@ -109,6 +109,9 @@ function git? {
     echo "git update-index --assume-unchanged <file>" # Ignore changes
     echo "git rm --cached <file>" # Untrack a file
     echo "-------------------------------------------------------------------------------"
+    echo "git reset --hard HEAD" # Repair what has been done since last commit
+    echo "git revert HEAD" # Repair last commit
+    echo "-------------------------------------------------------------------------------"
 
 }
 
