@@ -93,6 +93,3 @@ if ! shopt -oq posix; then
 fi
 
 PATH=/usr/local/texlive/2013/bin/x86_64-linux:$PATH
-
-echo "`printf '\033[01;32m'`Hello `printf '\033[01;34m'`$USER`printf '\033[00m'`"
-echo "My IP address is `printf '\033[01;31m'`$(hostname -I)`printf '\033[m'`"

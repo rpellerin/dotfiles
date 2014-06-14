@@ -1,3 +1,6 @@
+echo "`printf '\033[01;32m'`Hello `printf '\033[01;34m'`$USER`printf '\033[00m'`"
+echo "My IP address is `printf '\033[01;31m'`$(hostname -I)`printf '\033[m'`"
+
 #############
 # FUNCTIONS #
 #############
@@ -62,7 +65,7 @@ function rm_backup {
 }
 
 # A reminder
-function find? {
+function findhelp {
     echo "--------------------------------------------------------"
     echo "Delete a file recursively:"
     echo "find / -name '*.DS_Store' -type f -delete"
@@ -76,7 +79,7 @@ function find? {
 }
 
 # A reminder
-function git? {
+function githelp {
     echo "-------------------------------------------------------------------------------"
     echo "git clone http://... [repo-name]"
     echo "git init [repo-name]"
