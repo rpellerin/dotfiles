@@ -1,6 +1,16 @@
 echo "`printf '\033[01;32m'`Hello `printf '\033[01;34m'`$USER`printf '\033[00m'`"
 echo "My IP address is `printf '\033[01;31m'`$(hostname -I)`printf '\033[m'`"
 
+# https://coderwall.com/p/tgm2la
+if [[ "$TERM" != "screen" ]] && [[ "$SSH_CONNECTION" == "" ]]; then
+    WHOAMI=$(whoami)
+    if tmux has-session -t $WHOAMI 2>/dev/null; then
+        tmux -2 attach-session -t $WHOAMI
+    else
+        tmux -2 new-session -s $WHOAMI
+    fi
+fi
+
 #############
 # FUNCTIONS #
 #############
@@ -67,13 +77,13 @@ function rm_backup {
 # A reminder
 function findhelp {
     echo "--------------------------------------------------------"
-    echo "Delete a file recursively:"
+    echo "# Delete a file recursively:"
     echo "find / -name '*.DS_Store' -type f -delete"
     echo "--------------------------------------------------------"
-    echo "Rename a file recursively:"
+    echo "# Rename a file recursively:"
     echo "find / -type f -exec rename 's/oldname/newname/' '{}' \;"
     echo "--------------------------------------------------------"
-    echo "Find recently modified files"
+    echo "# Find recently modified files"
     echo "find / -type f -printf '%TY-%Tm-%Td %TT %p\n' | sort -r"
     echo "--------------------------------------------------------"
 }
@@ -115,7 +125,44 @@ function githelp {
     echo "git reset --hard HEAD" # Repair what has been done since last commit
     echo "git revert HEAD" # Repair last commit
     echo "-------------------------------------------------------------------------------"
+}
 
+# A reminder
+function tmuxhelp {
+    echo "--------------------------------------------------------"
+    echo "tmux <=> tmux new -s name"
+    echo "--------------------------------------------------------"
+    echo "tmux a <=> tmux a -t name # Attach to a session"
+    echo "tmux ls ; tmux kill-session -t name # List/kill sessions"
+    echo "--------------------------------------------------------"
+    echo "# Sessions"
+    echo "ctrl+b s # List and change session"
+    echo "ctrl+b $ # Rename session"
+    echo "ctrl+b d # Detach"
+    echo "--------------------------------------------------------"
+    echo "# Windows (tabs)"
+    echo "ctrl+b c # New window"
+    echo "ctrl+b , # Rename window"
+    echo "ctrl+b w # List windows"
+    echo "ctrl+b f # Find window"
+    echo "ctrl+b & # Kill window"
+    echo "ctrl+b . # Move window"
+    echo "--------------------------------------------------------"
+    echo "Panes (splits)"
+    echo "ctrl+b % # Horizontal split"
+    echo "ctrl+b \" # Vertical split"
+    echo "ctrl+b o # Swap panes"
+    echo "ctrl+b q # Show pane numbers"
+    echo "ctrl+b x # Kill pane"
+    echo "ctrl+b (space) # Toggle between layouts"
+    echo "ctrl+b (arrow) # Resize panes"
+    echo "--------------------------------------------------------"
+    echo "# Others"
+    ehco "ctrl+b t # Big clock"
+    echo "ctrl+b ? # List shortcuts"
+    echo "ctrl+b : # Prompt"
+    echo "--------------------------------------------------------"
+    echo "Taken from: https://gist.github.com/henrik/1967800"
 }
 
 
@@ -148,3 +195,4 @@ alias sshpi="ssh pi@serveur"
 #  - http://root.abl.es/methods/1504/automatic-unzipuntar-using-correct-tool/
 #  - http://forum.ubuntu-fr.org/viewtopic.php?id=20437&p=3
 #  - http://www.mercereau.info/partage-de-mon-fichier-bash_aliases/
+

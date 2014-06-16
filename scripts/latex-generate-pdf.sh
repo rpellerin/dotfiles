@@ -8,7 +8,7 @@
 #
 # ARGUMENT TO PASS
 # $1: .tex file to compile (without extention)
-# Example: ./generate-pdf.sh latex_files/Document (where Document a .tex file)
+# Example: ./generate-pdf.sh latex_files/Document (where Document is a .tex file)
 
 EVENTS="create,modify,close_write,moved_to"
 BASEDIR=$(dirname $1)
