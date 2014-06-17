@@ -1,16 +1,3 @@
-echo "`printf '\033[01;32m'`Hello `printf '\033[01;34m'`$USER`printf '\033[00m'`"
-echo "My IP address is `printf '\033[01;31m'`$(hostname -I)`printf '\033[m'`"
-
-# https://coderwall.com/p/tgm2la
-if [[ "$TERM" != "screen" ]] && [[ "$SSH_CONNECTION" == "" ]]; then
-    WHOAMI=$(whoami)
-    if tmux has-session -t $WHOAMI 2>/dev/null; then
-        tmux -2 attach-session -t $WHOAMI
-    else
-        tmux -2 new-session -s $WHOAMI
-    fi
-fi
-
 #############
 # FUNCTIONS #
 #############

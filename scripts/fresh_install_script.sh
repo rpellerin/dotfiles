@@ -22,6 +22,18 @@ install() {
     done
 }
 
+# https://github.com/sorin-ionescu/prezto
+install_prezto() {
+    rm -rf "$HOME/.zprezto"
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "$HOME/.zprezto"
+    ln -sf $HOME/.zprezto/runcoms/zlogin $HOME/.zlogin
+    ln -sf $HOME/.zprezto/runcoms/zlogout $HOME/.zlogout
+    ln -sf $HOME/.zprezto/runcoms/zpreztorc $HOME/.zpreztorc
+    ln -sf $HOME/.zprezto/runcoms/zprofile $HOME/.zprofile
+    ln -sf $HOME/.zprezto/runcoms/zshenv $HOME/.zshenv
+    ln -sf $HOME/.zprezto/runcoms/zshrc $HOME/.zshrc
+}
+
 ############################## BEGINNING OF THE SCRIPT ##############################
 
 while true; do
@@ -33,8 +45,10 @@ while true; do
     esac
 done
 
+install git
 install zsh
-command -v zsh && {
+
+command -v zsh >/dev/null && {
 while true; do
     read -p "Do you wish to set zsh as your default shell? " yn
     case $yn in
@@ -44,11 +58,11 @@ while true; do
     esac
 done
 }
-command -v zsh && {
+command -v zsh >/dev/null && {
 while true; do
-    read -p "Do you wish to install oh_my_zsh? " yn
+    read -p "Do you wish to install prezto? " yn
     case $yn in
-        [Yy]* ) wget --no-check-certificate http://install.ohmyz.sh -O - | sh; break;;
+        [Yy]* ) install_prezto; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -57,6 +71,5 @@ done
 
 install tmux
 install imagemagick # Manipulating images
-install git
 
 echo "All done! Enjoy your ULTIMATE Linux distro ;)"
