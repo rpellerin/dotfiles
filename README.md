@@ -11,6 +11,5 @@ Here are all my favorite dotfiles, taken from my Xubuntu 14.04.
 6. `echo ". ~/git/dotfiles/.aliases" >> ~/.zshrc` # Or .bashrc
 7. `ln -s ~/git/dotfiles/.tmux.conf ~/`
 8. `ln -s ~/git/dotfiles/.zpreztorc ~/`
-9. `ln -s ~/git/dotfiles/.zprezto/modules/tmux/init.zsh ~/.zprezto/modules/tmux/`
 
 I also added a few handy scripts in /scripts/.
