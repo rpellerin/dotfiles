@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # HANDY SCRIPT FOR GENERATING LATEX DOCUMENTS
 # Author: Romain PELLERIN <contact@romainpellerin.eu>

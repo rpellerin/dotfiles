@@ -3,13 +3,9 @@
 Here are all my favorite dotfiles, taken from my Xubuntu 14.04.
 
 ## How do I use your files?
-1. `cd $HOME`
-2. `mkdir -p git`
-3. `cd git/`
-4. `git clone https://github.com/rpellerin/dotfiles.git dotfiles`
-5. `echo ". ~/git/dotfiles/.rc" >> ~/.zshrc` # Or .bashrc
-6. `echo ". ~/git/dotfiles/.aliases" >> ~/.zshrc` # Or .bashrc
-7. `ln -s ~/git/dotfiles/.tmux.conf ~/`
-8. `ln -s ~/git/dotfiles/.zpreztorc ~/`
+In a terminal, write the following:
+1. `git clone https://github.com/rpellerin/dotfiles.git dotfiles`
+2. `./dotfiles/scripts/fresh_install_script.sh`
+3. Answer no to everything, except to "Do you wish to use the dotfiles from this git repo?"
 
-I also added a few handy scripts in /scripts/.
+I also added some other handy scripts in /scripts/.
