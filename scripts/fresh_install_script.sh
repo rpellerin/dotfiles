@@ -28,7 +28,7 @@ install() {
 
 # https://github.com/sorin-ionescu/prezto
 install_prezto() {
-    rm -rf "$HOME/.zprezto"
+    rm -rf "$HOME/.zprezto" && echo "Old install deleted"
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "$HOME/.zprezto" && {
         ln -sf $HOME/.zprezto/runcoms/zlogin $HOME/.zlogin
         ln -sf $HOME/.zprezto/runcoms/zlogout $HOME/.zlogout
@@ -44,10 +44,21 @@ install_teamviewer() {
 }
 
 copy_dotfiles() {
-    echo ". $REPO_DIR/.rc" >> $HOME/.zshrc
-    echo ". $REPO_DIR/.aliases" >> $HOME/.zshrc
-    ln -sf $REPO_DIR/.tmux.conf $HOME/
-    ln -sf -s $REPO_DIR/.zpreztorc $HOME/
+    grep ". $REPO_DIR/.rc" $HOME/.zshrc >/dev/null || {
+        echo ". $REPO_DIR/.rc" >> $HOME/.zshrc && echo ".rc added"
+    }
+    grep ". $REPO_DIR/.aliases" $HOME/.zshrc >/dev/null || {
+        echo ". $REPO_DIR/.aliases" >> $HOME/.zshrc && echo ".aliases added"
+    }
+    ln -sf $REPO_DIR/.tmux.conf $HOME/ && echo ".tmux.conf copied"
+    ln -sf -s $REPO_DIR/.zpreztorc $HOME/ && echo ".zpreztorc copied"
+    mkdir -p $HOME/.config/sublime-text-3/Packages/User && echo "sublime-text conf directory created"
+    ln -sf "$REPO_DIR/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap" $HOME/.config/sublime-text-3/Packages/User && {
+        echo "Default (Linux).sublime-keymap copied"
+    }
+    ln -sf "$REPO_DIR/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" $HOME/.config/sublime-text-3/Packages/User && {
+        echo "Preferences.sublime-settings copied"
+    }
     echo "Done"
 }
 
