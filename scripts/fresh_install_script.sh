@@ -59,6 +59,7 @@ copy_dotfiles() {
     ln -sf "$REPO_DIR/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" $HOME/.config/sublime-text-3/Packages/User && {
         echo "Preferences.sublime-settings copied"
     }
+    ln -sf "$REPO_DIR/.gitconfig" $HOME/ && echo ".gitconfig copied"
     echo "Done"
 }
 
@@ -117,15 +118,6 @@ command -v zsh >/dev/null && {
     done
 }
 
-while true; do
-    read -p "Do you wish to use the dotfiles from this git repo? " yn
-    case $yn in
-        [Yy]* ) copy_dotfiles; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
 install libreoffice
 
 command -v libreoffice >/dev/null && {
@@ -156,5 +148,14 @@ install synaptic
 install gtk-recordmydesktop
 install gedit
 install i3lock
+
+while true; do
+    read -p "Do you wish to use the dotfiles from this git repo? " yn
+    case $yn in
+        [Yy]* ) copy_dotfiles; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
 echo "All done! Enjoy your ULTIMATE Linux distro ;)"
