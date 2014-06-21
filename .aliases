@@ -177,7 +177,7 @@ alias path='echo $PATH | tr ":" "\n"'
 alias watch='watch ' # Source of this hack: http://yabfog.com/blog/2012/09/06/using-watch-with-a-bash-alias
 alias ssh='ssh -X'
 alias sshpi="ssh pi@serveur"
-alias pause="i3lock -i $HOME/Images/pause.png -p default -n -t"
+alias pause="i3lock -i $HOME/Images/pause.png -n -t"
 
 # Some sources : 
 #  - http://root.abl.es/methods/1504/automatic-unzipuntar-using-correct-tool/

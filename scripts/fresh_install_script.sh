@@ -155,5 +155,6 @@ install gigolo
 install synaptic
 install gtk-recordmydesktop
 install gedit
+install i3lock
 
 echo "All done! Enjoy your ULTIMATE Linux distro ;)"
