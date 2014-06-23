@@ -17,18 +17,20 @@ compile() {
     { # Try
         pdflatex -halt-on-error -output-directory $2 $1
         echo "STEP 1 [OK]"
-        bibtex $1
+        pdflatex -halt-on-error -output-directory $2 $1
         echo "STEP 2 [OK]"
-        makeglossaries $1
+        bibtex $1
         echo "STEP 3 [OK]"
-        pdflatex -halt-on-error -output-directory $2 $1
-        echo "STEP 4 [OK]"
         makeglossaries $1
-        echo "STEP 5 [OK]"
+        echo "STEP 4 [OK]"
         pdflatex -halt-on-error -output-directory $2 $1
+        echo "STEP 5 [OK]"
+        makeglossaries $1
         echo "STEP 6 [OK]"
         pdflatex -halt-on-error -output-directory $2 $1
         echo "STEP 7 [OK]"
+        pdflatex -halt-on-error -output-directory $2 $1
+        echo "STEP 8 [OK]"
     }
 }
 
