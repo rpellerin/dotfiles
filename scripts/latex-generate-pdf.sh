@@ -49,6 +49,6 @@ fi
 # The most interesting part...
 while inotifywait -e $EVENTS $(dirname $1); do
     compile $1 $BASEDIR
-    rm $BASEDIR/*.aux $BASEDIR/*.bbl $BASEDIR/*.blg $BASEDIR/*.toc $BASEDIR/*.log $BASEDIR/*.out $BASEDIR/*.glg $BASEDIR/*.gls $BASEDIR/*.ist $BASEDIR/*.glo -vf # Remove all output files except PDF
+    rm $BASEDIR/*.aux $BASEDIR/*.bbl $BASEDIR/*.blg $BASEDIR/*.toc $BASEDIR/*.log $BASEDIR/*.out $BASEDIR/*.glg $BASEDIR/*.gls $BASEDIR/*.ist $BASEDIR/*.glo $BASEDIR/*.xdy -vf # Remove all output files except PDF
     echo "PDF generated!"
 done
