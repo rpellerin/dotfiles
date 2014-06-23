@@ -23,8 +23,12 @@ compile() {
         echo "STEP 3 [OK]"
         pdflatex -halt-on-error -output-directory $2 $1
         echo "STEP 4 [OK]"
-        pdflatex -halt-on-error -output-directory $2 $1
+        makeglossaries $1
         echo "STEP 5 [OK]"
+        pdflatex -halt-on-error -output-directory $2 $1
+        echo "STEP 6 [OK]"
+        pdflatex -halt-on-error -output-directory $2 $1
+        echo "STEP 7 [OK]"
     }
 }
 
