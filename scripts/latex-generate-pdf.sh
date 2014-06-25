@@ -12,26 +12,31 @@
 
 EVENTS="create,modify,close_write,moved_to"
 BASEDIR=$(dirname $1)
+FILENAME=$(basename $1)
 
 compile() {
+    CURRENT_PATH=$(pwd)
+    cd $2
     { # Try
-        pdflatex -halt-on-error -output-directory $2 $1
+        cd $2
+        pdflatex -halt-on-error $1
         echo "STEP 1 [OK]"
-        pdflatex -halt-on-error -output-directory $2 $1
+        pdflatex -halt-on-error $1
         echo "STEP 2 [OK]"
         bibtex $1
         echo "STEP 3 [OK]"
         makeglossaries $1
         echo "STEP 4 [OK]"
-        pdflatex -halt-on-error -output-directory $2 $1
+        pdflatex -halt-on-error $1
         echo "STEP 5 [OK]"
         makeglossaries $1
         echo "STEP 6 [OK]"
-        pdflatex -halt-on-error -output-directory $2 $1
+        pdflatex -halt-on-error $1
         echo "STEP 7 [OK]"
-        pdflatex -halt-on-error -output-directory $2 $1
+        pdflatex -halt-on-error $1
         echo "STEP 8 [OK]"
     }
+    cd $CURRENT_PATH
 }
 
 show_error() {
@@ -54,7 +59,7 @@ fi
 
 # The most interesting part...
 while inotifywait -e $EVENTS $(dirname $1); do
-    compile $1 $BASEDIR
+    compile $FILENAME $BASEDIR
     rm $BASEDIR/*.aux $BASEDIR/*.bbl $BASEDIR/*.blg $BASEDIR/*.toc $BASEDIR/*.log $BASEDIR/*.out $BASEDIR/*.glg $BASEDIR/*.gls $BASEDIR/*.ist $BASEDIR/*.glo $BASEDIR/*.xdy $BASEDIR/*.nav $BASEDIR/*.snm -vf # Remove all output files except PDF
     echo "PDF generated!"
 done
