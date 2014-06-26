@@ -134,6 +134,7 @@ done
 install git
 install tmux
 install imagemagick # Manipulating images
+install optipng # Lossless compression
 install default-jdk
 install texlive-full
 install filezilla
