@@ -2,3 +2,5 @@ echo "`printf '\033[01;32m'`Hello `printf '\033[01;34m'`$USER`printf '\033[00m'`
 echo "My IP address is `printf '\033[01;31m'`$(hostname -I)`printf '\033[m'`"
 
 export EDITOR='subl'
+
+PATH=$PATH:/home/romain/sdk-android/platform-tools
