@@ -81,14 +81,15 @@ function githelp {
     echo "git clone http://... [repo-name]"
     echo "git init [repo-name]"
     echo "-------------------------------------------------------------------------------"
-    echo "git add -A <==> git add . ; git add -u" # Add to the staging area (index)
+    echo "git add -A <==> git add . ; git add -u # Add to the staging area (index)"
     echo "-------------------------------------------------------------------------------"
     echo "git commit -m 'message' -a"
     echo "git commit -m 'message' -a --amend"
     echo "-------------------------------------------------------------------------------"
     echo "git status"
-    echo "git log --stat" # Last commits, --stat optional
+    echo "git log --stat # Last commits, --stat optional"
     echo "git ls-files"
+    echo "git diff HEAD~1..HEAD"
     echo "-------------------------------------------------------------------------------"
     echo "git push origin master"
     echo "git push origin master:master"
@@ -106,11 +107,12 @@ function githelp {
     echo "git checkout -b new-branch <==> git branch new-branch ; git checkout new-branch"
     echo "git merge old-branch"
     echo "-------------------------------------------------------------------------------"
-    echo "git update-index --assume-unchanged <file>" # Ignore changes
-    echo "git rm --cached <file>" # Untrack a file
+    echo "git update-index --assume-unchanged <file> # Ignore changes"
+    echo "git rm --cached <file> # Untrack a file"
     echo "-------------------------------------------------------------------------------"
-    echo "git reset --hard HEAD" # Repair what has been done since last commit
-    echo "git revert HEAD" # Repair last commit
+    echo "git reset --hard HEAD # Repair what has been done since last commit"
+    echo "git revert HEAD # Repair last commit"
+    echo "git checkout [file] # Reset a file to its previous state at last commit"
     echo "-------------------------------------------------------------------------------"
 }
 
