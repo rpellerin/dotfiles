@@ -124,7 +124,7 @@ command -v libreoffice >/dev/null && {
 while true; do
     read -p "Do you wish to install FR package for libreoffice? " yn
     case $yn in
-        [Yy]* ) sudo aptitude install libreoffice-l10n-fr; break;;
+        [Yy]* ) sudo aptitude install libreoffice-l10n-fr libreoffice-help-fr hyphen-fr; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -149,6 +149,7 @@ install synaptic
 install gtk-recordmydesktop
 install gedit
 install i3lock
+install pdf-presenter-console
 
 while true; do
     read -p "Do you wish to use the dotfiles from this git repo? " yn
