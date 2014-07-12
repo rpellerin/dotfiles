@@ -3,3 +3,9 @@
 	name = Romain Pellerin
 [color]
 	ui = auto
+[alias]
+	st = status
+	pom = push origin master
+	oneline = log --pretty=oneline --abbrev-commit --graph --decorate
+	lc = !git oneline ORIG_HEAD.. --stat --no-merges
+
