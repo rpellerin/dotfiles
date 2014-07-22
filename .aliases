@@ -147,7 +147,7 @@ function tmuxhelp {
     echo "ctrl+b (arrow) # Resize panes"
     echo "--------------------------------------------------------"
     echo "# Others"
-    ehco "ctrl+b t # Big clock"
+    echo "ctrl+b t # Big clock"
     echo "ctrl+b ? # List shortcuts"
     echo "ctrl+b : # Prompt"
     echo "--------------------------------------------------------"
