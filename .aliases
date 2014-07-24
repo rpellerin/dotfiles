@@ -114,6 +114,11 @@ function githelp {
     echo "git revert HEAD # Repair last commit"
     echo "git checkout [file] # Reset a file to its previous state at last commit"
     echo "-------------------------------------------------------------------------------"
+    echo "git tag # List"
+    echo "git tag v0.5 # Lightwieght tag"
+    echo "git tag -a v1.4 -m 'my version 1.4' # Annotated tag"
+    echo "git push origin v1.4 # Pushing"
+    echo "-------------------------------------------------------------------------------"
 }
 
 # A reminder
