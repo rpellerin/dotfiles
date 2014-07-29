@@ -20,8 +20,8 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
  
 # Services that the system will offer to the network
-TCP_SERVICES="80 9091 443" # SSH can be written here
-UDP_SERVICES=""
+TCP_SERVICES="80 443 9091 51413" # SSH can be written here // Web server, transmission-daemon
+UDP_SERVICES="51413" # transmission-daemon
 # Services the system will use from the network
 REMOTE_TCP_SERVICES="80 443" # web browsing
 REMOTE_UDP_SERVICES="53" # DNS
@@ -85,6 +85,8 @@ for PORT in $REMOTE_UDP_SERVICES; do
  iptables -A OUTPUT -p udp --dport ${PORT} -j ACCEPT
 done
 fi
+# Transmission-daemon
+iptables -A OUTPUT -m owner --gid-owner debian-transmission -j ACCEPT
 
 # So are security package updates:
 # Note: You can hardcode the IP address here to prevent DNS spoofing
