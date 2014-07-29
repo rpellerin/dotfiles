@@ -63,6 +63,10 @@ copy_dotfiles() {
     echo "Done"
 }
 
+install_firewall() {
+    sudo mv $REPO_DIR/scripts/firewall.sh /etc/init.d/ && sudo chmod 700 /etc/init.d/firewall.sh && chown root:root /etc/init.d/firewall.sh && sudo update-rc.d firewall.sh defaults && echo "Firewall installed"
+}
+
 ############################## BEGINNING OF THE SCRIPT ##############################
 
 command -v aptitude >/dev/null || while true; do
@@ -155,6 +159,15 @@ while true; do
     read -p "Do you wish to use the dotfiles from this git repo? " yn
     case $yn in
         [Yy]* ) copy_dotfiles; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+while true; do
+    read -p "Do you wish to install the firewall? " yn
+    case $yn in
+        [Yy]* ) intall_firewall; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
