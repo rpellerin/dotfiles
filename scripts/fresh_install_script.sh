@@ -59,8 +59,11 @@ copy_dotfiles() {
     ln -sf "$REPO_DIR/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" $HOME/.config/sublime-text-3/Packages/User && {
         echo "Preferences.sublime-settings copied"
     }
+    ln -sf "$REPO_DIR/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml" $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/ && {
+      echo "xfce4-keyboard-shortcuts.xml copied"
+    }
     ln -sf "$REPO_DIR/.gitconfig" $HOME/ && echo ".gitconfig copied"
-    ln -sf "$REPO_DIR/Images/pause.png" $HOME/Images/ && echo "Images/pause.png copied"
+    cp "$REPO_DIR/Images/pause.png" $HOME/Images/pause.png && echo "Images/pause.png copied"
     echo "Done"
 }
 
