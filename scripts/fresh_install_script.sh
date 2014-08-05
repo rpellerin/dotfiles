@@ -60,6 +60,7 @@ copy_dotfiles() {
         echo "Preferences.sublime-settings copied"
     }
     ln -sf "$REPO_DIR/.gitconfig" $HOME/ && echo ".gitconfig copied"
+    ln -sf "$REPO_DIR/Images/pause.png" $HOME/Images/ && echo "Images/pause.png copied"
     echo "Done"
 }
 
