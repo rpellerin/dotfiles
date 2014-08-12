@@ -40,35 +40,39 @@ install_prezto() {
 }
 
 install_teamviewer() {
-    wget http://download.teamviewer.com/download/teamviewer_linux.deb -O teamviewer.deb && sudo dpkg -i teamviewer.deb && rm teamviewer.deb -f && sudo aptitude -f install
+    wget http://download.teamviewer.com/download/teamviewer_linux.deb -O teamviewer.deb && sudo dpkg -i teamviewer.deb && rm teamviewer.deb -f && sudo apt-get -f install
 }
 
 copy_dotfiles() {
     grep ". $REPO_DIR/.rc" $HOME/.zshrc >/dev/null || {
-        echo ". $REPO_DIR/.rc" >> $HOME/.zshrc && echo ".rc added"
+        echo ". $REPO_DIR/.rc" >> $HOME/.zshrc && echo ".rc added to $HOME/.zshrc"
     }
     grep ". $REPO_DIR/.aliases" $HOME/.zshrc >/dev/null || {
-        echo ". $REPO_DIR/.aliases" >> $HOME/.zshrc && echo ".aliases added"
+        echo ". $REPO_DIR/.aliases" >> $HOME/.zshrc && echo ".aliases added to $HOME/.zshrc"
     }
-    ln -sf $REPO_DIR/.tmux.conf $HOME/ && echo ".tmux.conf copied"
-    ln -sf -s $REPO_DIR/.zpreztorc $HOME/ && echo ".zpreztorc copied"
-    mkdir -p $HOME/.config/sublime-text-3/Packages/User && echo "sublime-text conf directory created"
+    ln -sf $REPO_DIR/.tmux.conf $HOME/ && echo ".tmux.conf copied (symlink)"
+    ln -sf -s $REPO_DIR/.zpreztorc $HOME/ && echo ".zpreztorc copied (symlink)"
+    mkdir -p $HOME/.config/sublime-text-3/Packages/User && echo "$HOME/.config/sublime-text-3/Packages/User created"
     ln -sf "$REPO_DIR/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap" $HOME/.config/sublime-text-3/Packages/User && {
-        echo "Default (Linux).sublime-keymap copied"
+        echo "Default (Linux).sublime-keymap copied (symlink)"
     }
     ln -sf "$REPO_DIR/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" $HOME/.config/sublime-text-3/Packages/User && {
-        echo "Preferences.sublime-settings copied"
+        echo "Preferences.sublime-settings copied (symlink)"
     }
+    mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml && echo "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml created"
     ln -sf "$REPO_DIR/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml" $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/ && {
-      echo "xfce4-keyboard-shortcuts.xml copied"
+      echo "xfce4-keyboard-shortcuts.xml copied (symlink)"
     }
-    ln -sf "$REPO_DIR/.gitconfig" $HOME/ && echo ".gitconfig copied"
-    cp "$REPO_DIR/Images/pause.png" $HOME/Images/pause.png && echo "Images/pause.png copied"
+    ln -sf "$REPO_DIR/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml" $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/ && {
+      echo "xfce4-panel.xml copied (symlink)"
+    }
+    ln -sf "$REPO_DIR/.gitconfig" $HOME/ && echo ".gitconfig copied (symlink)"
+    cp -i "$REPO_DIR/Images/pause.png" $HOME/Images/pause.png && echo "Images/pause.png copied (true copy)"
     echo "Done"
 }
 
 install_firewall() {
-    sudo mv $REPO_DIR/scripts/firewall.sh /etc/init.d/ && sudo chmod 700 /etc/init.d/firewall.sh && chown root:root /etc/init.d/firewall.sh && sudo update-rc.d firewall.sh defaults && echo "Firewall installed"
+    sudo cp -i $REPO_DIR/scripts/firewall.sh /etc/init.d/ && sudo chmod 700 /etc/init.d/firewall.sh && sudo chown root:root /etc/init.d/firewall.sh && sudo update-rc.d firewall.sh defaults && echo "Firewall installed"
 }
 
 ############################## BEGINNING OF THE SCRIPT ##############################
@@ -93,7 +97,7 @@ done
 
 command -v teamviewer >/dev/null || {
     while true; do
-        read -p "Do you wish to install TeamViewer? " yn
+        read -p "Do you wish to install TeamViewer ? " yn
         case $yn in
             [Yy]* ) install_teamviewer; break;;
             [Nn]* ) break;;
@@ -171,7 +175,7 @@ done
 while true; do
     read -p "Do you wish to install the firewall? " yn
     case $yn in
-        [Yy]* ) intall_firewall; break;;
+        [Yy]* ) install_firewall; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
