@@ -47,8 +47,8 @@ iptables -P FORWARD DROP
 iptables -P OUTPUT DROP
 
 # Logs
-iptables -A INPUT -j LOG
-iptables -A OUTPUT -j LOG
+#iptables -A INPUT -j LOG
+#iptables -A OUTPUT -j LOG
 
 # Don't break established connections:
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT

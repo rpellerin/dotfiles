@@ -162,6 +162,7 @@ install gtk-recordmydesktop
 install gedit
 install i3lock
 install pdf-presenter-console
+install p7zip-full
 
 while true; do
     read -p "Do you wish to use the dotfiles from this git repo? " yn
