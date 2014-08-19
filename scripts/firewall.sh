@@ -20,15 +20,15 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
  
 # Services that the system will offer to the network
-TCP_SERVICES="80 443 9091 51413" # SSH can be written here // Web server, transmission-daemon
-UDP_SERVICES="51413" # transmission-daemon
+TCP_SERVICES="80 443 9091 51413" # SSH can be written here, but will be allowed for anyone // http, https, transmission-daemon web, transmission-daemon peer
+UDP_SERVICES="51413" # transmission-daemon peer
 # Services the system will use from the network
-REMOTE_TCP_SERVICES="80 443" # web browsing
-REMOTE_UDP_SERVICES="53" # DNS
+REMOTE_TCP_SERVICES="21 22 80 443 631" # ftp, ssh, http, https, ipp (printers)
+REMOTE_UDP_SERVICES="23 53" # ntp (time update), DNS ("whois" command for example)
 # Network that will be used for remote mgmt
 # (if undefined, everyone will be allowed)
 NETWORK_MGMT=192.168.1.0/24
-# Port used for the SSH service, define this is you have setup a
+# Port used for the SSH service (locally), define this is you have setup a
 # management network but remove it from TCP_SERVICES
 SSH_PORT="22"
  
