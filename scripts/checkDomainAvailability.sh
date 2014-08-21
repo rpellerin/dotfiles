@@ -8,7 +8,7 @@
 # whois
 #
 # ARGUMENT TO PASS
-# The domain name without the top-level domain
+# 1- The domain name without the top-level domain
 # Example: ./checkDomainAvailability.sh google
  
 if [ "$#" -eq 0 ]; then
