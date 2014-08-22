@@ -122,6 +122,9 @@ echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
  
 fw_stop () {
 iptables -F
+iptables -X
+iptables -t nat -F
+iptables -t nat -X
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
@@ -133,6 +136,9 @@ iptables -P OUTPUT ACCEPT
  
 fw_clear () {
 iptables -F
+iptables -X
+iptables -t nat -F
+iptables -t nat -X
 iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
