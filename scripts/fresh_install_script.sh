@@ -40,7 +40,9 @@ install_prezto() {
 }
 
 install_teamviewer() {
-    wget http://download.teamviewer.com/download/teamviewer_linux.deb -O teamviewer.deb && sudo dpkg -i teamviewer.deb && rm teamviewer.deb -f && sudo apt-get -f install
+    wget http://download.teamviewer.com/download/teamviewer_linux.deb -O /tmp/teamviewer.deb && sudo dpkg -i /tmp/teamviewer.deb
+    rm /tmp/teamviewer.deb -f
+    sudo apt-get -f install
 }
 
 copy_dotfiles() {
@@ -65,6 +67,9 @@ copy_dotfiles() {
     }
     ln -sf "$REPO_DIR/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml" $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/ && {
       echo "xfce4-panel.xml copied (symlink)"
+    }
+    ln -sf "$REPO_DIR/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml" $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/ && {
+      echo "xfce4-power-manager.xml copied (symlink)"
     }
     ln -sf "$REPO_DIR/.gitconfig" $HOME/ && echo ".gitconfig copied (symlink)"
     cp -i "$REPO_DIR/Images/pause.png" $HOME/Images/pause.png && echo "Images/pause.png copied (true copy)"

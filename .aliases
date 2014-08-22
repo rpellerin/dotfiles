@@ -61,6 +61,11 @@ function rm_backup {
     find $1 -name '*~' -exec rm '{}' \; -print
 }
 
+# Shows the last modified files
+function last_modified {
+    find $1 -type f -exec stat --format '%Y :%y %n' {} \; | sort -n | cut -d: -f2- | tail
+}
+
 # A reminder
 function findhelp {
     echo "--------------------------------------------------------"
