@@ -66,6 +66,11 @@ function last_modified {
     find $1 -type f -exec stat --format '%Y :%y %n' {} \; | sort -n | cut -d: -f2- | tail
 }
 
+# Set the brightness to the desired value (0-100)
+function set_brightness {
+  sudo sh -c "echo $1 > /sys/class/backlight/acpi_video0/brightness"
+}
+
 # A reminder
 function findhelp {
     echo "--------------------------------------------------------"
