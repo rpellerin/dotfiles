@@ -43,8 +43,11 @@
       <property name="show-frame" type="bool" value="false"/>
       <property name="size-max" type="uint" value="22"/>
       <property name="names-visible" type="array">
+        <value type="string" value="vlc"/>
         <value type="string" value="applet networkmanager"/>
+        <value type="string" value="gestionnaire de tâches"/>
         <value type="string" value="blueman-applet"/>
+        <value type="string" value="xfce4-power-manager"/>
       </property>
     </property>
     <property name="plugin-5" type="string" value="indicator">
