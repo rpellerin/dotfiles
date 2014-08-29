@@ -75,6 +75,21 @@ install_firewall() {
     sudo cp -i $REPO_DIR/scripts/firewall.sh /etc/init.d/ && sudo chmod 700 /etc/init.d/firewall.sh && sudo chown root:root /etc/init.d/firewall.sh && sudo update-rc.d firewall.sh defaults && echo "Firewall installed"
 }
 
+install_fix_brightness() {
+    sudo touch /etc/init.d/prev_brightness
+    sudo chmod 600 /etc/init.d/prev_brightness
+    sudo rm /etc/init.d/save_screen_brightness -f
+    sudo touch /etc/init.d/save_screen_brightness
+    sudo chmod 700 /etc/init.d/save_screen_brightness
+    sudo sh -s "echo '#!/bin/sh' >> /etc/init.d/save_screen_brightness"
+    sudo sh -s "echo 'cat /sys/class/backlight/acpi_video0/brightness > /etc/init.d/prev_brightness' >> /etc/init.d/save_screen_brightness"
+    sudo ln -sf /etc/init.d/save_screen_brightness /etc/rc0.d/K99save_screen_brightness
+    sudo ln -sf /etc/init.d/save_screen_brightness /etc/rc6.d/K99save_screen_brightness
+    sudo grep "cat /etc/init.d/prev_brightness > /sys/class/backlight/acpi_video0/brightness" /etc/rc.local || {
+      sudo sed -i 's/exit 0/cat \/etc\/init.d\/prev_brightness > \/sys\/class\/backlight\/acpi_video0\/brightness\nexit 0/' /etc/rc.local
+    }
+}
+
 ############################## BEGINNING OF THE SCRIPT ##############################
 
 command -v aptitude >/dev/null || while true; do
@@ -164,6 +179,8 @@ install gedit
 install i3lock
 install pdf-presenter-console
 install p7zip-full
+install openvpn
+install network-manager-openvpn
 
 while true; do
     read -p "Do you wish to use the dotfiles from this git repo? " yn
@@ -178,6 +195,15 @@ while true; do
     read -p "Do you wish to install the firewall? " yn
     case $yn in
         [Yy]* ) install_firewall; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+while true; do
+    read -p "Do you use a laptop and is your screen brightness reseted at every reboot?" yn
+    case $yn in
+        [Yy]* ) install_fix_brightness; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
