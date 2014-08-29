@@ -143,6 +143,7 @@ while true; do
 done
 }
 
+sudo add-apt-repository ppa:git-core/ppa
 install git
 install tmux
 install imagemagick # Manipulating images
