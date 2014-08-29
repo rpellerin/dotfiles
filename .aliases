@@ -207,6 +207,7 @@ alias watch='watch ' # Source of this hack: http://yabfog.com/blog/2012/09/06/us
 alias ssh='ssh -X'
 alias sshpi="ssh pi@serveur"
 alias pause="i3lock -i $HOME/Images/pause.png -n -t"
+alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 
 # Some sources : 
 #  - http://root.abl.es/methods/1504/automatic-unzipuntar-using-correct-tool/
