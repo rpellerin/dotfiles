@@ -181,6 +181,8 @@ install pdf-presenter-console
 install p7zip-full
 install openvpn
 install network-manager-openvpn
+install codeblocks
+install build-essential
 
 while true; do
     read -p "Do you wish to use the dotfiles from this git repo? " yn
