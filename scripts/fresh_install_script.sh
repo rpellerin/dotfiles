@@ -162,6 +162,8 @@ sudo add-apt-repository ppa:git-core/ppa
 install git
 install tmux
 install imagemagick # Manipulating images
+install exiftool # EXIF data
+install jhead # EXIF data
 install optipng # Lossless compression
 install default-jdk
 install texlive-full
