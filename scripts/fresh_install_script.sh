@@ -185,6 +185,8 @@ install openvpn
 install network-manager-openvpn
 install codeblocks
 install build-essential
+echo "You will need the following if you want to develop Android app on a 64bit OS"
+install lib32stdc++6
 
 while true; do
     read -p "Do you wish to use the dotfiles from this git repo? " yn
