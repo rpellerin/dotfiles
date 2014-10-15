@@ -88,6 +88,10 @@ install_fix_brightness() {
     sudo grep "cat /etc/init.d/prev_brightness > /sys/class/backlight/acpi_video0/brightness" /etc/rc.local || {
       sudo sed -i 's/exit 0/cat \/etc\/init.d\/prev_brightness > \/sys\/class\/backlight\/acpi_video0\/brightness\nexit 0/' /etc/rc.local
     }
+    sudo grep "pgrep xflux || xflux -l 49.4106 -g 2.8322" /etc/rc.local || {
+      sudo sed -i 's/exit 0/pgrep xflux || xflux -l 49.4106 -g 2.8322\nexit 0/' /etc/rc.local
+    }
+    echo "Please install f.lux: http://doc.ubuntu-fr.org/f.lux#installation_manuelle"
 }
 
 ############################## BEGINNING OF THE SCRIPT ##############################
