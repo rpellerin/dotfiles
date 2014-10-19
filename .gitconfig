@@ -8,4 +8,4 @@
 	pom = push origin master
 	oneline = log --pretty=oneline --abbrev-commit --graph --decorate
 	lc = !git oneline ORIG_HEAD.. --stat --no-merges
-
+	whoistheboss = !git ls-files | xargs -n1 git blame --line-porcelain | sed -n 's/^author //p' | sort -f | uniq -ic | sort -nr
