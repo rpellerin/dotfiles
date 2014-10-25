@@ -41,8 +41,14 @@ install_prezto() {
 
 install_teamviewer() {
     wget http://download.teamviewer.com/download/teamviewer_linux.deb -O /tmp/teamviewer.deb && sudo dpkg -i /tmp/teamviewer.deb
-    rm /tmp/teamviewer.deb -f
     sudo apt-get -f install
+    rm /tmp/teamviewer.deb -f
+}
+
+install_chrome() {
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb && sudo dpkg -i /tmp/chrome.deb
+    sudo apt-get -f install
+    rm /tmp/chrome.deb -f
 }
 
 copy_dotfiles() {
@@ -81,8 +87,8 @@ install_fix_brightness() {
     sudo rm /etc/init.d/save_screen_brightness -f
     sudo touch /etc/init.d/save_screen_brightness
     sudo chmod 700 /etc/init.d/save_screen_brightness
-    sudo sh -s "echo '#!/bin/sh' >> /etc/init.d/save_screen_brightness"
-    sudo sh -s "echo 'cat /sys/class/backlight/acpi_video0/brightness > /etc/init.d/prev_brightness' >> /etc/init.d/save_screen_brightness"
+    sudo sh -c "echo '#\!/bin/sh' >> /etc/init.d/save_screen_brightness"
+    sudo sh -c "echo 'cat /sys/class/backlight/acpi_video0/brightness > /etc/init.d/prev_brightness' >> /etc/init.d/save_screen_brightness"
     sudo ln -sf /etc/init.d/save_screen_brightness /etc/rc0.d/K99save_screen_brightness
     sudo ln -sf /etc/init.d/save_screen_brightness /etc/rc6.d/K99save_screen_brightness
     sudo grep "cat /etc/init.d/prev_brightness > /sys/class/backlight/acpi_video0/brightness" /etc/rc.local || {
@@ -115,6 +121,17 @@ command -v teamviewer >/dev/null || {
         read -p "Do you wish to install TeamViewer ? " yn
         case $yn in
             [Yy]* ) install_teamviewer; break;;
+            [Nn]* ) break;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+}
+
+command -v google-chrome >/dev/null || {
+    while true; do
+        read -p "Do you wish to install Google Chrome (64bit) ? " yn
+        case $yn in
+            [Yy]* ) install_chrome; break;;
             [Nn]* ) break;;
             * ) echo "Please answer yes or no.";;
         esac
@@ -174,6 +191,7 @@ install zathura
 install wireshark
 install vlc
 install htop
+install gksu
 install gigolo
 install synaptic
 install gtk-recordmydesktop
@@ -207,7 +225,7 @@ while true; do
 done
 
 while true; do
-    read -p "Do you use a laptop and is your screen brightness reseted at every reboot?" yn
+    read -p "Do you use a laptop and is your screen brightness reseted at every reboot? " yn
     case $yn in
         [Yy]* ) install_fix_brightness; break;;
         [Nn]* ) break;;
