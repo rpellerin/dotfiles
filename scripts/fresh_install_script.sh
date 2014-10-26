@@ -92,7 +92,7 @@ install_fix_brightness() {
     sudo ln -sf /etc/init.d/save_screen_brightness /etc/rc0.d/K99save_screen_brightness
     sudo ln -sf /etc/init.d/save_screen_brightness /etc/rc6.d/K99save_screen_brightness
     sudo grep "cat /etc/init.d/prev_brightness > /sys/class/backlight/acpi_video0/brightness" /etc/rc.local || {
-      sudo sed -i 's/exit 0/cat \/etc\/init.d\/prev_brightness > \/sys\/class\/backlight\/acpi_video0\/brightness\nexit 0/' /etc/rc.local
+      sudo sed -i 's/^exit 0/cat \/etc\/init.d\/prev_brightness > \/sys\/class\/backlight\/acpi_video0\/brightness\nexit 0/' /etc/rc.local
     }
 }
 
