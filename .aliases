@@ -19,6 +19,7 @@ function update_git_repos() {
     echo "\n========================================\n$DIR\n========================================"
     if [[ -d "$CURRENT_DIR/$DIR" ]]; then
       \cd "$CURRENT_DIR/$DIR"
+      git status
       git pull origin master
     else
       echo "$CURRENT_DIR/$DIR not a directory"
