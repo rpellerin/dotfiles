@@ -7,6 +7,26 @@ function backup() {
     cp "$1" "$1_`date +%Y-%m-%d_%H-%M-%S`_BACKUP"
 }
 
+# Update all git repos
+function update_git_repos() {
+  if [ $# -ne 1 ]; then
+    echo "This function requires one parameter which must be a directory"
+    return
+  fi
+  CURRENT_DIR=`pwd`
+  echo "Updating all Git repos"
+  for DIR in "$1"/*; do
+    echo "\n========================================\n$DIR\n========================================"
+    if [[ -d "$CURRENT_DIR/$DIR" ]]; then
+      \cd "$CURRENT_DIR/$DIR"
+      git pull origin master
+    else
+      echo "$CURRENT_DIR/$DIR not a directory"
+    fi
+  done
+  \cd "$CURRENT_DIR"
+}
+
 # Extract any archive
 function extract() {
     if [ -f $1 ] ; then
@@ -45,7 +65,7 @@ function maj() {
 
 # Display the content of a directory after a 'cd'
 function custom_cd () {
-        cd $@ && ls
+        \cd "$@" && ls
 }
 
 # Open a file with the appropriate application
