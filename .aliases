@@ -229,6 +229,7 @@ alias ssh='ssh -X'
 alias sshpi="ssh pi@serveur"
 alias pause="i3lock -i $HOME/Images/pause.png -n -t"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 # Some sources : 
 #  - http://root.abl.es/methods/1504/automatic-unzipuntar-using-correct-tool/

@@ -18,6 +18,11 @@
 ### END INIT INFO
  
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
+# Ports you may want to add
+# 8080 livebox (remote tcp)
+# 1194 OpenVPN (remote or local udp)
+# 3128 Squid Proxy (remote or local tcp)
  
 # Services that the system will offer to the network
 TCP_SERVICES="80 443 9091 51413" # SSH can be written here, but will be allowed for anyone // http, https, transmission-daemon web, transmission-daemon peer

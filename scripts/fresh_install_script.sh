@@ -187,6 +187,7 @@ install texlive-full
 install filezilla
 install sublime-text
 install gcolor2
+install icoutils
 install zathura
 install wireshark
 install vlc
