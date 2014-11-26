@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh 
 
 # BACKUP SPECIFIC FILES/DIRECTORIES
 # Author: Romain PELLERIN <contact@romainpellerin.eu>
@@ -36,8 +36,10 @@ rm -rf /tmp/backup
 mkdir -p /tmp/backup
 
 while read DIR; do
-  echo $DIR
-  cp --parents --preserve=all -r $DIR /tmp/backup
+  if [ -n "$DIR" ]; then
+     echo "$DIR"
+     cp --parents --preserve=all -r "$DIR" /tmp/backup
+  fi
 done <"$FILES_LIST"
 
 CURRENT_DIR="`pwd`"
