@@ -1,5 +1,5 @@
 #!/bin/sh
-export http_proxy=vpn.kyane.fr:8888
+export http_proxy=vpn.xxx.fr:8888
 cd /transmission-downloads/jimmy-fallon/
 
 url=$(curl -s 'http://www.nbc.com/the-tonight-show/' | grep 'data-type="Home:Content_Episode"' | sed 's/<a href="//;s/".*$//' | tail -n 1)
