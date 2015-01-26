@@ -6,7 +6,7 @@ url=$(curl -s 'http://www.nbc.com/the-tonight-show/' | grep 'data-type="Home:Con
 number=$(echo $url | sed 's/\/the-tonight-show\/episodes\///')
 youtube-dl "http://www.nbc.com"$url --no-post-overwrites -w -o "$number.%(ext)s" --no-part
 
-avconv -i $number.flv -codec copy $number.mp4
+avconv -y -i $number.flv -codec copy $number.mp4
 rm *.flv
 
 unset http_proxy
