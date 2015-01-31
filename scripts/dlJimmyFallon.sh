@@ -7,7 +7,7 @@ number=$(echo $url | sed 's/\/the-tonight-show\/episodes\///')
 youtube-dl "http://www.nbc.com"$url --no-post-overwrites -w -o "$number.%(ext)s" --no-part
 
 avconv -y -i $number.flv -codec copy $number.mp4
-rm *.flv
+rm *.flv*
 rm *.part
 
 unset http_proxy
