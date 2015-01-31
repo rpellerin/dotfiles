@@ -8,5 +8,6 @@ youtube-dl "http://www.nbc.com"$url --no-post-overwrites -w -o "$number.%(ext)s"
 
 avconv -y -i $number.flv -codec copy $number.mp4
 rm *.flv
+rm *.part
 
 unset http_proxy
