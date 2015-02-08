@@ -44,4 +44,5 @@ done <"$FILES_LIST"
 
 CURRENT_DIR="`pwd`"
 cd /tmp && tar --preserve-permissions -zcf $DEST_FILE backup && rm -rf /tmp/backup && echo "\n$DEST_FILE created" || echo "\nAn error occured"
+chmod go-r backup*
 cd $CURRENT_DIR
