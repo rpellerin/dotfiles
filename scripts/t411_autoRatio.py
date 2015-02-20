@@ -44,11 +44,11 @@ currentTorrents = subprocess.check_output(["transmission-remote", "-n", transmis
 lines = [line.split() for line in currentTorrents.splitlines(False)]
 lines.pop() # Remove last line
 del lines[0] # Remove first line
-listTorrents = dict()
+
 for torrent in lines:
   uid = torrent[0].decode("utf-8").replace('*','').strip()
+  done = torrent[1].decode("utf-8").replace('%','').strip()
   ratio = torrent[7].decode("utf-8").strip()
-  listTorrents[uid] = ratio # id, ratio
 
   output = subprocess.check_output(["transmission-remote", "-n", transmissionUsername+":"+transmissionPassword, "-t", uid, "-i"])
 
@@ -56,6 +56,12 @@ for torrent in lines:
     newitem = item.decode('utf-8').strip()
     if 'Name:' in newitem:
       name = newitem
+      if float(done) == 0:
+        subprocess.call(["transmission-remote", "-n", transmissionUsername+":"+transmissionPassword, "-t", uid, "--remove-and-delete"])
+        print("[DELETED] "+name)
+        print("Ratio: 0")
+        time.sleep(1)
+        break
 
     if 'Latest activity' in newitem:
       liste = newitem.split(':',1) # Split only one time
@@ -65,7 +71,8 @@ for torrent in lines:
         subprocess.call(["transmission-remote", "-n", transmissionUsername+":"+transmissionPassword, "-t", uid, "--remove-and-delete"])
         print("[DELETED] "+name)
         print("Ratio: "+ratio+"\nLast activity: "+str(difference)+" seconds ago")
-        time.sleep(2)
+        time.sleep(1)
+        break
 
 freeSpace = getDiskSpaceLeft()
 print("Free space: "+str(freeSpace)+" bytes")
@@ -93,4 +100,4 @@ for el in torrents:
           print("[NOT ADDED - DUPLICATE] "+el['name'])
     else:
       totalSize -= int(el['size'])
-      print("NOT ENOUGH SPACE. Skipping...")
+      print("[NOT ADDED - NOT ENOUGH SPACE] "+el['name'])
