@@ -202,6 +202,7 @@ install pdf-presenter-console
 install p7zip-full
 install openvpn
 install network-manager-openvpn
+install network-manager-vpnc
 install codeblocks
 install build-essential
 echo "You will need the following if you want to develop Android app on a 64bit OS"

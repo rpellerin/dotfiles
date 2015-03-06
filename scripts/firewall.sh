@@ -23,12 +23,20 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin
 # 8080 livebox (remote tcp)
 # 1194 OpenVPN (remote or local udp)
 # 3128 Squid Proxy (remote or local tcp)
- 
+# 993 imap (remote tcp)
+# 995 pop3 (remote tcp)
+# 465 smtp (remote tcp)
+# 631 ipp, printers (remote tcp)
+# 51413 transmission peer port (local tcp and local udp)
+# 9091 transmission webpage (local tcp) 
+# 389 LDAP (remote tcp and remote udp)
+# 636 LDAPS (remote tcp and remote udp)
+
 # Services that the system will offer to the network
-TCP_SERVICES="80 443 9091 51413" # SSH can be written here, but will be allowed for anyone // http, https, transmission-daemon web, transmission-daemon peer
-UDP_SERVICES="68 51413" # DHCP, transmission-daemon peer
+TCP_SERVICES="80 443" # SSH can be written here, but will be allowed for anyone // http, https
+UDP_SERVICES="68" # DHCP, transmission-daemon peer
 # Services the system will use from the network
-REMOTE_TCP_SERVICES="21 22 80 443 465 631" # ftp, ssh, http, https, smtp (ssl), ipp (printers)
+REMOTE_TCP_SERVICES="21 22 80 443 465" # ftp, ssh, http, https, smtp (ssl)
 REMOTE_UDP_SERVICES="53 67 123" # DNS ("whois" command for example), DHCP, ntp (time update)
 # Network that will be used for remote mgmt
 # (if undefined, everyone will be allowed)
