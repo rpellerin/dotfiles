@@ -31,6 +31,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin
 # 9091 transmission webpage (local tcp) 
 # 389 LDAP (remote tcp and remote udp)
 # 636 LDAPS (remote tcp and remote udp)
+# 6667 irc (remote tcp)
 
 # Services that the system will offer to the network
 TCP_SERVICES="80 443" # SSH can be written here, but will be allowed for anyone // http, https
