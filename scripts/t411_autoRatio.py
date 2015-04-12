@@ -74,6 +74,13 @@ for torrent in lines:
         time.sleep(1)
         break
 
+    if 'Tracker gave an error: Torrent non enregist' in newitem:
+      subprocess.call(["transmission-remote", "-n", transmissionUsername+":"+transmissionPassword, "-t", uid, "--remove-and-delete"])
+      print("[DELETED] "+name)
+      print("Ratio: "+ratio+"\nTorrent non enregistré")
+      time.sleep(1)
+      break
+
 freeSpace = getDiskSpaceLeft()
 print("Free space: "+str(freeSpace)+" bytes")
 credentials = {'username': t411username, 'password': t411password}
