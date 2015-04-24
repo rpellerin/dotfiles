@@ -51,6 +51,10 @@ install_chrome() {
     rm /tmp/chrome.deb -f
 }
 
+install_eg() {
+    git clone https://github.com/srsudar/eg $HOME/.eg && sudo ln -fs $HOME/.eg/eg/eg_exec.py /usr/local/bin/eg
+}
+
 copy_dotfiles() {
     grep ". $REPO_DIR/.rc" $HOME/.zshrc >/dev/null || {
         echo ". $REPO_DIR/.rc" >> $HOME/.zshrc && echo ".rc added to $HOME/.zshrc"
@@ -160,6 +164,17 @@ command -v zsh >/dev/null && {
             * ) echo "Please answer yes or no.";;
         esac
     done
+}
+
+command -v eg >/dev/null && {
+while true; do
+    read -p "eg gives examples of command. For instance type 'eg tar'. Do you wish to install eg? " yn
+    case $yn in
+        [Yy]* ) install_eg; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 }
 
 install libreoffice
