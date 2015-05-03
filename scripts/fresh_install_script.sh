@@ -52,7 +52,7 @@ install_chrome() {
 }
 
 install_eg() {
-    git clone https://github.com/srsudar/eg $HOME/.eg && sudo ln -fs $HOME/.eg/eg/eg_exec.py /usr/local/bin/eg
+    git clone https://github.com/srsudar/eg $HOME/.eg && sudo ln -fs $HOME/.eg/eg_exec.py /usr/local/bin/eg
 }
 
 copy_dotfiles() {
