@@ -202,6 +202,10 @@ function tmuxhelp {
     echo "Taken from: https://gist.github.com/henrik/1967800"
 }
 
+function gitwhoistheboss {
+    echo 'You can specify a pattern, for example **/*.cpp'
+    echo 'git ls-tree -r -z --name-only HEAD -- **/*.cpp | xargs -0 -n1 git blame --line-porcelain HEAD |grep  "^author "|sort|uniq -c|sort -nr'
+}
 
 ###########
 # ALIASES #
