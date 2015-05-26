@@ -10,3 +10,4 @@
 	oneline = log --pretty=oneline --abbrev-commit --graph --decorate
 	lc = !git oneline ORIG_HEAD.. --stat --no-merges
 	whoistheboss = !git ls-tree -r -z --name-only HEAD -- | xargs -0 -n1 git blame --line-porcelain HEAD |grep  '^author '|sort|uniq -c|sort -nr
+  whattime = !git log --committer=Pellerin --pretty="%cd" | cut -d' ' -f4 | cut -d: -f1 | sort -n | uniq -c
