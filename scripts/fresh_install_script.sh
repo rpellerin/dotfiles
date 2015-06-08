@@ -39,6 +39,13 @@ install_prezto() {
     }
 }
 
+install_pandoc() {
+    sudo aptitude install haskell-platform
+    cabal update
+    cabal install pandoc
+    cabal install pandoc-citeproc
+}
+
 install_teamviewer() {
     wget http://download.teamviewer.com/download/teamviewer_linux.deb -O /tmp/teamviewer.deb && sudo dpkg -i /tmp/teamviewer.deb
     sudo apt-get -f install
@@ -188,6 +195,17 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
+}
+
+command -v pandoc >/dev/null || {
+    while true; do
+        read -p "Do you wish to install Haskell and Pandoc ? " yn
+        case $yn in
+            [Yy]* ) install_pandoc; break;;
+            [Nn]* ) break;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
 }
 
 sudo add-apt-repository ppa:git-core/ppa
