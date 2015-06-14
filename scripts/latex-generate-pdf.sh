@@ -12,7 +12,7 @@
 
 EVENTS="create,modify,close_write,moved_to"
 BASEDIR=$(dirname $1)
-FILENAME=$(basename $1)
+FILENAME=$(basename $1 | sed "s/.tex//")
 CURRENT_PATH=$(pwd)
 
 compile() {
@@ -30,14 +30,14 @@ compile() {
 
 show_error() {
     echo "Illegal usage" >&2
-    echo "Usage: generate-pdf.sh <directory-where-tex-files-are> <file-to-compile-without-extention>"
-    echo "For example, to compile latex/Document.tex, write: 'generate-pdf.sh latex/Document'"
+    echo "Usage: generate-pdf.sh <directory-where-tex-files-are> <tex-file-to-compile>"
+    echo "For example, to compile latex/Document.tex, write: 'generate-pdf.sh latex/Document.tex'"
 }
 
 ############################## BEGINNING OF THE SCRIPT ##############################
 
 # Some checks
-if [ "$#" -ne 1 ] || [ ! -d $BASEDIR ] || [ ! -f $1.tex ]; then
+if [ "$#" -ne 1 ] || [ ! -d $BASEDIR ] || [ ! -f $1 ]; then
     show_error
     exit 0
 fi
@@ -46,6 +46,7 @@ if ! dpkg -s inotify-tools > /dev/null; then
     exit 0
 fi
 
+echo $FILENAME
 # The most interesting part...
 while inotifywait -e $EVENTS "$(dirname $1)"; do
     cd "$BASEDIR"
