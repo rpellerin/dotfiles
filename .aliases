@@ -20,7 +20,7 @@ function update_git_repos() {
     if [[ -d "$CURRENT_DIR/$DIR" ]]; then
       \cd "$CURRENT_DIR/$DIR"
       git status
-      git pull origin master
+      git pull origin $(git rev-parse --abbrev-ref HEAD)
     else
       echo "$CURRENT_DIR/$DIR not a directory"
     fi

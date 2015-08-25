@@ -5,4 +5,4 @@ export EDITOR='subl'
 
 PATH=$PATH:/home/romain/sdk-android/platform-tools:/home/romain/.cabal/bin/
 
-echo -e "CPU temp: \c" && {/opt/vc/bin/vcgencmd measure_temp | cut -d = -f 2}
+#echo -e "CPU temp: \c" && {/opt/vc/bin/vcgencmd measure_temp | cut -d = -f 2}
