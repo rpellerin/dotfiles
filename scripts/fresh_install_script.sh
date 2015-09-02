@@ -71,6 +71,7 @@ copy_dotfiles() {
     }
     ln -sf $REPO_DIR/.tmux.conf $HOME/ && echo ".tmux.conf copied (symlink)"
     ln -sf -s $REPO_DIR/.zpreztorc $HOME/ && echo ".zpreztorc copied (symlink)"
+    ln -sf -s $REPO_DIR/.curlrc $HOME/ && echo ".curlrc copied (symlink)"
     mkdir -p $HOME/.config/sublime-text-3/Packages/User && echo "$HOME/.config/sublime-text-3/Packages/User created"
     ln -sf $REPO_DIR/.config/sublime-text-3/Packages/User/* $HOME/.config/sublime-text-3/Packages/User && {
       echo "-- Some files has been copied in the last created directory (symlinks)"
