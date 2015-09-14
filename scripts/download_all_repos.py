@@ -13,7 +13,7 @@ destDir       = './' # destination
 
 def cloneRepo(url,destDir):
   print("Cloning "+url)
-  git.repo.base.Repo.clone_from(url,destDir)
+  git.repo.base.Repo.clone_from(url, destDir, recursive=True)
 
 
 ######## SCRIPT BEGINS HERE #########
