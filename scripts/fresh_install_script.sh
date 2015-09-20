@@ -221,6 +221,9 @@ install texlive-full
 install inotify-tools
 install filezilla
 install sublime-text
+install atom
+install arandr
+install zenity
 install gcolor2
 install icoutils
 install zathura

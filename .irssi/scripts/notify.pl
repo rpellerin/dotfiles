@@ -41,7 +41,7 @@ sub notify {
     $summary = sanitize($summary);
     $message = sanitize($message);
 
-    my $cmd = "EXEC - " . "notify-send -i /home/romain/.irssi/scripts/notify.png '" . $summary . "' '" . $message . "'";
+    my $cmd = "EXEC - " . "notify-send -i /home/romain/.irssi/scripts/notify.png '" . $summary . "' '" . $message . "' && cvlc /home/romain/.irssi/scripts/notify.mp3 --no-loop --play-and-exit &>/dev/null || echo 'Failed to run the script'";
     $server->command($cmd);
 
 }
