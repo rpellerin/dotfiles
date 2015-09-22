@@ -5,4 +5,6 @@ export EDITOR='subl'
 
 PATH=$PATH:/home/romain/sdk-android/platform-tools:/home/romain/.cabal/bin/
 
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+
 #echo -e "CPU temp: \c" && {/opt/vc/bin/vcgencmd measure_temp | cut -d = -f 2}

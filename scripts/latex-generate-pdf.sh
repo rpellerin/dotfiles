@@ -48,7 +48,7 @@ fi
 
 echo $FILENAME
 # The most interesting part...
-while inotifywait -e $EVENTS "$(dirname $1)"; do
+while inotifywait -r -e $EVENTS "$(dirname $1)"; do
     cd "$BASEDIR"
     if compile "$FILENAME"; then echo "PDF generated with no error!"; fi
     cd "$CURRENT_PATH"
