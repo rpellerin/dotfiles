@@ -181,6 +181,8 @@ function tmuxhelp {
     echo "ctrl+b f # Find window"
     echo "ctrl+b & # Kill window"
     echo "ctrl+b . # Move window"
+    echo "ctrl+b n # New window"
+    echo "ctrl+b p # Previous window"
     echo "--------------------------------------------------------"
     echo "Panes (splits)"
     echo "ctrl+b % # Horizontal split"

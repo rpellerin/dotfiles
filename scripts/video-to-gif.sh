@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
+
 if [ "$#" -ne 2 ]; then
     echo "Illegal usage. First parameter must be the source video and second parameter must be the output GIF"
     exit
