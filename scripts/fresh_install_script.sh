@@ -212,6 +212,7 @@ command -v pandoc >/dev/null || {
 sudo add-apt-repository ppa:git-core/ppa
 install git
 install tmux
+echo "You should install https://github.com/tmux-plugins/tmux-battery"
 install imagemagick # Manipulating images
 install exiftool # EXIF data
 install jhead # EXIF data
