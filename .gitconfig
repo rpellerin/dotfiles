@@ -12,3 +12,5 @@
     whoistheboss = !git ls-tree -r -z --name-only HEAD -- | xargs -0 -n1 git blame --line-porcelain HEAD |grep  '^author '|sort|uniq -c|sort -nr
     whattime = !git log --committer=Pellerin --pretty="%cd" | cut -d' ' -f4 | cut -d: -f1 | sort -n | uniq -c
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[push]
+	default = simple
