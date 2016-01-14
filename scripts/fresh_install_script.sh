@@ -223,6 +223,7 @@ install inotify-tools
 install filezilla
 install sublime-text
 install atom
+install cloc
 install arandr
 install zenity
 install gcolor2
