@@ -52,5 +52,5 @@ while inotifywait -r -e $EVENTS "$(dirname $1)"; do
     cd "$BASEDIR"
     if compile "$FILENAME"; then echo "PDF generated with no error!"; fi
     cd "$CURRENT_PATH"
-    rm "$BASEDIR/"*.aux "$BASEDIR/"*.bbl "$BASEDIR/"*.blg "$BASEDIR/"*.toc "$BASEDIR/"*.log "$BASEDIR/"*.out "$BASEDIR/"*.glg "$BASEDIR/"*.gls "$BASEDIR/"*.ist "$BASEDIR/"*.glo "$BASEDIR/"*.xdy "$BASEDIR/"*.nav "$BASEDIR/"*.snm "$BASEDIR/"*.vrb "$BASEDIR/"*.lot "$BASEDIR/"*.lof -vf # Remove all output files except PDF
+    rm "$BASEDIR/"*.aux "$BASEDIR/"*.bbl "$BASEDIR/"*.blg "$BASEDIR/"*.toc "$BASEDIR/"*.log "$BASEDIR/"*.out "$BASEDIR/"*.glg "$BASEDIR/"*.gls "$BASEDIR/"*.ist "$BASEDIR/"*.glo "$BASEDIR/"*.xdy "$BASEDIR/"*.nav "$BASEDIR/"*.snm "$BASEDIR/"*.vrb "$BASEDIR/"*.lot "$BASEDIR/"*.lof "$BASEDIR/"*.bcf "$BASEDIR/"*.run.xml -vf # Remove all output files except PDF
 done
