@@ -219,6 +219,7 @@ install jhead # EXIF data
 install optipng # Lossless compression
 install default-jdk
 install texlive-full
+install biber
 install inotify-tools
 install filezilla
 install sublime-text
