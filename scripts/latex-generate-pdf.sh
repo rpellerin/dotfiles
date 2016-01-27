@@ -22,10 +22,8 @@ compile() {
     biber "$1"
     makeglossaries "$1"
     pdflatex -halt-on-error "$1" || return 1
-    makeglossaries "$1"
-    {
-      pdflatex -halt-on-error "$1"
-    } || return 1
+    biber "$1"
+    pdflatex -halt-on-error "$1" && pdflatex -halt-on-error "$1" || return 1
 }
 
 show_error() {
