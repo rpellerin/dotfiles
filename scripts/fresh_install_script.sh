@@ -1,31 +1,3 @@
-#!/bin/sh
-
-# HANDY SCRIPT TO RUN AFTER A FRESH INSTALL OF *UBUNTU
-# Don't run it with root rights, only with a regular user
-# Author: Romain PELLERIN <contact@romainpellerin.eu>
-#
-# REQUIREMENTS
-# None
-#
-# ARGUMENT TO PASS
-# None
-# Example: ./fresh_install_script.sh
-
-REPO_DIR=`cd "$( dirname "$0" )/../" && pwd`
-
-install() {
-    command -v $1 >/dev/null || {
-    while true; do
-        read -p "Do you wish to install $1? " yn
-        case $yn in
-            [Yy]* ) sudo aptitude install $1; break;;
-            [Nn]* ) break;;
-            * ) echo "Please answer yes or no.";;
-        esac
-    done
-    }
-}
-
 # https://github.com/sorin-ionescu/prezto
 install_prezto() {
     rm -rf "$HOME/.zprezto" && echo "Old install deleted"
@@ -50,12 +22,6 @@ install_teamviewer() {
     wget http://download.teamviewer.com/download/teamviewer_linux.deb -O /tmp/teamviewer.deb && sudo dpkg -i /tmp/teamviewer.deb
     sudo apt-get -f install
     rm /tmp/teamviewer.deb -f
-}
-
-install_chrome() {
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb && sudo dpkg -i /tmp/chrome.deb
-    sudo apt-get -f install
-    rm /tmp/chrome.deb -f
 }
 
 install_eg() {
@@ -110,53 +76,11 @@ install_fix_brightness() {
 
 ############################## BEGINNING OF THE SCRIPT ##############################
 
-command -v aptitude >/dev/null || while true; do
-    read -p "Do you wish to install aptitude (required to continue)? " yn
-    case $yn in
-        [Yy]* ) sudo apt-get update ; sudo apt-get install aptitude; break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
-while true; do
-    read -p "Do you wish to update and upgrade your system? " yn
-    case $yn in
-        [Yy]* ) sudo aptitude update ; sudo aptitude upgrade; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
 command -v teamviewer >/dev/null || {
     while true; do
         read -p "Do you wish to install TeamViewer ? " yn
         case $yn in
             [Yy]* ) install_teamviewer; break;;
-            [Nn]* ) break;;
-            * ) echo "Please answer yes or no.";;
-        esac
-    done
-}
-
-command -v google-chrome >/dev/null || {
-    while true; do
-        read -p "Do you wish to install Google Chrome (64bit) ? " yn
-        case $yn in
-            [Yy]* ) install_chrome; break;;
-            [Nn]* ) break;;
-            * ) echo "Please answer yes or no.";;
-        esac
-    done
-}
-
-install zsh
-
-[ $SHELL != "/bin/zsh" ] && command -v zsh >/dev/null && {
-    while true; do
-        read -p "Do you wish to set zsh as your default shell? " yn
-        case $yn in
-            [Yy]* ) chsh -s /bin/zsh; break;;
             [Nn]* ) break;;
             * ) echo "Please answer yes or no.";;
         esac
@@ -185,19 +109,6 @@ while true; do
 done
 }
 
-install libreoffice
-
-command -v libreoffice >/dev/null && {
-while true; do
-    read -p "Do you wish to install FR package for libreoffice? " yn
-    case $yn in
-        [Yy]* ) sudo aptitude install libreoffice-l10n-fr libreoffice-help-fr hyphen-fr; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-}
-
 command -v pandoc >/dev/null || {
     while true; do
         read -p "Do you wish to install Haskell and Pandoc ? " yn
@@ -209,45 +120,27 @@ command -v pandoc >/dev/null || {
     done
 }
 
-sudo add-apt-repository ppa:git-core/ppa
-install git
-install tmux
 echo "You should install https://github.com/tmux-plugins/tmux-battery"
-install imagemagick # Manipulating images
 install exiftool # EXIF data
 install jhead # EXIF data
 install optipng # Lossless compression
-install default-jdk
-install texlive-full
 install biber
-install inotify-tools
 install filezilla
 install sublime-text
 install atom
 install cloc
-install arandr
 install zenity
-install gcolor2
 install icoutils
 install zathura
 install wireshark
-install vlc
 install htop
-install gksu
-install gigolo
 install synaptic
 install gtk-recordmydesktop
-install gedit
-install i3lock
 install pdf-presenter-console
-install p7zip-full
 install openvpn
 install network-manager-openvpn
 install network-manager-vpnc
 install codeblocks
-install build-essential
-echo "You will need the following if you want to develop Android app on a 64bit OS"
-install lib32stdc++6
 
 while true; do
     read -p "Do you wish to use the dotfiles from this git repo? " yn
@@ -277,5 +170,3 @@ while true; do
 done
 
 echo "You shoud install f.lux and launch it at startup (Menu>Settings>Session and startup): http://doc.ubuntu-fr.org/f.lux#installation_manuelle"
-
-echo "All done! Enjoy your ULTIMATE Linux distro ;)"
