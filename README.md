@@ -85,7 +85,7 @@
     - Also, change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Filtrer-The-Pirate-Bay-Ubu-roi-des-Internets).
     - Finally, in *Keyboard*, bind the command `i3lock -i /home/romain/Pictures/pause.png -n -t` with *Ctrl+Alt+Delete*.
 
-6. Set up **Thunderbird**. Most of the time, you can import the directory ~/.thunderbird (except the directory *Crash Reports*, inside, maybe) from another computer.
+6. Set up **Thunderbird**. Most of the time, you can import the directory *~/.thunderbird* (except the directory *Crash Reports*, inside, maybe) from another computer.
 
 7. Install the [ownCloud client](https://software.opensuse.org/download/package?project=isv:ownCloud:desktop&package=owncloud-client).
 
@@ -96,6 +96,8 @@
     ```bash
     git clone https://github.com/tmux-plugins/tmux-battery $HOME/.tmux-battery
     ```
+    
+    Also, make sure nothing happens when you close the lid (in both plugged mode or battery mode).
 
 
 ## Optional stuff
