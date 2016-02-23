@@ -69,10 +69,10 @@
     echo "source $REPO_DIR/.rc" >> $HOME/.zshrc
     echo "source $REPO_DIR/.aliases" >> $HOME/.zshrc
     ln -sf $REPO_DIR/.tmux.conf $HOME/
-    cp -i "$REPO_DIR/Images/pause.png" $HOME/Images/pause.png
+    cp -i "$REPO_DIR/Pictures/pause.png" $HOME/Pictures/pause.png
     ln -sf "$REPO_DIR/.gitconfig" $HOME/
     ln -sf -s $REPO_DIR/.curlrc $HOME/
-    diff $REPO_DIR/.zpreztorc $HOME/.zpreztorc
+    diff $REPO_DIR/.zpreztorc $HOME/.zprezto/runcoms/zpreztorc
 	```
 
 3. Check *Additional Drivers* in *Settings* to make sure all devices are being used.
@@ -83,7 +83,7 @@
 
     - More importantly, set the keyboard shortcuts (*Tile window to the x*, *Show desktop*).
     - Also, change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Filtrer-The-Pirate-Bay-Ubu-roi-des-Internets).
-    - Finally, in *Keyboard*, bind the command `i3lock -i /home/romain/Images/pause.png -n -t` with *Ctrl+Alt+Delete*.
+    - Finally, in *Keyboard*, bind the command `i3lock -i /home/romain/Pictures/pause.png -n -t` with *Ctrl+Alt+Delete*.
 
 6. Set up **Thunderbird**. Most of the time, you can import the directory ~/.thunderbird (except the directory *Crash Reports*, inside, maybe) from another computer.
 
@@ -91,7 +91,12 @@
 
 8. You shoud install f.lux and launch it at startup (Menu>Settings>Session and startup): http://doc.ubuntu-fr.org/f.lux#installation_manuelle
 
-9. On a laptop, you should install [https://github.com/tmux-plugins/tmux-battery](https://github.com/tmux-plugins/tmux-battery).
+9. On a laptop, you should install [https://github.com/tmux-plugins/tmux-battery](https://github.com/tmux-plugins/tmux-battery):
+
+    ```bash
+    git clone https://github.com/tmux-plugins/tmux-battery $HOME/.tmux-battery
+    ```
+
 
 ## Optional stuff
 
