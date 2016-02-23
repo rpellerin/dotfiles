@@ -47,6 +47,9 @@
 
 	sudo apt-get install -f # To fix problems
 
+    cd dotfiles # cd to this git repo
+    REPO_DIR=`pwd`
+
     # ZSH + Prezto
     zsh
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
@@ -57,17 +60,30 @@
     chsh -s /bin/zsh # Might need rebooting to take effect
 
     # Install the firewall
-    sudo cp -i scripts/firewall.sh /etc/init.d/
+    sudo cp -i $REPO_DIR/scripts/firewall.sh /etc/init.d/
     sudo chmod 700 /etc/init.d/firewall.sh
     sudo chown root:root /etc/init.d/firewall.sh
     sudo update-rc.d firewall.sh defaults
+
+    # Custom settings
+    echo "source $REPO_DIR/.rc" >> $HOME/.zshrc
+    echo "source $REPO_DIR/.aliases" >> $HOME/.zshrc
+    ln -sf $REPO_DIR/.tmux.conf $HOME/
+    cp -i "$REPO_DIR/Images/pause.png" $HOME/Images/pause.png
+    ln -sf "$REPO_DIR/.gitconfig" $HOME/
+    ln -sf -s $REPO_DIR/.curlrc $HOME/
+    diff $REPO_DIR/.zpreztorc $HOME/.zpreztorc
 	```
 
 3. Check *Additional Drivers* in *Settings* to make sure all devices are being used.
 
-4. Set up the xfce panel (top bar): show the battery indicator, set the date, time and timezone, sync the time with the Internet. Add network, RAM and CPU monitor.
+4. Set up the xfce panel (top bar): show the battery indicator (if on a laptop), set the date, time and timezone, sync the time with the Internet. Add network, RAM and CPU monitor.
 
-5. Go through all the settings, in the *Settings Manager*. More importantly, set the keyboard shortcuts.
+5. Go through all the settings, in the *Settings Manager*.
+
+    - More importantly, set the keyboard shortcuts (*Tile window to the x*, *Show desktop*).
+    - Also, change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Filtrer-The-Pirate-Bay-Ubu-roi-des-Internets).
+    - Finally, in *Keyboard*, bind the command `i3lock -i /home/romain/Images/pause.png -n -t` with *Ctrl+Alt+Delete*.
 
 6. Set up **Thunderbird**. Most of the time, you can import the directory ~/.thunderbird (except the directory *Crash Reports*, inside, maybe) from another computer.
 
@@ -75,29 +91,29 @@
 
 8. You shoud install f.lux and launch it at startup (Menu>Settings>Session and startup): http://doc.ubuntu-fr.org/f.lux#installation_manuelle
 
+9. On a laptop, you should install [https://github.com/tmux-plugins/tmux-battery](https://github.com/tmux-plugins/tmux-battery).
+
 ## Optional stuff
 
 ### TeamViewer
 
-    ```bash
-    wget http://download.teamviewer.com/download/teamviewer_linux.deb -O /tmp/teamviewer.deb
-    sudo dpkg -i /tmp/teamviewer.deb
-    sudo apt-get install -f
-    rm /tmp/teamviewer.deb -f
-    ```
+```bash
+wget http://download.teamviewer.com/download/teamviewer_linux.deb -O /tmp/teamviewer.deb
+sudo dpkg -i /tmp/teamviewer.deb
+sudo apt-get install -f
+rm /tmp/teamviewer.deb -f
+```
 
 ### Haskell & Pandoc
 
-    ```bash
-    sudo aptitude install haskell-platform
-    cabal update
-    cabal install pandoc
-    cabal install pandoc-citeproc
-    ```
+```bash
+sudo aptitude install haskell-platform
+cabal update
+cabal install pandoc
+cabal install pandoc-citeproc
+```
 
 ### Optional Debian/Ubuntu packages
-
-Installable with `npm install -g <package>`
 
 - `exiftool` for EXIF data
 - `jhead` for EXIF data
@@ -118,10 +134,12 @@ Installable with `npm install -g <package>`
 
 ### Optional npm packages
 
+Installable with `npm install -g <package>`.
+
 - `cloc` Count Lines of Code
 
 ### Optional Python packages
 
-Installable with `pip install <package>`
+Installable with `pip install <package>`.
 
 - `eg` useful examples of common commands
