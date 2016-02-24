@@ -32,7 +32,7 @@
         gimp \
         curl \
         ffmpeg \
-        vim \
+        vim-gtk \
         python3 \
         zsh \
         libreoffice \
@@ -40,6 +40,7 @@
         libreoffice-help-fr \
         hyphen-fr
 	# lib32stdc++6 is for developing for Android on a 64-bit OS
+	# vim-gtk for clipboard support
 
     # NodeJS
 	curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
@@ -72,6 +73,7 @@
     cp -i "$REPO_DIR/Pictures/pause.png" $HOME/Pictures/pause.png
     ln -sf "$REPO_DIR/.gitconfig" $HOME/
     ln -sf -s $REPO_DIR/.curlrc $HOME/
+    ln -sf -s $REPO_DIR/.vimrc $HOME/
     diff $REPO_DIR/.zpreztorc $HOME/.zprezto/runcoms/zpreztorc
 	```
 
