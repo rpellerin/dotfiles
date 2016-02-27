@@ -16,3 +16,5 @@
 	default = simple
 [fetch]
 	prune = true
+[core]
+	editor = vim
