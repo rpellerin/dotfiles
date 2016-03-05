@@ -60,6 +60,10 @@
     done
     chsh -s /bin/zsh # Might need rebooting to take effect
 
+    # Vundle
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    # Then go to https://github.com/VundleVim/Vundle.vim
+
     # Install the firewall
     sudo cp -i $REPO_DIR/scripts/firewall.sh /etc/init.d/
     sudo chmod 700 /etc/init.d/firewall.sh
@@ -127,7 +131,7 @@ cabal install pandoc-citeproc
 - `exiftool` for EXIF data
 - `jhead` for EXIF data
 - `filezilla`
-- `atom`
+- `atom (go to official website to download the .deb file)`
 - `zenity` a simple interactive dialog
 - `icoutils` to create Microsoft Windows(R) icon and cursor files
 - `zathura` a PDF viewer
