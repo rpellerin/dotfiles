@@ -52,10 +52,6 @@ set ffs=unix,dos,mac " Use Unix as the standard file type
 highlight Overlength ctermbg=red ctermfg=white guibg=#592929
 " match Overlength /\%101v.\+/
 
-" COLOR
-colorscheme badwolf              " awesome colorscheme
-syntax enable                    " enable syntax processin, don't use 'syntaxt on' as it overrules my settings
-
 " MARKDOWN
 autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,markdown} set filetype=markdown
 
@@ -102,6 +98,11 @@ set smartcase                    " when searching try to be smart about cases"
 set incsearch                    " search as characters are entered
 set hlsearch                     " highlight
 set magic                        " for regular expressions turn magic on
+
+" COLOR
+set background=dark
+colorscheme badwolf              " awesome colorscheme
+syntax enable                    " enable syntax processin, don't use 'syntaxt on' as it overrules my settings
 
 " OTHER
 set autoread                     " set to auto read when a file is changed from the outside
