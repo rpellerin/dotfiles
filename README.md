@@ -60,10 +60,6 @@
     done
     chsh -s /bin/zsh # Might need rebooting to take effect
 
-    # Vundle
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    # Then go to https://github.com/VundleVim/Vundle.vim
-
     # Install the firewall
     sudo cp -i $REPO_DIR/scripts/firewall.sh /etc/init.d/
     sudo chmod 700 /etc/init.d/firewall.sh
@@ -76,9 +72,19 @@
     ln -sf $REPO_DIR/.tmux.conf $HOME/
     cp -i "$REPO_DIR/Pictures/pause.png" $HOME/Pictures/pause.png
     ln -sf "$REPO_DIR/.gitconfig" $HOME/
-    ln -sf -s $REPO_DIR/.curlrc $HOME/
-    ln -sf -s $REPO_DIR/.vimrc $HOME/
+    ln -sf $REPO_DIR/.curlrc $HOME/
+    ln -sf $REPO_DIR/.vimrc $HOME/
+    ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/
+    ln -s $REPO_DIR/.tern-project $HOME/
     diff $REPO_DIR/.zpreztorc $HOME/.zprezto/runcoms/zpreztorc
+
+    # Set up Vim
+    ## Vundle (Vim package manager)
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    ### Then go to https://github.com/VundleVim/Vundle.vim
+    ## Install YouCompleteMe by reading https://github.com/Valloric/YouCompleteMe/blob/master/README.md#ubuntu-linux-x64 (no need to read the "Full Installation Guide" section)
+    ## Finally, deactivate your firewall (just in case), launch Vim and run:
+    :PluginInstall
 	```
 
 3. Check *Additional Drivers* in *Settings* to make sure all devices are being used.
