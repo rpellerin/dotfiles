@@ -105,5 +105,4 @@ set magic                        " for regular expressions turn magic on
 
 " OTHER
 set autoread                     " set to auto read when a file is changed from the outside
-set history=50000                " sets how many lines of history VIM has to remember
-"
+set history=5000                " sets how many lines of history VIM has to remember
