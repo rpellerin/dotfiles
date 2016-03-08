@@ -18,6 +18,9 @@ Plugin 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, bracke
 Plugin 'sjl/badwolf' " Color theme
 Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder
 
+set laststatus=2
+set statusline+=%F
+
 " Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -27,6 +30,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:ycm_confirm_extra_conf = 0
+" Don't ask if .ycm_extra_conf.py is safe to be loaded
 
 call vundle#end()            " required
 filetype plugin indent on    " required
