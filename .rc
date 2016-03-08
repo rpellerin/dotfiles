@@ -1,7 +1,13 @@
 echo "`printf '\033[01;32m'`Hello `printf '\033[01;34m'`$USER`printf '\033[00m'`"
 echo "My IP address is `printf '\033[01;31m'`$(hostname -I)`printf '\033[m'`"
 
-export EDITOR='vim'
+export EDITOR=vim
+export VISUAL=vim
+
+# Enable Ctrl-x-e to edit command line
+autoload edit-command-line
+zle -N edit-command-line
+bindkey "^x^e" edit-command-line
 
 PATH=/home/romain/git/dotfiles/scripts/:/home/romain/sdk-android/platform-tools:/home/romain/.cabal/bin/:$PATH
 
