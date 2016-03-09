@@ -18,3 +18,4 @@
 	prune = true
 [core]
 	editor = vim
+	excludesfile = /home/romain/.gitignore_global

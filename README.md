@@ -72,6 +72,7 @@
     ln -sf $REPO_DIR/.tmux.conf $HOME/
     cp -i "$REPO_DIR/Pictures/pause.png" $HOME/Pictures/pause.png
     ln -sf "$REPO_DIR/.gitconfig" $HOME/
+    ln -sf "$REPO_DIR/.gitignore_global" $HOME/
     ln -sf $REPO_DIR/.curlrc $HOME/
     ln -sf $REPO_DIR/.vimrc $HOME/
     ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/

@@ -1,3 +1,6 @@
+" https://github.com/KtorZ/dotfiles/blob/master/vimrc
+" https://github.com/sd65/MiniVim/blob/master/vimrc
+
 " use "+y to copy to system clipboard and "*y to copy to middle mouse button clipboard
 
 set nocompatible              " be iMproved, required
