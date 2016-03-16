@@ -28,7 +28,7 @@
         i3lock \
         p7zip-full \
         build-essential \
-        lib32stdc++6 \
+        lib32stdc++6 lib32z1 \
         gimp \
         curl \
         ffmpeg \
@@ -39,7 +39,7 @@
         libreoffice-l10n-fr \
         libreoffice-help-fr \
         hyphen-fr
-	# lib32stdc++6 is for developing for Android on a 64-bit OS
+	# lib32stdc++6 and lib32z1 are for developing for Android on a 64-bit OS
 	# vim-gtk for clipboard support
 
     # NodeJS
