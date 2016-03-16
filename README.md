@@ -78,6 +78,8 @@
     ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/
     ln -s $REPO_DIR/.tern-project $HOME/
     diff $REPO_DIR/.zpreztorc $HOME/.zprezto/runcoms/zpreztorc
+    mkdir -p $HOME/.gradle
+    cp $REPO_DIR/.gradle/gradle.properties $HOME/.gradle/
 
     # Set up Vim
     ## Vundle (Vim package manager)
