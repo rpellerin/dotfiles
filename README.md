@@ -48,9 +48,6 @@
 
 	sudo apt-get install -f # To fix problems
 
-    cd dotfiles # cd to this git repo
-    REPO_DIR=`pwd`
-
     # ZSH + Prezto
     zsh
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
@@ -60,6 +57,9 @@
     done
     chsh -s /bin/zsh # Might need rebooting to take effect
 
+    cd dotfiles # cd to this git repo
+    REPO_DIR=`pwd`
+    
     # Install the firewall
     sudo cp -i $REPO_DIR/scripts/firewall.sh /etc/init.d/
     sudo chmod 700 /etc/init.d/firewall.sh
