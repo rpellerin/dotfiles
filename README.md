@@ -12,6 +12,7 @@
 
 	sudo apt-get install aptitude \
         git \
+        autojump \
         ntp \
         tmux \
         imagemagick \
@@ -159,6 +160,7 @@ cabal install pandoc-citeproc
 Installable with `npm install -g <package>`.
 
 - `cloc` Count Lines of Code
+- `gnomon` Utility to annotate console logging statements with timestamps
 
 ### Optional Python packages
 
