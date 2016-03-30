@@ -66,7 +66,7 @@ function maj() {
 
 # Display the content of a directory after a 'cd'
 function custom_cd () {
-        \cd "$@" && ls
+        \cd $@ && ls
 }
 
 # Open a file with the appropriate application
@@ -209,6 +209,10 @@ function gitwhoistheboss {
     echo 'git ls-tree -r -z --name-only HEAD -- **/*.cpp | xargs -0 -n1 git blame --line-porcelain HEAD |grep  "^author "|sort|uniq -c|sort -nr'
 }
 
+function ino {
+    EVENTS="create,modify,close_write,moved_to"; while inotifywait -e $EVENTS -r ./ --exclude '(.*\.sw(p|x))'; do $@; done
+}
+
 ###########
 # ALIASES #
 ###########
@@ -237,7 +241,7 @@ alias pause="i3lock -i $HOME/Images/pause.png -n -t"
 alias speedtest="wget -nc -O /tmp/speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py ; chmod +x /tmp/speedtest-cli && /tmp/speedtest-cli"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
-# Some sources : 
+# Some sources :
 #  - http://root.abl.es/methods/1504/automatic-unzipuntar-using-correct-tool/
 #  - http://forum.ubuntu-fr.org/viewtopic.php?id=20437&p=3
 #  - http://www.mercereau.info/partage-de-mon-fichier-bash_aliases/
