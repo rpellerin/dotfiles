@@ -167,3 +167,4 @@ Installable with `npm install -g <package>`.
 Installable with `pip install <package>`.
 
 - `eg` useful examples of common commands
+- `gitpython` an API for GitHub
