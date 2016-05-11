@@ -29,7 +29,6 @@
         i3lock \
         p7zip-full \
         build-essential \
-        lib32stdc++6 lib32z1 \
         gimp \
         curl \
         ffmpeg \
@@ -40,7 +39,6 @@
         libreoffice-l10n-fr \
         libreoffice-help-fr \
         hyphen-fr
-	# lib32stdc++6 and lib32z1 are for developing for Android on a 64-bit OS
 	# vim-gtk for clipboard support
 
     # NodeJS
@@ -118,6 +116,31 @@
 
 ## Optional stuff
 
+### Android
+
+Pay attention while installing the Android SDK, it requires extra Debian packages, as stated on the download page.
+
+### Python 3.5
+
+1. Download it from [https://www.python.org/downloads/](https://www.python.org/downloads/)
+2. Extract the tar ball and `cd` to the directory.
+3. Then:
+
+    ```bash
+    sudo apt-get install libssl-dev openssl
+    ./configure --with-ensurepip=install
+    make profile-opt
+    make test
+    sudo make install
+    ```
+
+### Optional Python packages
+
+Installable with `pip install <package>`.
+
+- `eg` useful examples of common commands
+- `gitpython` an API for GitHub
+
 ### TeamViewer
 
 ```bash
@@ -161,10 +184,3 @@ Installable with `npm install -g <package>`.
 
 - `cloc` Count Lines of Code
 - `gnomon` Utility to annotate console logging statements with timestamps
-
-### Optional Python packages
-
-Installable with `pip install <package>`.
-
-- `eg` useful examples of common commands
-- `gitpython` an API for GitHub
