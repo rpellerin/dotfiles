@@ -100,7 +100,7 @@ for PORT in $REMOTE_UDP_SERVICES; do
 done
 fi
 # Transmission-daemon
-iptables -A OUTPUT -m owner --gid-owner debian-transmission -j ACCEPT
+#iptables -A OUTPUT -m owner --gid-owner debian-transmission -j ACCEPT
 
 # So are security package updates:
 # Note: You can hardcode the IP address here to prevent DNS spoofing
