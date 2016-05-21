@@ -16,7 +16,7 @@
 # Short-Description: Start firewall daemon at boot time
 # Description:       Custom Firewall scrip.
 ### END INIT INFO
- 
+
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
 # Ports you may want to add
@@ -28,16 +28,16 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin
 # 465 smtp (remote tcp)
 # 631 ipp, printers (remote tcp)
 # 51413 transmission peer port (local tcp and local udp)
-# 9091 transmission webpage (local tcp) 
+# 9091 transmission webpage (local tcp)
 # 389 LDAP (remote tcp and remote udp)
 # 636 LDAPS (remote tcp and remote udp)
 # 6667 irc (remote tcp)
 
 # Services that the system will offer to the network
-TCP_SERVICES="80 443" # SSH can be written here, but will be allowed for anyone // http, https
-UDP_SERVICES="68" # DHCP, transmission-daemon peer
+TCP_SERVICES="80 443" # SSH can be written here, but that would allow it for anyone // http, https
+UDP_SERVICES="68" # DHCP
 # Services the system will use from the network
-REMOTE_TCP_SERVICES="21 22 80 443 465" # ftp, ssh, http, https, smtp (ssl)
+REMOTE_TCP_SERVICES="21 22 80 443 465 993" # ftp, ssh, http, https, smtp (ssl), imap
 REMOTE_UDP_SERVICES="53 67 123" # DNS ("whois" command for example), DHCP, ntp (time update)
 # Network that will be used for remote mgmt
 # (if undefined, everyone will be allowed)
@@ -45,17 +45,17 @@ NETWORK_MGMT=192.168.1.0/24
 # Port used for the SSH service (locally), define this is you have setup a
 # management network but remove it from TCP_SERVICES
 SSH_PORT="22"
- 
+
 if ! [ -x /sbin/iptables ]; then
  exit 0
 fi
- 
+
 ##########################
 # Start the Firewall rules
 ##########################
- 
+
 fw_start () {
-# Default policy: forbid everything 
+# Default policy: forbid everything
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT DROP
@@ -129,11 +129,11 @@ echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
 echo 0 > /proc/sys/net/ipv4/conf/all/send_redirects
 echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
 }
- 
+
 ##########################
 # Stop the Firewall rules
 ##########################
- 
+
 fw_stop () {
 iptables -F
 iptables -X
@@ -143,11 +143,11 @@ iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 }
- 
+
 ##########################
 # Clear the Firewall rules
 ##########################
- 
+
 fw_clear () {
 iptables -F
 iptables -X
@@ -157,28 +157,28 @@ iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
 }
- 
+
 ##########################
 # Test the Firewall rules
 ##########################
- 
+
 fw_save () {
 iptables-save > /etc/iptables.backup
 }
- 
+
 fw_restore () {
 if [ -e /etc/iptables.backup ]; then
  iptables-restore < /etc/iptables.backup
 fi
 }
- 
+
 fw_test () {
 fw_save
 sleep 30 && echo "Restore previous Firewall rules..." && fw_restore &
 fw_stop
 fw_start
 }
- 
+
 case "$1" in
 start|restart)
  echo -n "Starting firewall.."
