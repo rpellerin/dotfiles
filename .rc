@@ -9,7 +9,7 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey "^x^e" edit-command-line
 
-PATH=/home/romain/git/dotfiles/scripts/:/home/romain/sdk-android/platform-tools:/home/romain/.cabal/bin/:$PATH
+PATH=/home/romain/git/dotfiles/scripts/:/home/romain/Android/Sdk/platform-tools/:/home/romain/.cabal/bin/:/home/romain/android-studio/bin/:$PATH
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export ANDROID_HOME=/home/romain/Android/Sdk

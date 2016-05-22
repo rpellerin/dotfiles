@@ -2,6 +2,10 @@
 
 1. Install Chromium as a web browser. I wish I could use Mozilla Firefox however it's far behind Chromium, regarding performance.
 
+    ```bash
+    sudo apt-get install lib32stdc++6 # To fix problems
+    ```
+
 2. Install many things:
 
 	```bash
@@ -38,17 +42,24 @@
         libreoffice \
         libreoffice-l10n-fr \
         libreoffice-help-fr \
-        hyphen-fr
+        hyphen-fr \
+        hunspell-en-gb \
+        thunderbird-locale-en-gb \
+        libreoffice-l10n-en-gb \
+        libreoffice-help-en-gb \
+        hyphen-en-gb
+
 	# vim-gtk for clipboard support
 
     # NodeJS
-	curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 	sudo apt-get install nodejs # And read https://docs.npmjs.com/getting-started/fixing-npm-permissions
 
 	sudo apt-get install -f # To fix problems
 
     # ZSH + Prezto
     zsh
+    # Press the 'q' key
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
     setopt EXTENDED_GLOB
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
@@ -118,7 +129,7 @@
 
 ### Android
 
-Pay attention while installing the Android SDK, it requires extra Debian packages, as stated on the download page.
+Pay attention while installing the Android SDK, it requires extra Debian packages, as stated on the download page. You'll also need to install `lib32stdc++6`.
 
 ### Python 3.5
 
