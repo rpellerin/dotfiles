@@ -131,6 +131,13 @@
 
 Pay attention while installing the Android SDK, it requires extra Debian packages, as stated on the download page. You'll also need to install `lib32stdc++6`.
 
+Then:
+
+    ```bash
+    sudo ln -s /home/romain/android-studio/bin/studio.sh /usr/local/bin/studio
+    sudo ln -s /home/romain/Android/Sdk/tools/android /usr/local/bin/android
+    ```
+
 ### Python 3.5
 
 1. Download it from [https://www.python.org/downloads/](https://www.python.org/downloads/)
