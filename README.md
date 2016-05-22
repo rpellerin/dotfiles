@@ -3,7 +3,7 @@
 1. Install Chromium as a web browser. I wish I could use Mozilla Firefox however it's far behind Chromium, regarding performance.
 
     ```bash
-    sudo apt-get install lib32stdc++6 # To fix problems
+    sudo apt-get install -f # To fix problems
     ```
 
 2. Install many things:
