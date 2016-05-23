@@ -23,6 +23,7 @@
         optipng \
         texlive-full \
         openjdk-8-jdk \
+        openjdk-8-doc \
         inotify-tools \
         arandr \
         gcolor2 \
