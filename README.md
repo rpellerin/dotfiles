@@ -86,6 +86,8 @@
     ln -sf "$REPO_DIR/.gitignore_global" $HOME/
     ln -sf $REPO_DIR/.curlrc $HOME/
     ln -sf $REPO_DIR/.vimrc $HOME/
+    ln -sf $REPO_DIR/.less $HOME/
+    ln -sf $REPO_DIR/.lesskey $HOME/
     ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/
     ln -s $REPO_DIR/.tern-project $HOME/
     diff $REPO_DIR/.zpreztorc $HOME/.zprezto/runcoms/zpreztorc
