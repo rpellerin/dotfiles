@@ -205,3 +205,4 @@ Installable with `npm install -g <package>`.
 
 - `cloc` Count Lines of Code
 - `gnomon` Utility to annotate console logging statements with timestamps
+- `livedown` Live preview of Markdown files
