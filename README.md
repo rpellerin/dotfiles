@@ -22,6 +22,7 @@
         imagemagick \
         optipng \
         texlive-full \
+        biber \
         openjdk-8-jdk \
         openjdk-8-doc \
         inotify-tools \
