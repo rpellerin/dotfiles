@@ -22,7 +22,7 @@
         imagemagick \
         optipng \
         texlive-full \
-        biber \
+        texlive-bibtex-extra \
         openjdk-8-jdk \
         openjdk-8-doc \
         inotify-tools \
@@ -52,6 +52,7 @@
         hyphen-en-gb
 
 	# vim-gtk for clipboard support
+    # Install biber from http://biblatex-biber.sourceforge.net/
 
     # NodeJS
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
