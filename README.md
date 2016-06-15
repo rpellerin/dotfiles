@@ -53,6 +53,7 @@
 
 	# vim-gtk for clipboard support
     # Install biber from http://biblatex-biber.sourceforge.net/
+    # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
 
     # NodeJS
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
