@@ -16,6 +16,7 @@
 
 	sudo apt-get install aptitude \
         git \
+        xclip \
         autojump \
         ntp \
         tmux \
