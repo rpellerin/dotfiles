@@ -147,6 +147,8 @@ Then:
 
 ### Python 3.5
 
+If you download Python3 using your package manager (as seen above), you'll likely get a quite old version. If you want the latest one, here's how to do it:
+
 1. Download it from [https://www.python.org/downloads/](https://www.python.org/downloads/)
 2. Extract the tar ball and `cd` to the directory.
 3. Then:
