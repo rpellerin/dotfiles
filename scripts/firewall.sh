@@ -20,6 +20,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
 # Ports you may want to add
+# 5432 PostgreSQL (remote or local tcp)
 # 8080 livebox (remote tcp)
 # 1194 OpenVPN (remote or local udp)
 # 3128 Squid Proxy (remote or local tcp)
