@@ -103,6 +103,14 @@ fi
 # Transmission-daemon
 #iptables -A OUTPUT -m owner --gid-owner debian-transmission -j ACCEPT
 
+# Peerflix
+#iptables -A OUTPUT -m owner --gid-owner www-data -j ACCEPT
+
+# OpenVPN
+#iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+#iptables -A FORWARD -s 10.8.0.0/24 -j ACCEPT
+#iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+
 # So are security package updates:
 # Note: You can hardcode the IP address here to prevent DNS spoofing
 # and to setup the rules even if DNS does not work but then you
@@ -122,7 +130,7 @@ iptables -A OUTPUT -j REJECT
 # Other network protections
 # (some will only work with some kernel versions)
 echo 1 > /proc/sys/net/ipv4/tcp_syncookies
-echo 0 > /proc/sys/net/ipv4/ip_forward
+#echo 0 > /proc/sys/net/ipv4/ip_forward
 echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
 echo 1 > /proc/sys/net/ipv4/conf/all/log_martians
 echo 1 > /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
