@@ -10,10 +10,8 @@ echo "Paste here filepaths, one per line."
 
 while read -r file
 do
-    if [ -z "$file" ]; then exit; fi
+    if [ -z "$file" ]; then xdg-open $dirr; exit; fi
     b_name=`basename "$file"`
     convert "$file" -resize 700 "$dirr/$b_name"
     echo "Next."
 done <&0
-
-xdg-open $dirr
