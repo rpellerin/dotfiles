@@ -2,6 +2,30 @@
 # FUNCTIONS #
 #############
 
+# Tips for bash
+# Taken from http://samrowe.com/wordpress/advancing-in-the-bash-shell/
+function bashftw() {
+    echo '!! - last command'
+    echo '!xyz - last command beginning with xyz'
+    echo '!xyz:p - same but do not run the command'
+    echo '!-3 - antepenultimate command'
+    echo '!$ - last argument of the previous command'
+    echo '!* - all arguments of the previous command'
+    echo '^FOO^BAR - replace FOOs with BARs in the previous command'
+    echo '^w - erase word'
+    echo '^u - erase from here to the beginning of the line'
+    echo '^a - go to beginning of the line'
+    echo '^e - go to end of the line'
+    echo 'ls /usr/{,local/}{,s}bin/jojo - ls /usr/bin/jojo /usr/sbin/jojo /usr/local/bin/jojo /usr/local/sbin/jojo'
+    echo '!!:h - last command + remove a trailing file name component, leaving only the head'
+    echo '!!:t - last command + remove all leading file name components, leaving the tail'
+    echo '!-2$:r - last argument of penultimate command + remove a trailing suffix of the form .xxx, leaving the basename'
+    echo '!$:e - last argument of previous command + remove all but the trailing suffix'
+    echo '!!:s/mroe/more - replace ONCE mroe with more in the previous command'
+    echo '!!:gs/mroe/more - replace every instance of mroe with more in the previous command'
+    echo '!!:s/myfile/&.old/ - replace ONCE myfile with myfile.old in the previous command'
+}
+
 # Upload a file to transfer.sh
 function transfer() {
     if [ $# -eq 0 ]; then
