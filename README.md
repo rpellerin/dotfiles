@@ -201,7 +201,7 @@ cabal install pandoc-citeproc
 - `gtk-recordmydesktop`
 - `pdf-presenter-console`
 - `openvpn`
-- `network-manager-openvpn`
+- `network-manager-openvpn-gnome` (then `sudo service network-manager restart`)
 - `network-manager-vpnc`
 - `codeblocks`
 
