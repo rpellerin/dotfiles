@@ -34,6 +34,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:ycm_confirm_extra_conf = 0
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 " Don't ask if .ycm_extra_conf.py is safe to be loaded
 
 call vundle#end()            " required
