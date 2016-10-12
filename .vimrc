@@ -20,6 +20,7 @@ Plugin 'https://github.com/scrooloose/syntastic' " Syntax checker
 Plugin 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc
 Plugin 'sjl/badwolf' " Color theme
 Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder
+Plugin 'https://github.com/tpope/vim-dispatch' " Compile asynchronously and show output in splitted pane
 
 set laststatus=2
 set statusline+=%F
