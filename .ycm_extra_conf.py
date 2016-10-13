@@ -44,14 +44,34 @@ flags = [
 # a "-std=<something>".
 # For a C project, you would set this to something like 'c99' instead of
 # 'c++11'.
-'-std=c11',
+'-std=c++11',
 # ...and the same thing goes for the magic -x option which specifies the
 # language that the files to be compiled are written in. This is mostly
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
-'c'
+'-x',
+'c++',
+'-isystem',
+'/usr/lib/llvm-3.9/include',
+'-isystem',
+'/usr/lib/llvm-3.9/lib/clang/3.9.1/include',
+'-isystem',
+'/usr/lib/llvm-3.9/include/clang'
+#'-isystem',
+#'/usr/lib/gcc/x86_64-linux-gnu/5/include',
+#'-isystem',
+#'/usr/local/include',
+#'-isystem',
+#'/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed',
+#'-isystem',
+#'/usr/include/x86_64-linux-gnu',
+#'-isystem',
+#'/usr/include',
+#'-isystem',
+#'/usr/bin/../lib/gcc/x86_64-linux-gnu/5.4.0/../../../../include/c++/5.4.0',
+#'-isystem',
+#'/usr/local/include'
 ]
-
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
 # compile_commands.json file to use that instead of 'flags'. See here for

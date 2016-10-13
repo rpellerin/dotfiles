@@ -102,7 +102,7 @@
     ## Vundle (Vim package manager)
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     ### Then go to https://github.com/VundleVim/Vundle.vim
-    ## Install YouCompleteMe by reading https://github.com/Valloric/YouCompleteMe/blob/master/README.md#ubuntu-linux-x64 (no need to read the "Full Installation Guide" section)
+    ## Install YouCompleteMe by reading https://github.com/Valloric/YouCompleteMe/blob/master/README.md#ubuntu-linux-x64 (no need to read the "Full Installation Guide" section; if you alreadt have Clang on your system, your might use the option `--system-libclang`)
     ## Finally, deactivate your firewall (just in case), launch Vim and run:
     :PluginInstall
 	```
