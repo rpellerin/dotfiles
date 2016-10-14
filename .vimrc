@@ -34,11 +34,18 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+" Not sure those next two commands are necessary
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
+
+" Don't ask if .ycm_extra_conf.py is safe to be loaded
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = "/home/romain/.ycm_extra_conf.py"
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-" Don't ask if .ycm_extra_conf.py is safe to be loaded
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_key_list_select_completion = ['<Enter>']
+" For next line, by default TAB and Top/Down
+"let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Top>']
 
 call vundle#end()            " required
 filetype plugin indent on    " required
