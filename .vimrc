@@ -23,7 +23,7 @@ Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder
 Plugin 'https://github.com/tpope/vim-dispatch' " Compile asynchronously and show output in splitted pane
 
 set laststatus=2
-set statusline+=%F
+set statusline+=%F\ line:%l\ col:%c
 
 " Syntastic settings
 set statusline+=%#warningmsg#
@@ -108,7 +108,6 @@ set lazyredraw                   " redraw only when we need to.
 set showmatch                    " highlight matching [{()}]
 set mat=2                        " how many tenths of a second to blink when matching brackets
 set ignorecase                   " case insensitive
-set ruler                        " Line/char number, percentage in the bottom right of the screen
 set laststatus=2                 " Always show the status line
 
 " SEARCHING
