@@ -23,6 +23,11 @@ module.exports = {
         "semi": [
             "error",
             "always"
+        ],
+        "brace-style": [
+            "error",
+            "stroustrup",
+            { "allowSingleLine": true }
         ]
     }
 };
