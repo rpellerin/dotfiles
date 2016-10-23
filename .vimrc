@@ -1,8 +1,6 @@
 " https://github.com/KtorZ/dotfiles/blob/master/vimrc
 " https://github.com/sd65/MiniVim/blob/master/vimrc
 
-" use "+y to copy to system clipboard and "*y to copy to middle mouse button clipboard
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -32,11 +30,24 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 " Not sure those next two commands are necessary
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
+
+" http://usevim.com/2016/03/07/linting/
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
+
 
 " Don't ask if .ycm_extra_conf.py is safe to be loaded
 let g:ycm_confirm_extra_conf = 0

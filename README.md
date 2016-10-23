@@ -94,6 +94,7 @@
     ln -sf $REPO_DIR/.lesskey $HOME/
     ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/
     ln -s $REPO_DIR/.tern-project $HOME/
+    ln -s $REPO_DIR/.eslintrc.js $HOME/
     diff $REPO_DIR/.zpreztorc $HOME/.zprezto/runcoms/zpreztorc
     mkdir -p $HOME/.gradle
     cp $REPO_DIR/.gradle/gradle.properties $HOME/.gradle/
@@ -209,6 +210,7 @@ cabal install pandoc-citeproc
 
 Installable with `npm install -g <package>`.
 
+- `eslint` Linter for JavaScript, read [http://eslint.org/docs/user-guide/getting-started](http://eslint.org/docs/user-guide/getting-started)
 - `cloc` Count Lines of Code
 - `gnomon` Utility to annotate console logging statements with timestamps
 - `livedown` Live preview of Markdown files
