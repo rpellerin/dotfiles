@@ -19,7 +19,7 @@ compile() {
     {
       pdflatex -halt-on-error "$1"
     } || return 1
-    biber "$1"
+    biber "$1" || bibtex "$1"
     makeglossaries "$1"
     pdflatex -halt-on-error "$1" || return 1
     biber "$1"

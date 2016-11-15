@@ -182,8 +182,9 @@ rm /tmp/teamviewer.deb -f
 
 ```bash
 sudo aptitude install haskell-platform
+# http://pandoc.org/installing.html
 cabal update
-cabal install pandoc
+cabal install pandoc --enable-tests
 cabal install pandoc-citeproc
 ```
 
