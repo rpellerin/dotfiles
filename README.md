@@ -155,8 +155,8 @@ If you download Python3 using your package manager (as seen above), you'll likel
 3. Then:
 
     ```bash
-    sudo apt-get install libssl-dev openssl
-    ./configure --with-ensurepip=install
+    sudo apt-get install libssl-dev openssl libsqlite3-dev
+    ./configure --enable-loadable-sqlite-extensions --with-ensurepip=install
     make profile-opt
     make test
     sudo make install
