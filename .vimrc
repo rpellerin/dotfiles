@@ -80,6 +80,7 @@ set ffs=unix,dos,mac " Use Unix as the standard file type
 
 " SHOW A VERTICAL RULER
 highlight Overlength ctermbg=red ctermfg=white guibg=#592929
+highlight ExtraWhitespace ctermbg=red guibg=red
 " match Overlength /\%101v.\+/
 
 " MARKDOWN
