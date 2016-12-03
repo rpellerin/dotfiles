@@ -265,6 +265,7 @@ alias rm='rm --interactive --verbose'
 alias mv='mv --interactive --verbose'
 alias cp='cp --verbose'
 alias cd="custom_cd" # custom_cd is a custom function (see above)
+alias git="noglob git" # For zsh, see https://yous.be/2014/08/05/zsh-no-matches-found/
 
 # Some more ls aliases
 alias ll='ls -alF'
