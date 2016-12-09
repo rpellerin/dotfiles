@@ -279,7 +279,7 @@ alias path='echo $PATH | tr ":" "\n"'
 alias watch='watch ' # Source of this hack: http://yabfog.com/blog/2012/09/06/using-watch-with-a-bash-alias
 alias ssh='ssh -X'
 alias pause="i3lock -i $HOME/Images/pause.png -n -t"
-alias speedtest="wget -nc -O /tmp/speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py ; chmod +x /tmp/speedtest-cli && /tmp/speedtest-cli"
+alias speedtest="wget -nc -O /tmp/speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest.py ; chmod +x /tmp/speedtest-cli && /tmp/speedtest-cli"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 # Some sources :
