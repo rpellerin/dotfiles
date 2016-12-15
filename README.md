@@ -132,6 +132,7 @@
     
     Also, make sure nothing happens when you close the lid (in both plugged mode or battery mode).
 
+10. [Finally, block some domains to protect youself while using the Web](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading").
 
 ## Optional stuff
 
