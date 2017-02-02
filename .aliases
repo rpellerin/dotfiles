@@ -110,6 +110,11 @@ function custom_cd () {
         \cd $@ && ls
 }
 
+# Cd to a newly created directory
+function custom_mkdir() {
+    \mkdir $@ && \cd "${@: -1}"
+}
+
 # Open a file with the appropriate application
 function open {
     while [ "$1" ] ; do
@@ -265,6 +270,7 @@ alias rm='rm --interactive --verbose'
 alias mv='mv --interactive --verbose'
 alias cp='cp --verbose'
 alias cd="custom_cd" # custom_cd is a custom function (see above)
+alias mkdir="custom_mkdir" # custom_mkdir is a custom function (see above)
 alias git="noglob git" # For zsh, see https://yous.be/2014/08/05/zsh-no-matches-found/
 
 # Some more ls aliases
