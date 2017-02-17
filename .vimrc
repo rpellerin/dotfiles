@@ -2,7 +2,8 @@
 " https://github.com/sd65/MiniVim/blob/master/vimrc
 
 set nocompatible              " be iMproved, required
-filetype off                  " required
+filetype off                  " better, will be re-enabled at the end of the file anyway
+" http://vi.stackexchange.com/a/10125
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -60,8 +61,6 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -114,7 +113,6 @@ set number                       " show line numbers
 set showcmd                      " show command in bottom bar
 set cursorline                   " highlight current line
 set autoindent                   " copy indent on new line
-filetype indent on               " load filetype-specific indent files
 set wildmenu                     " visual autocomplete for command menu
 set lazyredraw                   " redraw only when we need to.
 set showmatch                    " highlight matching [{()}]
@@ -136,4 +134,24 @@ syntax enable                    " enable syntax processin, don't use 'syntaxt o
 
 " OTHER
 set autoread                     " set to auto read when a file is changed from the outside
-set history=5000                " sets how many lines of history VIM has to remember
+set history=5000                 " sets how many lines of history VIM has to remember
+
+" typing consl + space will print console.log()
+imap consl console.log()<Esc>==f(a
+
+autocmd BufNewFile *.html call Generate_Html()
+
+function Generate_Html()
+    call append(0,  '<!DOCTYPE html>')
+    call append(1,  '<html lang="en">')
+    call append(2,  '    <head>')
+    call append(3,  '        <meta charset="utf-8">')
+    call append(4,  '        <meta name="viewport" content="width=device-width, initial-scale=1">')
+    call append(5,  '        <link rel="stylesheet" href="main.css" type="text/css" />')
+    call append(6,  '        <script src=""></script>')
+    call append(7,  '        <title></title>')
+    call append(8,  '    </head>')
+    call append(9,  '    <body>')
+    call append(10, '    </body>')
+    call append(11, '</html>')
+endfunction
