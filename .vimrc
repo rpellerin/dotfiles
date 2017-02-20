@@ -1,8 +1,8 @@
 " https://github.com/KtorZ/dotfiles/blob/master/vimrc
 " https://github.com/sd65/MiniVim/blob/master/vimrc
 
-set nocompatible              " be iMproved, required
-filetype off                  " better, will be re-enabled at the end of the file anyway
+set nocompatible              " do not act as vi, required
+filetype off                  " will be re-enabled at the end of the file anyway
 " http://vi.stackexchange.com/a/10125
 
 " set the runtime path to include Vundle and initialize
@@ -60,7 +60,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 "let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Top>']
 
 call vundle#end()            " required
-filetype plugin indent on    " required
+filetype plugin indent on    " == filetype on (filetype dection, for syntax and options) + filetype plugin on (loads ftplugin.vim) + filetype indent on (loads indent.vim)
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -113,7 +113,6 @@ set number                       " show line numbers
 set showcmd                      " show command in bottom bar
 set cursorline                   " highlight current line
 set autoindent                   " copy indent on new line
-set wildmenu                     " visual autocomplete for command menu
 set lazyredraw                   " redraw only when we need to.
 set showmatch                    " highlight matching [{()}]
 set mat=2                        " how many tenths of a second to blink when matching brackets
@@ -130,7 +129,7 @@ set magic                        " for regular expressions turn magic on
 " COLOR
 set background=dark
 colorscheme badwolf              " awesome colorscheme
-syntax enable                    " enable syntax processin, don't use 'syntaxt on' as it overrules my settings
+syntax enable                    " enable syntax highlighting; 'syntax on' would overrule my settings
 
 " OTHER
 set autoread                     " set to auto read when a file is changed from the outside
@@ -155,3 +154,36 @@ function Generate_Html()
     call append(10, '    </body>')
     call append(11, '</html>')
 endfunction
+
+
+" FINDING FILES:
+
+" Search down into subfolders (from current active directory) and ~/git
+" Provides tab-completion for all file-related tasks
+" Command is :find something
+" * can be used to find matching files
+set path+=**,~/git/**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+
+" TAG JUMPING:
+
+" Requires 'ctags' to be installed (via apt-get)
+" Creates the 'tags' file
+command! MakeTags !ctags -R .
+" Now we can use:
+" - ^] to jump to tag under cursor
+" - g^t for ambiguous tags
+" - ^t to jump back up the tag stack
+
+
+" FILE BROWSING:
+
+" Tweaks for browsing
+" Command is :edit <path>
+let g:netrw_banner=0        " Disable annoying top banner
+let g:netrw_browse_split=3  " open selected file in new tab
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view (allow expanding folders), can be change by pressing i
