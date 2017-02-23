@@ -13,7 +13,6 @@ call vundle#begin()
 "
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'https://github.com/shime/vim-livedown.git' " Live preview of markdown
 Plugin 'https://github.com/Valloric/YouCompleteMe' " Auto completion
 Plugin 'https://github.com/scrooloose/syntastic' " Syntax checker
 Plugin 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc
@@ -111,7 +110,7 @@ autocmd BufWritePre * if index(blacklist, &ft) < 0 | :call <SID>StripTrailingWhi
 " UI
 set number                       " show line numbers
 set showcmd                      " show command in bottom bar
-set cursorline                   " highlight current line
+set cursorline
 set autoindent                   " copy indent on new line
 set lazyredraw                   " redraw only when we need to.
 set showmatch                    " highlight matching [{()}]
@@ -126,7 +125,7 @@ set incsearch                    " search as characters are entered
 set hlsearch                     " highlight
 set magic                        " for regular expressions turn magic on
 
-" COLOR
+" When follows is commented because the theme takes care of it
 set background=dark
 colorscheme badwolf              " awesome colorscheme
 syntax enable                    " enable syntax highlighting; 'syntax on' would overrule my settings
@@ -140,7 +139,7 @@ imap consl console.log()<Esc>==f(a
 
 autocmd BufNewFile *.html call Generate_Html()
 
-function Generate_Html()
+function! Generate_Html()
     call append(0,  '<!DOCTYPE html>')
     call append(1,  '<html lang="en">')
     call append(2,  '    <head>')
@@ -187,3 +186,10 @@ let g:netrw_banner=0        " Disable annoying top banner
 let g:netrw_browse_split=3  " open selected file in new tab
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view (allow expanding folders), can be change by pressing i
+
+
+" Disable Arrow keys in Escape mode
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
