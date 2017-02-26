@@ -21,7 +21,6 @@
         ctags \
         tree \
         ntp \
-        tmux \
         imagemagick \
         optipng \
         texlive-full \
@@ -58,6 +57,14 @@
     # ctags is for vim tag jumping (see .vimrc)
     # Install biber from http://biblatex-biber.sourceforge.net/
     # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
+
+    # Tmux
+    sudo apt-get install libevent-dev libncurses-dev
+    git clone https://github.com/tmux/tmux.git
+    cd tmux
+    sh autogen.sh
+    ./configure && make
+    sudo make install
 
     # NodeJS
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
@@ -127,13 +134,7 @@
 
 8. You shoud install f.lux and launch it at startup (Menu>Settings>Session and startup): http://doc.ubuntu-fr.org/f.lux#installation_manuelle
 
-9. On a laptop, you should install [https://github.com/tmux-plugins/tmux-battery](https://github.com/tmux-plugins/tmux-battery):
-
-    ```bash
-    git clone https://github.com/tmux-plugins/tmux-battery $HOME/.tmux-battery
-    ```
-    
-    Also, make sure nothing happens when you close the lid (in both plugged mode or battery mode).
+9. Make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
 
 10. [Finally, block some domains to protect youself while using the Web](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading").
 

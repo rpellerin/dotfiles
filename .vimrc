@@ -1,36 +1,35 @@
-" https://github.com/KtorZ/dotfiles/blob/master/vimrc
-" https://github.com/sd65/MiniVim/blob/master/vimrc
+" #################### GENERAL
+set nocompatible    " do not act as vi (useless since Vim 8.0)
+filetype off        " will be re-enabled at the end of the file anyway, http://vi.stackexchange.com/a/10125
 
-set nocompatible              " do not act as vi, required
-filetype off                  " will be re-enabled at the end of the file anyway
-" http://vi.stackexchange.com/a/10125
-
-" set the runtime path to include Vundle and initialize
+" Vundle is a plugin manager
+" Set the runtime path to include Vundle, and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
-"
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'https://github.com/Valloric/YouCompleteMe' " Auto completion
-Plugin 'https://github.com/scrooloose/syntastic' " Syntax checker
-Plugin 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc
-Plugin 'sjl/badwolf' " Color theme
-Plugin 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder
-Plugin 'https://github.com/tpope/vim-dispatch' " Compile asynchronously and show output in splitted pane
+Plugin 'VundleVim/Vundle.vim'   " Let Vundle manage Vundle, required
+Plugin 'Valloric/YouCompleteMe' " Auto completion
+Plugin 'scrooloose/syntastic'   " Syntax checker / linter
+Plugin 'scrooloose/nerdtree'    " A tree explorer plugin for vim
+Plugin 'Raimondi/delimitMate'   " Automatic closing of quotes, parenthesis, brackets, etc
+Plugin 'sjl/badwolf'            " Color theme
+Plugin 'ctrlpvim/ctrlp.vim'     " Fuzzy file, buffer, mru, tag, etc finder
+"Plugin 'tpope/vim-dispatch'     " Compile asynchronously and show output in splitted pane
+Plugin 'benmills/vimux'         " Vim plugin to interact with tmux
+Plugin 'tpope/vim-fugitive'     " fugitive.vim: a Git wrapper so awesome, it should be illegal
+Plugin 'tpope/vim-surround'     " surround.vim: quoting/parenthesizing made simple
 
 set laststatus=2
 set statusline+=%F\ line:%l\ col:%c
 
-" Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" SETTINGS FOR PLUGIN: Syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ignore_files= ['.asm.js$']
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 " Not sure those next two commands are necessary
@@ -88,12 +87,10 @@ autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,markdown} set filetype=markdown
 set tabstop=4                    " number of visual spaces per TAB
 set softtabstop=4                " number of spaces in tab when editing
 set expandtab                    " tabs are spaces
-set backspace=2                  " allow backspace on everything in insert mode
+set backspace=2 " allow backspace on everything in insert mode, http://stackoverflow.com/questions/10727392/vim-not-allowing-backspace
 set smarttab                     " be smart when using tabs
 set shiftwidth=4                 " control how many columns text is indented with the reindent operations (<< and >>) and automatic C-style indentation
-" set textwidth=100
-set ai "Auto indent
-set si "Smart indent
+set textwidth=100 " maximum width of text that is being inserted (longer lines may be broken after white space)
 
 function! <SID>StripTrailingWhitespaces()
     let _s=@/
@@ -108,21 +105,20 @@ let blacklist = ['markdown']
 autocmd BufWritePre * if index(blacklist, &ft) < 0 | :call <SID>StripTrailingWhitespaces()
 
 " UI
-set number                       " show line numbers
 set showcmd                      " show command in bottom bar
-set cursorline
-set autoindent                   " copy indent on new line
+set cursorline " highlight current line
+set autoindent                   " Apply the indentation of the current line to the next
+"set smartindent "Smart indent based on syntax/style of code, SHOULD NOT BE USED with 'filetype indent on': http://vim.wikia.com/wiki/Indenting_source_code
 set lazyredraw                   " redraw only when we need to.
 set showmatch                    " highlight matching [{()}]
 set mat=2                        " how many tenths of a second to blink when matching brackets
-set ignorecase                   " case insensitive
 set laststatus=2                 " Always show the status line
 
 " SEARCHING
 set ignorecase                   " ignore case when searching
-set smartcase                    " when searching try to be smart about cases"
+set smartcase                    " Override the 'ignorecase' option if the search pattern contains upper case characters
 set incsearch                    " search as characters are entered
-set hlsearch                     " highlight
+set hlsearch                     " highlight searches (undo :noh)
 set magic                        " for regular expressions turn magic on
 
 " When follows is commented because the theme takes care of it
@@ -132,7 +128,15 @@ syntax enable                    " enable syntax highlighting; 'syntax on' would
 
 " OTHER
 set autoread                     " set to auto read when a file is changed from the outside
-set history=5000                 " sets how many lines of history VIM has to remember
+set history=9999                 " sets how many lines of history VIM has to remember
+" Open all cmd args in new tabs
+execute ":silent tab all"
+
+
+set ttimeoutlen=0
+set timeoutlen=1000
+au InsertEnter * set timeout
+au InsertLeave * set notimeout
 
 " typing consl + space will print console.log()
 imap consl console.log()<Esc>==f(a
@@ -154,6 +158,9 @@ function! Generate_Html()
     call append(11, '</html>')
 endfunction
 
+set ttyfast " improves performance
+set synmaxcol=200 " Lines longer than 200 won't get syntax highlighting after that longer; improves performance TODO: not for markdowns files
+
 
 " FINDING FILES:
 
@@ -165,6 +172,7 @@ set path+=**,~/git/**
 
 " Display all matching files when we tab complete
 set wildmenu
+set wildmode=list:full " Show the list and cycle throught the items
 
 
 " TAG JUMPING:
@@ -194,5 +202,15 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+" ############# LINES #############
+set number          " show absolute line numbers
+set relativenumber  " also show relative line numbers
 
-set relativenumber
+" Display absolute line numbers in insert mode, and relative in normal and
+" visual modes
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+
+
+""" When opening a file : - Reopen at last position
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
