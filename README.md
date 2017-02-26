@@ -92,6 +92,11 @@
     sudo update-rc.d firewall.sh defaults
 
     # Custom settings
+    ln -sf $REPO_DIR/.vimrc $HOME/
+    mkdir -p $HOME/.vim
+    for file in .vim/**/*.*; do                                                                                                                                ⏎ master ✱ ◼
+        ln -sf $REPO_DIR/`dirname $file` $HOME/.vim
+    done
     echo "source $REPO_DIR/.rc" >> $HOME/.zshrc
     echo "source $REPO_DIR/.aliases" >> $HOME/.zshrc
     ln -sf $REPO_DIR/.tmux.conf $HOME/
@@ -99,7 +104,6 @@
     ln -sf "$REPO_DIR/.gitconfig" $HOME/
     ln -sf "$REPO_DIR/.gitignore_global" $HOME/
     ln -sf $REPO_DIR/.curlrc $HOME/
-    ln -sf $REPO_DIR/.vimrc $HOME/
     ln -sf $REPO_DIR/.less $HOME/
     ln -sf $REPO_DIR/.lesskey $HOME/
     ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/

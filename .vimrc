@@ -13,10 +13,11 @@ Plugin 'scrooloose/nerdtree'    " A tree explorer plugin for vim
 Plugin 'Raimondi/delimitMate'   " Automatic closing of quotes, parenthesis, brackets, etc
 Plugin 'sjl/badwolf'            " Color theme
 Plugin 'ctrlpvim/ctrlp.vim'     " Fuzzy file, buffer, mru, tag, etc finder
-"Plugin 'tpope/vim-dispatch'     " Compile asynchronously and show output in splitted pane
 Plugin 'benmills/vimux'         " Vim plugin to interact with tmux
 Plugin 'tpope/vim-fugitive'     " fugitive.vim: a Git wrapper so awesome, it should be illegal
+"Plugin 'tpope/vim-dispatch'     " Compile asynchronously and show output in splitted pane
 Plugin 'tpope/vim-surround'     " surround.vim: quoting/parenthesizing made simple
+Plugin 'tpope/vim-commentary'   " commentary.vim: comment stuff out
 
 set laststatus=2
 set statusline+=%F\ line:%l\ col:%c
