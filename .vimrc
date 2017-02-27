@@ -1,9 +1,9 @@
 " #################### GENERAL
-set nocompatible    " do not act as vi (useless since Vim 8.0)
-filetype off        " will be re-enabled at the end of the file anyway, http://vi.stackexchange.com/a/10125
+set nocompatible            " do not act as vi (useless as it is default since Vim 8.0)
+filetype plugin indent on   " == filetype on (filetype dection, for syntax and options) + filetype plugin on (loads ftplugin.vim) + filetype indent on (loads indent.vim)
+" http://vi.stackexchange.com/a/10125
 
-" Vundle is a plugin manager
-" Set the runtime path to include Vundle, and initialize
+" Set the runtime path to include Vundle (plugin manager), and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'   " Let Vundle manage Vundle, required
@@ -18,13 +18,22 @@ Plugin 'tpope/vim-fugitive'     " fugitive.vim: a Git wrapper so awesome, it sho
 "Plugin 'tpope/vim-dispatch'     " Compile asynchronously and show output in splitted pane
 Plugin 'tpope/vim-surround'     " surround.vim: quoting/parenthesizing made simple
 Plugin 'tpope/vim-commentary'   " commentary.vim: comment stuff out
+call vundle#end()
 
-set laststatus=2
+set laststatus=2 " show the satus line all the time"
+set scrolloff=3 " always show at least 3 lines above and below the cursor
 set statusline+=%F\ line:%l\ col:%c
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+set backupdir=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim/swap,~/.tmp,~/tmp,/var/tmp,/tmp
+
+" toggle invisible characters
+set list
+set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 
 " SETTINGS FOR PLUGIN: Syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -33,7 +42,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_ignore_files= ['.asm.js$']
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-" Not sure those next two commands are necessary
+" Not sure wheter those next two commands are necessary
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
 
@@ -58,28 +67,10 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " For next line, by default TAB and Top/Down
 "let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Top>']
 
-call vundle#end()            " required
-filetype plugin indent on    " == filetype on (filetype dection, for syntax and options) + filetype plugin on (loads ftplugin.vim) + filetype indent on (loads indent.vim)
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-"################ CUSTOM ##################
 
 set encoding=utf-8 " The encoding displayed
 set fileencoding=utf-8 " The encoding written to file
 set ffs=unix,dos,mac " Use Unix as the standard file type
-
-" SHOW A VERTICAL RULER
-highlight Overlength ctermbg=red ctermfg=white guibg=#592929
-highlight ExtraWhitespace ctermbg=red guibg=red
-" match Overlength /\%101v.\+/
 
 " MARKDOWN
 autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,markdown} set filetype=markdown
@@ -89,9 +80,12 @@ set tabstop=4                    " number of visual spaces per TAB
 set softtabstop=4                " number of spaces in tab when editing
 set expandtab                    " tabs are spaces
 set backspace=2 " allow backspace on everything in insert mode, http://stackoverflow.com/questions/10727392/vim-not-allowing-backspace
-set smarttab                     " be smart when using tabs
 set shiftwidth=4                 " control how many columns text is indented with the reindent operations (<< and >>) and automatic C-style indentation
-set textwidth=100 " maximum width of text that is being inserted (longer lines may be broken after white space)
+set shiftround              " round indent to a multiple of 'shiftwidth'"
+" set textwidth=100 " maximum width of text that is being inserted (longer lines may be broken after white space)
+
+set diffopt+=vertical
+
 
 function! <SID>StripTrailingWhitespaces()
     let _s=@/
@@ -130,8 +124,6 @@ syntax enable                    " enable syntax highlighting; 'syntax on' would
 " OTHER
 set autoread                     " set to auto read when a file is changed from the outside
 set history=9999                 " sets how many lines of history VIM has to remember
-" Open all cmd args in new tabs
-execute ":silent tab all"
 
 
 set ttimeoutlen=0
@@ -160,8 +152,11 @@ function! Generate_Html()
 endfunction
 
 set ttyfast " improves performance
-set synmaxcol=200 " Lines longer than 200 won't get syntax highlighting after that longer; improves performance TODO: not for markdowns files
+set synmaxcol=200 " Lines longer than 200 won't get syntax highlighting after that longer; improves performance
 
+let mapleader = ','
+" search for word under the cursor
+nnoremap <leader>/ "fyiw :/<c-r>f<cr>"
 
 " FINDING FILES:
 
@@ -215,3 +210,7 @@ autocmd InsertLeave * :set relativenumber
 
 """ When opening a file : - Reopen at last position
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Open all cmd args in new tabs
+" Needs to be HERE otherwise other tabs will not have all the .vimrc loaded
+execute ":silent tab all"

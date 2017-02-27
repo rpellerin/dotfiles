@@ -94,7 +94,7 @@
     # Custom settings
     ln -sf $REPO_DIR/.vimrc $HOME/
     mkdir -p $HOME/.vim
-    for file in .vim/**/*.*; do                                                                                                                                ⏎ master ✱ ◼
+    for file in .vim/**/*.*; do
         ln -sf $REPO_DIR/`dirname $file` $HOME/.vim
     done
     echo "source $REPO_DIR/.rc" >> $HOME/.zshrc
