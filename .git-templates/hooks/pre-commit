@@ -1,0 +1,26 @@
+#!/bin/sh
+# Taken from: https://gist.github.com/guilherme/9604324
+# Check for console.log( that might accidentally be committed
+# This file must be executable (chmod +x)
+
+echo 'Pre-commit hook running...'
+
+# Redirect output to stderr.
+exec 1>&2
+# enable user input
+exec < /dev/tty
+
+consoleregexp='^\+.*console\.log[[:space:]]\?('
+# CHECK
+if test $(git diff --cached | grep $consoleregexp | wc -l) != 0
+then
+  exec git diff --cached | grep -ne $consoleregexp
+  read -p "Ocurrences of console.log found in the code. Continue? (y/n)" yn
+  echo $yn | grep ^[Yy]$
+  if [ $? -eq 0 ]
+  then
+    exit 0; # THE USER WANTS TO CONTINUE
+  else
+    exit 1; # THE USER DOESN'T WANT TO CONTINUE SO ABORT
+  fi
+fi

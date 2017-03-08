@@ -102,6 +102,7 @@
     ln -sf $REPO_DIR/.tmux.conf $HOME/
     cp -i "$REPO_DIR/Pictures/pause.png" $HOME/Pictures/pause.png
     ln -sf "$REPO_DIR/.gitconfig" $HOME/
+    ln -sf "$REPO_DIR/.git-templates" $HOME/
     ln -sf "$REPO_DIR/.gitignore_global" $HOME/
     ln -sf $REPO_DIR/.curlrc $HOME/
     ln -sf $REPO_DIR/.less $HOME/

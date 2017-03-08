@@ -21,3 +21,5 @@
 	excludesfile = /home/romain/.gitignore_global
 [diff]
 	submodule = log
+[init]
+	templatedir = ~/.git-templates
