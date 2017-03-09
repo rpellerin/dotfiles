@@ -70,6 +70,9 @@
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 	sudo apt-get install nodejs # And read https://docs.npmjs.com/getting-started/fixing-npm-permissions
 
+    crontab -e
+    */5 * * * * /usr/bin/node /home/romain/git/dotfiles/scripts/getWeather.js > /tmp/weather.txt
+
 	sudo apt-get install -f # To fix problems
 
     # ZSH + Prezto

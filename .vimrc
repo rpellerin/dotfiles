@@ -211,6 +211,8 @@ autocmd InsertLeave * :set relativenumber
 """ When opening a file : - Reopen at last position
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+autocmd filetype crontab setlocal nobackup nowritebackup
+
 " Open all cmd args in new tabs
 " Needs to be HERE otherwise other tabs will not have all the .vimrc loaded
 execute ":silent tab all"
