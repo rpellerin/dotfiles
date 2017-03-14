@@ -9,14 +9,14 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey "^x^e" edit-command-line
 
-PATH=/home/romain/git/dotfiles/scripts/:/home/romain/Android/Sdk/platform-tools/:/home/romain/.cabal/bin/:/home/romain/android-studio/bin/:~/.npm-global/bin:$PATH
-
 export NPM_CONFIG_PREFIX=~/.npm-global
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export ANDROID_HOME=/home/romain/Android/Sdk
 export ANDROID_SDK=/home/romain/Android/Sdk
 export ANDROID_NDK=/home/romain/Android/Ndk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
 #echo -e "CPU temp: \c" && {/opt/vc/bin/vcgencmd measure_temp | cut -d = -f 2}
 
@@ -28,3 +28,5 @@ export PS1="\$(date +%k:%M:%S) $PS1"
 if [[ "$COLORTERM" == "xfce4-terminal" ]] ; then
     export TERM=xterm-256color
 fi
+
+export PATH=/home/romain/git/dotfiles/scripts:/home/romain/.cabal/bin:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin:$PATH
