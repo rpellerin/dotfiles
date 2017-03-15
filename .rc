@@ -29,4 +29,22 @@ if [[ "$COLORTERM" == "xfce4-terminal" ]] ; then
     export TERM=xterm-256color
 fi
 
-export PATH=/home/romain/git/dotfiles/scripts:/home/romain/.cabal/bin:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin:$PATH
+export PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/.cabal/bin:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin
+
+export PATH=$PATH:/usr/local/go/bin
+
+# TODO add node_modules/.bin to PATH by default, and modify cd() to do PATH=$PATH:$(npm bin) if [ -f package.json ] # TODO in .aliases
+# Adds node_modules/.bin to the PATH
+npm_chpwd_hook() {
+    if [ -n "${PRENPMPATH+x}" ]; then
+        PATH=$PRENPMPATH
+        unset PRENPMPATH
+    fi
+    if [ -f package.json ]; then
+        PRENPMPATH=$PATH
+        PATH=$(npm bin):$PATH
+    fi
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook preexec npm_chpwd_hook
