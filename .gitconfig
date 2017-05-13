@@ -6,6 +6,7 @@
 [alias]
     ad = "!f() { git add $1 && git status; }; f"
     st = status
+    dif = diff --word-diff-regex=.
     pom = push origin master
     oneline = log --pretty=oneline --abbrev-commit --graph --decorate
     lc = !git oneline ORIG_HEAD.. --stat --no-merges
@@ -21,5 +22,7 @@
 	excludesfile = /home/romain/.gitignore_global
 [diff]
 	submodule = log
+	mnemonicprefix = true
+	renames = true
 [init]
 	templatedir = ~/.git-templates
