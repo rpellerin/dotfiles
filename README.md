@@ -1,9 +1,12 @@
 # What to do after a fresh install of Xubuntu?
 
-1. Install Chromium as a web browser. I wish I could use Mozilla Firefox however it's far behind Chromium, regarding performance.
+![How to secure your laptop](https://raw.githubusercontent.com/rpellerin/dotfiles/master/Pictures/secure-laptop.png)
+
+1. Download Chrome .deb file and then:
 
     ```bash
-    sudo apt-get install -f # To fix problems
+    sudo dpgk -i google-chrome-stable.deb
+    sudo apt install -f # To fix dependencies problems
     ```
 
 2. Install many things:
@@ -55,7 +58,7 @@
 
 	# vim-gtk for clipboard support
     # ctags is for vim tag jumping (see .vimrc)
-    # Install biber from http://biblatex-biber.sourceforge.net/
+    # Install biber from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
     # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
 
     # Tmux
