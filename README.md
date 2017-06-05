@@ -2,22 +2,30 @@
 
 ![How to secure your laptop](https://raw.githubusercontent.com/rpellerin/dotfiles/master/Pictures/secure-laptop.png)
 
-1. Download Chrome .deb file and then:
+1. Upgrade the bios by downloading the latest image from [Dell.com](http://www.dell.com/support/home/us/en/19/product-support/product/latitude-14-7480-laptop/drivers?os=biosa). Then:
+
+    ```bash
+    sudo mv Downloads/Latitude_7x80_1.4.6.exe /boot/efi
+    ```
+
+    Reboot and set a password for the BIOS and the hard drive.
+
+2. Download Chrome .deb file and then:
 
     ```bash
     sudo dpgk -i google-chrome-stable.deb
     sudo apt install -f # To fix dependencies problems
     ```
 
-2. Install many things:
+3. Install many things:
 
 	```bash
 	sudo apt-add-repository ppa:git-core/ppa
 
-	sudo apt-get update
-	sudo apt-get upgrade
+	sudo apt update
+	sudo apt upgrade
 
-	sudo apt-get install aptitude \
+	sudo apt install \
         git \
         xclip \
         autojump \
@@ -62,7 +70,7 @@
     # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
 
     # Tmux
-    sudo apt-get install libevent-dev libncurses-dev
+    sudo apt install libevent-dev libncurses-dev pkg-config automake autoconf
     git clone https://github.com/tmux/tmux.git
     cd tmux
     sh autogen.sh
@@ -71,16 +79,16 @@
 
     # NodeJS
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-	sudo apt-get install nodejs # And read https://docs.npmjs.com/getting-started/fixing-npm-permissions
+	sudo apt install nodejs # And read https://docs.npmjs.com/getting-started/fixing-npm-permissions
     # Yarn (better alternative to npm)
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    sudo apt-get update && sudo apt-get install yarn
+    sudo apt update && sudo apt install yarn
 
     crontab -e
     */5 * * * * /usr/bin/node /home/romain/git/dotfiles/scripts/getWeather.js > /tmp/weather.txt
 
-	sudo apt-get install -f # To fix problems
+	sudo apt install -f # To fix problems
 
     # ZSH + Prezto
     zsh
@@ -133,25 +141,25 @@
     :PluginInstall
 	```
 
-3. Check *Additional Drivers* in *Settings* to make sure all devices are being used.
+4. Check *Additional Drivers* in *Settings* to make sure all devices are being used.
 
-4. Set up the xfce panel (top bar): show the battery indicator (if on a laptop), set the date, time and timezone, sync the time with the Internet. Add network, RAM and CPU monitor.
+5. Set up the xfce panel (top bar): show the battery indicator (if on a laptop), set the date, time and timezone, sync the time with the Internet. Add network, RAM and CPU monitor.
 
-5. Go through all the settings, in the *Settings Manager*.
+6. Go through all the settings, in the *Settings Manager*.
 
     - More importantly, set the keyboard shortcuts (*Tile window to the x*, *Show desktop*).
     - Also, change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Filtrer-The-Pirate-Bay-Ubu-roi-des-Internets).
     - Finally, in *Keyboard*, bind the command `i3lock -i /home/romain/Pictures/pause.png -n -t` with *Ctrl+Alt+Delete*.
 
-6. Set up **Thunderbird**. Most of the time, you can import the directory *~/.thunderbird* (except the directory *Crash Reports*, inside, maybe) from another computer.
+7. Set up **Thunderbird**. Most of the time, you can import the directory *~/.thunderbird* (except the directory *Crash Reports*, inside, maybe) from another computer.
 
-7. Install the [ownCloud client](https://software.opensuse.org/download/package?project=isv:ownCloud:desktop&package=owncloud-client).
+8. Install the [ownCloud client](https://software.opensuse.org/download/package?project=isv:ownCloud:desktop&package=owncloud-client).
 
-8. You shoud install f.lux and launch it at startup (Menu>Settings>Session and startup): http://doc.ubuntu-fr.org/f.lux#installation_manuelle
+9. You shoud install f.lux and launch it at startup (Menu>Settings>Session and startup): http://doc.ubuntu-fr.org/f.lux#installation_manuelle
 
-9. Make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
+10. Make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
 
-10. [Finally, block some domains to protect youself while using the Web](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading").
+11. [Finally, block some domains to protect youself while using the Web](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading").
 
 ## Optional stuff
 
@@ -175,7 +183,7 @@ If you download Python3 using your package manager (as seen above), you'll likel
 3. Then:
 
     ```bash
-    sudo apt-get install libssl-dev openssl libsqlite3-dev
+    sudo apt install libssl-dev openssl libsqlite3-dev
     ./configure --enable-loadable-sqlite-extensions --with-ensurepip=install
     make profile-opt
     make test
@@ -194,14 +202,14 @@ Installable with `pip install <package>`.
 ```bash
 wget http://download.teamviewer.com/download/teamviewer_linux.deb -O /tmp/teamviewer.deb
 sudo dpkg -i /tmp/teamviewer.deb
-sudo apt-get install -f
+sudo apt install -f
 rm /tmp/teamviewer.deb -f
 ```
 
 ### Haskell & Pandoc
 
 ```bash
-sudo aptitude install haskell-platform
+sudo apt install haskell-platform
 # http://pandoc.org/installing.html
 cabal update
 cabal install pandoc --enable-tests
