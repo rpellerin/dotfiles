@@ -8,7 +8,8 @@
     sudo mv Downloads/Latitude_7x80_1.4.6.exe /boot/efi
     ```
 
-    Reboot and set a password for the BIOS and the hard drive.
+
+    Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter BIOS setup. Set a password for the BIOS and the hard drive.
 
 2. Download Chrome .deb file and then:
 
