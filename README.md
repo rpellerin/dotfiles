@@ -19,6 +19,8 @@
     sudo apt install -f # To fix dependencies problems
     ```
 
+    Also download Firefox Nightly and set it up correctly ([setting TLS minimum to 1.1 for example](https://support.mozilla.org/fr/questions/1103968)).
+
 3. Install many things:
 
 	```bash
