@@ -19,7 +19,12 @@
     sudo apt install -f # To fix dependencies problems
     ```
 
-    Also download Firefox Nightly and set it up correctly ([setting TLS minimum to 1.1 for example](https://support.mozilla.org/fr/questions/1103968)).
+    Also download Firefox Nightly and set it up correctly:
+    
+    - [Setting TLS minimum to 1.1 for example](https://support.mozilla.org/fr/questions/1103968)
+    - [Extensions](https://blog.imirhil.fr/2015/12/08/extensions-vie-privee.html)
+    - [More extensions](https://amiunique.org/tools)
+    - [Even more extensions](http://sebsauvage.net/wiki/doku.php?id=firefox)
 
 3. Install many things:
 
@@ -153,6 +158,7 @@
 
     - More importantly, set the keyboard shortcuts (*Tile window to the x*, *Show desktop*).
     - Also, change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Filtrer-The-Pirate-Bay-Ubu-roi-des-Internets).
+    - Set up your `/etc/hosts`: [blocklists](https://github.com/jmdugan/blocklists) and [how to make the internet not suck (as much)](http://someonewhocares.org/hosts/)
     - Finally, in *Keyboard*, bind the command `i3lock -i /home/romain/Pictures/pause.png -n -t` with *Ctrl+Alt+Delete*.
 
 7. Set up **Thunderbird**. Most of the time, you can import the directory *~/.thunderbird* (except the directory *Crash Reports*, inside, maybe) from another computer.
@@ -163,7 +169,7 @@
 
 10. Make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
 
-11. [Finally, block some domains to protect youself while using the Web](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading").
+11. [Finally, you might want to protect your privacy even further](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading").
 
 ## Optional stuff
 
