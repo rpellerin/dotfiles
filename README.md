@@ -212,6 +212,8 @@ Installable with `pip install <package>`.
 ```bash
 wget http://download.teamviewer.com/download/teamviewer_linux.deb -O /tmp/teamviewer.deb
 sudo dpkg -i /tmp/teamviewer.deb
+# You might need to run dpkg --add-architecture i386 before the previous command
+sudo apt update # Required to solve dependencies involving i386 packages
 sudo apt install -f
 rm /tmp/teamviewer.deb -f
 ```
