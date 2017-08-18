@@ -253,5 +253,8 @@ Installable with `npm install -g <package>`.
 
 - `eslint` Linter for JavaScript, read [http://eslint.org/docs/user-guide/getting-started](http://eslint.org/docs/user-guide/getting-started)
 - `cloc` Count Lines of Code
+- `sloc` Source Line Of Code (same stuff)
 - `gnomon` Utility to annotate console logging statements with timestamps
 - `livedown` Live preview of Markdown files
+- `peerflix` Download torrent and watch them as they are being downloaded
+- `castnow` Play media files on Chromecast (subtitles supported)
