@@ -118,6 +118,11 @@
     sudo chown root:root /etc/init.d/firewall.sh
     sudo update-rc.d firewall.sh defaults
 
+    # Battery saver (https://doc.ubuntu-fr.org/tlp)
+    sudo apt install tlp
+    sudo systemctl enable tlp
+    sudo systemctl enable tlp-sleep
+
     # Custom settings
     ln -sf $REPO_DIR/.vimrc $HOME/
     mkdir -p $HOME/.vim
