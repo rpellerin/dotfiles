@@ -45,6 +45,7 @@
         optipng \
         texlive-full \
         texlive-bibtex-extra \
+        biber \
         openjdk-8-jdk \
         openjdk-8-doc \
         inotify-tools \
@@ -75,7 +76,8 @@
 
 	# vim-gtk for clipboard support
     # ctags is for vim tag jumping (see .vimrc)
-    # Install biber from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
+    # Install biber from apt first and try to compile a PDF document.
+    # If there is any compatibility issue, install it from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
     # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
 
     # Tmux
