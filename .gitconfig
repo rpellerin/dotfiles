@@ -3,6 +3,7 @@
 	name = Romain Pellerin
 [color]
 	ui = auto
+	grep = true
 [alias]
     ad = "!f() { git add $1 && git status; }; f"
     st = status
