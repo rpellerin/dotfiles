@@ -9,7 +9,7 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey "^x^e" edit-command-line
 
-export NPM_CONFIG_PREFIX=~/.npm-global
+#export NPM_CONFIG_PREFIX=~/.npm-global
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export ANDROID_HOME=/home/romain/Android/Sdk
@@ -48,3 +48,18 @@ npm_chpwd_hook() {
 
 autoload -Uz add-zsh-hook
 add-zsh-hook preexec npm_chpwd_hook
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# place this after nvm initialization!
+load-nvmrc() {
+  if [[ -f .nvmrc && -r .nvmrc ]]; then
+    nvm use
+  elif [[ $(nvm version) != $(nvm version default)  ]]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
