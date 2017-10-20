@@ -68,6 +68,7 @@
         libreoffice \
         libreoffice-l10n-fr \
         libreoffice-help-fr \
+        libreoffice-pdfimport \
         hyphen-fr \
         hunspell-en-gb \
         thunderbird-locale-en-gb \
@@ -77,6 +78,7 @@
 
 	# vim-gtk for clipboard support
     # ctags is for vim tag jumping (see .vimrc)
+    # libreoffice-pdfimport is for PDF signing
     # Install biber from apt first and try to compile a PDF document.
     # If there is any compatibility issue, install it from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
     # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
