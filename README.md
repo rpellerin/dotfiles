@@ -25,6 +25,7 @@
     - [Extensions](https://blog.imirhil.fr/2015/12/08/extensions-vie-privee.html)
     - [More extensions](https://amiunique.org/tools)
     - [Even more extensions](http://sebsauvage.net/wiki/doku.php?id=firefox)
+    - Disable third-party cookies and enable Do Not Track.
 
 3. Install many things:
 
