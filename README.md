@@ -26,6 +26,12 @@
     - [More extensions](https://amiunique.org/tools)
     - [Even more extensions](http://sebsauvage.net/wiki/doku.php?id=firefox)
     - Disable third-party cookies and enable Do Not Track.
+    - In [about:config](about:config), do:
+        - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0`.
+        - Set `view_source.wrap_long_lines` to `true`.
+        - Set `general.useragent.override` to `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36`
+        - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
+        - Set `gfx.webrender.enabled` to `true`.
 
 3. Install many things:
 
@@ -147,6 +153,7 @@
     ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/
     ln -s $REPO_DIR/.tern-project $HOME/
     ln -s $REPO_DIR/.eslintrc.js $HOME/
+    ln -s $REPO_DIR/.config/compton.conf $HOME/.config/
     diff $REPO_DIR/.zpreztorc $HOME/.zprezto/runcoms/zpreztorc
     mkdir -p $HOME/.gradle
     cp $REPO_DIR/.gradle/gradle.properties $HOME/.gradle/
@@ -180,6 +187,8 @@
 10. Make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
 
 11. [Finally, you might want to protect your privacy even further](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading"). Also read [this](https://spreadprivacy.com/linux-privacy-tips/).
+
+12. If you experience V-sync issues when watching [this video](https://www.youtube.com/watch?v=0RvIbVmCOxg), you might want to install [compton](http://duncanlock.net/blog/2013/06/07/how-to-switch-to-compton-for-beautiful-tear-free-compositing-in-xfce/), unless you run [`xfwm4` 4.13+](https://github.com/xfce-mirror/xfwm4/blob/master/COMPOSITOR).
 
 ## Optional stuff
 
