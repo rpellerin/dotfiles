@@ -28,3 +28,5 @@
 	renames = true
 [init]
 	templatedir = ~/.git-templates
+[rebase]
+	autosquash = true
