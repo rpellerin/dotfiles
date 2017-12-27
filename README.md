@@ -80,7 +80,8 @@
         thunderbird-locale-en-gb \
         libreoffice-l10n-en-gb \
         libreoffice-help-en-gb \
-        hyphen-en-gb
+        hyphen-en-gb \
+        unattended-upgrades
 
 	# vim-gtk for clipboard support
     # ctags is for vim tag jumping (see .vimrc)
@@ -88,6 +89,9 @@
     # Install biber from apt first and try to compile a PDF document.
     # If there is any compatibility issue, install it from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
     # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
+    
+    # Security updates: automatic install
+    sudo dpkg-reconfigure unattended-upgrades
 
     # Tmux
     sudo apt install libevent-dev libncurses-dev pkg-config automake autoconf
