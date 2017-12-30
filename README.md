@@ -83,7 +83,8 @@
         libreoffice-l10n-en-gb \
         libreoffice-help-en-gb \
         hyphen-en-gb \
-        unattended-upgrades
+        unattended-upgrades \
+        redshift-gtk
 
     # scrot is for scripts/lock-screen.sh to work
     # xautolock is for auto locking session after 1 minute of inactivity
@@ -93,6 +94,7 @@
     # Install biber from apt first and try to compile a PDF document.
     # If there is any compatibility issue, install it from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
     # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
+    # redshift-gtk is an alternative to xflux
     
     # Security updates: automatic install
     sudo dpkg-reconfigure unattended-upgrades
@@ -154,6 +156,7 @@
     cp -i "$REPO_DIR/Pictures/pause.png" $HOME/Pictures/pause.png
     mkdir -p $HOME/.config/autostart
     cp "$REPO_DIR/.config/autostart/*" $HOME/.config/autostart"
+    cp "$REPO_DIR/.config/redshift.conf" $HOME/.config/
     ln -sf "$REPO_DIR/.gitconfig" $HOME/
     ln -sf "$REPO_DIR/.git-templates" $HOME/
     ln -sf "$REPO_DIR/.gitignore_global" $HOME/
