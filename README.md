@@ -63,6 +63,8 @@
         gigolo \
         gedit \
         i3lock \
+        scrot \
+        xautolock \
         p7zip-full \
         build-essential \
         gimp \
@@ -83,6 +85,8 @@
         hyphen-en-gb \
         unattended-upgrades
 
+    # scrot is for scripts/lock-screen.sh to work
+    # xautolock is for auto locking session after 1 minute of inactivity
 	# vim-gtk for clipboard support
     # ctags is for vim tag jumping (see .vimrc)
     # libreoffice-pdfimport is for PDF signing
@@ -148,6 +152,8 @@
     echo "source $REPO_DIR/.aliases" >> $HOME/.zshrc
     ln -sf $REPO_DIR/.tmux.conf $HOME/
     cp -i "$REPO_DIR/Pictures/pause.png" $HOME/Pictures/pause.png
+    mkdir -p $HOME/.config/autostart
+    cp "$REPO_DIR/.config/autostart/*" $HOME/.config/autostart"
     ln -sf "$REPO_DIR/.gitconfig" $HOME/
     ln -sf "$REPO_DIR/.git-templates" $HOME/
     ln -sf "$REPO_DIR/.gitignore_global" $HOME/
@@ -180,7 +186,7 @@
     - More importantly, set the keyboard shortcuts (*Tile window to the x*, *Show desktop*).
     - Also, change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Filtrer-The-Pirate-Bay-Ubu-roi-des-Internets).
     - Set up your `/etc/hosts`: [blocklists](https://github.com/jmdugan/blocklists) and [how to make the internet not suck (as much)](http://someonewhocares.org/hosts/)
-    - Finally, in *Keyboard*, bind the command `i3lock -i /home/romain/Pictures/pause.png -n -t` with *Ctrl+Alt+Delete*.
+    - Finally, in *Keyboard*, bind the command `/home/romain/git/dotfiles/scripts/lock-screen.sh` with *Ctrl+Alt+Delete*.
 
 7. Set up **Thunderbird**. Most of the time, you can import the directory *~/.thunderbird* (except the directory *Crash Reports*, inside, maybe) from another computer.
 
