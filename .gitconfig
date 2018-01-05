@@ -30,3 +30,5 @@
 	templatedir = ~/.git-templates
 [rebase]
 	autosquash = true
+[pull]
+    ff = only
