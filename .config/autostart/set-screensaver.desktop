@@ -2,9 +2,9 @@
 Encoding=UTF-8
 Version=0.9.4
 Type=Application
-Name=xautolock
+Name=set-screensaver
 Comment=
-Exec=xautolock -time 1 -detectsleep -locker '/home/romain/git/dotfiles/scripts/lock-screen.sh'
+Exec=/home/romain/git/dotfiles/scripts/set-screensaver.sh
 OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false
