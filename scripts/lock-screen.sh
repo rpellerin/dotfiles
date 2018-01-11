@@ -10,7 +10,7 @@
 logger Screen locked with i3lock
 
 # Turn the screen off
-xset dpms force off &
+(sleep 2 && xset dpms force off)&
 
 # Lock screen
 #/usr/bin/i3lock -i /tmp/screen_locked.png -n -t
