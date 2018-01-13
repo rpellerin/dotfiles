@@ -12,4 +12,4 @@
 
 
 # Lock the screen using i3lock when screensaver is fired or when lid is closed
-xss-lock -n /home/romain/git/dotfiles/scripts/lock-screen.sh -- xset dpms force off
+xss-lock -n /home/romain/git/dotfiles/scripts/lock-screen.sh -- sh -c "pgrep i3lock && xset dpms force off || i3lock -i /home/romain/Pictures/pause.png -n -t"
