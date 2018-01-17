@@ -96,8 +96,7 @@
     # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
     # redshift-gtk is an alternative to xflux
     
-    # Security updates: automatic install
-    sudo dpkg-reconfigure unattended-upgrades
+    # Security updates: automatic install sudo dpkg-reconfigure unattended-upgrades
 
     # Tmux
     sudo apt install libevent-dev libncurses-dev pkg-config automake autoconf
@@ -204,6 +203,10 @@
 12. If you experience V-sync issues when watching [this video](https://www.youtube.com/watch?v=0RvIbVmCOxg), you might want to install [compton](http://duncanlock.net/blog/2013/06/07/how-to-switch-to-compton-for-beautiful-tear-free-compositing-in-xfce/), unless you run [`xfwm4` 4.13+](https://github.com/xfce-mirror/xfwm4/blob/master/COMPOSITOR).
 
 ## Optional stuff
+
+### Hardening security
+
+Check [this](https://korben.info/attaquant-prendre-controle-total-dune-machine-30-secondes-grace-a-intel-amt.html) out if own a laptop equiped with an Intel CPU and ATM (Active Management Technology).
 
 ### Android
 
