@@ -18,6 +18,7 @@ echo "Output file GIF will be $size pixel wide"
 palette="/tmp/palette.png"
 
 filters="fps=15,scale=$size:-1:flags=lanczos"
+paletteops="stats_mode=diff"
 
-ffmpeg -v warning -i $1 -vf "$filters,palettegen" -y $palette
+ffmpeg -v warning -i $1 -vf "$filters,palettegen=$paletteops" -y $palette
 ffmpeg -v warning -i $1 -i $palette -lavfi "$filters [x]; [x][1:v] paletteuse" -y $2
