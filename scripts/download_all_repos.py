@@ -2,7 +2,7 @@
 
 # Downloads all the repos from a given Github user
 
-import requests, json, git
+import requests, json, git # sudo pip install gitpython
 
 baseURL  = 'https://api.github.com/users/'
 reposURL = '/repos'
