@@ -26,6 +26,7 @@
     - [More extensions](https://amiunique.org/tools)
     - [Even more extensions](http://sebsauvage.net/wiki/doku.php?id=firefox)
     - Disable third-party cookies and enable Do Not Track.
+    - Follow [this short tutorial](https://wiki.mozilla.org/Privacy/Privacy_Task_Force/firefox_about_config_privacy_tweeks).
     - In [about:config](about:config), do:
         - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0`.
         - Set `view_source.wrap_long_lines` to `true`.
