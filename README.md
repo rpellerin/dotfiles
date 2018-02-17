@@ -24,7 +24,7 @@
     - [Setting TLS minimum to 1.1 for example](https://support.mozilla.org/fr/questions/1103968)
     - [Extensions](https://blog.imirhil.fr/2015/12/08/extensions-vie-privee.html)
     - [More extensions](https://amiunique.org/tools)
-    - [Even more extensions](http://sebsauvage.net/wiki/doku.php?id=firefox)
+    - [Even more extensions + how to configure Firefox](http://sebsauvage.net/wiki/doku.php?id=firefox)
     - Disable third-party cookies and enable Do Not Track.
     - Follow [this short tutorial](https://wiki.mozilla.org/Privacy/Privacy_Task_Force/firefox_about_config_privacy_tweeks).
     - In [about:config](about:config), do:
