@@ -191,7 +191,7 @@
     - Set up your `/etc/hosts`: [blocklists](https://github.com/jmdugan/blocklists) and [how to make the internet not suck (as much)](http://someonewhocares.org/hosts/)
     - Finally, in *Keyboard*, bind the command `/home/romain/git/dotfiles/scripts/lock-screen.sh` with *Ctrl+Alt+Delete*.
 
-7. Set up **Thunderbird**. Most of the time, you can import the directory *~/.thunderbird* (except the directory *Crash Reports*, inside, maybe) from another computer.
+7. Set up **Thunderbird**. Most of the time, you can import the directory *~/.thunderbird* (except the directory *Crash Reports*, inside, maybe) from another computer. In Preferences > Advanced > General > Config Editor, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
 
 8. Install the [ownCloud client](https://software.opensuse.org/download/package?project=isv:ownCloud:desktop&package=owncloud-client). **UPDATE**: install NextCloud instead of ownCloud.
 
