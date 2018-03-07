@@ -65,7 +65,7 @@
         gedit \
         i3lock \
         scrot \
-        xautolock \
+        xss-lock \
         p7zip-full \
         build-essential \
         gimp \
@@ -88,7 +88,7 @@
         redshift-gtk
 
     # scrot is for scripts/lock-screen.sh to work
-    # xautolock is for auto locking session after 1 minute of inactivity
+    # xss-lock is for auto locking session after 2 minutes of inactivity
 	# vim-gtk for clipboard support
     # ctags is for vim tag jumping (see .vimrc)
     # libreoffice-pdfimport is for PDF signing
@@ -108,8 +108,12 @@
     sudo make install
 
     # NodeJS
-	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-	sudo apt install nodejs # And read https://docs.npmjs.com/getting-started/fixing-npm-permissions
+    # Use nvm
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+    nvm install node
+    # Or install Nodejs directly
+    curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+    sudo apt install nodejs # And read https://docs.npmjs.com/getting-started/fixing-npm-permissions
     # Yarn (better alternative to npm)
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -155,7 +159,7 @@
     ln -sf $REPO_DIR/.tmux.conf $HOME/
     cp -i "$REPO_DIR/Pictures/pause.png" $HOME/Pictures/pause.png
     mkdir -p $HOME/.config/autostart
-    cp "$REPO_DIR/.config/autostart/*" $HOME/.config/autostart"
+    cp $REPO_DIR/.config/autostart/* "$HOME/.config/autostart"
     cp "$REPO_DIR/.config/redshift.conf" $HOME/.config/
     ln -sf "$REPO_DIR/.gitconfig" $HOME/
     ln -sf "$REPO_DIR/.git-templates" $HOME/
