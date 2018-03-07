@@ -190,7 +190,11 @@
 
 6. Go through all the settings, in the *Settings Manager*.
 
-    - More importantly, set the keyboard shortcuts (*Tile window to the x*, *Show desktop*).
+    - More importantly, set the keyboard shortcuts (*Tile window to the x*, *Show desktop*). Also, set:
+        
+        - Shift Alt 4: `xfce4-screenshooter -r`
+        - Ctrl Shift Alt 4: `xfce4-screenshooter -c -r`
+
     - Also, change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Filtrer-The-Pirate-Bay-Ubu-roi-des-Internets).
     - Set up your `/etc/hosts`: [blocklists](https://github.com/jmdugan/blocklists) and [how to make the internet not suck (as much)](http://someonewhocares.org/hosts/)
     - Finally, in *Keyboard*, bind the command `/home/romain/git/dotfiles/scripts/lock-screen.sh` with *Ctrl+Alt+Delete*.
@@ -203,7 +207,7 @@
 
 10. Make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
 
-11. [Finally, you might want to protect your privacy even further](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading"). Also read [this](https://spreadprivacy.com/linux-privacy-tips/).
+11. [You might want to protect your privacy even further](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading"). Also read [this](https://spreadprivacy.com/linux-privacy-tips/).
 
 12. If you experience V-sync issues when watching [this video](https://www.youtube.com/watch?v=0RvIbVmCOxg), you might want to install [compton](http://duncanlock.net/blog/2013/06/07/how-to-switch-to-compton-for-beautiful-tear-free-compositing-in-xfce/), unless you run [`xfwm4` 4.13+](https://github.com/xfce-mirror/xfwm4/blob/master/COMPOSITOR).
 
@@ -212,6 +216,22 @@
     ```bash
     sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" > /etc/lightdm/lightdm.conf.d/50-no-guest.conf'
     ```
+
+14. Disable Bluetooth on startup: disable blueman applet from application autostart cause its turns bluetooth on when starting. Then run `sudo systemctl disable bluetooth`. To check status, run one of the following commands:
+
+    - `hcitool dev`
+    - `rfkill list`
+    - `bluetooth`
+
+
+15. Install VS Code from the official website: [https://code.visualstudio.com/](https://code.visualstudio.com/). Suggested extensions are:
+
+    - esbenp.prettier-vscode
+    - dbaeumer.vscode-eslint
+    - eamodio.gitlens
+
+    Then, run `ln -s $REPO_DIR/.config/Code/User/* $HOME/.config/Code/User/`.
+
 
 ## Optional stuff
 
@@ -246,12 +266,14 @@ If you download Python3 using your package manager (as seen above), you'll likel
     sudo make install
     ```
 
+
 ### Optional Python packages
 
 Installable with `pip install <package>`.
 
 - `eg` useful examples of common commands
 - `gitpython` an API for GitHub
+
 
 ### TeamViewer
 
@@ -264,6 +286,7 @@ sudo apt install -f
 rm /tmp/teamviewer.deb -f
 ```
 
+
 ### Haskell & Pandoc
 
 ```bash
@@ -274,12 +297,12 @@ cabal install pandoc --enable-tests
 cabal install pandoc-citeproc
 ```
 
+
 ### Optional Debian/Ubuntu packages
 
 - `exiftool` for EXIF data
 - `jhead` for EXIF data
 - `filezilla`
-- `atom (go to official website to download the .deb file)`
 - `zenity` a simple interactive dialog
 - `icoutils` to create Microsoft Windows(R) icon and cursor files
 - `zathura` a PDF viewer
