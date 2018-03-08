@@ -27,6 +27,7 @@
     - [Even more extensions + how to configure Firefox](http://sebsauvage.net/wiki/doku.php?id=firefox)
     - Disable third-party cookies and enable Do Not Track.
     - Follow [this short tutorial](https://wiki.mozilla.org/Privacy/Privacy_Task_Force/firefox_about_config_privacy_tweeks).
+    - [Enable DNS over HTTPS](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec).
     - In [about:config](about:config), do:
         - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0`.
         - Set `view_source.wrap_long_lines` to `true`.
