@@ -77,3 +77,6 @@ if [[ ! -f .nvmrc && ! -f /tmp/.nvmrc ]]; then
     fi
     touch /tmp/.nvmrc
 fi
+
+# rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
