@@ -22,5 +22,9 @@
       "lint": true,
       "rails": true
     }
+  },
+  "files.insertFinalNewline": true,
+  "[ruby]": {
+    "editor.tabSize": 2
   }
 }
