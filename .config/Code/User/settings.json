@@ -3,6 +3,7 @@
   "editor.formatOnSave": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
+  "ruby.codeCompletion": "solargraph",
   "workbench.startupEditor": "newUntitledFile",
   "editor.fontSize": 18,
   "editor.wordWrap": "on",
