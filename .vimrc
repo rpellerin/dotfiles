@@ -213,6 +213,7 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 
+set mouse=a
 " Open all cmd args in new tabs
 " Needs to be HERE otherwise other tabs will not have all the .vimrc loaded
 execute ":silent tab all"

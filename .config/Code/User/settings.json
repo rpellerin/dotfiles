@@ -20,8 +20,8 @@
   "gitlens.keymap": "alternate",
   "ruby.lint": {
     "rubocop": {
-      "lint": true,
-      "rails": true
+      "lint": false,
+      "rails": false
     }
   },
   "files.insertFinalNewline": true,
