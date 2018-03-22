@@ -2,7 +2,7 @@
   // Place your settings in this file to overwrite the default settings
   "editor.formatOnSave": true,
   "terminal.integrated.fontSize": 15,
-  "editor.fontSize": 18,
+  "editor.fontSize": 14,
   "window.title": "${activeEditorLong}",
   "prettier.semi": false,
   "prettier.singleQuote": true,
@@ -29,5 +29,6 @@
   "files.insertFinalNewline": true,
   "[ruby]": {
     "editor.tabSize": 2
-  }
+  },
+  "editor.mouseWheelZoom": true
 }
