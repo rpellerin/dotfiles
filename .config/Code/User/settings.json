@@ -1,11 +1,13 @@
 {
   // Place your settings in this file to overwrite the default settings
   "editor.formatOnSave": true,
+  "terminal.integrated.fontSize": 15,
+  "editor.fontSize": 18,
+  "window.title": "${activeEditorLong}",
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "ruby.codeCompletion": "solargraph",
   "workbench.startupEditor": "newUntitledFile",
-  "editor.fontSize": 18,
   "editor.wordWrap": "on",
   "gitlens.advanced.messages": {
     "suppressCommitHasNoPreviousCommitWarning": false,
