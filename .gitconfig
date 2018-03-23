@@ -15,6 +15,7 @@
     whattime = !git log --committer=Pellerin --pretty="%cd" | cut -d' ' -f4 | cut -d: -f1 | sort -n | uniq -c
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset%C(yellow)%ci / %ai%Creset' --abbrev-commit
     lgall = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset%C(yellow)%ci / %ai%Creset' --abbrev-commit --all
+    pushn = !git push --set-upstream origin "$(git rev-parse --abbrev-ref HEAD)"
 [push]
 	default = simple
 [fetch]
