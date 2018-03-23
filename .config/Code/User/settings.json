@@ -2,6 +2,7 @@
   // Place your settings in this file to overwrite the default settings
   "editor.formatOnSave": true,
   "terminal.integrated.fontSize": 15,
+  "workbench.editor.enablePreview": false,
   "editor.fontSize": 14,
   "window.title": "${activeEditorLong}",
   "prettier.semi": false,
