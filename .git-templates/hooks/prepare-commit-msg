@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Adds the branch name to the commit msg
+# Taken and modified from https://gist.github.com/jimschubert/9073276
+
+BRANCH_NAME_UPPERCASE=`git rev-parse --abbrev-ref HEAD | tr /a-z/ /A-Z/`
+
+# If amend or merge or something else, do nothing
+if [ "$#" -gt 1 ]; then
+  exit 0
+fi
+
+CONTENT=`cat "$1"`
+
+echo "" > "$1"
+echo "" >> "$1"
+echo $BRANCH_NAME_UPPERCASE >> "$1"
+echo "$CONTENT" >> "$1"
