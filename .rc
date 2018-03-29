@@ -17,6 +17,7 @@ export ANDROID_SDK=/home/romain/Android/Sdk
 export ANDROID_NDK=/home/romain/Android/Ndk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+export GPG_TTY=$(tty)
 
 #echo -e "CPU temp: \c" && {/opt/vc/bin/vcgencmd measure_temp | cut -d = -f 2}
 
