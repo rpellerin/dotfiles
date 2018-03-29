@@ -33,5 +33,5 @@
 	autosquash = true
 [pull]
     ff = only
-[gpg]¬
+[gpg]
     program = gpg2
