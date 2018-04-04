@@ -17,10 +17,12 @@
     "suppressGitVersionWarning": false,
     "suppressLineUncommittedWarning": false,
     "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": false,
+    "suppressShowKeyBindingsNotice": true,
     "suppressUpdateNotice": false,
     "suppressWelcomeNotice": true
   },
-  "gitlens.keymap": "alternate",
+  "gitlens.keymap": "chorded",
   "ruby.lint": {
     "rubocop": {
       "lint": false,
@@ -29,7 +31,8 @@
   },
   "files.insertFinalNewline": true,
   "[ruby]": {
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true
   },
   "editor.mouseWheelZoom": true
 }
