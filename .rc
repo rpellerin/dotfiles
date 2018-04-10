@@ -34,27 +34,39 @@ export PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/.cabal/bin:/hom
 
 export PATH=$PATH:/usr/local/go/bin
 
-# TODO add node_modules/.bin to PATH by default, and modify cd() to do PATH=$PATH:$(npm bin) if [ -f package.json ] # TODO in .aliases
-# Adds node_modules/.bin to the PATH
-npm_chpwd_hook() {
-    if [ -n "${PRENPMPATH+x}" ]; then
-        PATH=$PRENPMPATH
-        unset PRENPMPATH
-    fi
-    if [ -f package.json ]; then
-        PRENPMPATH=$PATH
-        PATH=$(npm bin):$PATH
-    fi
-}
-
 autoload -Uz add-zsh-hook
-add-zsh-hook preexec npm_chpwd_hook
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # place this after nvm initialization!
-load-nvmrc() {
+load-nvmrc-and-node-modules() {
+  if [ -f package.json ] && [ -x "$(command -v npm)" ]; then
+    echo 'Found package.json'
+    echo 'Found npm command'
+    NPM_BIN_PATH=$(npm bin)
+
+    if [ "$PREV_NPM_BIN_PATH" != "$NPM_BIN_PATH" ]; then
+      # Variable PREV_NPM_BIN_PATH is set and not null, and different from NPM_BIN_PATH
+      if [ -n "${PREV_NPM_BIN_PATH+x}" ]; then
+        # Removes old NPM_BIN_PATH
+        echo "Removing ${PREV_NPM_BIN_PATH} from PATH"
+        PATH=$(echo $PATH | sed -e "s#${PREV_NPM_BIN_PATH}##g")
+        # echo "New PATH: $PATH"
+      fi
+      if echo "$PATH" | grep -q "$(npm bin)"; then
+        echo "Removing npm bin from PATH"
+        PATH=$(echo $PATH | sed -e "s#${NPM_BIN_PATH}##g")
+      fi
+      PREV_NPM_BIN_PATH=$NPM_BIN_PATH
+      echo "Adding $(npm bin) to PATH"
+      PATH="$NPM_BIN_PATH:$PATH"
+      # echo "Exported PATH: $PATH"
+      export PATH
+    else
+      echo '$(npm bin) has not changed. Not touching $PATH.'
+    fi
+  fi
   if [[ -f .nvmrc && -r .nvmrc ]]; then
     nvm use
   elif [[ $(nvm version) != $(nvm version default)  ]]; then
@@ -62,8 +74,9 @@ load-nvmrc() {
     nvm use default
   fi
 }
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+
+add-zsh-hook chpwd load-nvmrc-and-node-modules
+load-nvmrc-and-node-modules
 
 # If no file .nvmrc, look for latest node version available, download it and set it as default
 if [[ ! -f .nvmrc && ! -f /tmp/.nvmrc ]]; then
