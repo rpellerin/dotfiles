@@ -111,6 +111,8 @@
     # NodeJS
     # Use nvm
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+    # Make sure ~/.zshrc does not contain code added by nvm install script,
+    # since it is already present in dotfiles/.rc
     nvm install node
     # Or install Nodejs directly
     curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -

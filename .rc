@@ -15,8 +15,7 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export ANDROID_HOME=/home/romain/Android/Sdk
 export ANDROID_SDK=/home/romain/Android/Sdk
 export ANDROID_NDK=/home/romain/Android/Ndk
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 export GPG_TTY=$(tty)
 
 #echo -e "CPU temp: \c" && {/opt/vc/bin/vcgencmd measure_temp | cut -d = -f 2}
@@ -30,9 +29,7 @@ if [[ "$COLORTERM" == "xfce4-terminal" ]] ; then
     export TERM=xterm-256color
 fi
 
-export PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/.cabal/bin:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin
-
-export PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/.cabal/bin:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin:/usr/local/go/bin
 
 autoload -Uz add-zsh-hook
 
@@ -68,7 +65,6 @@ load-nvmrc-and-node-modules() {
       echo "Adding $(npm bin) to PATH"
       PATH="$NPM_BIN_PATH:$PATH"
       # echo "Exported PATH: $PATH"
-      export PATH
     else
       echo '$(npm bin) has not changed. Not touching $PATH.'
     fi
