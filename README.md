@@ -269,6 +269,7 @@ If you download Python3 using your package manager (as seen above), you'll likel
     sudo make install
     ```
 
+You might also consider using [Pipenv](https://docs.pipenv.org/) to manage virtual environments.
 
 ### Optional Python packages
 
