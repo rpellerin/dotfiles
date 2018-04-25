@@ -34,8 +34,17 @@ PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/.cabal/bin:/home/romai
 autoload -Uz add-zsh-hook
 
 git-check-should-rebase() {
+    user_command="$1"
     if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
-        /home/romain/git/dotfiles/scripts/git-should-rebase.sh
+        stringtosearch="git pull"
+        # https://stackoverflow.com/questions/2829613/how-do-you-tell-if-a-string-contains-another-string-in-unix-shell-scripting
+        if test "${user_command#*$stringtosearch}" = "$user_command"
+        then
+            # echo 'Not running git pull'
+            /home/romain/git/dotfiles/scripts/git-should-rebase.sh
+        else
+            echo 'Running git pull'
+        fi
     fi
 }
 
