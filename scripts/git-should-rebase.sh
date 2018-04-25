@@ -9,18 +9,27 @@ RESET_STYLES='\033[0m'
 BOLD='\033[1m'
 
 UPSTREAM='origin/master'
+
+if [ -z "$UPSTREAM" ]; then
+    exit 0
+fi
+
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
 BASE=$(git merge-base @ "$UPSTREAM")
 
-if [ $LOCAL = $REMOTE ]; then
+if [ -z "$BASE" ]; then
     exit 0
+fi
+
+if [ $LOCAL = $REMOTE ]; then
     #echo "Up-to-date"
+    exit 0
 elif [ $LOCAL = $BASE ]; then
     echo "${RED_COLOR}${BOLD}Need to pull.${RESET_STYLES}"
 elif [ $REMOTE = $BASE ]; then
-    exit 0
     #echo "Need to push"
+    exit 0
 else
     echo "${RED_COLOR}${BOLD}Rebase on $UPSTREAM available.${RESET_STYLES}"
 fi
