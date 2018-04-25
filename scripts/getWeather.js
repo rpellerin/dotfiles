@@ -49,7 +49,7 @@ getJSON(URL_GPS_COORDINATES).then( result => {
     city = result.city
     return getJSON(URL_WEATHER(result.latitude, result.longitude))
 }).then( ({query}) => {
-    console.log(`${query.results.channel.item.condition.temp}°C in ${city}, ${query.results.channel.item.condition.text}`)
+    console.log(`${query.results.channel.item.condition.temp}°C${city ? ` in ${city}` : ''}, ${query.results.channel.item.condition.text}`)
 }).catch( error => {
     console.log(error)
 })

@@ -34,5 +34,6 @@
     "editor.tabSize": 2,
     "files.insertFinalNewline": true
   },
-  "editor.mouseWheelZoom": true
+  "editor.mouseWheelZoom": true,
+  "search.location": "sidebar"
 }

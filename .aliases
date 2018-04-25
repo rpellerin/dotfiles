@@ -258,6 +258,10 @@ function ino {
     EVENTS="create,modify,close_write,moved_to"; while inotifywait -e $EVENTS -r ./ --exclude '(.*\.sw(p|x))'; do $@; done
 }
 
+function delete-gone-branches {
+    git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D
+}
+
 ###########
 # ALIASES #
 ###########
@@ -286,7 +290,6 @@ alias ssh='ssh -X'
 alias pause="i3lock -i $HOME/Images/pause.png -n -t"
 alias speedtest="wget -nc -O /tmp/speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest.py ; chmod +x /tmp/speedtest-cli && /tmp/speedtest-cli"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
-
 # Some sources :
 #  - http://root.abl.es/methods/1504/automatic-unzipuntar-using-correct-tool/
 #  - http://forum.ubuntu-fr.org/viewtopic.php?id=20437&p=3

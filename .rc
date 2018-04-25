@@ -36,6 +36,12 @@ export PATH=$PATH:/usr/local/go/bin
 
 autoload -Uz add-zsh-hook
 
+git-check-should-rebase() {
+    if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
+        /home/romain/git/dotfiles/scripts/git-should-rebase.sh
+    fi
+}
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
@@ -73,9 +79,11 @@ load-nvmrc-and-node-modules() {
     echo "Reverting to nvm default version"
     nvm use default
   fi
+  git-check-should-rebase
 }
 
 add-zsh-hook chpwd load-nvmrc-and-node-modules
+add-zsh-hook preexec git-check-should-rebase
 load-nvmrc-and-node-modules
 
 # If no file .nvmrc, look for latest node version available, download it and set it as default
