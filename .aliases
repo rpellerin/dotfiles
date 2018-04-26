@@ -2,6 +2,12 @@
 # FUNCTIONS #
 #############
 
+# Opens in VS code files edited in last commit by default, or provided hash commit (first argument)
+function open_last_modified_files() {
+    COMMIT_HASH=${1:-HEAD}
+    git diff-tree --no-commit-id --name-only -r "$COMMIT_HASH" | xargs code -r
+}
+
 # Tips for bash
 # Taken from http://samrowe.com/wordpress/advancing-in-the-bash-shell/
 function bashftw() {
