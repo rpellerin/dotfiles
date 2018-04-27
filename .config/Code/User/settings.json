@@ -1,5 +1,6 @@
 {
   // Place your settings in this file to overwrite the default settings
+  "git.autofetch": false,
   "editor.formatOnSave": true,
   "terminal.integrated.fontSize": 15,
   "workbench.editor.enablePreview": false,
@@ -7,7 +8,7 @@
   "window.title": "${activeEditorLong}",
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "ruby.codeCompletion": "solargraph",
+  "ruby.codeCompletion": "rcodetools",
   "workbench.startupEditor": "newUntitledFile",
   "editor.wordWrap": "on",
   "gitlens.advanced.messages": {
@@ -24,11 +25,15 @@
   },
   "gitlens.keymap": "chorded",
   "ruby.lint": {
+    "ruby": {
+      "unicode": true
+    },
     "rubocop": {
-      "lint": false,
-      "rails": false
+      "lint": true,
+      "rails": true
     }
   },
+  "ruby.intellisense": "rubyLocate",
   "files.insertFinalNewline": true,
   "[ruby]": {
     "editor.tabSize": 2,

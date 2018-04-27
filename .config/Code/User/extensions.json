@@ -3,7 +3,6 @@
     "esbenp.prettier-vscode", // Allows to prettify the code and run eslint after
     "dbaeumer.vscode-eslint", // Handle advanced feedback, like variable not used
     "eamodio.gitlens",
-    "rebornix.ruby",
-    "castwide.solargraph"
+    "rebornix.ruby"
   ]
 }
