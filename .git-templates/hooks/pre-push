@@ -1,13 +1,13 @@
 #!/bin/bash
 
-protected_branch='master'
+protected_branches='master|production'
 current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
-if [ $protected_branch = $current_branch ]
+if test $(echo "$current_branch" | grep -E $protected_branches | wc -l) != 0
 then
-    read -p "You're about to push master, is that what you intended? [y|n] " -n 1 -r < /dev/tty
-    echo
-    if echo $REPLY | grep -E '^[Yy]$' > /dev/null
+    read -p "You're about to push ${current_branch}, is that what you intended? [y|n] " -r yn < /dev/tty
+    echo $yn | grep ^[Yy]$ 1>/dev/null
+    if [ $? -eq 0 ]
     then
         exit 0 # push will execute
     fi

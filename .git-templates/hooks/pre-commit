@@ -5,18 +5,13 @@
 
 echo 'Pre-commit hook running...'
 
-# Redirect output to stderr.
-exec 1>&2
-# enable user input
-exec < /dev/tty
-
 consoleregexp='console\.log|token|password|pwd|TOKEN|PASSWORD|PWD|secret|SECRET'
 # CHECK
 if test $(git diff --cached | grep -E $consoleregexp | wc -l) != 0
 then
   exec git diff --cached --name-only | while read file; do grep -H -nE $consoleregexp "$file"; done
-  read -p "Ocurrences of forbidden words found in the code. Continue? (y/n)" yn
-  echo $yn | grep ^[Yy]$
+  read -p "Ocurrences of forbidden words found in the code. Continue? (y/n)" -r yn < /dev/tty
+  echo $yn | grep ^[Yy]$ 1>/dev/null
   if [ $? -eq 0 ]
   then
     exit 0; # THE USER WANTS TO CONTINUE
