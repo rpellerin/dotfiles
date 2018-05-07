@@ -5,7 +5,7 @@
 
 echo 'Pre-commit hook running...'
 
-consoleregexp='console\.log|token|password|pwd|TOKEN|PASSWORD|PWD|secret|SECRET'
+consoleregexp='debugger|pry|debug\(|console\.log|token|password|pwd|TOKEN|PASSWORD|PWD|secret|SECRET'
 # CHECK
 if test $(git diff --cached | grep -E $consoleregexp | wc -l) != 0
 then
