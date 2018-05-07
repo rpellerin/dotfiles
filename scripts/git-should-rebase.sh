@@ -14,6 +14,12 @@ if [ -z "$UPSTREAM" ]; then
     exit 0
 fi
 
+# Exits if remote branch does not exists
+git branch -a | grep "$UPSTREAM">/dev/null
+if [ $? -eq 1 ]; then
+    exit 0
+fi
+
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
 BASE=$(git merge-base @ "$UPSTREAM")
@@ -21,7 +27,6 @@ BASE=$(git merge-base @ "$UPSTREAM")
 if [ -z "$BASE" ]; then
     exit 0
 fi
-
 if [ $LOCAL = $REMOTE ]; then
     #echo "Up-to-date"
     exit 0
