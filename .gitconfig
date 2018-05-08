@@ -34,5 +34,10 @@
 	autosquash = true
 [pull]
     ff = only
+	rebase = preserve
 [gpg]
     program = gpg2
+[branch]
+	autoSetupRebase = always
+[rerere]
+	enabled = true
