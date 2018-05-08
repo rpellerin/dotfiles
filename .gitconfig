@@ -7,6 +7,7 @@
 [alias]
     ad = "!f() { git add $1 && git status; }; f"
     st = status
+    co = checkout
     dif = diff --word-diff-regex=.
     pom = push origin master
     oneline = log --pretty=oneline --abbrev-commit --graph --decorate
