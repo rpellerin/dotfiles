@@ -45,6 +45,7 @@
 
 	sudo apt install \
         git \
+        git-extras \
         xclip \
         autojump \
         ctags \
@@ -55,8 +56,8 @@
         texlive-full \
         texlive-bibtex-extra \
         biber \
-        openjdk-8-jdk \
-        openjdk-8-doc \
+        openjdk-9-jdk \
+        openjdk-9-doc \
         inotify-tools \
         arandr \
         gcolor2 \
@@ -65,7 +66,6 @@
         gigolo \
         gedit \
         i3lock \
-        scrot \
         xss-lock \
         p7zip-full \
         build-essential \
@@ -86,9 +86,17 @@
         libreoffice-help-en-gb \
         hyphen-en-gb \
         unattended-upgrades \
-        redshift-gtk
+        redshift-gtk \
+        mpd mpv \
+        ranger \
+        pass \
+        rofi
 
-    # scrot is for scripts/lock-screen.sh to work
+    # MPD is a music player for terminal, MPV is a video player compatible with Youtube and co.
+    # Ranger is a file explorer
+    # Pass is a password manager
+    # Rofi is an app launcher
+    # An alternative to autojump is z: https://github.com/rupa/z
     # xss-lock is for auto locking session after 2 minutes of inactivity
 	# vim-gtk for clipboard support
     # ctags is for vim tag jumping (see .vimrc)
@@ -107,6 +115,11 @@
     sh autogen.sh
     ./configure && make
     sudo make install
+
+    # Ranger: add image preview support
+    mkdir -p ~/.config/ranger
+    echo 'set preview_images true' >> ~/.config/ranger/rc.conf
+    ranger --copy-config=scope
 
     # NodeJS
     # Use nvm
@@ -235,6 +248,17 @@
 
     Then, run `ln -s $REPO_DIR/.config/Code/User/* $HOME/.config/Code/User/`.
 
+## Create a GPG key
+
+Only if you don't have one already.
+
+For Github to verify your commits, mostly. Also useful for `pass`.
+
+```bash
+gpg2 --full-gen-key # Accept RSA and RSA, size 4096
+```
+
+[More details](https://help.github.com/articles/signing-commits-with-gpg/).
 
 ## Optional stuff
 
@@ -278,6 +302,19 @@ Installable with `pip install <package>`.
 - `eg` useful examples of common commands
 - `gitpython` an API for GitHub
 
+### Install Rust and `exa` (a better `ls`)
+
+```bash
+curl https://sh.rustup.rs -sSf | sh
+```
+
+[More details](https://www.rust-lang.org/en-US/install.html).
+
+Now install `exa`:
+
+```bash
+cargo install exa
+```
 
 ### TeamViewer
 

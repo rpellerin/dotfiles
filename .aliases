@@ -212,6 +212,14 @@ function githelp {
     echo "-------------------------------------------------------------------------------"
 }
 
+function shellvarshelp {
+    echo '- $_: last argument of the preceding command'
+    echo '- !$: last word of the previous entry in history'
+    echo '- $!: last command''s PID'
+    echo '- %: last job (see `jobs`). A good use of it is `kill -9 %`.'
+    echo '- %1: job with ID in the list of running jobs (see `jobs`)'
+}
+
 # A reminder
 function tmuxhelp {
     echo "--------------------------------------------------------"
@@ -285,7 +293,7 @@ alias git="noglob git" # For zsh, see https://yous.be/2014/08/05/zsh-no-matches-
 # Some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='exa -lh'
 
 # Handy shortcuts
 alias q='exit'

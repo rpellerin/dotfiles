@@ -1,9 +1,11 @@
 #!/bin/sh
 
 # Take a screenshot
+# sudo apt install scrot
 #scrot /tmp/screen_locked.png
 
 # Blur it
+# sudo apt install imagemagick
 #mogrify -blur 0x8 /tmp/screen_locked.png
 
 # Log in /var/log/syslog

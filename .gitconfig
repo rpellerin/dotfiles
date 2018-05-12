@@ -36,8 +36,10 @@
     ff = only
 	rebase = preserve
 [gpg]
-    program = gpg2
+	program = gpg2
 [branch]
 	autoSetupRebase = always
 [rerere]
 	enabled = true
+[commit]
+	gpgsign = true
