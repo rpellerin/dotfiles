@@ -8,7 +8,7 @@
     ad = "!f() { git add $1 && git status; }; f"
     st = status
     co = checkout
-    dif = diff --word-diff-regex=.
+    dif = diff --word-diff-regex=[^[:space:],]+
     pom = push origin master
     oneline = log --pretty=oneline --abbrev-commit --graph --decorate
     lc = !git oneline ORIG_HEAD.. --stat --no-merges
