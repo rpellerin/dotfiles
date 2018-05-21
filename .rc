@@ -105,9 +105,14 @@ if [[ ! -f .nvmrc && ! -f /tmp/.nvmrc ]]; then
     touch /tmp/.nvmrc
 fi
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 export PRY_RESCUE_RAILS=1
 export SELENIUM_LOCATION=local
+export PYENV_ROOT="$HOME/.pyenv"
+
+# rbenv and pyenv
+export PATH="$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi

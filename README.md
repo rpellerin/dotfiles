@@ -293,11 +293,16 @@ If you download Python3 using your package manager (as seen above), you'll likel
     sudo make install
     ```
 
-You might also consider using [Pipenv](https://docs.pipenv.org/) to manage virtual environments.
+You might also consider using [Pipenv](https://github.com/pyenv/pyenv-virtualenv) to manage several versions of Python and virtual environments.
+
+```bash
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+```
 
 ### Optional Python packages
 
-Installable with `pip install <package>`.
+Installable with `pip install <package>`. [Don't run them as `sudo`](https://pages.charlesreid1.com/dont-sudo-pip/).
 
 - `eg` useful examples of common commands
 - `gitpython` an API for GitHub
