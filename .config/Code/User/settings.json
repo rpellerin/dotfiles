@@ -1,10 +1,17 @@
 {
   // Place your settings in this file to overwrite the default settings
   "git.autofetch": false,
+  "javascript.implicitProjectConfig.checkJs": true,
   "editor.formatOnSave": true,
+  "editor.formatOnType": true,
   "terminal.integrated.fontSize": 15,
-  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreview": true,
   "editor.fontSize": 14,
+  "bracketPairColorizer.forceUniqueOpeningColor": true,
+  "bracketPairColorizer.showHorizontalScopeLine": false,
+  "bracketPairColorizer.forceIterationColorCycle": true,
+  "bracketPairColorizer.highlightActiveScope": true,
+  "bracketPairColorizer.showBracketsInGutter": true,
   "window.title": "${activeEditorLong}",
   "prettier.semi": false,
   "prettier.singleQuote": true,
@@ -40,5 +47,7 @@
     "files.insertFinalNewline": true
   },
   "editor.mouseWheelZoom": true,
-  "search.location": "sidebar"
+  "search.location": "sidebar",
+  "extensions.ignoreRecommendations": false,
+  "gitlens.historyExplorer.enabled": true
 }
