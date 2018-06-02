@@ -34,6 +34,8 @@
         - Set `general.useragent.override` to `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36`
         - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
         - Set `gfx.webrender.enabled` to `true`.
+        - Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/)).
+        - Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query`.
 
 3. Install many things:
 
