@@ -4,7 +4,7 @@ const { exec, spawn } = require('child_process')
 const os = require('os')
 const rl = require('readline')
 
-const BLACK_LISTED_PACKAGES = ['rxjs', 'query-string', 'shader', 'jest-junit', 'react-virtualized', 'moment', 'react-sortable-hoc']
+const BLACK_LISTED_PACKAGES = ['rxjs', 'query-string', 'shader', 'jest-junit', 'react-virtualized', 'moment', 'moment-timezone', 'react-sortable-hoc']
 
 const testStrings = [
     'a 1.2.3 1.2.5',
@@ -97,7 +97,7 @@ run("yarn outdated | tail -n +7 | head -n -1 | awk '{print $1,$2,$4}'", async re
         const { name, oldVersion, newVersion } = packagesToUpdate[i]
         console.log(`Updating ${name}...`)
 
-        let returnCode = await runWithOutput(`yarn upgrade ${name}`)
+        let returnCode = await runWithOutput(`yarn upgrade ${name} --latest`)
         if (returnCode !== 0) process.exit(1)
 
         returnCode = await runWithOutput('git add -A')
