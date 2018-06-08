@@ -92,18 +92,18 @@ add-zsh-hook preexec git-check-should-rebase
 load-nvmrc-and-node-modules
 
 # If no file .nvmrc, look for latest node version available, download it and set it as default
-if [[ ! -f .nvmrc && ! -f /tmp/.nvmrc ]]; then
-    NODE_LATEST_VERSION=$(curl --max-time 3 -s 'https://nodejs.org/dist/latest/' | grep -Po 'node-v([0-9]+\.[0-9]+\.[0-9]+)' | head -n 1 | cut -c 6-)
-    echo "Latest version of NodeJS is $NODE_LATEST_VERSION"
-    # Install latest NodeJS if need be
-    if [ "$(node --version)" != "$NODE_LATEST_VERSION" ] && [ "$NODE_LATEST_VERSION" != "" ]; then
-        echo 'Installing the latest version...'
-        nvm install node
-        #nvm use node # Done automatically
-        nvm alias default node
-    fi
-    touch /tmp/.nvmrc
-fi
+#if [[ ! -f .nvmrc && ! -f /tmp/.nvmrc ]]; then
+#    NODE_LATEST_VERSION=$(curl --max-time 3 -s 'https://nodejs.org/dist/latest/' | grep -Po 'node-v([0-9]+\.[0-9]+\.[0-9]+)' | head -n 1 | cut -c 6-)
+#    echo "Latest version of NodeJS is $NODE_LATEST_VERSION"
+#    # Install latest NodeJS if need be
+#    if [ "$(node --version)" != "$NODE_LATEST_VERSION" ] && [ "$NODE_LATEST_VERSION" != "" ]; then
+#        echo 'Installing the latest version...'
+#        nvm install node
+#        #nvm use node # Done automatically
+#        nvm alias default node
+#    fi
+#    touch /tmp/.nvmrc
+#fi
 
 export PRY_RESCUE_RAILS=1
 export SELENIUM_LOCATION=local
