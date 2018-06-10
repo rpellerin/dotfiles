@@ -1,5 +1,8 @@
 #!/bin/sh
 #
+# TODO: make this a SystemD service instead of a SysV Init script
+# https://gist.github.com/drmalex07/7712d4185b7651747932
+#
 # Simple Firewall configuration.
 #
 # Author: Romain Pellerin <contact@romainpellerin.eu>
@@ -35,11 +38,11 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin
 # 6667 irc (remote tcp)
 
 # Services that the system will offer to the network
-TCP_SERVICES="80 443" # SSH can be written here, but that would allow it for anyone // http, https
+TCP_SERVICES="" # SSH can be written here, but that would allow it for anyone
 UDP_SERVICES="68" # DHCP
 # Services the system will use from the network
-REMOTE_TCP_SERVICES="21 22 80 443 465 993" # ftp, ssh, http, https, smtp (ssl), imap
-REMOTE_UDP_SERVICES="53 67 123" # DNS ("whois" command for example), DHCP, ntp (time update)
+REMOTE_TCP_SERVICES="21 22 80 443 465 993" # ftp, ssh, http, https, smtp (ssl), imap, openvpn
+REMOTE_UDP_SERVICES="53 67 123 1194" # DNS ("whois" command for example), DHCP, ntp (time update), openvpn
 # Network that will be used for remote mgmt
 # (if undefined, everyone will be allowed)
 NETWORK_MGMT=192.168.1.0/24
