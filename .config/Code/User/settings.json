@@ -49,5 +49,6 @@
   "editor.mouseWheelZoom": true,
   "search.location": "sidebar",
   "extensions.ignoreRecommendations": false,
-  "gitlens.historyExplorer.enabled": true
+  "gitlens.historyExplorer.enabled": true,
+  "terminal.integrated.rendererType": "dom"
 }

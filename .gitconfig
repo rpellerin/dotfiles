@@ -6,6 +6,8 @@
 	ui = auto
 	grep = true
 [alias]
+    commmit = commit
+    comit = commit
     ad = "!f() { git add $1 && git status; }; f"
     st = status
     co = checkout
