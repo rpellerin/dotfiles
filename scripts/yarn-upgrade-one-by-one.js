@@ -58,8 +58,8 @@ const allPreviousDigitsMatch = (oldSplit, newSplit, index) => {
 const computePackagesToUpgrade = outdatedPackages => outdatedPackages
     .filter(s => s && s.trim().length > 0)
     .map(s => s.split(' '))
-    .filter(([name, oldVersion, newVersion]) => isVersion(oldVersion) && isVersion(newVersion))
-    .map(([name, oldVersion, newVersion]) => {
+    .filter(([name, oldVersion, newVersion, url]) => isVersion(oldVersion) && isVersion(newVersion))
+    .map(([name, oldVersion, newVersion, url]) => {
         const oldSplit = oldVersion.split('.')
         const newSplit = newVersion.split('.')
         const differences = oldSplit.map((number, i, arr) => {
@@ -67,7 +67,7 @@ const computePackagesToUpgrade = outdatedPackages => outdatedPackages
             return +newSplit[i]
         }, { bitsInCommon: 0, majorDiff: 0, minorDiff: 0, patchDiff: 0 })
 
-        const obj = { name, differences, oldVersion, newVersion }
+        const obj = { name, differences, oldVersion, newVersion, url }
         return obj
     })
     .filter(({ differences }) => differences.some(diff => diff !== 0)) // removes those with no differences
@@ -85,8 +85,7 @@ const ask = async (question, callback) => new Promise(resolve => {
     })
 })
 
-
-run("yarn outdated | tail -n +7 | head -n -1 | awk '{print $1,$2,$4}'", async result => {
+run("yarn outdated | tail -n +7 | head -n -1 | awk '{print $1,$2,$4,$6}'", async result => {
     const packagesToUpdate = computePackagesToUpgrade(result.split(os.EOL))
     console.table(packagesToUpdate)
     const response = await ask('Continue? [Y/n]')
@@ -105,6 +104,9 @@ run("yarn outdated | tail -n +7 | head -n -1 | awk '{print $1,$2,$4}'", async re
 
         const commigMessage = `chore(npm): Upgraded ${name} from ${oldVersion} to ${newVersion}`
         returnCode = await runWithOutput('git commit -m', [commigMessage, '-m', 'UPGRADE-NPM-PACKAGES'])
+        if (['--push', '-p'].includes(process.argv[2])) {
+            await runWithOutput('git push')
+        }
         if (returnCode !== 0) process.exit(1)
 
         console.log(commigMessage)
