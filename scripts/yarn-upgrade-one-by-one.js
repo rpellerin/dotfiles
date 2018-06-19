@@ -102,7 +102,7 @@ run("yarn outdated | tail -n +7 | head -n -1 | awk '{print $1,$2,$4,$6}'", async
         returnCode = await runWithOutput('git add -A')
         if (returnCode !== 0) process.exit(1)
 
-        const commigMessage = `chore(npm): Upgraded ${name} from ${oldVersion} to ${newVersion}`
+        const commigMessage = `chore(npm): Upgrade ${name} from ${oldVersion} to ${newVersion}`
         returnCode = await runWithOutput('git commit -m', [commigMessage, '-m', 'UPGRADE-NPM-PACKAGES'])
         if (['--push', '-p'].includes(process.argv[2])) {
             await runWithOutput('git push')
