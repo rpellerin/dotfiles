@@ -1,5 +1,6 @@
 {
   // Place your settings in this file to overwrite the default settings
+  "typescript.tsdk": "/home/romain/.nvm/versions/node/v10.4.1/lib/node_modules/typescript/lib",
   "git.autofetch": false,
   "javascript.implicitProjectConfig.checkJs": true,
   "editor.formatOnSave": true,
@@ -50,5 +51,6 @@
   "search.location": "sidebar",
   "extensions.ignoreRecommendations": false,
   "gitlens.historyExplorer.enabled": true,
-  "terminal.integrated.rendererType": "dom"
+  "terminal.integrated.rendererType": "dom",
+  "typescript.tsserver.log": "verbose"
 }
