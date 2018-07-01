@@ -46,3 +46,5 @@
 	enabled = true
 [commit]
 	gpgsign = true
+[protocol]
+	version = 2
