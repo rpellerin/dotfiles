@@ -48,3 +48,5 @@
 	gpgsign = true
 [protocol]
 	version = 2
+[help]
+	autocorrect = 20
