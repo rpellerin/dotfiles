@@ -36,6 +36,11 @@
         - Set `gfx.webrender.enabled` to `true`.
         - Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/)).
         - Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query`.
+    - In [about:preferences](about:preferences), block cookies for the following domains:
+        - https://s.ytimg.com
+        - https://www.youtube.com
+        - https://r5---sn-25glenes.googlevideo.com
+        - https://i.ytimg.com
 
 3. Install many things:
 
