@@ -296,6 +296,7 @@ alias la='ls -A'
 alias l='exa -lh'
 
 # Handy shortcuts
+alias gt='git'
 alias q='exit'
 alias lstree="find . | sed 's/[^/]*\//|   /g;s/| *\([^| ]\)/+--- \1/'"
 alias path='echo $PATH | tr ":" "\n"'
