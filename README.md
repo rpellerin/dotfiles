@@ -41,6 +41,10 @@
         - https://www.youtube.com
         - https://r5---sn-25glenes.googlevideo.com
         - https://i.ytimg.com
+    - Add these cool extensions:
+        - [tabliss.io](https://tabliss.io/)
+        - [React Developer Tools](https://github.com/facebook/react-devtools)
+        - [Redux DevTools](https://github.com/zalmoxisus/redux-devtools-extension)
 
 3. Install many things:
 
@@ -53,6 +57,7 @@
 	sudo apt install \
         git \
         git-extras \
+        gnupg2 \
         xclip \
         autojump \
         ctags \
