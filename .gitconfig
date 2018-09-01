@@ -3,7 +3,7 @@
 	name = Romain Pellerin
 	signingkey = CB1024B0775792E8
 [color]
-	ui = auto
+	ui = true
 	grep = true
 [alias]
     commmit = commit
@@ -30,6 +30,7 @@
 [core]
 	editor = vim
 	excludesfile = /home/romain/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [diff]
 	submodule = log
 	mnemonicprefix = true
@@ -53,3 +54,15 @@
 	version = 2
 [help]
 	autocorrect = 20
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

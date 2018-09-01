@@ -53,5 +53,5 @@
   "gitlens.historyExplorer.enabled": true,
   "terminal.integrated.rendererType": "dom",
   "typescript.tsserver.log": "verbose",
-  "window.zoomLevel": 0
+  "window.zoomLevel": 2
 }
