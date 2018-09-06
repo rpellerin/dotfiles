@@ -5,7 +5,7 @@
 1. Upgrade the bios by downloading the latest image from [Dell.com](http://www.dell.com/support/home/us/en/19/product-support/product/latitude-14-7480-laptop/drivers?os=biosa). Then:
 
     ```bash
-    sudo mv Downloads/Latitude_7x80_1.4.6.exe /boot/efi
+    sudo cp Downloads/Latitude_7x80_1.4.6.exe /boot/efi # Not mv because of permissions
     ```
 
 
