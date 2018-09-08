@@ -200,7 +200,10 @@
     ln -s $REPO_DIR/.tern-project $HOME/
     ln -s $REPO_DIR/.eslintrc.js $HOME/
     ln -s $REPO_DIR/.config/compton.conf $HOME/.config/
-    diff $REPO_DIR/.zpreztorc $HOME/.zprezto/runcoms/zpreztorc
+    
+    source "$REPO_DIR/.rc"
+    git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc
+    
     mkdir -p $HOME/.gradle
     cp $REPO_DIR/.gradle/gradle.properties $HOME/.gradle/
 
