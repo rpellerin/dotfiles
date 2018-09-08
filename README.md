@@ -18,31 +18,51 @@
     ```bash
     sudo dpgk -i google-chrome-stable.deb
     sudo apt install -f # To fix dependencies problems
+    sudo dpgk -i google-chrome-stable.deb
+    rm -f google-chrome-stable.deb
     ```
 
-    Also open Firefox and set it up correctly:
+3. [Download VS code .deb file](https://code.visualstudio.com/docs/setup/linux) and then:
+
+    ```bash
+    sudo dpgk -i code_1.27_amd64.deb
+    sudo apt install -f # To fix dependencies problems
+    sudo dpgk -i code_1.27_amd64.deb
+    rm -f code_1.27_amd64.deb
+    ```
+
+4. Also open Firefox and set it up correctly:
     
-    - [Setting TLS minimum to 1.1 for example](https://support.mozilla.org/fr/questions/1103968)
-    - [Extensions](https://blog.imirhil.fr/2015/12/08/extensions-vie-privee.html)
-    - [More extensions](https://amiunique.org/tools)
-    - [Even more extensions + how to configure Firefox](http://sebsauvage.net/wiki/doku.php?id=firefox)
-    - Disable third-party cookies and enable Do Not Track.
-    - Follow [this short tutorial](https://wiki.mozilla.org/Privacy/Privacy_Task_Force/firefox_about_config_privacy_tweeks).
-    - [Enable DNS over HTTPS](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec).
     - In [about:config](about:config), do:
         - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0`.
+        - Set `security.tls.version.min` to `3` ([more info](https://support.mozilla.org/fr/questions/1103968))
         - Set `view_source.wrap_long_lines` to `true`.
+        - Set `browser.tabs.warnOnClose` to `false`.
+        - Set `browser.tabs.closeWindowWithLastTab` to `false`.
+        - Set `network.prefetch-next` to `false`.
+        - Set `network.dns.disablePrefetch` to `false`.
+        - Set `datareporting.healthreport.uploadEnabled` to `false`.
         - Set `general.useragent.override` to `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36`
         - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
         - Set `gfx.webrender.enabled` to `true`.
-        - Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/)).
+        - Set `geo.enabled` to `false`.
+        - Set `browser.safebrowsing.malware.enabled` to `false`.
+        - Set `browser.safebrowsing.phishing.enabled` to `false`
+        - Set `browser.send_pings` to `false`
+        - Set `dom.battery.enabled` to `false`
+        - Set `media.navigator.enabled` to `false`
+        - Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
         - Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query`.
-    - In [about:preferences](about:preferences), block cookies for the following domains:
+    - In [about:preferences#general](about:preferences#general), check `Restore previous session`.
+    - In [about:preferences#search](about:preferences#search), add the search bar in the toolbar
+    - In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Also, block cookies for the following domains:
         - https://s.ytimg.com
         - https://www.youtube.com
         - https://r5---sn-25glenes.googlevideo.com
         - https://i.ytimg.com
-    - Add these cool extensions:
+    
+        Also, disable third-party cookies and enable `Tracking Protection` and `Do Not Track` at all times.
+    - Add these extensions:
         - [tabliss.io](https://tabliss.io/)
         - [React Developer Tools](https://github.com/facebook/react-devtools)
         - [Redux DevTools](https://github.com/zalmoxisus/redux-devtools-extension)
@@ -136,17 +156,13 @@
 
     # NodeJS
     # Use nvm
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
     # Make sure ~/.zshrc does not contain code added by nvm install script,
     # since it is already present in dotfiles/.rc
     nvm install node
     # Or install Nodejs directly
-    curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-    sudo apt install nodejs # And read https://docs.npmjs.com/getting-started/fixing-npm-permissions
-    # Yarn (better alternative to npm)
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    sudo apt update && sudo apt install yarn
+    # curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+    # sudo apt install nodejs # And read https://docs.npmjs.com/getting-started/fixing-npm-permissions
 
     crontab -e
     */5 * * * * /usr/bin/node /home/romain/git/dotfiles/scripts/getWeather.js > /tmp/weather.txt
@@ -223,6 +239,8 @@
 	```
 
 4. Check *Additional Drivers* in *Settings* to make sure all devices are being used.
+
+5. Set the keyboard layout to US international with dead keys.
 
 5. Set up the xfce panel (top bar): show the battery indicator (if on a laptop), set the date, time and timezone, sync the time with the Internet. Add network, RAM and CPU monitor.
 
