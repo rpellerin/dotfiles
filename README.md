@@ -211,6 +211,8 @@
     ## Install YouCompleteMe by reading https://github.com/Valloric/YouCompleteMe/blob/master/README.md#ubuntu-linux-x64 (no need to read the "Full Installation Guide" section; if you alreadt have Clang on your system, your might use the option `--system-libclang`)
     ## Finally, deactivate your firewall (just in case), launch Vim and run:
     :PluginInstall
+    
+    zsh-newuser-install
 	```
 
 4. Check *Additional Drivers* in *Settings* to make sure all devices are being used.
