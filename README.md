@@ -203,6 +203,7 @@
     
     source "$REPO_DIR/.rc"
     git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc
+    ln -s "$REPO_DIR/.zpreztorc" $HOME/
     
     mkdir -p $HOME/.gradle
     cp $REPO_DIR/.gradle/gradle.properties $HOME/.gradle/
