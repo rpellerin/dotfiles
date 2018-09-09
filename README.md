@@ -474,14 +474,14 @@ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
 ```
 
-#### Optional Python packages
+#### Optional Python packages
 
 Installable with `pip install <package>`. [Don't run them as `sudo`](https://pages.charlesreid1.com/dont-sudo-pip/).
 
 - `eg` useful examples of common commands
 - `gitpython` an API for GitHub
 
-### TeamViewer
+### TeamViewer
 
 ```bash
 wget http://download.teamviewer.com/download/teamviewer_linux.deb -O /tmp/teamviewer.deb
@@ -492,7 +492,7 @@ sudo apt install -f
 rm /tmp/teamviewer.deb -f
 ```
 
-### Haskell & Pandoc
+### Haskell & Pandoc
 
 ```bash
 sudo apt install haskell-platform
