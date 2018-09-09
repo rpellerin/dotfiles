@@ -21,104 +21,7 @@ GRUB_TIMEOUT=0
 sudo update-grub
 ```
 
-## 2. Create SSH and GPG keys
-
-### SSH
-
-```bash
-ssh-keygen -t rsa -b 4096 -C "<me@domain>" -f .ssh/id_rsa
-cat .ssh/id_rsa.pub | xclip -i -selection clip-board
-```
-
-Paste what you just copied at [https://github.com/settings/keys](https://github.com/settings/keys)
-
-### GPG
-
-Only if you don't have one already. For Github to verify your commits, mostly. Also useful for `pass`.
-
-```bash
-gpg2 --full-gen-key # Accept RSA and RSA, size 4096
-gpg2 --list-secret-keys --keyid-format LONG # Copy the value after `sec rsa4096/`
-gpg --armor --export <copied value> | xclip -i -selection clip-board
-sudo git config --system user.signingkey <copied value>
-```
-
-We store the signing key in the system settings instead of the user's settings to avoid having to commit every new key in this repo.
-
-Paste what you just copied at [https://github.com/settings/keys](https://github.com/settings/keys). [More details](https://help.github.com/articles/signing-commits-with-gpg/).
-
-## 3. Google Chrome
-
-Download Chrome .deb file and then:
-
-```bash
-sudo dpgk -i google-chrome-stable.deb
-sudo apt install -f # To fix dependencies problems
-sudo dpgk -i google-chrome-stable.deb
-rm -f google-chrome-stable.deb
-```
-
-## 4. Visual Studio Code
-
-[Download VS code .deb file](https://code.visualstudio.com/docs/setup/linux) and then:
-
-```bash
-sudo dpgk -i code_1.27_amd64.deb
-sudo apt install -f # To fix dependencies problems
-sudo dpgk -i code_1.27_amd64.deb
-rm -f code_1.27_amd64.deb
-code --install-extension "esbenp.prettier-vscode"
-code --install-extension "dbaeumer.vscode-eslint"
-code --install-extension "eamodio.gitlens"
-```
-
-## 5. Firefox
-
-- In [about:config](about:config), do:
-  - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0`.
-  - Set `security.tls.version.min` to `3` ([more info](https://support.mozilla.org/fr/questions/1103968))
-  - Set `view_source.wrap_long_lines` to `true`.
-  - Set `browser.tabs.warnOnClose` to `false`.
-  - Set `browser.tabs.closeWindowWithLastTab` to `false`.
-  - Set `network.prefetch-next` to `false`.
-  - Set `network.dns.disablePrefetch` to `false`.
-  - Set `datareporting.healthreport.uploadEnabled` to `false`.
-  - Set `general.useragent.override` to `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36`
-  - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
-  - Set `gfx.webrender.enabled` to `true`.
-  - Set `geo.enabled` to `false`.
-  - Set `browser.safebrowsing.malware.enabled` to `false`.
-  - Set `browser.safebrowsing.phishing.enabled` to `false`
-  - Set `browser.send_pings` to `false`
-  - Set `dom.battery.enabled` to `false`
-  - Set `media.navigator.enabled` to `false`
-  - Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
-  - Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query`.
-- In [about:preferences#general](about:preferences#general), check `Restore previous session`.
-- In [about:preferences#search](about:preferences#search), add the search bar in the toolbar
-- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Also, block cookies for the following domains:
-
-  - https://s.ytimg.com
-  - https://www.youtube.com
-  - https://r5---sn-25glenes.googlevideo.com
-  - https://i.ytimg.com
-
-  Also, disable third-party cookies and enable `Tracking Protection` and `Do Not Track` at all times.
-
-- Add these extensions:
-  - [tabliss.io](https://tabliss.io/)
-  - [React Developer Tools](https://github.com/facebook/react-devtools)
-  - [Redux DevTools](https://github.com/zalmoxisus/redux-devtools-extension)
-
-## 6. Git
-
-```bash
-sudo apt-add-repository ppa:git-core/ppa
-sudo apt update
-sudo apt install git git-extras
-```
-
-## 7. Essential packages
+## 2. Essential packages
 
 ```bash
 sudo apt update
@@ -172,7 +75,7 @@ sudo apt install gnupg2 \
 # For automatic security updates, run `sudo dpkg-reconfigure unattended-upgrades`
 ```
 
-## 8. Optional packages
+## 3. Optional packages
 
 ```bash
 sudo apt install texlive-full \
@@ -208,6 +111,103 @@ sudo apt install texlive-full \
 # zathura is a PDF viewer
 # synaptic see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
 # After installing network-manager-openvpn-gnome do `sudo service network-manager restart`
+```
+
+## 4. Create SSH and GPG keys
+
+### SSH
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "<me@domain>" -f .ssh/id_rsa
+cat .ssh/id_rsa.pub | xclip -i -selection clip-board
+```
+
+Paste what you just copied at [https://github.com/settings/keys](https://github.com/settings/keys)
+
+### GPG
+
+Only if you don't have one already. For Github to verify your commits, mostly. Also useful for `pass`.
+
+```bash
+gpg2 --full-gen-key # Accept RSA and RSA, size 4096
+gpg2 --list-secret-keys --keyid-format LONG # Copy the value after `sec rsa4096/`
+gpg --armor --export <copied value> | xclip -i -selection clip-board
+sudo git config --system user.signingkey <copied value>
+```
+
+We store the signing key in the system settings instead of the user's settings to avoid having to commit every new key in this repo.
+
+Paste what you just copied at [https://github.com/settings/keys](https://github.com/settings/keys). [More details](https://help.github.com/articles/signing-commits-with-gpg/).
+
+## 5. Google Chrome
+
+Download Chrome .deb file and then:
+
+```bash
+sudo dpgk -i google-chrome-stable.deb
+sudo apt install -f # To fix dependencies problems
+sudo dpgk -i google-chrome-stable.deb
+rm -f google-chrome-stable.deb
+```
+
+## 6. Visual Studio Code
+
+[Download VS code .deb file](https://code.visualstudio.com/docs/setup/linux) and then:
+
+```bash
+sudo dpgk -i code_1.27_amd64.deb
+sudo apt install -f # To fix dependencies problems
+sudo dpgk -i code_1.27_amd64.deb
+rm -f code_1.27_amd64.deb
+code --install-extension "esbenp.prettier-vscode"
+code --install-extension "dbaeumer.vscode-eslint"
+code --install-extension "eamodio.gitlens"
+```
+
+## 7. Firefox
+
+- In [about:config](about:config), do:
+  - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0`.
+  - Set `security.tls.version.min` to `3` ([more info](https://support.mozilla.org/fr/questions/1103968))
+  - Set `view_source.wrap_long_lines` to `true`.
+  - Set `browser.tabs.warnOnClose` to `false`.
+  - Set `browser.tabs.closeWindowWithLastTab` to `false`.
+  - Set `network.prefetch-next` to `false`.
+  - Set `network.dns.disablePrefetch` to `false`.
+  - Set `datareporting.healthreport.uploadEnabled` to `false`.
+  - Set `general.useragent.override` to `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36`
+  - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
+  - Set `gfx.webrender.enabled` to `true`.
+  - Set `geo.enabled` to `false`.
+  - Set `browser.safebrowsing.malware.enabled` to `false`.
+  - Set `browser.safebrowsing.phishing.enabled` to `false`
+  - Set `browser.send_pings` to `false`
+  - Set `dom.battery.enabled` to `false`
+  - Set `media.navigator.enabled` to `false`
+  - Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
+  - Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query`.
+- In [about:preferences#general](about:preferences#general), check `Restore previous session`.
+- In [about:preferences#search](about:preferences#search), add the search bar in the toolbar
+- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Also, block cookies for the following domains:
+
+  - https://s.ytimg.com
+  - https://www.youtube.com
+  - https://r5---sn-25glenes.googlevideo.com
+  - https://i.ytimg.com
+
+  Also, disable third-party cookies and enable `Tracking Protection` and `Do Not Track` at all times.
+
+- Add these extensions:
+  - [tabliss.io](https://tabliss.io/)
+  - [React Developer Tools](https://github.com/facebook/react-devtools)
+  - [Redux DevTools](https://github.com/zalmoxisus/redux-devtools-extension)
+
+## 8. Git
+
+```bash
+sudo apt-add-repository ppa:git-core/ppa
+sudo apt update
+sudo apt install git git-extras
 ```
 
 ## 9. Thunderbird
