@@ -217,7 +217,6 @@ Download Thunderbird 60 `.deb` file. Then extract it and:
 ```bash
 sudo mv thunderbird/ /opt
 sudo ln -s /opt/thunderbird/thunderbird /usr/bin/
-# If you are running Ubuntu and want it attached to the dock, do:
 sudo su
 bash
 cat > /usr/share/applications/thunderbird.desktop << "EOF"
