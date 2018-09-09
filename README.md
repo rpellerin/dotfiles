@@ -2,7 +2,7 @@
 
 ![How to secure your laptop](https://raw.githubusercontent.com/rpellerin/dotfiles/master/Pictures/secure-laptop.png)
 
-## 1. BIOS
+## 1. BIOS and Grub
 
 Upgrade the bios by downloading the latest image from [Dell.com](http://www.dell.com/support/home/us/en/19/product-support/product/latitude-14-7480-laptop/drivers?os=biosa). (Alternatively, you can try to download the image from [this website](https://fwupd.org/lvfs/devicelist) and install it through "Software" (simply open the file).) Then:
 
@@ -12,6 +12,14 @@ rm Downloads/Latitude_7x80_1.4.6.exe
 ```
 
 Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter BIOS setup. Set a password for the BIOS and the hard drive. Don't forget to remove the file from `/boot/efi`.
+
+Then:
+
+```bash
+sudoedit /etc/default/grub
+GRUB_TIMEOUT=0
+sudo update-grub
+```
 
 ## 2. Create SSH and GPG keys
 
@@ -381,7 +389,7 @@ Open the settings manager and do:
   - Slack to `Super + S`
   - `/home/romain/git/dotfiles/scripts/lock-screen.sh` to `Ctrl+Alt+Delete`.
 
-Make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
+- In `Power manager`, make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
 
 ## 19. Owncloud
 
