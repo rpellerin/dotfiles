@@ -4,6 +4,8 @@
 
 ## 1. BIOS and Grub
 
+*Side note*: leaving Secure Boot on is fine, as long as you select "Enroll MOK" after rebooting, following the install.
+
 Upgrade the bios by downloading the latest image from [Dell.com](http://www.dell.com/support/home/us/en/19/product-support/product/latitude-14-7480-laptop/drivers?os=biosa). (Alternatively, you can try to download the image from [this website](https://fwupd.org/lvfs/devicelist) and install it through "Software" (simply open the file).) Then:
 
 ```bash
