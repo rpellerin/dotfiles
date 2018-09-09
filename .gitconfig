@@ -1,7 +1,6 @@
 [user]
 	email = contact@romainpellerin.eu
 	name = Romain Pellerin
-	signingkey = CB1024B0775792E8
 [color]
 	ui = true
 	grep = true

@@ -52,6 +52,5 @@
   "extensions.ignoreRecommendations": false,
   "gitlens.historyExplorer.enabled": true,
   "terminal.integrated.rendererType": "dom",
-  "typescript.tsserver.log": "verbose",
-  "window.zoomLevel": 2
+  "typescript.tsserver.log": "verbose"
 }
