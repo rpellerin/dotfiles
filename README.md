@@ -89,7 +89,6 @@ sudo apt install texlive-full \
     arandr \
     gcolor2 \
     mpd mpv \
-    pass \
     rofi \
     exiftool \
     jhead \
