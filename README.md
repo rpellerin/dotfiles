@@ -393,6 +393,7 @@ Open the settings manager and do:
   - `/home/romain/git/dotfiles/scripts/lock-screen.sh` to `Ctrl+Alt+Delete`.
 
 - In `Power manager`, make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
+- In `Removable Drives and Media`, uncheck the 3 options about auto-mount and auto-broswe.
 
 ## 19. Owncloud
 
