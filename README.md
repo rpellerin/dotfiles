@@ -337,7 +337,7 @@ ln -s "$REPO_DIR/.zpreztorc" $HOME/
 zsh-newuser-install
 ```
 
-## 15. Edit termninal preferences
+## 15. Edit terminal preferences
 
 - In `General`, unlimited scrollback
 - In `Appearance`, uncheck menu bar and borders around new windows
