@@ -4,7 +4,7 @@
 
 ## 1. BIOS and Grub
 
-*Side note*: leaving Secure Boot on is fine, as long as you select "Enroll MOK" after rebooting, following the install.
+_Side note_: leaving Secure Boot on is fine, as long as you select "Enroll MOK" after rebooting, following the install.
 
 Upgrade the bios by downloading the latest image from [Dell.com](http://www.dell.com/support/home/us/en/19/product-support/product/latitude-14-7480-laptop/drivers?os=biosa). (Alternatively, you can try to download the image from [this website](https://fwupd.org/lvfs/devicelist) and install it through "Software" (simply open the file).) Then:
 
@@ -65,11 +65,9 @@ sudo apt install gnupg2 \
     hunspell-en-gb \
     unattended-upgrades \
     redshift-gtk \
-    pass \
     gtk-recordmydesktop \
     youtube-dl
 
-# Pass is a password manager
 # Rofi is an app launcher
 # An alternative to autojump is z: https://github.com/rupa/z
 # xss-lock is for auto locking session after 2 minutes of inactivity
@@ -117,7 +115,18 @@ sudo apt install texlive-full \
 # After installing network-manager-openvpn-gnome do `sudo service network-manager restart`
 ```
 
-## 4. Create SSH and GPG keys
+## 4. Pass, SSH and GPG keys
+
+### Pass
+
+```bash
+git clone https://git.zx2c4.com/password-store
+git clone git@github.com:tadfisher/pass-otp.git
+cd password-store
+sudo make install
+cd ../pass-otp
+sudo make install
+```
 
 ### SSH
 
