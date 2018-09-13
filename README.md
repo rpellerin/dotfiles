@@ -120,6 +120,7 @@ sudo apt install texlive-full \
 ### Pass
 
 ```bash
+sudo apt install oathtool # For OTPs
 git clone https://git.zx2c4.com/password-store
 git clone git@github.com:tadfisher/pass-otp.git
 cd password-store
