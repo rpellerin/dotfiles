@@ -153,6 +153,30 @@ We store the signing key in the system settings instead of the user's settings t
 
 Paste what you just copied at [https://github.com/settings/keys](https://github.com/settings/keys). [More details](https://help.github.com/articles/signing-commits-with-gpg/).
 
+It's also very important to make backups of your private and public keys:
+
+```bash
+gpg2 --export-secret-keys -a "Romain" > secret.key
+gpg2 --export -a "Romain" > public.key
+gpg2 --export-ownertrust > romain-ownertrust-gpg.txt
+gpg2 --delete-secret-and-public-key "Romain"
+gpg -c secret.key # Encrypt your private key before saving it somewhere
+```
+
+To restore it:
+
+```bash
+gpg secret.key.gpg # Decrypt private key
+gpg2 --import secret.key
+gpg2 --import public.key # Is this needed?
+gpg2 --import-ownertrust romain-ownertrust-gpg.txt
+# Or, if you don't have the ownertrust file
+gpg2 --edit-key "Romain"
+trust
+5
+save
+```
+
 ## 5. Google Chrome
 
 Download Chrome .deb file and then:
