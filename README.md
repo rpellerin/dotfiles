@@ -451,6 +451,13 @@ Disable blueman applet from application autostart cause it turns bluetooth on wh
     - `rfkill list`
     - `bluetooth`
 
+## 23. Fuzzy finder
+
+```bash
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+
 ## Optional stuff
 
 ### Improving privacy
