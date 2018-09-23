@@ -290,6 +290,7 @@ alias la='ls -A'
 alias l='exa -lh'
 
 # Handy shortcuts
+alias du="ncdu -rr -x --exclude .git --exclude node_modules"
 alias man='tldr'
 alias top='htop'
 alias gt='git'

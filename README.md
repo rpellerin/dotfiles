@@ -33,6 +33,9 @@ sudo apt update
 sudo apt upgrade
 sudo apt install gnupg2 \
     htop \
+    ncdu \
+    silversearcher-ag \
+    jq \
     xclip \
     autojump \
     ctags \
