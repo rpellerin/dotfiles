@@ -147,9 +147,20 @@ Only if you don't have one already. For Github to verify your commits, mostly. A
 
 ```bash
 gpg2 --full-gen-key # Accept RSA and RSA, size 4096
-gpg2 --gen-revoke "Romain Pellerin" > revoke.asc
-gpg2 -c revoke.asc
 gpg2 --list-secret-keys --keyid-format LONG # Copy the value after `sec rsa4096/`
+gpg2 --edit-key <copied value>
+
+# Now we'll create a signing subkey
+addKey
+4
+4096
+5y
+y
+y
+save
+
+gpg2 --gen-revoke <copied value> > revoke.asc
+gpg2 -c revoke.asc
 gpg2 --armor --export <copied value> | xclip -i -selection clip-board
 sudo git config --system user.signingkey <copied value>
 ```
@@ -161,10 +172,10 @@ Paste what you just copied at [https://github.com/settings/keys](https://github.
 It's also very important to make backups of your private and public keys:
 
 ```bash
-gpg2 --export-secret-keys -a "Romain" > secret.key
-gpg2 --export -a "Romain" > public.key
+gpg2 --export-secret-keys --armor "Romain" > secret.key
+gpg2 --export --armor "Romain" > public.key
+gpg2 --export-secret-subkeys --armor <copied value> > subkeys.key
 gpg2 --export-ownertrust > romain-ownertrust-gpg.txt
-gpg2 --delete-secret-and-public-key "Romain"
 gpg2 -c secret.key # Encrypt your private key before saving it somewhere
 ```
 
@@ -180,6 +191,26 @@ gpg2 --edit-key "Romain"
 trust
 5
 save
+```
+
+If you have made backups and created a signing subkey, it's reasonably safe to remove the master key from your machine. You only need the master key to sign other people's key or edit your subkeys.
+
+```bash
+gpg2 --delete-secret-key <copied value>
+gpg2 --import subkeys.key
+shred -u subkeys # for security purposes
+```
+
+If, for some reason, you want to erase all your secret and public keys, run:
+
+```
+gpg2 --delete-secret-and-public-key <copied value>
+```
+
+**Finally, configure Pass**:
+
+```bash
+pass init <copied value>
 ```
 
 ## 5. Google Chrome
