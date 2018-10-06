@@ -122,3 +122,7 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export TIME_STYLE=long-iso
+
+if [ ! -d "$HOME/.password-store" ] || [ -z "$(ls -A $HOME/.password-store)" ]; then
+    echo '>>> No password store found.'
+fi
