@@ -368,6 +368,8 @@ ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/
 ln -s $REPO_DIR/.tern-project $HOME/
 ln -s $REPO_DIR/.eslintrc.js $HOME/
 ln -s $REPO_DIR/.config/compton.conf $HOME/.config/
+mkdir -p $HOME/.gnupg
+ln -s $REPO_DIR/.gpupg/gpg.conf $HOME/.gpupg
 
 source "$REPO_DIR/.rc"
 git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc
