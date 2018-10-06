@@ -201,6 +201,16 @@ gpg2 --import subkeys.key
 shred -u subkeys # for security purposes
 ```
 
+To temporarily re-import it, do:
+
+```bash
+mkdir ~/gpgtmp
+gpg2 --homedir ~/gpgtmp --import secret.txt
+# Do what you need to with `gpg2 --homedir ~/gpgtmp command`
+gpg-connect-agent --homedir ~/gpgtmp KILLAGENT /bye
+rm -rf ~/gpgtmp
+```
+
 If, for some reason, you want to erase all your secret and public keys, run:
 
 ```
