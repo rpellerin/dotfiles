@@ -148,7 +148,7 @@ Only if you don't have one already. For Github to verify your commits, mostly. A
 ```bash
 gpg2 --full-gen-key # Accept RSA and RSA, size 4096
 gpg2 --list-secret-keys --keyid-format LONG # Copy the value after `sec rsa4096/`
-gpg --armor --export <copied value> | xclip -i -selection clip-board
+gpg2 --armor --export <copied value> | xclip -i -selection clip-board
 sudo git config --system user.signingkey <copied value>
 ```
 
@@ -163,13 +163,13 @@ gpg2 --export-secret-keys -a "Romain" > secret.key
 gpg2 --export -a "Romain" > public.key
 gpg2 --export-ownertrust > romain-ownertrust-gpg.txt
 gpg2 --delete-secret-and-public-key "Romain"
-gpg -c secret.key # Encrypt your private key before saving it somewhere
+gpg2 -c secret.key # Encrypt your private key before saving it somewhere
 ```
 
 To restore it:
 
 ```bash
-gpg secret.key.gpg # Decrypt private key
+gpg2 secret.key.gpg # Decrypt private key
 gpg2 --import secret.key
 gpg2 --import public.key # Is this needed?
 gpg2 --import-ownertrust romain-ownertrust-gpg.txt
