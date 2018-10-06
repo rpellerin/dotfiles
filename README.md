@@ -175,7 +175,7 @@ It's also very important to make backups of your private and public keys:
 gpg2 --export-secret-keys --armor "Romain" > secret.key
 gpg2 --export --armor "Romain" > public.key
 gpg2 --export-secret-subkeys --armor <copied value> > subkeys.key
-gpg2 --export-ownertrust > romain-ownertrust-gpg.txt
+gpg2 --export-ownertrust --armor > romain-ownertrust-gpg.txt
 gpg2 -c secret.key # Encrypt your private key before saving it somewhere
 ```
 
