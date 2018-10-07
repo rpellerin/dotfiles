@@ -223,6 +223,12 @@ gpg2 --delete-secret-and-public-key <copied value>
 pass init <copied value>
 ```
 
+Set a cronjob to periodically make a backup:
+
+```bash
+0 20 9 * * tar czfh "$HOME/$(date -u +"%Y-%m-%dT%H-%M-%SZ")-password-store.tar.gz" -C "$HOME" .password-store
+```
+
 ## 5. Google Chrome
 
 Download Chrome .deb file and then:
