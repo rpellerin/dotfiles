@@ -126,3 +126,6 @@ export TIME_STYLE=long-iso
 if [ ! -d "$HOME/.password-store" ] || [ -z "$(ls -A $HOME/.password-store)" ]; then
     echo '>>> No password store found.'
 fi
+
+# Remove if pass auto-completion works out of the box
+export fpath=(/usr/share/zsh/site-functions $fpath)
