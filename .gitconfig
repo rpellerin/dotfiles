@@ -21,6 +21,7 @@
     bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
     # File history
     filelog = log -u
+    fixup = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autosquash $REV^' -
 [push]
 	default = simple
 [fetch]
