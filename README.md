@@ -263,7 +263,7 @@ code --install-extension "eamodio.gitlens"
   - Set `browser.tabs.warnOnClose` to `false`.
   - Set `browser.tabs.closeWindowWithLastTab` to `false`.
   - Set `network.prefetch-next` to `false`.
-  - Set `network.dns.disablePrefetch` to `false`.
+  - Set `network.dns.disablePrefetch` to `true`.
   - Set `datareporting.healthreport.uploadEnabled` to `false`.
   - Set `general.useragent.override` to `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36`
   - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
@@ -276,16 +276,16 @@ code --install-extension "eamodio.gitlens"
   - Set `media.navigator.enabled` to `false`
   - Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
   - Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query`.
-- In [about:preferences#general](about:preferences#general), check `Restore previous session`.
-- In ](about:preferences#search), add the search bar next to the url bar and uncheck `Show search suggestions ahead of browsing history in address bar results`
-- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Also, block cookies for the following domains:
+- In [about:preferences#general](about:preferences#general), check `Restore previous session` and unckeck `Ctrl+Tab cycles through tabs in recently used order`
+- In [about:preferences#search](about:preferences#search), add the search bar next to the url bar and uncheck `Show search suggestions ahead of browsing history in address bar results`
+- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Also, block cookies for trackers and the following domains:
 
   - https://s.ytimg.com
   - https://www.youtube.com
   - https://r5---sn-25glenes.googlevideo.com
   - https://i.ytimg.com
 
-  Also, disable third-party cookies and enable `Tracking Protection` and `Do Not Track` at all times.
+  Also, disable third-party cookies and enable `Trackers Protection`, `Third-Party Cookies` for trackers and `Do Not Track` at all times.
 
 - Add these extensions:
   - [tabliss.io](https://tabliss.io/)
