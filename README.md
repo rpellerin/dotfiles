@@ -265,7 +265,7 @@ code --install-extension "eamodio.gitlens"
   - Set `network.prefetch-next` to `false`.
   - Set `network.dns.disablePrefetch` to `true`.
   - Set `datareporting.healthreport.uploadEnabled` to `false`.
-  - Set `general.useragent.override` to `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36`
+  - Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0`
   - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
   - Set `gfx.webrender.enabled` to `true`.
   - Set `geo.enabled` to `false`.
