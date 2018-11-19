@@ -274,6 +274,7 @@ code --install-extension "eamodio.gitlens"
   - Set `browser.send_pings` to `false`
   - Set `dom.battery.enabled` to `false`
   - Set `media.navigator.enabled` to `false`
+  - Set `accessibility.blockautorefresh` to `true`
   - Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
   - Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query`.
 - In [about:preferences#general](about:preferences#general), check `Restore previous session` and unckeck `Ctrl+Tab cycles through tabs in recently used order`
