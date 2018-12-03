@@ -53,5 +53,7 @@
   "gitlens.historyExplorer.enabled": true,
   "terminal.integrated.rendererType": "dom",
   "typescript.tsserver.log": "verbose",
-  "window.titleBarStyle": "custom"
+  "window.titleBarStyle": "custom",
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true
 }
