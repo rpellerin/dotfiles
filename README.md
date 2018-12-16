@@ -484,9 +484,13 @@ Open the settings manager and do:
 - In `Power manager`, make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
 - In `Removable Drives and Media`, uncheck the 3 options about auto-mount and auto-broswe.
 
-## 19. Owncloud
+## 19. Nextcloud
 
-Install the [ownCloud client](https://software.opensuse.org/download/package?project=isv:ownCloud:desktop&package=owncloud-client). **UPDATE**: install NextCloud instead of ownCloud.
+```bash
+sudo add-apt-repository ppa:nextcloud-devs/client
+sudo apt update
+sudo apt install nextcloud-client
+```
 
 ## 20. Compton
 
