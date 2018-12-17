@@ -22,6 +22,7 @@
     # File history
     filelog = log -u
     fixup = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autosquash $REV^' -
+    push-commit-by-commit = "!git log --oneline $(git merge-base @ 'origin/master').. | tac | awk '{ print $1 }' | while read hash; do git push origin $hash:\"`git rev-parse --abbrev-ref HEAD`\" --force-with-lease; sleep 1; done"
 [push]
 	default = simple
 [fetch]
