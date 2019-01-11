@@ -4,7 +4,7 @@ const { exec, spawn } = require('child_process')
 const os = require('os')
 const rl = require('readline')
 
-const BLACK_LISTED_PACKAGES = ['rxjs', 'react-virtualized', 'i18n-extract', 'react-pdf', 'whatwg-fetch']
+const BLACK_LISTED_PACKAGES = ['rxjs', 'react-virtualized', 'i18n-extract', 'whatwg-fetch']
 
 const testStrings = [
     'a 1.2.3 1.2.5',
