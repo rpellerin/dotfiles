@@ -4,7 +4,7 @@ const { exec, spawn } = require('child_process')
 const os = require('os')
 const rl = require('readline')
 
-const BLACK_LISTED_PACKAGES = ['rxjs', 'react-virtualized', 'i18n-extract', 'whatwg-fetch']
+let BLACK_LISTED_PACKAGES = ['rxjs', 'react-virtualized', 'i18n-extract', 'whatwg-fetch']
 
 const testStrings = [
     'a 1.2.3 1.2.5',
@@ -55,7 +55,7 @@ const allPreviousDigitsMatch = (oldSplit, newSplit, index) => {
     return true
 }
 
-const computePackagesToUpgrade = outdatedPackages => outdatedPackages
+const computePackagesToUpgrade = (outdatedPackages, blacklistedPackages = []) => outdatedPackages
     .filter(s => s && s.trim().length > 0)
     .map(s => s.split(' '))
     .filter(([name, oldVersion, newVersion, url]) => isVersion(oldVersion) && isVersion(newVersion))
@@ -71,7 +71,7 @@ const computePackagesToUpgrade = outdatedPackages => outdatedPackages
         return obj
     })
     .filter(({ differences }) => differences.some(diff => diff !== 0)) // removes those with no differences
-    .filter(({ name }) => !BLACK_LISTED_PACKAGES.includes(name))
+    .filter(({ name }) => !blacklistedPackages.includes(name))
     .sort(sortFromMinorToMajor)
 
 const ask = async (question, callback) => new Promise(resolve => {
@@ -86,12 +86,17 @@ const ask = async (question, callback) => new Promise(resolve => {
 })
 
 run("yarn outdated | tail -n +7 | head -n -1 | awk '{print $1,$2,$4,$6}'", async result => {
-    let packagesToUpdate = computePackagesToUpgrade(result.split(os.EOL))
+    if (process.argv[2] === '--blacklist' && process.argv[3]) {
+        BLACK_LISTED_PACKAGES = process.argv[3].split(',').map(s => s.trim()).filter(s => s.length > 0)
+    }
+    let packagesToUpdate = computePackagesToUpgrade(result.split(os.EOL), BLACK_LISTED_PACKAGES)
     console.table(packagesToUpdate)
     const response = await ask('Which packages to update (order matters, comma-separated)? [all]')
     if (response !== 'all' && response !== '') {
       packagesToUpdate = response.split(',').map(id=>parseInt(id, 10)).map(id=>packagesToUpdate[id])
     }
+    const response2 = await ask('Git push after each upgrade? [Y/n]')
+    const shouldPush = !!response2.match(/^[Yy]/)
     for (let i = 0; i < packagesToUpdate.length; i++) {
         const { name, oldVersion, newVersion } = packagesToUpdate[i]
         console.log(`Updating ${name}...`)
@@ -104,9 +109,7 @@ run("yarn outdated | tail -n +7 | head -n -1 | awk '{print $1,$2,$4,$6}'", async
 
         const commigMessage = `chore(npm): Upgrade ${name} from ${oldVersion} to ${newVersion}`
         returnCode = await runWithOutput('git commit -m', [commigMessage, '-m', 'UPGRADE-NPM-PACKAGES'])
-        if (['--push', '-p'].includes(process.argv[2])) {
-            await runWithOutput('git push')
-        }
+        if (shouldPush) await runWithOutput('git push')
         if (returnCode !== 0) process.exit(1)
 
         console.log(commigMessage)
