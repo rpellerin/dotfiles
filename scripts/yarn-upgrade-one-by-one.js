@@ -86,11 +86,11 @@ const ask = async (question, callback) => new Promise(resolve => {
 })
 
 run("yarn outdated | tail -n +7 | head -n -1 | awk '{print $1,$2,$4,$6}'", async result => {
-    const packagesToUpdate = computePackagesToUpgrade(result.split(os.EOL))
+    let packagesToUpdate = computePackagesToUpgrade(result.split(os.EOL))
     console.table(packagesToUpdate)
-    const response = await ask('Continue? [Y/n]')
-    if (!response.match(/^[Yy]/)) {
-        process.exit(0)
+    const response = await ask('Which packages to update (order matters, comma-separated)? [all]')
+    if (response !== 'all' && response !== '') {
+      packagesToUpdate = response.split(',').map(id=>parseInt(id, 10)).map(id=>packagesToUpdate[id])
     }
     for (let i = 0; i < packagesToUpdate.length; i++) {
         const { name, oldVersion, newVersion } = packagesToUpdate[i]
