@@ -33,9 +33,6 @@ sudo apt update
 sudo apt upgrade
 sudo apt install gnupg2 \
     htop \
-    ncdu \
-    silversearcher-ag \
-    jq \
     xclip \
     autojump \
     ctags \
@@ -45,7 +42,6 @@ sudo apt install gnupg2 \
     optipng \
     inotify-tools \
     vlc \
-    gksu \
     gigolo \
     i3lock \
     xss-lock \
@@ -54,7 +50,7 @@ sudo apt install gnupg2 \
     gimp \
     curl \
     ffmpeg \
-    vim-gtk \
+    vim-gtk3 \
     python3 \
     zsh \
     libreoffice \
@@ -69,16 +65,17 @@ sudo apt install gnupg2 \
     unattended-upgrades \
     redshift-gtk \
     gtk-recordmydesktop \
+    cryptsetup \
     youtube-dl
 
-# Rofi is an app launcher
+sudo dpkg-reconfigure unattended-upgrades
+
 # An alternative to autojump is z: https://github.com/rupa/z
 # xss-lock is for auto locking session after 2 minutes of inactivity
-# vim-gtk for clipboard support
+# vim-gtk3 for clipboard support
 # ctags is for vim tag jumping (see .vimrc)
 # libreoffice-pdfimport is for PDF signing
 # redshift-gtk is an alternative to xflux
-# For automatic security updates, run `sudo dpkg-reconfigure unattended-upgrades`
 ```
 
 ## 3. Optional packages
@@ -88,17 +85,20 @@ sudo apt install texlive-full \
     texlive-bibtex-extra \
     biber \
     arandr \
-    gcolor2 \
     mpd mpv \
     rofi \
     exiftool \
     jhead \
+    ncdu \
+    jq \
     filezilla
     zenity \
     icoutils \
+    silversearcher-ag \
     zathura \
     wireshark
     synaptic \
+    gksu \
     pdf-presenter-console \
     openvpn \
     network-manager-openvpn-gnome \
@@ -109,6 +109,7 @@ sudo apt install texlive-full \
 # If there is any compatibility issue, install it from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
 # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
 
+# Rofi is an app launcher
 # MPD is a music player for terminal, MPV is a video player compatible with Youtube and co.
 # exiftool and jhead are for EXIF data
 # zenity is a simple interactive dialog
@@ -116,6 +117,8 @@ sudo apt install texlive-full \
 # zathura is a PDF viewer
 # synaptic see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
 # After installing network-manager-openvpn-gnome do `sudo service network-manager restart`
+
+# Gcolor3 is a useful tool that can be downloaded at https://www.hjdskes.nl/projects/gcolor3/
 ```
 
 ## 4. Pass, SSH and GPG keys
@@ -123,7 +126,8 @@ sudo apt install texlive-full \
 ### Pass
 
 ```bash
-sudo apt install oathtool # For OTPs
+sudo apt install oathtool dmenu # oathtool for OTPs, dmenu for passmenu
+# You can either apt install pass or use git clone, depending on how recent the version offered by apt is
 git clone https://git.zx2c4.com/password-store
 git clone git@github.com:tadfisher/pass-otp.git
 cd password-store
@@ -245,7 +249,7 @@ rm -f google-chrome-stable.deb
 [Download VS code .deb file](https://code.visualstudio.com/docs/setup/linux) and then:
 
 ```bash
-sudo dpgk -i code_1.27_amd64.deb
+sudo apt install code_1.27_amd64.deb
 sudo apt install -f # To fix dependencies problems
 sudo dpgk -i code_1.27_amd64.deb
 rm -f code_1.27_amd64.deb
@@ -265,7 +269,7 @@ code --install-extension "eamodio.gitlens"
   - Set `network.prefetch-next` to `false`.
   - Set `network.dns.disablePrefetch` to `true`.
   - Set `datareporting.healthreport.uploadEnabled` to `false`.
-  - Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0`
+  - Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0`
   - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
   - Set `gfx.webrender.enabled` to `true`.
   - Set `geo.enabled` to `false`.
@@ -308,6 +312,7 @@ Download Thunderbird 60 `.deb` file. Then extract it and:
 ```bash
 sudo mv thunderbird/ /opt
 sudo ln -s /opt/thunderbird/thunderbird /usr/bin/
+# Do the following only if /usr/share/applications/thunderbird.desktop does not exist
 sudo su
 bash
 cat > /usr/share/applications/thunderbird.desktop << "EOF"
@@ -417,7 +422,7 @@ ln -s $REPO_DIR/.tern-project $HOME/
 ln -s $REPO_DIR/.eslintrc.js $HOME/
 ln -s $REPO_DIR/.config/compton.conf $HOME/.config/
 mkdir -p $HOME/.gnupg
-ln -s $REPO_DIR/.gpupg/gpg.conf $HOME/.gpupg
+ln -s $REPO_DIR/.gnupg/gpg.conf $HOME/.gnupg/gpg.conf
 
 source "$REPO_DIR/.rc"
 git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc
@@ -443,7 +448,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 :PluginInstall
 ## Install YouCompleteMe by reading
 ## https://github.com/Valloric/YouCompleteMe/blob/master/README.md#ubuntu-linux-x64
-## (no need to read the "Full Installation Guide" section; if you alreadt have Clang
+## (no need to read the "Full Installation Guide" section; if you already have Clang
 ## on your system, your might use the option `--system-libclang`)
 ```
 
@@ -474,6 +479,7 @@ Open the settings manager and do:
 
   - Shift Alt 4: `xfce4-screenshooter -r`
   - Ctrl Shift Alt 4: `xfce4-screenshooter -c -r`
+  - Ctrl Q: `true`
   - Email client to `Super + M`
   - Browser to `Super + W`
   - File explorer to `Super + F`
