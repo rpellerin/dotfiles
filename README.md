@@ -29,9 +29,11 @@ sudo update-grub
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
+sudo apt-add-repository ppa:git-core/ppa
 sudo apt update
 sudo apt upgrade
 sudo apt install gnupg2 \
+    git git-extras
     htop \
     xclip \
     autojump \
@@ -132,6 +134,7 @@ git clone https://git.zx2c4.com/password-store
 git clone git@github.com:tadfisher/pass-otp.git
 cd password-store
 sudo make install
+cp /usr/share/zsh/site-functions/_pass /usr/share/zsh/vendor-completions
 cd ../pass-otp
 sudo make install
 ```
@@ -165,22 +168,20 @@ save
 
 gpg2 --gen-revoke <copied value> > revoke.asc
 gpg2 -c revoke.asc
+echo "  signingkey = <copied value>" >> ~/.gitconfig_local
 gpg2 --armor --export <copied value> | xclip -i -selection clip-board
-sudo git config --system user.signingkey <copied value>
 ```
-
-We store the signing key in the system settings instead of the user's settings to avoid having to commit every new key in this repo.
 
 Paste what you just copied at [https://github.com/settings/keys](https://github.com/settings/keys). [More details](https://help.github.com/articles/signing-commits-with-gpg/).
 
 It's also very important to make backups of your private and public keys:
 
 ```bash
-gpg2 --export-secret-keys --armor "Romain" > secret.key
-gpg2 --export --armor "Romain" > public.key
-gpg2 --export-secret-subkeys --armor <copied value> > subkeys.key
-gpg2 --export-ownertrust --armor > romain-ownertrust-gpg.txt
-gpg2 -c secret.key # Encrypt your private key before saving it somewhere
+gpg2 --armor --export-secret-keys "Romain" > secret.key
+gpg2 --armor --export "Romain" > public.key # --export-secret-keys also exports public keys, but just in case
+gpg2 --armor --export-secret-subkeys <copied value> > subkeys.key # --export-secret-keys also exports subkeys, but just in case
+gpg2 --export-ownertrust > romain-ownertrust-gpg.txt
+gpg2 -c secret.key # Encrypt your private key before saving it somewhere. Also save your ~/.gnupg/gpg.conf
 ```
 
 To restore it:
@@ -220,6 +221,8 @@ If, for some reason, you want to erase all your secret and public keys, run:
 ```
 gpg2 --delete-secret-and-public-key <copied value>
 ```
+
+[More on restoring GPG keys here](https://lists.gnupg.org/pipermail/gnupg-users/2016-September/056735.html).
 
 **Finally, configure Pass**:
 
@@ -297,15 +300,7 @@ code --install-extension "eamodio.gitlens"
   - [React Developer Tools](https://github.com/facebook/react-devtools)
   - [Redux DevTools](https://github.com/zalmoxisus/redux-devtools-extension)
 
-## 8. Git
-
-```bash
-sudo apt-add-repository ppa:git-core/ppa
-sudo apt update
-sudo apt install git git-extras
-```
-
-## 9. Thunderbird
+## 8. Thunderbird
 
 Download Thunderbird 60 `.deb` file. Then extract it and:
 
@@ -333,7 +328,7 @@ ln -s /opt/thunderbird/chrome/icons/default/default256.png /usr/share/pixmaps/th
 
 To restore all email accounts, preferences and emails, you can import the directory `~/.thunderbird` from another computer. In _Preferences > Advanced > General > Config Editor_, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
 
-## 10. Tmux
+## 9. Tmux
 
 ```bash
 sudo apt install libevent-dev libncurses-dev pkg-config automake autoconf
@@ -344,7 +339,7 @@ sh autogen.sh
 sudo make install
 ```
 
-## 11. ZSH + Prezto
+## 10. ZSH + Prezto
 
 ```bash
 zsh
@@ -357,7 +352,7 @@ done
 chsh -s /bin/zsh # Might need rebooting to take effect
 ```
 
-## 12. NVM + NodeJS + a few packages
+## 11. NVM + NodeJS + a few packages
 
 ```bash
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
@@ -372,7 +367,7 @@ nvm install node
 npm i -g tldr peerflix castnow # castnow plays media files on Chromecast (subtitles supported)
 ```
 
-## 13. Battery saver (https://doc.ubuntu-fr.org/tlp)
+## 12. Battery saver (https://doc.ubuntu-fr.org/tlp)
 
 ```bash
 sudo apt install tlp
@@ -380,7 +375,9 @@ sudo systemctl enable tlp
 sudo systemctl enable tlp-sleep
 ```
 
-## 14. Firewall
+## 13. Firewall
+
+*(Note to myself: make this a systemd service some day)*
 
 ```bash
 cd dotfiles # cd to this git repo
@@ -452,22 +449,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ## on your system, your might use the option `--system-libclang`)
 ```
 
-## 17. Install Rust and `exa` (a better `ls`)
-
-```bash
-curl https://sh.rustup.rs -sSf | sh
-```
-
-[More details](https://www.rust-lang.org/en-US/install.html).
-
-Now install `exa`:
-
-```bash
-sudo apt install zlib1g-dev
-cargo install exa
-```
-
-## 18. All settings
+## 17. All settings
 
 Open the settings manager and do:
 
@@ -490,7 +472,7 @@ Open the settings manager and do:
 - In `Power manager`, make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
 - In `Removable Drives and Media`, uncheck the 3 options about auto-mount and auto-broswe.
 
-## 19. Nextcloud
+## 18. Nextcloud
 
 ```bash
 sudo add-apt-repository ppa:nextcloud-devs/client
@@ -498,17 +480,17 @@ sudo apt update
 sudo apt install nextcloud-client
 ```
 
-## 20. Compton
+## 19. Compton
 
 If you experience V-sync issues when watching [this video](https://www.youtube.com/watch?v=0RvIbVmCOxg), you might want to install [compton](http://duncanlock.net/blog/2013/06/07/how-to-switch-to-compton-for-beautiful-tear-free-compositing-in-xfce/), unless you run [`xfwm4` 4.13+](https://github.com/xfce-mirror/xfwm4/blob/master/COMPOSITOR).
 
-## 21. Disabling guest sessions
+## 20. Disabling guest sessions
 
 ```bash
 sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" > /etc/lightdm/lightdm.conf.d/50-no-guest.conf'
 ```
 
-## 22. Disabling Bluetooth on startup
+## 21. Disabling Bluetooth on startup
 
 Disable blueman applet from application autostart cause it turns bluetooth on when starting. Then run `sudo systemctl disable bluetooth`. To check status, run one of the following commands:
 
@@ -516,7 +498,7 @@ Disable blueman applet from application autostart cause it turns bluetooth on wh
     - `rfkill list`
     - `bluetooth`
 
-## 23. Fuzzy finder
+## 22. Fuzzy finder
 
 ```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -536,6 +518,20 @@ Set up your `/etc/hosts`: [https://github.com/rpellerin/safe-hosts](https://gith
 ### Hardening security
 
 Check [this](https://korben.info/attaquant-prendre-controle-total-dune-machine-30-secondes-grace-a-intel-amt.html) out if you own a laptop equiped with an Intel CPU and ATM (Active Management Technology).
+### Install Rust and `exa` (a better `ls`)
+
+```bash
+curl https://sh.rustup.rs -sSf | sh
+```
+
+[More details](https://www.rust-lang.org/en-US/install.html).
+
+Now install `exa`:
+
+```bash
+sudo apt install zlib1g-dev
+cargo install exa
+```
 
 ### Ranger
 

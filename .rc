@@ -126,9 +126,3 @@ export TIME_STYLE=long-iso
 if [ ! -d "$HOME/.password-store" ] || [ -z "$(ls -A $HOME/.password-store)" ]; then
     echo '>>> No password store found.'
 fi
-
-# Remove this block if pass auto-completion works out of the box
-#
-# Must run following command also on Ubuntu 16.04 (https://github.com/sorin-ionescu/prezto/issues/1591)
-# echo 'export skip_global_compinit=1' >> ~./.zprofile
-export fpath=(/usr/share/zsh/site-functions $fpath)
