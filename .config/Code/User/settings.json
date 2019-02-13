@@ -3,7 +3,6 @@
   "typescript.tsdk": "/home/romain/.nvm/versions/node/v10.11.0/lib/node_modules/typescript/lib",
   "git.autofetch": false,
   "javascript.implicitProjectConfig.checkJs": true,
-  "editor.formatOnSave": true,
   "editor.formatOnType": true,
   "terminal.integrated.fontSize": 15,
   "workbench.editor.enablePreview": true,
@@ -55,5 +54,7 @@
   "typescript.tsserver.log": "verbose",
   "window.titleBarStyle": "custom",
   "gitlens.views.fileHistory.enabled": true,
-  "gitlens.views.lineHistory.enabled": true
+  "gitlens.views.lineHistory.enabled": true,
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 0
 }

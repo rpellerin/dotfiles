@@ -288,6 +288,7 @@ alias git="noglob git" # For zsh, see https://yous.be/2014/08/05/zsh-no-matches-
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='exa -lh'
+alias rials='rails'
 
 # Handy shortcuts
 alias du="ncdu -rr -x --exclude .git --exclude node_modules"
