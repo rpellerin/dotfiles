@@ -40,6 +40,7 @@ sudo apt install gnupg2 \
     ctags \
     tree \
     ntp \
+    tumbler-plugins-extra \
     imagemagick \
     optipng \
     inotify-tools \
@@ -72,6 +73,7 @@ sudo apt install gnupg2 \
 
 sudo dpkg-reconfigure unattended-upgrades
 
+# tumbler-plugins-extra is to get Thunar to show video thumbnails
 # An alternative to autojump is z: https://github.com/rupa/z
 # xss-lock is for auto locking session after 2 minutes of inactivity
 # vim-gtk3 for clipboard support
@@ -290,8 +292,14 @@ code --install-extension "eamodio.gitlens"
 
   - https://s.ytimg.com
   - https://www.youtube.com
+  - https://yt3.ggpht.com
+  - https://www.google.com
+  - https://www.google.fr
   - https://r5---sn-25glenes.googlevideo.com
   - https://i.ytimg.com
+  - https://fonts.googleapis.com
+  - https://i9.ytimg.com
+  - https://r1---sn-25ge7ns7.googlevideo.com
 
   Also, disable third-party cookies and enable `Trackers Protection`, `Third-Party Cookies` for trackers and `Do Not Track` at all times.
 
@@ -488,6 +496,11 @@ sudo apt install nextcloud-client
 
 If you experience V-sync issues when watching [this video](https://www.youtube.com/watch?v=0RvIbVmCOxg), you might want to install [compton](http://duncanlock.net/blog/2013/06/07/how-to-switch-to-compton-for-beautiful-tear-free-compositing-in-xfce/), unless you run [`xfwm4` 4.13+](https://github.com/xfce-mirror/xfwm4/blob/master/COMPOSITOR).
 
+1. In Settings > Window Manager Tweaks > Compositor, uncheck `Enable display compositing`
+2. `sudo apt install compton`
+3. Make sure `~/.config/compton.conf` and `~/.config/autostart/compton.desktop` exist
+4. Run `compton` to start it for the current session (it while auto start next time you log in)
+
 ## 20. Disabling guest sessions
 
 ```bash
@@ -513,7 +526,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 ### Improving privacy
 
-Change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Filtrer-The-Pirate-Bay-Ubu-roi-des-Internets).
+Change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Filtrer-The-Pirate-Bay-Ubu-roi-des-Internets). Go to Settings > Network.
 
 Set up your `/etc/hosts`: [https://github.com/rpellerin/safe-hosts](https://github.com/rpellerin/safe-hosts).
 
