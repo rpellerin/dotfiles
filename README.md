@@ -408,7 +408,7 @@ cp $REPO_DIR/.config/autostart/* "$HOME/.config/autostart"
 cp "$REPO_DIR/.config/redshift.conf" $HOME/.config/
 mkdir -p $HOME/.config/Code/User/
 ln -s $REPO_DIR/.config/Code/User/* $HOME/.config/Code/User/
-ln -sf "$REPO_DIR/.gitconfig" $HOME/ # Edit your email address
+ln -sf "$REPO_DIR/.gitconfig" $HOME/
 ln -sf "$REPO_DIR/.git-templates" $HOME/
 ln -sf "$REPO_DIR/.gitignore_global" $HOME/
 ln -sf $REPO_DIR/.curlrc $HOME/
@@ -469,8 +469,12 @@ Open the settings manager and do:
   - Slack to `Super + S`
   - `/home/romain/git/dotfiles/scripts/lock-screen.sh` to `Ctrl+Alt+Delete`.
 
-- In `Power manager`, make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off.
-- In `Removable Drives and Media`, uncheck the 3 options about auto-mount and auto-broswe.
+  The layout is likely 105 key (intl) (check with `cat /etc/default/keyboard`). Set the repeat delay to 350ms and the repeat speed to 35.
+
+- In `Power manager`, make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off. Enable status notification. Disable screen blanking altogether.
+- In `Removable Drives and Media`, uncheck the 3 options about auto-mount and auto-browse.
+- In `Notifications`, log all notifications and applications.
+- In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling.
 
 ## 18. Nextcloud
 
