@@ -41,7 +41,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin
 TCP_SERVICES="" # SSH can be written here, but that would allow it for anyone
 UDP_SERVICES="68" # DHCP
 # Services the system will use from the network
-REMOTE_TCP_SERVICES="21 22 80 443 465 993" # ftp, ssh, http, https, smtp (ssl), imap, openvpn
+REMOTE_TCP_SERVICES="21 22 43 80 443 465 993" # ftp, ssh, whois, http, https, smtp (ssl), imap, openvpn
 REMOTE_UDP_SERVICES="53 67 123 1194" # DNS ("whois" command for example), DHCP, ntp (time update), openvpn
 # Network that will be used for remote mgmt
 # (if undefined, everyone will be allowed)
