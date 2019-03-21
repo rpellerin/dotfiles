@@ -232,10 +232,12 @@ gpg2 --delete-secret-and-public-key <copied value>
 pass init <copied value>
 ```
 
-Set a cronjob to periodically make a backup:
+Set a cronjob to periodically make a backup + other helpful cron jobs:
 
 ```bash
 0 20 9 * * tar czfh "$HOME/$(date -u +"%Y-%m-%dT%H-%M-%SZ")-password-store.tar.gz" -C "$HOME" .password-store
+0 */1 * * * /home/romain/git/dotfiles/scripts/getWeather.py > /tmp/weather.txt
+0 */1 * * * /home/romain/git/dotfiles/scripts/airparif.py > /tmp/airparif.txt
 ```
 
 ## 5. Google Chrome
