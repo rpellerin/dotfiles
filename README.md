@@ -537,7 +537,8 @@ Set up your `/etc/hosts`: [https://github.com/rpellerin/safe-hosts](https://gith
 ### Hardening security
 
 Check [this](https://korben.info/attaquant-prendre-controle-total-dune-machine-30-secondes-grace-a-intel-amt.html) out if you own a laptop equiped with an Intel CPU and ATM (Active Management Technology).
-### Install Rust and `exa` (a better `ls`)
+
+### Install Rust
 
 ```bash
 curl https://sh.rustup.rs -sSf | sh
@@ -545,11 +546,19 @@ curl https://sh.rustup.rs -sSf | sh
 
 [More details](https://www.rust-lang.org/en-US/install.html).
 
+#### `exa` (a better `ls`)
+
 Now install `exa`:
 
 ```bash
 sudo apt install zlib1g-dev
 cargo install exa
+```
+
+#### `bat` (a better `cat`)
+
+```bash
+cargo install bat
 ```
 
 ### Ranger
