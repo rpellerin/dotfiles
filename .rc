@@ -31,7 +31,7 @@ if [[ "$COLORTERM" == "xfce4-terminal" ]] ; then
     export TERM=xterm-256color
 fi
 
-PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/.cabal/bin:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin:/usr/local/go/bin
+PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin:/usr/local/go/bin
 
 autoload -Uz add-zsh-hook
 
@@ -111,6 +111,9 @@ load-nvmrc-and-node-modules
 if [[ -f /home/romain/.ghcup/env ]]; then
     source /home/romain/.ghcup/env
 fi
+
+# GHCUP requires that .cabal/bin comes before .ghcup/bin in PATH
+export PATH="$HOME/.cabal/bin:$PATH"
 
 export PRY_RESCUE_RAILS=1
 export SELENIUM_LOCATION=local
