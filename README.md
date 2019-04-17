@@ -631,6 +631,21 @@ rm /tmp/teamviewer.deb -f
 
 ```bash
 sudo apt install haskell-platform
+```
+
+Or, better:
+
+```bash
+sudo apt install curl g++ gcc libgmp-dev libtinfo-dev make ncurses-dev python3 coreutils xz-utils zlib1g-dev build-essential libnuma-dev
+# https://github.com/haskell/ghcup/issues/64
+# https://github.com/haskell/ghcup/issues/31
+curl https://raw.githubusercontent.com/haskell/ghcup/master/bootstrap-haskell -sSf | sh
+cabal new-install cabal-install
+```
+
+Then:
+
+```bash
 # http://pandoc.org/installing.html
 cabal update
 cabal install pandoc --enable-tests

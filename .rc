@@ -110,10 +110,9 @@ load-nvmrc-and-node-modules
 
 if [[ -f /home/romain/.ghcup/env ]]; then
     source /home/romain/.ghcup/env
+else
+    export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 fi
-
-# GHCUP requires that .cabal/bin comes before .ghcup/bin in PATH
-export PATH="$HOME/.cabal/bin:$PATH"
 
 export PRY_RESCUE_RAILS=1
 export SELENIUM_LOCATION=local
