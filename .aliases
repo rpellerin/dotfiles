@@ -271,6 +271,14 @@ function delete-gone-branches {
     git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D
 }
 
+function zoomin {
+    perl -pi -e 's/(FontName.*?)(\d+)/$1.($2+2)/e' ~/.config/xfce4/terminal/terminalrc
+}
+
+function zoomout {
+    perl -pi -e 's/(FontName.*?)(\d+)/$1.($2-2)/e' ~/.config/xfce4/terminal/terminalrc
+}
+
 ###########
 # ALIASES #
 ###########
