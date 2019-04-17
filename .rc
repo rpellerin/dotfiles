@@ -1,5 +1,7 @@
-echo "`printf '\033[01;32m'`Hello `printf '\033[01;34m'`$USER`printf '\033[00m'`"
-echo "My IP address is `printf '\033[01;31m'`$(hostname -I)`printf '\033[m'`"
+if [[ -z "$NO_OUTPUT" ]] ; then
+    echo "`printf '\033[01;32m'`Hello `printf '\033[01;34m'`$USER`printf '\033[00m'`"
+    echo "My IP address is `printf '\033[01;31m'`$(hostname -I)`printf '\033[m'`"
+fi
 
 export EDITOR=vim
 export VISUAL=vim
@@ -54,34 +56,35 @@ export NVM_DIR="$HOME/.nvm"
 # place this after nvm initialization!
 load-nvmrc-and-node-modules() {
   if [ -f package.json ] && [ -x "$(command -v npm)" ]; then
-    echo 'Found package.json'
-    echo 'Found npm command'
+    if [[ -z "$NO_OUTPUT" ]]; then echo 'Found package.json'; fi
+    if [[ -z "$NO_OUTPUT" ]]; then echo 'Found npm command'; fi
     NPM_BIN_PATH=$(npm bin)
 
     if [ "$PREV_NPM_BIN_PATH" != "$NPM_BIN_PATH" ]; then
       # Variable PREV_NPM_BIN_PATH is set and not null, and different from NPM_BIN_PATH
       if [ -n "${PREV_NPM_BIN_PATH+x}" ]; then
         # Removes old NPM_BIN_PATH
-        echo "Removing ${PREV_NPM_BIN_PATH} from PATH"
+        if [[ -z "$NO_OUTPUT" ]]; then echo "Removing ${PREV_NPM_BIN_PATH} from PATH"; fi
         PATH=$(echo $PATH | sed -e "s#${PREV_NPM_BIN_PATH}##g")
         # echo "New PATH: $PATH"
       fi
       if echo "$PATH" | grep -q "$(npm bin)"; then
-        echo "Removing npm bin from PATH"
+        if [[ -z "$NO_OUTPUT" ]]; then echo "Removing npm bin from PATH"; fi
         PATH=$(echo $PATH | sed -e "s#${NPM_BIN_PATH}##g")
       fi
       PREV_NPM_BIN_PATH=$NPM_BIN_PATH
-      echo "Adding $(npm bin) to PATH"
+      if [[ -z "$NO_OUTPUT" ]]; then echo "Adding $(npm bin) to PATH"; fi
       PATH="$NPM_BIN_PATH:$PATH"
       # echo "Exported PATH: $PATH"
     else
-      echo '$(npm bin) has not changed. Not touching $PATH.'
+      if [[ -z "$NO_OUTPUT" ]]; then echo '$(npm bin) has not changed. Not touching $PATH.'; fi
     fi
   fi
   if [[ -f .nvmrc && -r .nvmrc ]]; then
-    nvm use
+    if [[ -z "$NO_OUTPUT" ]]; then nvm use;
+    else nvm use>/dev/null; fi
   elif [[ $(nvm version) != $(nvm version default)  ]]; then
-    echo "Reverting to nvm default version"
+    if [[ -z "$NO_OUTPUT" ]]; then echo "Reverting to nvm default version"; fi
     nvm use default
   fi
   git-check-should-rebase
