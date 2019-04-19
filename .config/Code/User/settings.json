@@ -49,12 +49,13 @@
   "editor.mouseWheelZoom": true,
   "search.location": "sidebar",
   "extensions.ignoreRecommendations": false,
-  "gitlens.historyExplorer.enabled": true,
   "terminal.integrated.rendererType": "dom",
   "typescript.tsserver.log": "verbose",
   "window.titleBarStyle": "custom",
   "gitlens.views.fileHistory.enabled": true,
   "gitlens.views.lineHistory.enabled": true,
   "editor.formatOnSave": true,
-  "window.zoomLevel": 0
+  "window.zoomLevel": 0,
+  "ruby.specPattern": "test",
+  "ruby.specCommand": "bundle exec rails test"
 }
