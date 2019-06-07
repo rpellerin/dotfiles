@@ -6,6 +6,7 @@
   "terminal.integrated.fontSize": 15,
   "workbench.editor.enablePreview": true,
   "editor.fontSize": 14,
+  "editor.rulers": [119],
   "bracketPairColorizer.forceUniqueOpeningColor": true,
   "bracketPairColorizer.showHorizontalScopeLine": false,
   "bracketPairColorizer.forceIterationColorCycle": true,
