@@ -58,5 +58,6 @@
   "window.zoomLevel": 0,
   "ruby.specPattern": "test",
   "ruby.specCommand": "bundle exec rails test",
-  "editor.snippetSuggestions": "top"
+  "editor.snippetSuggestions": "top",
+  "javascript.updateImportsOnFileMove.enabled": "never"
 }
