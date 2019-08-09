@@ -301,7 +301,7 @@ alias rials='rails'
 
 # Handy shortcuts
 alias du="ncdu -rr -x --exclude .git --exclude node_modules"
-alias man='tldr'
+#alias man='tldr'
 alias top='htop'
 alias gt='git'
 alias lstree="find . | sed 's/[^/]*\//|   /g;s/| *\([^| ]\)/+--- \1/'"
