@@ -33,6 +33,7 @@ sudo apt-add-repository ppa:git-core/ppa
 sudo apt update
 sudo apt upgrade
 sudo apt install gnupg2 \
+    apt-listchanges \
     git git-extras
     htop \
     xclip \
@@ -523,6 +524,25 @@ Disable blueman applet from application autostart cause it turns bluetooth on wh
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install # Select Yes Yes No
 ```
+
+## 23. Hardening security and checking for malwares
+
+```bash
+sudo apt install rkhunter lynis chkrootkit
+
+sudo cp  /etc/rkhunter.conf /etc/rkhunter.conf.local
+# In /etc/rkhunter.conf.local set `WEB_CMD=curl` and `PKGMGR=DPKG`
+sudo rkhunter --update
+sudo rkhunter --propupd
+sudo rkhunter --check
+
+sudo lynis update info
+sudo lynis audit system
+
+sudo chkrootkit
+```
+
+It is advised to run these tools daily as cron jobs.
 
 ## Optional stuff
 
