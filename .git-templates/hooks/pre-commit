@@ -30,18 +30,18 @@ if [ -x "$(command -v eslint)" ] && [ -n "$MODIFIED_FILES_JS" ]; then
   echo 'Running Eslint...'
   echo "$MODIFIED_FILES_JS" | while read file; do
     if [ -f "$file" ]; then
-      eslint --max-warnings 0 "$file"
+      echo "$file"
     fi
-  done
+  done | xargs eslint --max-warnings 0
 fi
 
 if [ -x "$(command -v rubocop)" ] && [ -n "$MODIFIED_FILES_RB" ]; then
   echo 'Running Rubocop...'
   echo "$MODIFIED_FILES_RB" | while read file; do
     if [ -f "$file" ]; then
-      rubocop "$file"
+      echo "$file"
     fi
-  done
+  done | xargs rubocop --auto-correct --force-exclusion
 fi
 
 echo 'All good!'

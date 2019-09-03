@@ -59,5 +59,8 @@
   "ruby.specPattern": "test",
   "ruby.specCommand": "bundle exec rails test",
   "editor.snippetSuggestions": "top",
-  "javascript.updateImportsOnFileMove.enabled": "never"
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
