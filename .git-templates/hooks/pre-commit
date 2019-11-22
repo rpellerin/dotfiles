@@ -32,7 +32,7 @@ if [ -x "$(command -v eslint)" ] && [ -n "$MODIFIED_FILES_JS" ]; then
     if [ -f "$file" ]; then
       echo "$file"
     fi
-  done | xargs eslint --max-warnings 0
+  done | xargs --no-run-if-empty eslint --max-warnings 0
 fi
 
 if [ -x "$(command -v rubocop)" ] && [ -n "$MODIFIED_FILES_RB" ]; then
@@ -41,7 +41,7 @@ if [ -x "$(command -v rubocop)" ] && [ -n "$MODIFIED_FILES_RB" ]; then
     if [ -f "$file" ]; then
       echo "$file"
     fi
-  done | xargs rubocop --auto-correct --force-exclusion
+  done | xargs --no-run-if-empty rubocop --auto-correct --force-exclusion
 fi
 
 echo 'All good!'
