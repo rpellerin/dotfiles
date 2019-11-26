@@ -17,7 +17,7 @@ fi
 
 while read -r file
 do
-    if [ -z "$file" ]; then xdg-open $dirr; exit; fi
+    if [ -z "$file" ]; then xdg-open $dirr; break; fi
     b_name=`basename "$file"`
     convert "$file" -resize $size "$dirr/$b_name"
     echo "Next."
