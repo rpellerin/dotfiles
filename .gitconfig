@@ -16,6 +16,7 @@
     whoistheboss = !git ls-tree -r HEAD|sed -re 's/^.{53}//'|while read filename; do file "$filename"; done|grep -E ': .*text'|sed -r -e 's/: .*//'|while read filename; do git blame -w "$filename"; done|sed -r -e 's/.*\((.*)[0-9]{4}-[0-9]{2}-[0-9]{2} .*/\1/' -e 's/ +$//'|sort|uniq -c|sort -nr
     whattime = !git log --committer=Pellerin --pretty="%cd" | cut -d' ' -f4 | cut -d: -f1 | sort -n | uniq -c
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset%C(yellow)%ci / %ai%Creset' --abbrev-commit
+    lgo = "!git log $(git merge-base origin/master @).. --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset%C(yellow)%ci / %ai%Creset' --abbrev-commit"
     lgall = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset%C(yellow)%ci / %ai%Creset' --abbrev-commit --all
     pushn = !git push --set-upstream origin "$(git rev-parse --abbrev-ref HEAD)"
     bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
