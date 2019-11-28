@@ -23,6 +23,6 @@ do
     echo "Next."
 done <&0
 
-exiftool -all= "$dirr/*"
-rm -f "$dirr/*_original"
+find "$dirr/" -type f -exec exiftool -all= '{}' \;
+find "$dirr/" -type f -iname "*_original" -exec rm -f '{}' \;
 echo "Done."
