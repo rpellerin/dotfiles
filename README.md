@@ -238,7 +238,6 @@ Set a cronjob to periodically make a backup + other helpful cron jobs:
 ```bash
 0 20 9 * * tar czfh "$HOME/$(date -u +"%Y-%m-%dT%H-%M-%SZ")-password-store.tar.gz" -C "$HOME" .password-store
 0 */1 * * * /home/romain/git/dotfiles/scripts/getWeather.py > /tmp/weather.txt
-0 */1 * * * /home/romain/git/dotfiles/scripts/airparif.py > /tmp/airparif.txt
 ```
 
 ## 5. Google Chrome
@@ -388,7 +387,7 @@ sudo systemctl enable tlp-sleep
 
 ## 13. Firewall
 
-*(Note to myself: make this a systemd service some day)*
+_(Note to myself: make this a systemd service some day)_
 
 ```bash
 cd dotfiles # cd to this git repo
