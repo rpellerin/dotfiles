@@ -71,3 +71,6 @@
 	whitespace = red reverse
 [include]
       path = ~/.gitconfig_local
+[gc]
+	reflogExpire = 30
+	reflogExpireUnreachable = 20
