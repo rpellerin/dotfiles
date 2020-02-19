@@ -47,7 +47,6 @@
     "files.insertFinalNewline": true
   },
   "editor.mouseWheelZoom": true,
-  "search.location": "sidebar",
   "extensions.ignoreRecommendations": false,
   "terminal.integrated.rendererType": "dom",
   "typescript.tsserver.log": "verbose",
