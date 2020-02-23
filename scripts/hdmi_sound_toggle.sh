@@ -30,7 +30,7 @@ sleep 1
 # Check whether HDMI-1 and eDP-1 are set to "audio: on" with xrandr --prop
 #if pactl list cards | grep -q 'Active Profile: output:hdmi-stereo';then
 if xrandr | grep -q "$extern connected"; then
-    /usr/bin/xrandr --output "$intern" --off --output "$extern" --mode 1920x1080 >> /tmp/debug_xrandr 2>&1
+    /usr/bin/xrandr --output "$intern" --off --output "$extern" --set audio on --mode 1920x1080 >> /tmp/debug_xrandr 2>&1
     sleep 1
     # Line below not needed because of --set audio on (= forced)
     pactl set-card-profile 0 output:hdmi-stereo
