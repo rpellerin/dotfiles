@@ -31,11 +31,12 @@ sleep 1
 #if pactl list cards | grep -q 'Active Profile: output:hdmi-stereo';then
 if xrandr | grep -q "$extern connected"; then
     /usr/bin/xrandr --output "$intern" --off --output "$extern" --mode 1920x1080 >> /tmp/debug_xrandr 2>&1
-    #sleep 1
+    sleep 1
     # Line below not needed because of --set audio on (= forced)
-    #pactl set-card-profile 0 output:hdmi-stereo
-#else
+    pactl set-card-profile 0 output:hdmi-stereo
+else
+    sleep 1
     #/usr/bin/xrandr --output "$extern" --off --output "$intern" --auto >> /tmp/debug_xrandr 2>&1
     # Line below not needed because of --set audio on (= forced)
-    #pactl set-card-profile 0 output:analog-stereo+input:analog-stereo
+    pactl set-card-profile 0 output:analog-stereo+input:analog-stereo
 fi
