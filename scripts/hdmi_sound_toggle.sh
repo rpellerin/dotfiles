@@ -34,6 +34,7 @@ if xrandr | grep -q "$extern connected"; then
     sleep 1
     # Line below not needed because of --set audio on (= forced)
     pactl set-card-profile 0 output:hdmi-stereo
+    bash -c "sleep 2; kill $(pidof xfce4-display-settings)" &
 else
     sleep 1
     #/usr/bin/xrandr --output "$extern" --off --output "$intern" --auto >> /tmp/debug_xrandr 2>&1
