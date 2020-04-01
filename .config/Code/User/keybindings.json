@@ -41,5 +41,9 @@
         "key": "ctrl+alt+k",
         "command": "-bookmarks.toggle",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+c",
+        "command": "copyRelativeFilePath",
     }
 ]

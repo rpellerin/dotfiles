@@ -54,7 +54,7 @@
   "gitlens.views.fileHistory.enabled": true,
   "gitlens.views.lineHistory.enabled": true,
   "editor.formatOnSave": true,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "ruby.specPattern": "test",
   "ruby.specCommand": "bundle exec rails test",
   "editor.snippetSuggestions": "top",
