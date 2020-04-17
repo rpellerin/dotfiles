@@ -280,6 +280,16 @@ function zoomout {
     perl -pi -e 's/(FontName.*?)(\d+)/$1.($2-2)/e' ~/.config/xfce4/terminal/terminalrc
 }
 
+function new-pr {
+    branch="$(git rev-parse --abbrev-ref HEAD)"
+    title=$branch
+    if [ $# -eq 1 ]; then
+        title="$1"
+    fi
+    git push --set-upstream origin "$branch"
+    echo "$title\n$(cat /home/romain/git/dotfiles/pr-template.md)" | hub pull-request -c -F -
+}
+
 ###########
 # ALIASES #
 ###########
