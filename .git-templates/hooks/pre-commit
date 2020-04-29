@@ -8,7 +8,7 @@ echo 'Pre-commit hook running...'
 consoleregexp='debugger|pry|debug\(|console\.log|token|password|pwd|TOKEN|PASSWORD|PWD|secret|SECRET'
 MODIFIED_FILES=$(git diff --cached --no-ext-diff --unified=0 --no-prefix --name-only)
 MODIFIED_FILES_JS=$(echo "$MODIFIED_FILES" | grep -E ".*\.js$")
-MODIFIED_FILES_RB=$(echo "$MODIFIED_FILES" | grep -E ".*\.rb$")
+MODIFIED_FILES_RB=$(echo "$MODIFIED_FILES" | grep -E ".*\.(rb|rake)$")
 
 # CHECK FORBIDDEN KEYWORDS
 if test $(git diff --cached --no-ext-diff --unified=0 --no-prefix | egrep "^\+" | grep -E "$consoleregexp" | wc -l) != 0
@@ -32,7 +32,7 @@ if [ -x "$(command -v eslint)" ] && [ -n "$MODIFIED_FILES_JS" ]; then
     if [ -f "$file" ]; then
       echo "$file"
     fi
-  done | xargs --no-run-if-empty eslint --max-warnings 0
+  done | xargs --no-run-if-empty eslint --max-warnings 0 --no-ignore
 fi
 
 if [ -x "$(command -v rubocop)" ] && [ -n "$MODIFIED_FILES_RB" ]; then
