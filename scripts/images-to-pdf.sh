@@ -21,7 +21,7 @@ do
 done <&0
 
 if [ "$choice" = "2" ]; then
-    density="254"
+    density="100"
     page="2100x2970"
 else
     density="127"
