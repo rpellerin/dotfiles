@@ -11,3 +11,6 @@ echo "Processing..."
 ls | cat -n | while read n f; do cp -n "$f" "$dirr/$(printf "%05d.${f#*.}" $n)"; done
 xdg-open "$dirr"
 echo "Done"
+echo "Syncing..."
+sync
+echo "Synced"
