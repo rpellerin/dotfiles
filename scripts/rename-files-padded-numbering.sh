@@ -13,4 +13,5 @@ echo "Done"
 echo "Syncing..."
 sync
 echo "Synced"
+cd "$dirr"
 xdg-open "$dirr"
