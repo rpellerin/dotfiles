@@ -9,6 +9,6 @@ check_run() {
 }
 
 # In this example it's used to run `yarn` if yarn.lock changed
-check_run yarn.lock "yarn" 1>/dev/null 2>&1 &
+check_run yarn.lock "kill -s USR1 $(cat /tmp/node-exec.sh.pid)" 1>/dev/null 2>&1 &
 check_run Gemfile.lock "bundle" 1>/dev/null &
 check_run "db/migrate" "sleep 10; bundle exec rails db:migrate" 1>/dev/null 2>&1 &

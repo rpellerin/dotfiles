@@ -5,13 +5,4 @@
 # this is a file checkout – do nothing
 if [ "$3" == "0" ]; then exit; fi
 
-changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
-
-check_run() {
-	echo "$changed_files" | grep --quiet "$1" && eval "$2"
-}
-
-# In this example it's used to run `yarn` if yarn.lock changed
-check_run yarn.lock "yarn" 1>/dev/null 2>&1 &
-check_run Gemfile.lock "bundle" 1>/dev/null &
-check_run "db/migrate" "sleep 10; bundle exec rails db:migrate" 1>/dev/null 2>&1 &
+./.git/hooks/post-merge
