@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # git hook to run a command after `git checkout` if a specified file was changed
 
