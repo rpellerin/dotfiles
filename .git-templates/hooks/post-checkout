@@ -3,6 +3,6 @@
 # git hook to run a command after `git checkout` if a specified file was changed
 
 # this is a file checkout – do nothing
-if [ "$3" == "0" ]; then exit; fi
+[[ "$3" == '0' ]] && exit
 
 ./.git/hooks/post-merge

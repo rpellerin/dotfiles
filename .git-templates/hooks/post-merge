@@ -5,9 +5,9 @@
 changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
 
 check_run() {
-	echo "$changed_files" | grep --quiet -E "$1" && eval "$2"
+	grep --quiet -E "$1" <<< "$changed_files"
 }
 
 # In this example it's used to run `yarn` if yarn.lock changed
-check_run "yarn\.lock" "kill -s USR1 $(cat /tmp/node-exec.sh.pid)" 1>/dev/null 2>&1 &
-check_run "db\/|Gemfile\.lock" "./bin/setup" 1>/dev/null &
+check_run "yarn\.lock" && kill -s USR1 "$(cat /tmp/node-exec.sh.pid)" >/dev/null 2>&1
+check_run "db\/|Gemfile\.lock" && ./bin/setup >/dev/null 2>&1 &
