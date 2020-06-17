@@ -1,49 +1,57 @@
 // Place your key bindings in this file to overwrite the defaults
 [
-    {
-        "key": "ctrl+tab",
-        "command": "workbench.action.nextEditor"
-    },
-    {
-        "key": "ctrl+shift+tab",
-        "command": "workbench.action.previousEditor"
-    },
-    {
-        "key": "ctrl+k",
-        "command": "deleteAllRight"
-    },
-    {
-        "key": "ctrl+alt+k",
-        "command": "bookmarks.jumpToPrevious",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+j",
-        "command": "-bookmarks.jumpToPrevious",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+j",
-        "command": "bookmarks.jumpToNext",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+l",
-        "command": "-bookmarks.jumpToNext",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+",
-        "command": "bookmarks.toggle",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+k",
-        "command": "-bookmarks.toggle",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+shift+alt+c",
-        "command": "copyRelativeFilePath",
-    }
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "deleteAllRight"
+  },
+  {
+    "key": "ctrl+alt+k",
+    "command": "bookmarks.jumpToPrevious",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+j",
+    "command": "-bookmarks.jumpToPrevious",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+j",
+    "command": "bookmarks.jumpToNext",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+l",
+    "command": "-bookmarks.jumpToNext",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+",
+    "command": "bookmarks.toggle",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+k",
+    "command": "-bookmarks.toggle",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+alt+c",
+    "command": "copyRelativeFilePath"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "gitlens.openCommitInRemote"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "-editor.action.startFindReplaceAction"
+  }
 ]
