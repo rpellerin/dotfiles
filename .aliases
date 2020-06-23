@@ -282,12 +282,30 @@ function zoomout {
 
 function new-pr {
     branch="$(git rev-parse --abbrev-ref HEAD)"
-    title=$branch
-    if [ $# -eq 1 ]; then
+    if [ $# -eq 0 ]; then
+        title=`whiptail --title "PR title" --menu "Choose the PR title" 0 0 0 \
+            "$(git show -s --format=%s HEAD)" "" \
+            "<Custom>" "" \
+            "$(git show -s --format=%s HEAD~1)" "" \
+            "$(git show -s --format=%s HEAD~2)" "" 3>&1 1>&2 2>&3`
+        [ $? -ne 0 ] && exit 0
+        if [ $title = '<Custom>' ]; then
+            title=$(whiptail --inputbox "PR title?" 0 70 "$branch" --title "PR title" 3>&1 1>&2 2>&3)
+            [ $? -ne 0 ] && exit 0
+        fi
+    else
         title="$1"
     fi
-    git push --set-upstream origin "$branch"
-    echo "$title\n$(cat /home/romain/git/dotfiles/pr-template.md)" | hub pull-request -c -F -
+    if (whiptail --title "PR body" --yesno "Add PR template in the body?" 0 0); then
+        body="$title\n$(cat /home/romain/git/dotfiles/pr-template.md)"
+    else
+        body="$title"
+    fi
+    echo $branch
+    echo "========="
+    echo $body
+    #git push --set-upstream origin "$branch"
+    #echo "body" | hub pull-request -c -F -
 }
 
 ###########
