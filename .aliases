@@ -288,10 +288,10 @@ function new-pr {
             "<Custom>" "" \
             "$(git show -s --format=%s HEAD~1)" "" \
             "$(git show -s --format=%s HEAD~2)" "" 3>&1 1>&2 2>&3`
-        [ $? -ne 0 ] && exit 0
+        [ $? -ne 0 ] && return 0
         if [ $title = '<Custom>' ]; then
             title=$(whiptail --inputbox "PR title?" 0 70 "$branch" --title "PR title" 3>&1 1>&2 2>&3)
-            [ $? -ne 0 ] && exit 0
+            [ $? -ne 0 ] && return 0
         fi
     else
         title="$1"
@@ -301,11 +301,8 @@ function new-pr {
     else
         body="$title"
     fi
-    echo $branch
-    echo "========="
-    echo $body
-    #git push --set-upstream origin "$branch"
-    #echo "body" | hub pull-request -c -F -
+    git push --set-upstream origin "$branch"
+    echo "$body" | hub pull-request -c -F -
 }
 
 ###########
