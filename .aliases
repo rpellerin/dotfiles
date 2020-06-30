@@ -303,6 +303,7 @@ function new-pr {
     fi
     git push --set-upstream origin "$branch"
     echo "$body" | hub pull-request -c -F -
+    xdg-open "$(xclip -out -selection clipboard)"
 }
 
 ###########
