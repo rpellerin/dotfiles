@@ -5,4 +5,4 @@
 # this is a file checkout – do nothing
 [[ "$3" == '0' ]] && exit
 
-./.git/hooks/post-merge
+ORIG_HEAD=$1 HEAD=$2 .git/hooks/post-merge
