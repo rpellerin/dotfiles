@@ -70,6 +70,7 @@ sudo apt install gnupg2 \
     redshift-gtk \
     gtk-recordmydesktop \
     cryptsetup \
+    ecryptfs-utils \
     youtube-dl
 
 sudo dpkg-reconfigure unattended-upgrades
