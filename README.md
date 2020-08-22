@@ -68,10 +68,9 @@ sudo apt install gnupg2 \
     hunspell-en-gb \
     unattended-upgrades \
     redshift-gtk \
-    gtk-recordmydesktop \
+    simplescreenrecorder \
     cryptsetup \
-    ecryptfs-utils \
-    youtube-dl
+    ecryptfs-utils
 
 sudo dpkg-reconfigure unattended-upgrades
 
@@ -82,6 +81,9 @@ sudo dpkg-reconfigure unattended-upgrades
 # ctags is for vim tag jumping (see .vimrc)
 # libreoffice-pdfimport is for PDF signing
 # redshift-gtk is an alternative to xflux
+
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
 ```
 
 ## 3. Optional packages
@@ -102,14 +104,12 @@ sudo apt install texlive-full \
     icoutils \
     silversearcher-ag \
     zathura \
-    wireshark
     synaptic \
     gksu \
     pdf-presenter-console \
     openvpn \
     network-manager-openvpn-gnome \
-    network-manager-vpnc \
-    codeblocks
+    network-manager-vpnc
 
 # Install biber from apt first and try to compile a PDF document.
 # If there is any compatibility issue, install it from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
@@ -133,7 +133,7 @@ sudo apt install texlive-full \
 
 ```bash
 sudo apt install oathtool dmenu # oathtool for OTPs, dmenu for passmenu
-# You can either apt install pass or use git clone, depending on how recent the version offered by apt is
+# You can either `apt install pass pass-extension-otp` (preferred) or use git clone, depending on how recent the version offered by apt is
 git clone https://git.zx2c4.com/password-store
 git clone git@github.com:tadfisher/pass-otp.git
 cd password-store
@@ -237,7 +237,7 @@ pass init <copied value>
 Set a cronjob to periodically make a backup + other helpful cron jobs:
 
 ```bash
-0 20 9 * * tar czfh "$HOME/$(date -u +"%Y-%m-%dT%H-%M-%SZ")-password-store.tar.gz" -C "$HOME" .password-store
+0 20 9 * * tar czfh "/home/romain/$(date -u +"%Y-%m-%dT%H-%M-%SZ")-password-store.tar.gz" -C "$HOME" .password-store
 0 */1 * * * /home/romain/git/dotfiles/scripts/getWeather.py > /tmp/weather.txt
 ```
 
@@ -277,7 +277,6 @@ code --install-extension "eamodio.gitlens"
   - Set `network.prefetch-next` to `false`.
   - Set `network.dns.disablePrefetch` to `true`.
   - Set `datareporting.healthreport.uploadEnabled` to `false`.
-  - Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0`
   - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
   - Set `gfx.webrender.enabled` to `true`.
   - Set `geo.enabled` to `false`.
@@ -287,11 +286,12 @@ code --install-extension "eamodio.gitlens"
   - Set `dom.battery.enabled` to `false`
   - Set `media.navigator.enabled` to `false`
   - Set `accessibility.blockautorefresh` to `true`
-  - Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
-  - Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query` and [`network.security.esni.enabled` to `true`](https://korben.info/comment-activer-les-dns-via-https-dans-firefox.html).
+  - OPTIONAL: Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
+  - OPTIONAL: Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query` and [`network.security.esni.enabled` to `true`](https://korben.info/comment-activer-les-dns-via-https-dans-firefox.html).
+  - OPTIONAL: Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0`
 - In [about:preferences#general](about:preferences#general), check `Restore previous session` and unckeck `Ctrl+Tab cycles through tabs in recently used order`
-- In [about:preferences#search](about:preferences#search), add the search bar next to the url bar and uncheck `Show search suggestions ahead of browsing history in address bar results`
-- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Also, block cookies for trackers and the following domains:
+- In [about:preferences#search](about:preferences#search), uncheck `Show search suggestions ahead of browsing history in address bar results`
+- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. For `Enhanced Tracking Protection`, check `Strict`. Optionally, block cookies for trackers and the following domains:
 
   - https://s.ytimg.com
   - https://www.youtube.com
@@ -304,7 +304,7 @@ code --install-extension "eamodio.gitlens"
   - https://i9.ytimg.com
   - https://r1---sn-25ge7ns7.googlevideo.com
 
-  Also, disable third-party cookies and enable `Trackers Protection`, `Third-Party Cookies` for trackers and `Do Not Track` at all times.
+  Make sure to be sending `Do Not Track` at all times.
 
 - Add these extensions:
   - [tabliss.io](https://tabliss.io/)
@@ -313,7 +313,7 @@ code --install-extension "eamodio.gitlens"
 
 ## 8. Thunderbird
 
-Download Thunderbird 60 `.deb` file. Then extract it and:
+If you can't get a recent version of Thunderbird through `apt`, download a `.deb` file. Then extract it and:
 
 ```bash
 sudo mv thunderbird/ /opt
@@ -340,6 +340,8 @@ ln -s /opt/thunderbird/chrome/icons/default/default256.png /usr/share/pixmaps/th
 To restore all email accounts, preferences and emails, you can import the directory `~/.thunderbird` from another computer. In _Preferences > Advanced > General > Config Editor_, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
 
 ## 9. Tmux
+
+Install through `apt` or manually:
 
 ```bash
 sudo apt install libevent-dev libncurses-dev pkg-config automake autoconf
@@ -427,7 +429,6 @@ ln -sf $REPO_DIR/.less $HOME/
 ln -sf $REPO_DIR/.lesskey $HOME/
 ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/
 ln -s $REPO_DIR/.tern-project $HOME/
-ln -s $REPO_DIR/.eslintrc.js $HOME/
 ln -s $REPO_DIR/.config/compton.conf $HOME/.config/
 mkdir -p $HOME/.gnupg
 ln -s $REPO_DIR/.gnupg/gpg.conf $HOME/.gnupg/gpg.conf
@@ -441,8 +442,8 @@ zsh-newuser-install
 
 ## 15. Edit terminal preferences
 
-- In `General`, unlimited scrollback
-- In `Appearance`, uncheck menu bar and borders around new windows
+- In `General`, unlimited scrollback. Disable the scrollbar being shown.
+- In `Appearance`, uncheck menu bar and borders around new windows. Set the font size to 13.
 - In `Colors`, use the `Xubuntu dark` theme, check `Cursor color` and edit colors as you like.
 
 ## 16. Set up Vim
@@ -455,9 +456,11 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ### Deactivate your firewall (just in case), launch Vim and run:
 :PluginInstall
 ## Install YouCompleteMe by reading
-## https://github.com/Valloric/YouCompleteMe/blob/master/README.md#ubuntu-linux-x64
-## (no need to read the "Full Installation Guide" section; if you already have Clang
-## on your system, your might use the option `--system-libclang`)
+## https://github.com/ycm-core/YouCompleteMe/blob/master/README.md
+### In a nutshell:
+### sudo apt install build-essential cmake vim python3-dev
+### cd ~/.vim/bundle/YouCompleteMe
+### python3 install.py --ts-completer
 ```
 
 ## 17. All settings
@@ -468,8 +471,11 @@ Open the settings manager and do:
 - Set the keyboard layout to US international with dead keys.
 - Set up the xfce panel (top bar): show the battery indicator (if on a laptop), set the date, time and timezone (clock format: `%a %d %b %T %p`), sync the time with the Internet. Add network, RAM and CPU monitor.
 - In `Window Manager` > `Keyboard`, set the keyboard shortcuts (_Tile window to the x_, _Show desktop_).
+- In `Screensaver`, disable Screensaver and Lock Screen altogether.
+- In `Display`, in the tab `Advanced`, create a profile for when connected to a TV for instance, and enable both `Configure new displays when connected` and `Automatically enable profiles when new display is connected`
 - In `Keyboard` > `Application Shortcuts`, set:
 
+  - Super A: `~/git/dotfiles/scripts/passmenu`
   - Shift Alt 4: `xfce4-screenshooter -r`
   - Ctrl Shift Alt 4: `xfce4-screenshooter -c -r`
   - Ctrl Q: `true`

@@ -7,7 +7,7 @@ filetype plugin indent on   " == filetype on (filetype dection, for syntax and o
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'   " Let Vundle manage Vundle, required
-Plugin 'Valloric/YouCompleteMe' " Auto completion
+Plugin 'ycm-core/YouCompleteMe' " Auto completion
 Plugin 'scrooloose/syntastic'   " Syntax checker / linter
 Plugin 'scrooloose/nerdtree'    " A tree explorer plugin for vim
 Plugin 'Raimondi/delimitMate'   " Automatic closing of quotes, parenthesis, brackets, etc
