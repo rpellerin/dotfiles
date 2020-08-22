@@ -241,6 +241,12 @@ Set a cronjob to periodically make a backup + other helpful cron jobs:
 0 */1 * * * /home/romain/git/dotfiles/scripts/getWeather.py > /tmp/weather.txt
 ```
 
+### GPG + Git: signed commits
+
+```bash
+sudo git config --system user.signingkey <KEY>
+```
+
 ## 5. Google Chrome
 
 Download Chrome .deb file and then:
