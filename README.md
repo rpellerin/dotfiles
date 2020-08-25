@@ -534,7 +534,7 @@ Disable blueman applet from application autostart cause it turns bluetooth on wh
 
 ```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install # Select Yes Yes No
+~/.fzf/install --no-update-rc
 ```
 
 ## 23. Hardening security and checking for malwares
