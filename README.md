@@ -512,7 +512,7 @@ sudo apt update
 sudo apt install nextcloud-client
 ```
 
-## 19. Compton
+## 19. Compton (NOT NEEDED SINCE 20.04)
 
 If you experience V-sync issues when watching [this video](https://www.youtube.com/watch?v=0RvIbVmCOxg), you might want to install [compton](http://duncanlock.net/blog/2013/06/07/how-to-switch-to-compton-for-beautiful-tear-free-compositing-in-xfce/), unless you run [`xfwm4` 4.13+](https://github.com/xfce-mirror/xfwm4/blob/master/COMPOSITOR).
 
