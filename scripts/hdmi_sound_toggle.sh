@@ -1,7 +1,8 @@
 #!/bin/bash -x
 
 # TO INSTALL:
-# sudo bash -c "echo 'SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/romain/.Xauthority", RUN+="/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh"' > /lib/udev/rules.d/hdmi_sound.rules
+# sudo su
+# echo 'SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/romain/.Xauthority", RUN+="/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh"' > /lib/udev/rules.d/hdmi_sound.rules
 
 # Sources
 # - http://jeffhoogland.blogspot.com/2014/02/howto-switch-to-hdmi-audio-out.html
@@ -30,7 +31,7 @@ sleep 1
 # Check whether HDMI-1 and eDP-1 are set to "audio: on" with xrandr --prop
 #if pactl list cards | grep -q 'Active Profile: output:hdmi-stereo';then
 if xrandr | grep -q "$extern connected"; then
-    /usr/bin/xrandr --output "$intern" --off --output "$extern" --set audio on --mode 1920x1080 >> /tmp/debug_xrandr 2>&1
+    #/usr/bin/xrandr --output "$intern" --off --output "$extern" --set audio on --mode 1920x1080 >> /tmp/debug_xrandr 2>&1
     sleep 1
     # Line below not needed because of --set audio on (= forced)
     pactl set-card-profile 0 output:hdmi-stereo

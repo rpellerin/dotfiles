@@ -444,6 +444,9 @@ git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc
 ln -s "$REPO_DIR/.zpreztorc" $HOME/
 
 zsh-newuser-install
+
+sudo su¬
+echo 'SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/romain/.Xauthority", RUN+="/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh"' > /lib/udev/rules.d/hdmi_sound.rules
 ```
 
 ## 15. Edit terminal preferences
