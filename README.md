@@ -445,7 +445,7 @@ ln -s "$REPO_DIR/.zpreztorc" $HOME/
 
 zsh-newuser-install
 
-sudo su¬
+sudo su
 echo 'KERNEL=="card0", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/romain/.Xauthority", RUN+="/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh"' > /etc/udev/rules.d/99-hdmi_sound.rules
 sudo udevadm control --reload-rules
 sudo systemctl restart udev
