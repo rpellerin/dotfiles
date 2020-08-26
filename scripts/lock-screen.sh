@@ -16,5 +16,5 @@ logger Screen locked with i3lock
 
 # Lock screen
 #/usr/bin/i3lock -i /tmp/screen_locked.png -n -t
-i3lock -i /home/romain/Pictures/pause.png -n -t
+pgrep i3lock || i3lock -i /home/romain/Pictures/pause.png -n -t
 # -n for no fork otherwise several instances could be launched by xss-lock
