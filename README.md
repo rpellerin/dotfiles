@@ -624,7 +624,7 @@ sudo ln -s /home/romain/android-studio/bin/studio.sh /usr/local/bin/studio
 sudo ln -s /home/romain/Android/Sdk/tools/android /usr/local/bin/android
 ```
 
-### Python 3.5
+### Python 3+
 
 If you download Python3 using your package manager (as seen above), you'll likely get a quite old version. If you want the latest one, here's how to do it:
 
