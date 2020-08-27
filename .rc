@@ -31,7 +31,7 @@ if [[ "$COLORTERM" == "xfce4-terminal" ]] ; then
     export TERM=xterm-256color
 fi
 
-PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin:/usr/local/go/bin
+PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin:/usr/local/go/bin:/home/romain/.local/bin
 
 autoload -Uz add-zsh-hook
 
