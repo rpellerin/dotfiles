@@ -397,8 +397,6 @@ sudo systemctl enable tlp-sleep
 
 ## 13. Firewall
 
-_(Note to myself: make this a systemd service some day)_
-
 ```bash
 cd dotfiles # cd to this git repo
 sudo cp -i scripts/firewall.service /etc/systemd/system/

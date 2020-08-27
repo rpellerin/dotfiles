@@ -1,8 +1,5 @@
 #!/bin/sh
 #
-# TODO: make this a SystemD service instead of a SysV Init script
-# https://gist.github.com/drmalex07/7712d4185b7651747932
-#
 # Simple Firewall configuration.
 #
 # Author: Romain Pellerin <contact@romainpellerin.eu>
