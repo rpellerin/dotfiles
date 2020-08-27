@@ -1,0 +1,14 @@
+[Unit]
+Description=Firewall
+After=syslog.target network.target
+
+[Service]
+Restart=on-failure
+RestartSec=3
+RemainAfterExit=yes
+ExecStart=/home/romain/git/dotfiles/scripts/firewall.sh start
+ExecStop=/home/romain/git/dotfiles/scripts/firewall.sh clear
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

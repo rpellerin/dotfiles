@@ -401,10 +401,10 @@ _(Note to myself: make this a systemd service some day)_
 
 ```bash
 cd dotfiles # cd to this git repo
-sudo cp -i scripts/firewall.sh /etc/init.d/
-sudo chmod 700 /etc/init.d/firewall.sh
-sudo chown root:root /etc/init.d/firewall.sh
-sudo update-rc.d firewall.sh defaults
+sudo cp -i scripts/firewall.service /etc/systemd/system/
+sudo chmod 700 /etc/systemd/system/firewall.service
+sudo chown root:root /etc/systemd/system/firewall.service
+sudo systemctl enable firewall
 ```
 
 ## 14. Custom conf files

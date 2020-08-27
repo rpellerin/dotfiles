@@ -10,15 +10,6 @@
 # chkconfig: 2345 9 91
 # description: Activates/Deactivates the firewall at boot time
 #
-### BEGIN INIT INFO
-# Provides:          firewall.sh
-# Required-Start:    $syslog $network
-# Required-Stop:     $syslog $network
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: Start firewall daemon at boot time
-# Description:       Custom Firewall scrip.
-### END INIT INFO
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
