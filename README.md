@@ -124,6 +124,8 @@ sudo apt install texlive-full \
 # synaptic see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
 # After installing network-manager-openvpn-gnome do `sudo service network-manager restart`
 
+# Add a .ovpn file to the systray: `nmcli connection import type openvpn file <file>`
+
 # Gcolor3 is a useful tool that can be downloaded at https://www.hjdskes.nl/projects/gcolor3/
 ```
 
