@@ -84,6 +84,7 @@ sudo dpkg-reconfigure unattended-upgrades
 
 sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
+sudo apt install python-is-python3 # youtube-dl targets python, not python3 explicitely
 ```
 
 ## 3. Optional packages
