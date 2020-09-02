@@ -38,12 +38,9 @@ sudo apt install gnupg2 \
     htop \
     xclip \
     autojump \
-    ctags \
     tree \
-    ntp \
     tumbler-plugins-extra \
     imagemagick \
-    optipng \
     inotify-tools \
     vlc \
     gigolo \
@@ -55,7 +52,6 @@ sudo apt install gnupg2 \
     curl \
     ffmpeg \
     vim-gtk3 \
-    python3 \
     zsh \
     libreoffice \
     libreoffice-l10n-fr \
@@ -100,6 +96,9 @@ sudo apt install texlive-full \
     jhead \
     ncdu \
     jq \
+    ctags \
+    ntp \
+    optipng \
     filezilla
     zenity \
     icoutils \
