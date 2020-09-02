@@ -58,10 +58,6 @@ sudo apt install gnupg2 \
     libreoffice-l10n-en-gb \
     libreoffice-help-en-gb \
     libreoffice-help-fr \
-    libreoffice-pdfimport \
-    hyphen-fr \
-    hyphen-en-gb \
-    hunspell-en-gb \
     unattended-upgrades \
     redshift-gtk \
     simplescreenrecorder \
@@ -74,8 +70,6 @@ sudo dpkg-reconfigure unattended-upgrades
 # An alternative to autojump is z: https://github.com/rupa/z
 # xss-lock is for auto locking session after 2 minutes of inactivity
 # vim-gtk3 for clipboard support
-# ctags is for vim tag jumping (see .vimrc)
-# libreoffice-pdfimport is for PDF signing
 # redshift-gtk is an alternative to xflux
 
 sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
@@ -105,11 +99,18 @@ sudo apt install texlive-full \
     silversearcher-ag \
     zathura \
     synaptic \
+    libreoffice-pdfimport \
+    hyphen-fr \
+    hyphen-en-gb \
+    hunspell-en-gb \
     gksu \
     pdf-presenter-console \
     openvpn \
     network-manager-openvpn-gnome \
     network-manager-vpnc
+
+# ctags is for vim tag jumping (see .vimrc)
+# libreoffice-pdfimport is for PDF signing
 
 # Install biber from apt first and try to compile a PDF document.
 # If there is any compatibility issue, install it from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
