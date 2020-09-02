@@ -302,8 +302,7 @@ function new-pr {
         body="$title\n$(cat /home/romain/git/dotfiles/pr-template.md)"
     fi
     git push --set-upstream origin "$branch"
-    echo "$body" | hub pull-request -c -F -
-    xdg-open "$(xclip -out -selection clipboard)"
+    gh pr create --title "$title" --body "$body"
 }
 
 ###########

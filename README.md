@@ -36,6 +36,7 @@ sudo apt install gnupg2 \
     apt-listchanges \
     git git-extras
     htop \
+    python3-pip \
     xclip \
     autojump \
     tree \
@@ -134,9 +135,23 @@ sudo apt install texlive-full \
 
 ### Pass
 
+#### Prerequisite
+
 ```bash
 sudo apt install oathtool dmenu # oathtool for OTPs, dmenu for passmenu
-# You can either `apt install pass pass-extension-otp` (preferred) or use git clone, depending on how recent the version offered by apt is
+```
+
+#### Installation
+
+#### Preferred method
+
+```bash
+sudo apt install pass pass-extension-otp
+```
+
+#### Alternative
+
+```bash
 git clone https://git.zx2c4.com/password-store
 git clone git@github.com:tadfisher/pass-otp.git
 cd password-store
@@ -158,6 +173,8 @@ Paste what you just copied at [https://github.com/settings/keys](https://github.
 ### GPG
 
 Only if you don't have one already. For Github to verify your commits, mostly. Also useful for `pass`.
+
+Make sure to run `sudo chmod go-rwx .gnupg` before doing anything else.
 
 ```bash
 gpg2 --full-gen-key # Accept RSA and RSA, size 4096
@@ -273,6 +290,8 @@ rm -f code_1.27_amd64.deb
 code --install-extension "esbenp.prettier-vscode"
 code --install-extension "dbaeumer.vscode-eslint"
 code --install-extension "eamodio.gitlens"
+code --install-extension "bracketPairColorizer"
+code --install-extension "rebornix.ruby"
 ```
 
 ## 7. Firefox
@@ -488,7 +507,8 @@ Open the settings manager and do:
 - In `Display`, in the tab `Advanced`, create a profile for when connected to a TV for instance, and enable both `Configure new displays when connected` and `Automatically enable profiles when new display is connected`
 - In `Keyboard` > `Application Shortcuts`, set:
 
-  - Super A: `~/git/dotfiles/scripts/passmenu`
+  - Super A: `/home/romain/git/dotfiles/scripts/passmenu`
+  - Super C: `google-chrome`
   - Shift Alt 4: `xfce4-screenshooter -r`
   - Ctrl Shift Alt 4: `xfce4-screenshooter -c -r`
   - Ctrl Q: `true`
@@ -501,9 +521,9 @@ Open the settings manager and do:
 
   The layout is likely 105 key (intl) (check with `cat /etc/default/keyboard`). Set the repeat delay to 350ms and the repeat speed to 35.
 
-- In `Power manager`, make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off. Enable status notification. Disable screen blanking altogether.
+- In `Power manager`, make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off. Enable status notification. In another tab, disable screen blanking altogether.
 - In `Removable Drives and Media`, uncheck the 3 options about auto-mount and auto-browse.
-- In `Notifications`, log all notifications and applications.
+- In `Notifications`, log all notifications but not applications.
 - In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling.
 
 ## 18. Nextcloud
