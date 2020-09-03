@@ -164,7 +164,7 @@ sudo make install
 ### SSH
 
 ```bash
-ssh-keygen -t rsa -b 4096 -C "<me@domain>" -f .ssh/id_rsa
+ssh-keygen -t rsa -b 4096 -C "<public github email address>" -f .ssh/id_rsa
 cat .ssh/id_rsa.pub | xclip -i -selection clip-board
 ```
 
