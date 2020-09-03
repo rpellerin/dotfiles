@@ -525,6 +525,7 @@ Open the settings manager and do:
   - Terminal to `Super + T`
   - Slack to `Super + S`
   - `/home/romain/git/dotfiles/scripts/lock-screen.sh` to `Ctrl+Alt+Delete`.
+  - Remove existing shortcuts for `xflock4`
 
   The layout is likely 105 key (intl) (check with `cat /etc/default/keyboard`). Set the repeat delay to 350ms and the repeat speed to 35.
 
