@@ -298,6 +298,7 @@ code --install-extension "dbaeumer.vscode-eslint"
 code --install-extension "eamodio.gitlens"
 code --install-extension "bracketPairColorizer"
 code --install-extension "rebornix.ruby"
+code --install-extension "noku.rails-run-spec-vscode"
 ```
 
 ## 7. Firefox
