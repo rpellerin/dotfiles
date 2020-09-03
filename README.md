@@ -263,9 +263,15 @@ Set a cronjob to periodically make a backup + other helpful cron jobs:
 
 ### GPG + Git: signed commits
 
+Put the following in `~/.gitconfig_local`:
+
 ```bash
-sudo git config --system user.signingkey <KEY>
+[user]
+	email = <public github email address>
+	signingkey = <key associated with public github email address>
 ```
+
+To get the IDs of available keys, run: `gpg2 --list-secret-keys --keyid-format LONG`
 
 ## 5. Google Chrome
 
