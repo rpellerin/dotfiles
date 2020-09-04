@@ -299,6 +299,7 @@ code --install-extension "eamodio.gitlens"
 code --install-extension "bracketPairColorizer"
 code --install-extension "rebornix.ruby"
 code --install-extension "noku.rails-run-spec-vscode"
+code --install-extension "sianglim.slim"
 ```
 
 ## 7. Firefox
