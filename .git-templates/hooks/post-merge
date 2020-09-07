@@ -11,6 +11,12 @@ check_run() {
 	grep --quiet -E "$1" <<< "$changed_files"
 }
 
+ORIG_HEAD_DATE="$(git show --no-patch --no-notes --pretty=format:"%cI" $ORIG_HEAD)"
+HEAD_DATE="$(git show --no-patch --no-notes --pretty=format:"%cI" $HEAD)"
+
+ORIG_HEAD_DATE_INT=$(date -d "$ORIG_HEAD_DATE" +%s)
+HEAD_DATE_INT=$(date -d "$HEAD_DATE" +%s)
+
 # In this example it's used to run `yarn` if yarn.lock changed
 check_run "yarn\.lock" && [ -f /tmp/node-exec.sh.pid ] && kill -s USR1 "$(cat /tmp/node-exec.sh.pid)" >/dev/null 2>&1
-check_run "db\/|Gemfile\.lock" && ./bin/setup >/dev/null 2>&1 &
+[ $HEAD_DATE_INT -ge $ORIG_HEAD_DATE_INT ] && check_run "db\/|Gemfile\.lock" && ./bin/setup >/dev/null 2>&1 &
