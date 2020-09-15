@@ -25,6 +25,7 @@ rm -f $PATH_APP/ipcheck.err
  
 IP=`lynx -dump http://monip.org | grep 'IP' | sed 's/.*: //;'`
 OLD_IP=`cat $PATH_FILE_OLD_IP`
+OLD_ID=`dig @8.8.8.8 "$HOST" +short`
  
 echo > $PATH_LOG
 echo "Run dynhost" >> $PATH_LOG
