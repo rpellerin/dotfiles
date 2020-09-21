@@ -306,7 +306,7 @@ code --install-extension "sianglim.slim"
 
 - In [about:config](about:config), do:
   - Search for `vaapi` and change the relevant values for both results from `false` to `true`
-  - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0`.
+  - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0` (note: this will break many websites, from my experience)
   - Set `security.tls.version.min` to `3` ([more info](https://support.mozilla.org/fr/questions/1103968))
   - Set `view_source.wrap_long_lines` to `true`.
   - Set `browser.tabs.warnOnClose` to `false`.
