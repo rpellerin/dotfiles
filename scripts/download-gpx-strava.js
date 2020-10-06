@@ -1,23 +1,45 @@
 #!/bin/env node
 
 const { exec } = require("child_process");
-const fetch = require("node-fetch");
 const { exit } = require("process");
+const https = require("https");
 
 if (!process.env.COOKIE) {
   console.error("No environement variable named COOKIE found.");
   exit(1);
 }
 
+const fetch = async (url, options) =>
+  new Promise((resolve, reject) => {
+    https
+      .get(url, options, (res) => {
+        res.setEncoding("utf8");
+        let rawData = "";
+        res.on("data", (chunk) => {
+          rawData += chunk;
+        });
+        res.on("end", () => {
+          try {
+            const parsedData = JSON.parse(rawData);
+            resolve(parsedData);
+          } catch (e) {
+            reject(e);
+          }
+        });
+      })
+      .on("error", (e) => {
+        reject(e);
+      });
+  });
+
 const run = async () => {
   let ids = [];
   let body;
   let page = 1;
   do {
-    const result = await fetch(
+    body = await fetch(
       `https://www.strava.com/athlete/training_activities?keywords=&activity_type=Ride&workout_type=&commute=&private_activities=&trainer=&gear=&search_session_id=${process.env.COOKIE}&new_activity_only=false&order=&page=${page}&per_page=20`,
       {
-        credentials: "include",
         headers: {
           "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/72.0",
@@ -26,13 +48,10 @@ const run = async () => {
           "Accept-Language": "en-US,en;q=0.5",
           "X-Requested-With": "XMLHttpRequest",
           Cookie: process.env.COOKIE,
+          Referer: "https://www.strava.com/athlete/training",
         },
-        referrer: "https://www.strava.com/athlete/training",
-        method: "GET",
-        mode: "cors",
       }
     );
-    body = await result.json();
     ids = ids.concat(body.models.map(({ id }) => id));
     page += 1;
     console.log(ids.length);
