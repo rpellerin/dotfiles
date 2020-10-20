@@ -303,6 +303,7 @@ function new-pr {
     fi
     git push --set-upstream origin "$branch"
     gh pr create --title "$title" --body "$body"
+    gh pr view --web
 }
 
 ###########
