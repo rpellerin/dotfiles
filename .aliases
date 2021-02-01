@@ -296,13 +296,8 @@ function new-pr {
     else
         title="$1"
     fi
-    if (whiptail --title "PR body" --yesno "Leave the PR body empty (no template)?" 0 0); then
-        body=""
-    else
-        body="$(cat /home/romain/git/dotfiles/pr-template.md)"
-    fi
     git push --set-upstream origin "$branch"
-    gh pr create --title "$title" --body "$body"
+    gh pr create --title "$title" --body ""
     gh pr view --web
 }
 
