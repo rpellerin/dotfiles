@@ -2,7 +2,6 @@
   // Place your settings in this file to overwrite the default settings
   "git.autofetch": false,
   "js/ts.implicitProjectConfig.checkJs": true,
-  "editor.formatOnType": true,
   "terminal.integrated.fontSize": 15,
   "workbench.editor.enablePreview": true,
   "editor.fontSize": 14,

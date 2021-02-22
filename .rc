@@ -11,27 +11,23 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey "^x^e" edit-command-line
 
-#export NPM_CONFIG_PREFIX=~/.npm-global
-
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export ANDROID_HOME=/home/romain/Android/Sdk
 export ANDROID_SDK=/home/romain/Android/Sdk
 export ANDROID_NDK=/home/romain/Android/Ndk
 PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 export GPG_TTY=$(tty)
 
-#echo -e "CPU temp: \c" && {/opt/vc/bin/vcgencmd measure_temp | cut -d = -f 2}
-
 . /usr/share/autojump/autojump.sh
 
 export PS1="\$(date +%k:%M:%S) $PS1"
 
+# TO DELETE AFTE MAKING SURE IT IS USELESS
 # http://stackoverflow.com/questions/19327836/why-am-i-seeing-only-8-colors-in-terminal-xfce-terminal
-if [[ "$COLORTERM" == "xfce4-terminal" ]] ; then
-    export TERM=xterm-256color
-fi
+# if [[ "$COLORTERM" == "xfce4-terminal" ]] ; then
+#     export TERM=xterm-256color
+# fi
 
-PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/android-studio/bin/:/home/romain/.npm-global/bin:/usr/local/go/bin:/home/romain/.local/bin
+PATH=$PATH:/home/romain/git/dotfiles/scripts:/home/romain/android-studio/bin/:/usr/local/go/bin:/home/romain/.local/bin
 
 autoload -Uz add-zsh-hook
 
@@ -54,10 +50,29 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # place this after nvm initialization!
-load-nvmrc-and-node-modules() {
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+load-node-modules() {
   if [ -f package.json ] && [ -x "$(command -v npm)" ]; then
-    if [[ -z "$NO_OUTPUT" ]]; then echo 'Found package.json'; fi
-    if [[ -z "$NO_OUTPUT" ]]; then echo 'Found npm command'; fi
+    if [[ -z "$NO_OUTPUT" ]]; then echo 'npm is in $PATH. Found package.json.'; fi
     NPM_BIN_PATH=$(npm bin)
 
     if [ "$PREV_NPM_BIN_PATH" != "$NPM_BIN_PATH" ]; then
@@ -80,33 +95,12 @@ load-nvmrc-and-node-modules() {
       if [[ -z "$NO_OUTPUT" ]]; then echo '$(npm bin) has not changed. Not touching $PATH.'; fi
     fi
   fi
-  if [[ -f .nvmrc && -r .nvmrc ]]; then
-    if [[ -z "$NO_OUTPUT" ]]; then nvm use;
-    else nvm use>/dev/null; fi
-  elif [[ $(nvm version) != $(nvm version default)  ]]; then
-    if [[ -z "$NO_OUTPUT" ]]; then echo "Reverting to nvm default version"; fi
-    nvm use default
-  fi
-  git-check-should-rebase
 }
 
-add-zsh-hook chpwd load-nvmrc-and-node-modules
-add-zsh-hook preexec git-check-should-rebase
-load-nvmrc-and-node-modules
+add-zsh-hook chpwd load-node-modules
+load-node-modules
 
-# If no file .nvmrc, look for latest node version available, download it and set it as default
-#if [[ ! -f .nvmrc && ! -f /tmp/.nvmrc ]]; then
-#    NODE_LATEST_VERSION=$(curl --max-time 3 -s 'https://nodejs.org/dist/latest/' | grep -Po 'node-v([0-9]+\.[0-9]+\.[0-9]+)' | head -n 1 | cut -c 6-)
-#    echo "Latest version of NodeJS is $NODE_LATEST_VERSION"
-#    # Install latest NodeJS if need be
-#    if [ "$(node --version)" != "$NODE_LATEST_VERSION" ] && [ "$NODE_LATEST_VERSION" != "" ]; then
-#        echo 'Installing the latest version...'
-#        nvm install node
-#        #nvm use node # Done automatically
-#        nvm alias default node
-#    fi
-#    touch /tmp/.nvmrc
-#fi
+add-zsh-hook preexec git-check-should-rebase
 
 if [[ -f /home/romain/.ghcup/env ]]; then
     source /home/romain/.ghcup/env
@@ -116,7 +110,6 @@ fi
 
 export PRY_RESCUE_RAILS="1"
 export HTTPS="1"
-export SELENIUM_LOCATION=local
 export PYENV_ROOT="$HOME/.pyenv"
 
 # rbenv and pyenv
