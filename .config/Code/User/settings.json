@@ -1,7 +1,7 @@
 {
   // Place your settings in this file to overwrite the default settings
   "git.autofetch": false,
-  "javascript.implicitProjectConfig.checkJs": true,
+  "js/ts.implicitProjectConfig.checkJs": true,
   "editor.formatOnType": true,
   "terminal.integrated.fontSize": 15,
   "workbench.editor.enablePreview": true,
@@ -25,10 +25,6 @@
     "suppressGitVersionWarning": false,
     "suppressLineUncommittedWarning": false,
     "suppressNoRepositoryWarning": false,
-    "suppressResultsExplorerNotice": false,
-    "suppressShowKeyBindingsNotice": true,
-    "suppressUpdateNotice": false,
-    "suppressWelcomeNotice": true
   },
   "gitlens.keymap": "chorded",
   "ruby.lint": {
@@ -44,15 +40,14 @@
   "files.insertFinalNewline": true,
   "[ruby]": {
     "editor.tabSize": 2,
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.mouseWheelZoom": true,
   "extensions.ignoreRecommendations": false,
   "terminal.integrated.rendererType": "dom",
   "typescript.tsserver.log": "verbose",
   "window.titleBarStyle": "custom",
-  "gitlens.views.fileHistory.enabled": true,
-  "gitlens.views.lineHistory.enabled": true,
   "editor.formatOnSave": true,
   "window.zoomLevel": 1,
   "ruby.specPattern": "test",
