@@ -48,7 +48,6 @@
   "typescript.tsserver.log": "verbose",
   "window.titleBarStyle": "custom",
   "editor.formatOnSave": true,
-  "window.zoomLevel": 1,
   "ruby.specPattern": "test",
   "ruby.specCommand": "bundle exec rails test",
   "editor.snippetSuggestions": "top",
@@ -60,4 +59,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.colorTheme": "Default Light+",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "window.zoomLevel": 1,
 }
