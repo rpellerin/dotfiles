@@ -27,7 +27,7 @@
     diff-to-html = "!echo \"cat <<'EOF' | git apply\n$(git diff --color)\nEOF\n\" | ansi2html > diff.html"
     diff-to-html-no-index = "!echo \"cat <<'EOF' | git apply\n$(git diff --color --no-index -U0 $@)\nEOF\n\" | ansi2html > diff.html"
 [push]
-	default = simple
+	default = current
 [fetch]
 	prune = true
 [core]
