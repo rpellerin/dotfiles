@@ -45,7 +45,7 @@
   "editor.mouseWheelZoom": true,
   "extensions.ignoreRecommendations": false,
   "terminal.integrated.rendererType": "dom",
-  "typescript.tsserver.log": "verbose",
+  "typescript.tsserver.log": "off",
   "window.titleBarStyle": "custom",
   "editor.formatOnSave": true,
   "ruby.specPattern": "test",
@@ -62,4 +62,5 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "window.zoomLevel": 1,
+  "terminal.integrated.tabs.enabled": false,
 }

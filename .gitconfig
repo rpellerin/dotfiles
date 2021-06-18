@@ -26,6 +26,7 @@
     push-commit-by-commit = "!git log --oneline $(git merge-base @ 'origin/master').. | tac | awk '{ print $1 }' | while read hash; do git push origin $hash:\"`git rev-parse --abbrev-ref HEAD`\" --force-with-lease; sleep 1; done"
     diff-to-html = "!echo \"cat <<'EOF' | git apply\n$(git diff --color)\nEOF\n\" | ansi2html > diff.html"
     diff-to-html-no-index = "!echo \"cat <<'EOF' | git apply\n$(git diff --color --no-index -U0 $@)\nEOF\n\" | ansi2html > diff.html"
+	delete-all-locales-branches-but-master = "!git branch -vv | cut -c 3- | cut -d' ' -f1 | grep -v master | xargs git branch -D"
 [push]
 	default = current
 [fetch]
