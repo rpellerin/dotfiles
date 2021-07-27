@@ -7,6 +7,7 @@
     commmit = commit
     comit = commit
     ad = "!f() { git add $1 && git status; }; f"
+	br = "!br() { git checkout -b $1 origin/master; }; br"
     st = status
     co = checkout
     dif = diff --word-diff-regex=[^[:space:],]+
