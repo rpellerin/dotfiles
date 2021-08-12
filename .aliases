@@ -294,7 +294,7 @@ function new-pr {
             [ $? -ne 0 ] && return 0
         fi
     else
-        $title="$PR_TITLE"
+        title="$PR_TITLE"
     fi
     git push --set-upstream origin "$branch"
     gh pr create --title "$title" "$@"
