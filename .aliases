@@ -282,7 +282,7 @@ function zoomout {
 
 function new-pr {
     branch="$(git rev-parse --abbrev-ref HEAD)"
-    if [ $# -eq 0 ]; then
+    if [ -z "$PR_TITLE" ]; then
         title=`whiptail --title "PR title" --menu "Choose the PR title" 0 0 0 \
             "$(git show -s --format=%s HEAD)" "" \
             "<Custom>" "" \
@@ -294,10 +294,10 @@ function new-pr {
             [ $? -ne 0 ] && return 0
         fi
     else
-        title="$1"
+        $title="$PR_TITLE"
     fi
     git push --set-upstream origin "$branch"
-    gh pr create --title "$title" --body ""
+    gh pr create --title "$title" "$@"
     gh pr view --web
 }
 

@@ -61,6 +61,6 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "window.zoomLevel": 1,
   "terminal.integrated.tabs.enabled": false,
+  "window.zoomLevel": 1,
 }
