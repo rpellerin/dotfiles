@@ -108,6 +108,7 @@ else
     export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 fi
 
+export HUSKY=0
 export PRY_RESCUE_RAILS="1"
 export PYENV_ROOT="$HOME/.pyenv"
 
