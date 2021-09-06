@@ -296,7 +296,6 @@ rm -f code_1.27_amd64.deb
 code --install-extension "esbenp.prettier-vscode"
 code --install-extension "dbaeumer.vscode-eslint"
 code --install-extension "eamodio.gitlens"
-code --install-extension "bracketPairColorizer"
 code --install-extension "rebornix.ruby"
 code --install-extension "noku.rails-run-spec-vscode"
 code --install-extension "sianglim.slim"
