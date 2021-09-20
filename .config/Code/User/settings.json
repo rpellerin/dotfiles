@@ -63,4 +63,5 @@
   },
   "terminal.integrated.tabs.enabled": false,
   "window.zoomLevel": 1,
+  "editor.bracketPairColorization.enabled": true,
 }
