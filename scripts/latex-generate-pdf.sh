@@ -28,8 +28,8 @@ compile() {
 
 show_error() {
     echo "Illegal usage" >&2
-    echo "Usage: generate-pdf.sh <directory-where-tex-files-are> <tex-file-to-compile>"
-    echo "For example, to compile latex/Document.tex, write: 'generate-pdf.sh latex/Document.tex'"
+    echo "Usage: latex-generate-pdf.sh <tex-file-to-compile>"
+    echo "For example, to compile latex/Document.tex, write: 'latex-generate-pdf.sh latex/Document.tex'"
 }
 
 ############################## BEGINNING OF THE SCRIPT ##############################
