@@ -524,6 +524,8 @@ Open the settings manager and do:
   - File explorer to `Super + F`
   - Terminal to `Super + T`
   - Slack to `Super + S`
+  - Ctrl F8: `xdg-open "https://twitter.com/"`
+  - Ctrl F12: `/home/romain/git/dotfiles/scripts/mprisctl.sh play-pause`
   - `/home/romain/git/dotfiles/scripts/lock-screen.sh` to `Ctrl+Alt+Delete`.
   - Remove existing shortcuts for `xflock4`
 
