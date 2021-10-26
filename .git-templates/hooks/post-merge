@@ -2,18 +2,25 @@
 
 # git hook to run a command after `git pull` if a specified file was changed
 
-ORIG_HEAD="${ORIG_HEAD:-ORIG_HEAD}"
-HEAD="${HEAD:-HEAD}"
+# HEAD@{1} is better than ORIG_HEAD, see stackoverflow.com/questions/4877306/list-changed-files-in-git-post-merge-hook/18957885
 
-changed_files="$(git diff-tree -r --name-only --no-commit-id $ORIG_HEAD $HEAD)"
+FROM_COMMIT="${FROM_COMMIT:-HEAD@{1\}}"
+TO_COMMIT="${TO_COMMIT:-HEAD}"
+[ "$DEBUG_GIT_HOOKS" = "1" ] && echo "Moved from $(git rev-parse $FROM_COMMIT) to $(git rev-parse $TO_COMMIT)"
+
+changed_files="$(git diff-tree -r --name-only --no-commit-id $FROM_COMMIT $TO_COMMIT)"
 
 check_run() {
-	grep --quiet -E "$1" <<< "$changed_files"
+    grep --quiet -E "$1" <<< "$changed_files"
 }
 
-ORIG_HEAD_DATE_INT=$(git show --no-patch --no-notes --pretty=format:"%cd" --date=raw $ORIG_HEAD | cut -d ' ' -f1)
-HEAD_DATE_INT=$(git show --no-patch --no-notes --pretty=format:"%cd" --date=raw $HEAD | cut -d ' ' -f1)
+# Run `yarn` if yarn.lock changed
+[ "$DEBUG_GIT_HOOKS" = "1" ] && check_run "^yarn\.lock" && echo "yarn.lock changed, killing yarn dev...."
+check_run "^yarn\.lock" && [ -f /tmp/node-exec.sh.pid ] && kill -s USR1 "$(cat /tmp/node-exec.sh.pid)" >/dev/null 2>&1
 
-# In this example it's used to run `yarn` if yarn.lock changed
-check_run "yarn\.lock" && [ -f /tmp/node-exec.sh.pid ] && kill -s USR1 "$(cat /tmp/node-exec.sh.pid)" >/dev/null 2>&1
-[ $HEAD_DATE_INT -ge $ORIG_HEAD_DATE_INT ] && check_run "db\/|Gemfile\.lock" && ./bin/setup >/dev/null 2>&1 &
+if [ -x "$(command -v bundle)" ]; then
+  [ "$DEBUG_GIT_HOOKS" = "1" ] && check_run "^Gemfile\.lock" && echo "Gemfile.lock changed, running bundle...."
+  check_run "^Gemfile\.lock" && bundle >/dev/null 2>&1 &
+  [ "$DEBUG_GIT_HOOKS" = "1" ] && check_run "^db\/" && echo "db/ changed, testing for pending migrations...."
+  check_run "^db\/" && (bundle exec rails db:abort_if_pending_migrations 2>/dev/null | grep -q 'pending migrations') && bundle exec rails db:migrate >/dev/null 2>&1 &
+fi

@@ -48,7 +48,6 @@
   "typescript.tsserver.log": "off",
   "window.titleBarStyle": "custom",
   "editor.formatOnSave": true,
-  "ruby.specPattern": "test",
   "ruby.specCommand": "bundle exec rails test",
   "editor.snippetSuggestions": "top",
   "javascript.updateImportsOnFileMove.enabled": "never",
@@ -62,6 +61,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "terminal.integrated.tabs.enabled": false,
-  "window.zoomLevel": 1,
   "editor.bracketPairColorization.enabled": true,
+  "ruby.specPattern": "test",
+  "window.zoomLevel": 1,
 }

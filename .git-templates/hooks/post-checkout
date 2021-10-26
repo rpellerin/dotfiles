@@ -8,4 +8,4 @@
 # this is a git clone
 [[ "$1" == '0000000000000000000000000000000000000000' ]] && exit 0
 
-[[ -f .git/hooks/post-merge ]] && ORIG_HEAD=$1 HEAD=$2 .git/hooks/post-merge
+[[ -f .git/hooks/post-merge ]] && FROM_COMMIT=$1 TO_COMMIT=$2 bin/git-hooks/post-merge
