@@ -64,4 +64,5 @@
   "editor.bracketPairColorization.enabled": true,
   "ruby.specPattern": "test",
   "window.zoomLevel": 1,
+  "terminal.integrated.enablePersistentSessions": false,
 }
