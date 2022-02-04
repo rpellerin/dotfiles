@@ -5,14 +5,7 @@
   "terminal.integrated.fontSize": 15,
   "workbench.editor.enablePreview": true,
   "editor.fontSize": 14,
-  "editor.rulers": [
-    119
-  ],
-  "bracketPairColorizer.forceUniqueOpeningColor": true,
-  "bracketPairColorizer.showHorizontalScopeLine": false,
-  "bracketPairColorizer.forceIterationColorCycle": true,
-  "bracketPairColorizer.highlightActiveScope": true,
-  "bracketPairColorizer.showBracketsInGutter": true,
+  "editor.rulers": [119],
   "window.title": "${activeEditorLong}",
   "ruby.codeCompletion": "rcodetools",
   "workbench.startupEditor": "newUntitledFile",
@@ -23,7 +16,7 @@
     "suppressFileNotUnderSourceControlWarning": false,
     "suppressGitVersionWarning": false,
     "suppressLineUncommittedWarning": false,
-    "suppressNoRepositoryWarning": false,
+    "suppressNoRepositoryWarning": false
   },
   "gitlens.keymap": "chorded",
   "ruby.lint": {
@@ -44,7 +37,6 @@
   },
   "editor.mouseWheelZoom": true,
   "extensions.ignoreRecommendations": false,
-  "terminal.integrated.rendererType": "dom",
   "typescript.tsserver.log": "off",
   "window.titleBarStyle": "custom",
   "editor.formatOnSave": true,
@@ -63,6 +55,9 @@
   "terminal.integrated.tabs.enabled": false,
   "editor.bracketPairColorization.enabled": true,
   "ruby.specPattern": "test",
-  "window.zoomLevel": 1,
   "terminal.integrated.enablePersistentSessions": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "window.zoomLevel": 1
 }
