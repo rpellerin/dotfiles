@@ -4,16 +4,16 @@
 
 echo "Make sure imagemagick is installed."
 
-dirr=`mktemp -d`
-echo "Output files will be put in $dirr"
-echo "Resizing to $size pixel wide..."
-echo "Paste here filepaths, one per line."
-
 size=$1
 
 if [ "$#" -ne 1 ];then
     size=700
 fi
+
+dirr=`mktemp -d`
+echo "Output files will be put in $dirr"
+echo "Resizing to $size pixel wide..."
+echo "Paste here filepaths, one per line."
 
 while read -r file
 do

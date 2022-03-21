@@ -59,11 +59,6 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "window.zoomLevel": 1,
-  "stylelint.validate": [
-    "css",
-    "less",
-    "postcss",
-    "scss"
-  ]
+  "stylelint.validate": ["css", "less", "postcss", "scss"],
+  "window.zoomLevel": 1
 }
