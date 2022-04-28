@@ -22,5 +22,5 @@ if [ -x "$(command -v bundle)" ]; then
   [ "$DEBUG_GIT_HOOKS" = "1" ] && check_run "^Gemfile\.lock" && echo "Gemfile.lock changed, running bundle...."
   check_run "^Gemfile\.lock" && bundle >/dev/null 2>&1 &
   [ "$DEBUG_GIT_HOOKS" = "1" ] && check_run "^db\/" && echo "db/ changed, testing for pending migrations...."
-  check_run "^db\/" && (bundle exec rails db:abort_if_pending_migrations 2>/dev/null | grep -q 'pending migrations') && bundle exec rails db:migrate >/dev/null 2>&1 &
+  check_run "^db\/" && { (bundle exec rails db:abort_if_pending_migrations 2>/dev/null | grep -q 'pending migrations') && bundle exec rails db:migrate >/dev/null 2>&1; } &
 fi
