@@ -39,7 +39,6 @@
   "extensions.ignoreRecommendations": false,
   "typescript.tsserver.log": "off",
   "window.titleBarStyle": "custom",
-  "editor.formatOnSave": true,
   "ruby.specCommand": "bundle exec rails test",
   "editor.snippetSuggestions": "top",
   "javascript.updateImportsOnFileMove.enabled": "never",
@@ -60,5 +59,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "stylelint.validate": ["css", "less", "postcss", "scss"],
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "editor.formatOnSave": true
 }
