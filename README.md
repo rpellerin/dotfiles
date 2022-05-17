@@ -375,6 +375,8 @@ ln -s /opt/thunderbird/chrome/icons/default/default256.png /usr/share/pixmaps/th
 
 To restore all email accounts, preferences and emails, you can import the directory `~/.thunderbird` from another computer. In _Preferences > Advanced > General > Config Editor_, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
 
+To connect it to your Google address book, [follow these instructions](https://support.mozilla.org/en-US/questions/1321916).
+
 ## 9. Tmux
 
 Install through `apt` or manually:
