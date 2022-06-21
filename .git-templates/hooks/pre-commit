@@ -41,7 +41,7 @@ if [ -x "$(command -v rubocop)" ] && [ -n "$MODIFIED_FILES_RB" ]; then
     if [ -f "$file" ]; then
       echo "$file"
     fi
-  done | xargs --no-run-if-empty rubocop --auto-correct --force-exclusion
+  done | xargs --no-run-if-empty rubocop --autocorrect --force-exclusion
 fi
 
 echo 'All good!'

@@ -59,7 +59,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "stylelint.validate": ["css", "less", "postcss", "scss"],
-  "window.zoomLevel": 1,
   "terminal.integrated.enableMultiLinePasteWarning": false,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 1
 }
