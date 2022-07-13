@@ -296,7 +296,7 @@ function new-pr {
     else
         title="$PR_TITLE"
     fi
-    git push --set-upstream origin "$branch"
+    git push origin "$branch"
     gh pr create --title "$title" "$@"
     gh pr view --web
 }
