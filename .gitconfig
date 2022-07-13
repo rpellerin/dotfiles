@@ -30,6 +30,7 @@
 	delete-all-locales-branches-but-master = "!git branch -vv | cut -c 3- | cut -d' ' -f1 | grep -v master | xargs git branch -D"
 [push]
 	default = current
+	autoSetupRemote = true
 [fetch]
 	prune = true
 [core]
