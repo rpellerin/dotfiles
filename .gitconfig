@@ -7,7 +7,7 @@
     commmit = commit
     comit = commit
     ad = "!f() { git add $1 && git status; }; f"
-	br = "!br() { git checkout -b $1 origin/master; }; br"
+	br = "!br() { git checkout -b $1 origin/master --no-track; }; br"
     st = status
     co = checkout
     dif = diff --word-diff-regex=[^[:space:],]+
@@ -28,7 +28,7 @@
     diff-to-html-no-index = "!echo \"cat <<'EOF' | git apply\n$(git diff --color --no-index -U0 $@)\nEOF\n\" | ansi2html > diff.html"
 	delete-all-locales-branches-but-master = "!git branch -vv | cut -c 3- | cut -d' ' -f1 | grep -v master | xargs git branch -D"
 [push]
-	default = current
+	default = simple
 	autoSetupRemote = true
 [fetch]
 	prune = true
