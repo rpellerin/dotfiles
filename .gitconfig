@@ -19,7 +19,6 @@
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset%C(yellow)%ci / %ai%Creset' --abbrev-commit
     lgo = "!git log origin/master.. --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset%C(yellow)%ci / %ai%Creset' --abbrev-commit"
     lgall = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset%C(yellow)%ci / %ai%Creset' --abbrev-commit --all
-    pushn = !git push --set-upstream origin "$(git rev-parse --abbrev-ref HEAD)"
     bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
     # File history
     filelog = log -u
