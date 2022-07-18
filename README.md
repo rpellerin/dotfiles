@@ -254,6 +254,13 @@ gpg2 --delete-secret-and-public-key <copied value>
 pass init <copied value>
 ```
 
+On your old computer, you may want to back up all your passwords in a plain text file, just in case the GPG keys restoration fails. VERY UNSAFE, as it exposes your passwords in clear text though.
+
+```bash
+cd .password-store
+find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > /tmp/pass.backup
+```
+
 Set a cronjob to periodically make a backup + other helpful cron jobs:
 
 ```bash
