@@ -1,3 +1,28 @@
+## What to do before reformating a computer?
+
+Back up, just in case, the following:
+
+- Passwords in clear, just in case the GPG keys restoration fails. VERY UNSAFE, as it exposes your passwords in clear text though.
+
+	```bash
+	cd .password-store
+	find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > /tmp/pass.backup
+	```
+
+- Bookmarks
+- RSS feeds in Thunderbird
+- cron jobs
+- The content of `$HOME/` (except for `.cache` and other non important folders), especially:
+
+    - `.zsh_history`
+    - `.config/`
+    - `.password-store/`
+    - `.gitconfig_local`
+    - `Documents/`, `Downloads/`, `Pictures/`
+    - SSH and GPG keys (`$HOME/.ssh`, `$HOME/.gnupg`)
+
+When reinstalling Xubuntu, use encrypted LVM on a ext4 filesystem (not ZFS). After the install, [we'll resize the SWAP partition](https://romainpellerin.eu/how-to-resize-an-encrypted-swap-partition-lvm.html), as by default it's too small (less than 1G).
+
 # What to do after a fresh install of Xubuntu?
 
 ![How to secure your laptop](https://raw.githubusercontent.com/rpellerin/dotfiles/master/Pictures/secure-laptop.png)
@@ -23,7 +48,11 @@ GRUB_TIMEOUT=0
 sudo update-grub
 ```
 
-## 2. Essential packages
+## 2. First steps and essential packages
+
+In Thunar, show hidden files.
+
+Then,
 
 ```bash
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
@@ -34,26 +63,29 @@ sudo apt update
 sudo apt upgrade
 sudo apt install gnupg2 \
     apt-listchanges \
+    xfce4-systemload-plugin \
+    xfce4-cpugraph-plugin \
+    xfce4-netload-plugin \
+    ristretto \
     git git-extras
     htop \
     python3-pip \
     xclip \
     autojump \
     tree \
+    jq \
     tumbler-plugins-extra \
     imagemagick \
     inotify-tools \
+    mousepad \
     vlc \
-    gigolo \
-    i3lock \
-    xss-lock \
-    p7zip-full \
     build-essential \
     gimp \
     curl \
     ffmpeg \
     vim-gtk3 \
     zsh \
+    p7zip-full \
     libreoffice \
     libreoffice-l10n-fr \
     libreoffice-l10n-en-gb \
@@ -62,16 +94,21 @@ sudo apt install gnupg2 \
     unattended-upgrades \
     redshift-gtk \
     simplescreenrecorder \
+    openvpn \
+    network-manager-openvpn-gnome \
+    network-manager-vpnc \
     cryptsetup \
-    ecryptfs-utils
+    ecryptfs-utils # To be able to `sudo mount -t ecryptfs src dist`
 
 sudo dpkg-reconfigure unattended-upgrades
 
 # tumbler-plugins-extra is to get Thunar to show video thumbnails
 # An alternative to autojump is z: https://github.com/rupa/z
-# xss-lock is for auto locking session after 2 minutes of inactivity
 # vim-gtk3 for clipboard support
 # redshift-gtk is an alternative to xflux
+
+# After installing network-manager-openvpn-gnome do `sudo service network-manager restart`
+# Add a .ovpn file to the systray: `nmcli connection import type openvpn file <file>`
 
 sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
@@ -85,12 +122,14 @@ sudo apt install texlive-full \
     texlive-bibtex-extra \
     biber \
     arandr \
+    i3lock \
+    xss-lock \
+    gigolo \
     mpd mpv \
     rofi \
     exiftool \
     jhead \
     ncdu \
-    jq \
     ctags \
     ntp \
     optipng \
@@ -105,10 +144,7 @@ sudo apt install texlive-full \
     hyphen-en-gb \
     hunspell-en-gb \
     gksu \
-    pdf-presenter-console \
-    openvpn \
-    network-manager-openvpn-gnome \
-    network-manager-vpnc
+    pdf-presenter-console
 
 # ctags is for vim tag jumping (see .vimrc)
 # libreoffice-pdfimport is for PDF signing
@@ -124,9 +160,7 @@ sudo apt install texlive-full \
 # icoutils to create Microsoft Windows(R) icon and cursor files
 # zathura is a PDF viewer
 # synaptic see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
-# After installing network-manager-openvpn-gnome do `sudo service network-manager restart`
-
-# Add a .ovpn file to the systray: `nmcli connection import type openvpn file <file>`
+# xss-lock is for auto locking session after 2 minutes of inactivity
 
 # Gcolor3 is a useful tool that can be downloaded at https://www.hjdskes.nl/projects/gcolor3/
 ```
@@ -254,18 +288,10 @@ gpg2 --delete-secret-and-public-key <copied value>
 pass init <copied value>
 ```
 
-On your old computer, you may want to back up all your passwords in a plain text file, just in case the GPG keys restoration fails. VERY UNSAFE, as it exposes your passwords in clear text though.
-
-```bash
-cd .password-store
-find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > /tmp/pass.backup
-```
-
-Set a cronjob to periodically make a backup + other helpful cron jobs:
+Set a cronjob to periodically make a backup:
 
 ```bash
 0 20 9 * * tar czfh "/home/romain/$(date -u +"%Y-%m-%dT%H-%M-%SZ")-password-store.tar.gz" -C "$HOME" .password-store
-0 */1 * * * /home/romain/git/dotfiles/scripts/getWeather.py > /tmp/weather.txt
 ```
 
 ### GPG + Git: signed commits
@@ -278,17 +304,18 @@ Put the following in `~/.gitconfig_local`:
 	signingkey = <key associated with public github email address>
 ```
 
-To get the IDs of available keys, run: `gpg2 --list-secret-keys --keyid-format LONG`
+To get the IDs of available keys, run: `gpg2 --list-secret-keys --keyid-format LONG`. The ID is on a "sec" line, after "rsa4096/".
 
-## 5. Google Chrome
+## 5. Firefox and Google Chrome
+
+In Firefox, [disable the title bar](https://linuxconfig.org/how-to-remove-firefox-title-bar-on-linux).
 
 Download Chrome .deb file and then:
 
 ```bash
-sudo dpgk -i google-chrome-stable.deb
-sudo apt install -f # To fix dependencies problems
-sudo dpgk -i google-chrome-stable.deb
-rm -f google-chrome-stable.deb
+mv Downloads/google-chrome-stable.deb /tmp # Otherwise the line below will emit a warning
+sudo apt install /tmp/google-chrome-stable.deb
+rm -f /tmp/google-chrome-stable.deb
 ```
 
 ## 6. Visual Studio Code
@@ -296,10 +323,9 @@ rm -f google-chrome-stable.deb
 [Download VS code .deb file](https://code.visualstudio.com/docs/setup/linux) and then:
 
 ```bash
-sudo apt install code_1.27_amd64.deb
-sudo apt install -f # To fix dependencies problems
-sudo dpgk -i code_1.27_amd64.deb
-rm -f code_1.27_amd64.deb
+mv Downloads/code_1.27_amd64.deb /tmp # Otherwise the line below will emit a warning
+sudo apt install /tmp/code_1.27_amd64.deb
+rm -f /tmp/code_1.27_amd64.deb
 code --install-extension "esbenp.prettier-vscode"
 code --install-extension "dbaeumer.vscode-eslint"
 code --install-extension "eamodio.gitlens"
@@ -313,7 +339,6 @@ code --install-extension "sianglim.slim"
 - In [about:config](about:config), do:
   - Search for `vaapi` and change the relevant values for both results from `false` to `true`
   - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0` (note: this will break many websites, from my experience)
-  - Set `security.tls.version.min` to `3` ([more info](https://support.mozilla.org/fr/questions/1103968))
   - Set `view_source.wrap_long_lines` to `true`.
   - Set `browser.tabs.warnOnClose` to `false`.
   - Set `browser.tabs.closeWindowWithLastTab` to `false`.
@@ -332,7 +357,7 @@ code --install-extension "sianglim.slim"
   - OPTIONAL: Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
   - OPTIONAL: Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query` and [`network.security.esni.enabled` to `true`](https://korben.info/comment-activer-les-dns-via-https-dans-firefox.html).
   - OPTIONAL: Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0`
-- In [about:preferences#general](about:preferences#general), check `Restore previous session` and unckeck `Ctrl+Tab cycles through tabs in recently used order`
+- In [about:preferences#general](about:preferences#general), check `Open previous windows and tabs` and unckeck `Ctrl+Tab cycles through tabs in recently used order`
 - In [about:preferences#search](about:preferences#search), uncheck `Show search suggestions ahead of browsing history in address bar results`
 - In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. For `Enhanced Tracking Protection`, check `Strict`. Optionally, block cookies for trackers and the following domains:
 
@@ -384,6 +409,10 @@ To restore all email accounts, preferences and emails, you can import the direct
 
 To connect it to your Google address book, [follow these instructions](https://support.mozilla.org/en-US/questions/1321916).
 
+If using a Gmail account, under "Server Settings, in "Advanced Account Settings", fill "IMAP server directory" with "[Gmail]" (without the double quotes).
+
+Don't forget to update the retention settings of folders, and where to save sent/draft/archives/deleted/etc emails.
+
 ## 9. Tmux
 
 Install through `apt` or manually:
@@ -407,13 +436,15 @@ setopt EXTENDED_GLOB
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
     ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
-chsh -s /bin/zsh # Might need rebooting to take effect
+chsh -s /bin/zsh # Now log out of your session and back in for this to take effect
 ```
+
+At this point, CTRL+R and CTRL+T do not work. Step #22 (Fuzzy finder) will make it work.
 
 ## 11. NVM + NodeJS + a few packages
 
 ```bash
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 # Make sure ~/.zshrc does not contain code added by nvm install script,
 # since it is already present in dotfiles/.rc
 nvm install node
@@ -480,8 +511,6 @@ source "$REPO_DIR/.rc"
 git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc
 ln -s "$REPO_DIR/.zpreztorc" $HOME/
 
-zsh-newuser-install
-
 sudo su
 echo 'KERNEL=="card0", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/romain/.Xauthority", RUN+="/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh"' > /etc/udev/rules.d/99-hdmi_sound.rules
 sudo udevadm control --reload-rules
@@ -492,7 +521,7 @@ sudo systemctl restart udev
 
 - In `General`, unlimited scrollback. Disable the scrollbar being shown.
 - In `Appearance`, uncheck menu bar and borders around new windows. Set the font size to 13.
-- In `Colors`, use the `Xubuntu dark` theme, check `Cursor color` and edit colors as you like.
+- In `Colors`, use the `Xubuntu dark` theme, check `Cursor color` and edit colors as you like, or leave the default one.
 
 ## 16. Set up Vim
 
@@ -553,22 +582,13 @@ sudo apt update
 sudo apt install nextcloud-client
 ```
 
-## 19. Compton (NOT NEEDED SINCE 20.04)
-
-If you experience V-sync issues when watching [this video](https://www.youtube.com/watch?v=0RvIbVmCOxg), you might want to install [compton](http://duncanlock.net/blog/2013/06/07/how-to-switch-to-compton-for-beautiful-tear-free-compositing-in-xfce/), unless you run [`xfwm4` 4.13+](https://github.com/xfce-mirror/xfwm4/blob/master/COMPOSITOR).
-
-1. In Settings > Window Manager Tweaks > Compositor, uncheck `Enable display compositing`
-2. `sudo apt install compton`
-3. Make sure `~/.config/compton.conf` and `~/.config/autostart/compton.desktop` exist
-4. Run `compton` to start it for the current session (it while auto start next time you log in)
-
-## 20. Disabling guest sessions
+## 19. Disabling guest sessions
 
 ```bash
 sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" > /etc/lightdm/lightdm.conf.d/50-no-guest.conf'
 ```
 
-## 21. Disabling Bluetooth on startup
+## 20. Disabling Bluetooth on startup
 
 Disable blueman applet from application autostart cause it turns bluetooth on when starting. Then run `sudo systemctl disable bluetooth`. To check status, run one of the following commands:
 
@@ -576,14 +596,14 @@ Disable blueman applet from application autostart cause it turns bluetooth on wh
     - `rfkill list`
     - `bluetooth`
 
-## 22. Fuzzy finder
+## 21. Fuzzy finder
 
 ```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --no-update-rc
 ```
 
-## 23. Hardening security and checking for malwares
+## 22. Hardening security and checking for malwares
 
 ```bash
 sudo apt install rkhunter lynis chkrootkit
