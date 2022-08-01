@@ -59,15 +59,18 @@ Then,
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 sudo apt-add-repository ppa:git-core/ppa
+sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt update
 sudo apt upgrade
 sudo apt install gnupg2 \
     apt-listchanges \
+    tmux \
     xfce4-systemload-plugin \
     xfce4-cpugraph-plugin \
     xfce4-netload-plugin \
     ristretto \
-    git git-extras
+    git git-extras \
+    nextcloud-client \
     htop \
     python3-pip \
     xclip \
@@ -109,10 +112,6 @@ sudo dpkg-reconfigure unattended-upgrades
 
 # After installing network-manager-openvpn-gnome do `sudo service network-manager restart`
 # Add a .ovpn file to the systray: `nmcli connection import type openvpn file <file>`
-
-sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-sudo chmod a+rx /usr/local/bin/youtube-dl
-sudo apt install python-is-python3 # youtube-dl targets python, not python3 explicitely
 ```
 
 ## 3. Optional packages
@@ -122,8 +121,6 @@ sudo apt install texlive-full \
     texlive-bibtex-extra \
     biber \
     arandr \
-    i3lock \
-    xss-lock \
     gigolo \
     mpd mpv \
     rofi \
@@ -158,7 +155,6 @@ sudo apt install texlive-full \
 # icoutils to create Microsoft Windows(R) icon and cursor files
 # zathura is a PDF viewer
 # synaptic see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
-# xss-lock is for auto locking session after 2 minutes of inactivity
 
 # Gcolor3 is a useful tool that can be downloaded at https://www.hjdskes.nl/projects/gcolor3/
 ```
@@ -175,22 +171,8 @@ sudo apt install oathtool dmenu # oathtool for OTPs, dmenu for passmenu
 
 #### Installation
 
-#### Preferred method
-
 ```bash
 sudo apt install pass pass-extension-otp
-```
-
-#### Alternative
-
-```bash
-git clone https://git.zx2c4.com/password-store
-git clone git@github.com:tadfisher/pass-otp.git
-cd password-store
-sudo make install
-cp /usr/share/zsh/site-functions/_pass /usr/share/zsh/vendor-completions
-cd ../pass-otp
-sudo make install
 ```
 
 ### SSH
@@ -379,29 +361,7 @@ code --install-extension "sianglim.slim"
 
 ## 8. Thunderbird
 
-If you can't get a recent version of Thunderbird through `apt`, download a `.deb` file. Then extract it and:
-
-```bash
-sudo mv thunderbird/ /opt
-sudo ln -s /opt/thunderbird/thunderbird /usr/bin/
-# Do the following only if /usr/share/applications/thunderbird.desktop does not exist
-sudo su
-bash
-cat > /usr/share/applications/thunderbird.desktop << "EOF"
-[Desktop Entry]
-Name=Thunderbird Mail
-Comment=Send and receive mail with Thunderbird
-GenericName=Mail Client
-Exec=thunderbird %u
-Terminal=false
-Type=Application
-Icon=thunderbird
-Categories=Network;Email;
-MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/xml;application/rss+xml;x-scheme-handler/mailto;
-StartupNotify=true
-EOF
-ln -s /opt/thunderbird/chrome/icons/default/default256.png /usr/share/pixmaps/thunderbird.png
-```
+Install it through `apt` is not yet already there.
 
 To restore all email accounts, preferences and emails, you can import the directory `~/.thunderbird` from another computer. In _Preferences > Advanced > General > Config Editor_, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
 
@@ -411,20 +371,7 @@ If using a Gmail account, under "Server Settings, in "Advanced Account Settings"
 
 Don't forget to update the retention settings of folders, and where to save sent/draft/archives/deleted/etc emails.
 
-## 9. Tmux
-
-Install through `apt` or manually:
-
-```bash
-sudo apt install libevent-dev libncurses-dev pkg-config automake autoconf
-git clone https://github.com/tmux/tmux.git
-cd tmux
-sh autogen.sh
-./configure && make
-sudo make install
-```
-
-## 10. ZSH + Prezto
+## 9. ZSH + Prezto
 
 ```bash
 zsh
@@ -439,22 +386,16 @@ chsh -s /bin/zsh # Now log out of your session and back in for this to take effe
 
 At this point, CTRL+R and CTRL+T do not work. Step #22 (Fuzzy finder) will make it work.
 
-## 11. NVM + NodeJS + a few packages
+## 10. NVM + NodeJS + a few packages
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-# Make sure ~/.zshrc does not contain code added by nvm install script,
-# since it is already present in dotfiles/.rc
+# Make sure ~/.zshrc does not contain code added by nvm install script since it is already present in dotfiles/.rc
 nvm install node
-# Or install Nodejs directly
-# curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-# sudo apt install nodejs # And read https://docs.npmjs.com/getting-started/fixing-npm-permissions
-
-# Install some useful packages
 npm i -g tldr peerflix castnow # castnow plays media files on Chromecast (subtitles supported)
 ```
 
-## 12. Battery saver (https://doc.ubuntu-fr.org/tlp)
+## 11. Battery saver (https://doc.ubuntu-fr.org/tlp)
 
 ```bash
 sudo apt install tlp
@@ -462,7 +403,7 @@ sudo systemctl enable tlp
 sudo systemctl enable tlp-sleep
 ```
 
-## 13. Firewall
+## 12. Firewall
 
 ```bash
 cd dotfiles # cd to this git repo
@@ -472,7 +413,7 @@ sudo chown root:root /etc/systemd/system/firewall.service
 sudo systemctl enable firewall
 ```
 
-## 14. Custom conf files
+## 13. Custom conf files
 
 ```bash
 cd dotfiles # cd to this git repo
@@ -509,17 +450,17 @@ sudo udevadm control --reload-rules
 sudo systemctl restart udev
 ```
 
-## 15. Edit terminal preferences
+## 14. Edit terminal preferences
 
 - In `General`, unlimited scrollback. Disable the scrollbar being shown.
 - In `Appearance`, uncheck menu bar and borders around new windows. Set the font size to 13.
 - In `Colors`, use the `Xubuntu dark` theme, check `Cursor color` and edit colors as you like, or leave the default one.
 
-## 16. Set up Vim
+## 15. Set up Vim
 
 Just open Vim once and let Vim-Plug install all of the listed plugins.
 
-## 17. All settings
+## 16. All settings
 
 Open the settings manager and do:
 
@@ -553,21 +494,13 @@ Open the settings manager and do:
 - In `Notifications`, log all notifications but not applications.
 - In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling.
 
-## 18. Nextcloud
-
-```bash
-sudo add-apt-repository ppa:nextcloud-devs/client
-sudo apt update
-sudo apt install nextcloud-client
-```
-
-## 19. Disabling guest sessions
+## 17. Disabling guest sessions
 
 ```bash
 sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" > /etc/lightdm/lightdm.conf.d/50-no-guest.conf'
 ```
 
-## 20. Disabling Bluetooth on startup
+## 18. Disabling Bluetooth on startup
 
 Disable blueman applet from application autostart cause it turns bluetooth on when starting. Then run `sudo systemctl disable bluetooth`. To check status, run one of the following commands:
 
@@ -575,14 +508,14 @@ Disable blueman applet from application autostart cause it turns bluetooth on wh
     - `rfkill list`
     - `bluetooth`
 
-## 21. Fuzzy finder
+## 19. Fuzzy finder
 
 ```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --no-update-rc
 ```
 
-## 22. Hardening security and checking for malwares
+## 20. Hardening security and checking for malwares
 
 ```bash
 sudo apt install rkhunter lynis chkrootkit
@@ -649,23 +582,9 @@ echo 'set preview_images true' >> ~/.config/ranger/rc.conf
 ranger --copy-config=scope
 ```
 
-### Python 3+
+### Python
 
-If you download Python3 using your package manager (as seen above), you'll likely get a quite old version. If you want the latest one, here's how to do it:
-
-1. Download it from [https://www.python.org/downloads/](https://www.python.org/downloads/)
-2. Extract the tar ball and `cd` to the directory.
-3. Then:
-
-   ```bash
-   sudo apt install libssl-dev openssl libsqlite3-dev
-   ./configure --enable-loadable-sqlite-extensions --with-ensurepip=install
-   make profile-opt
-   make test
-   sudo make install
-   ```
-
-You might also consider using [Pipenv](https://github.com/pyenv/pyenv-virtualenv) to manage several versions of Python and virtual environments.
+You might consider using [Pipenv](https://github.com/pyenv/pyenv-virtualenv) to manage several versions of Python and virtual environments.
 
 ```bash
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
@@ -674,10 +593,11 @@ git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-v
 
 #### Optional Python packages
 
-Installable with `pip install <package>`. [Don't run them as `sudo`](https://pages.charlesreid1.com/dont-sudo-pip/).
+Installable with `python3 -m pip install -U <package>`. [Don't run them as `sudo`](https://pages.charlesreid1.com/dont-sudo-pip/).
 
 - `eg` useful examples of common commands
 - `gitpython` an API for GitHub
+- `yt-dlp`: a video downloader
 
 ### TeamViewer
 
