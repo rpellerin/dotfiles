@@ -4,22 +4,22 @@ Back up, just in case, the following:
 
 - Passwords in clear, just in case the GPG keys restoration fails. VERY UNSAFE, as it exposes your passwords in clear text though.
 
-	```bash
-	cd .password-store
-	find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > /tmp/pass.backup
-	```
+  ```bash
+  cd .password-store
+  find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > /tmp/pass.backup
+  ```
 
 - Bookmarks
 - RSS feeds in Thunderbird
 - cron jobs
 - The content of `$HOME/` (except for `.cache` and other non important folders), especially:
 
-    - `.zsh_history`
-    - `.config/`
-    - `.password-store/`
-    - `.gitconfig_local`
-    - `Documents/`, `Downloads/`, `Pictures/`
-    - SSH and GPG keys (`$HOME/.ssh`, `$HOME/.gnupg`)
+  - `.zsh_history`
+  - `.config/`
+  - `.password-store/`
+  - `.gitconfig_local`
+  - `Documents/`, `Downloads/`, `Pictures/`
+  - SSH and GPG keys (`$HOME/.ssh`, `$HOME/.gnupg`)
 
 When reinstalling Xubuntu, use encrypted LVM on a ext4 filesystem (not ZFS). After the install, [we'll resize the SWAP partition](https://romainpellerin.eu/how-to-resize-an-encrypted-swap-partition-lvm.html), as by default it's too small (less than 1G).
 
@@ -130,7 +130,6 @@ sudo apt install texlive-full \
     exiftool \
     jhead \
     ncdu \
-    ctags \
     ntp \
     optipng \
     filezilla
@@ -146,7 +145,6 @@ sudo apt install texlive-full \
     gksu \
     pdf-presenter-console
 
-# ctags is for vim tag jumping (see .vimrc)
 # libreoffice-pdfimport is for PDF signing
 
 # Install biber from apt first and try to compile a PDF document.
@@ -482,10 +480,6 @@ REPO_DIR=`pwd`
 
 # Custom settings
 ln -sf $REPO_DIR/.vimrc $HOME/
-mkdir -p $HOME/.vim
-for file in .vim/**/*.*; do
-    ln -sf $REPO_DIR/`dirname $file` $HOME/.vim
-done
 echo "source $REPO_DIR/.rc" >> $HOME/.zshrc
 echo "source $REPO_DIR/.aliases" >> $HOME/.zshrc
 ln -sf $REPO_DIR/.tmux.conf $HOME/
@@ -501,8 +495,6 @@ ln -sf "$REPO_DIR/.gitignore_global" $HOME/
 ln -sf $REPO_DIR/.curlrc $HOME/
 ln -sf $REPO_DIR/.less $HOME/
 ln -sf $REPO_DIR/.lesskey $HOME/
-ln -s $REPO_DIR/.ycm_extra_conf.py $HOME/
-ln -s $REPO_DIR/.tern-project $HOME/
 ln -s $REPO_DIR/.config/compton.conf $HOME/.config/
 mkdir -p $HOME/.gnupg
 ln -s $REPO_DIR/.gnupg/gpg.conf $HOME/.gnupg/gpg.conf
@@ -525,20 +517,7 @@ sudo systemctl restart udev
 
 ## 16. Set up Vim
 
-```bash
-# Set up Vim
-## Vundle (Vim package manager)
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-### Then go to https://github.com/VundleVim/Vundle.vim
-### Deactivate your firewall (just in case), launch Vim and run:
-:PluginInstall
-## Install YouCompleteMe by reading
-## https://github.com/ycm-core/YouCompleteMe/blob/master/README.md
-### In a nutshell:
-### sudo apt install build-essential cmake vim python3-dev
-### cd ~/.vim/bundle/YouCompleteMe
-### python3 install.py --ts-completer
-```
+Just open Vim once and let Vim-Plug install all of the listed plugins.
 
 ## 17. All settings
 
@@ -668,20 +647,6 @@ sudo apt install ranger
 mkdir -p ~/.config/ranger
 echo 'set preview_images true' >> ~/.config/ranger/rc.conf
 ranger --copy-config=scope
-```
-
-### Android
-
-Pay attention while installing the Android SDK, it requires extra Debian packages, as stated on the download page. You'll also need to install `lib32stdc++6` and `lib32z1`.
-
-Then:
-
-```bash
-mkdir -p $HOME/.gradle
-cp $REPO_DIR/.gradle/gradle.properties $HOME/.gradle/
-
-sudo ln -s /home/romain/android-studio/bin/studio.sh /usr/local/bin/studio
-sudo ln -s /home/romain/Android/Sdk/tools/android /usr/local/bin/android
 ```
 
 ### Python 3+

@@ -1,31 +1,49 @@
 " #################### GENERAL
-set nocompatible            " do not act as vi (useless as it is default since Vim 8.0)
 filetype plugin indent on   " == filetype on (filetype dection, for syntax and options) + filetype plugin on (loads ftplugin.vim) + filetype indent on (loads indent.vim)
 " http://vi.stackexchange.com/a/10125
 
-" Set the runtime path to include Vundle (plugin manager), and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'   " Let Vundle manage Vundle, required
-Plugin 'ycm-core/YouCompleteMe' " Auto completion
-Plugin 'scrooloose/syntastic'   " Syntax checker / linter
-Plugin 'scrooloose/nerdtree'    " A tree explorer plugin for vim
-Plugin 'Raimondi/delimitMate'   " Automatic closing of quotes, parenthesis, brackets, etc
-Plugin 'sjl/badwolf'            " Color theme
-Plugin 'ctrlpvim/ctrlp.vim'     " Fuzzy file, buffer, mru, tag, etc finder
-Plugin 'benmills/vimux'         " Vim plugin to interact with tmux
-Plugin 'tpope/vim-fugitive'     " fugitive.vim: a Git wrapper so awesome, it should be illegal
-"Plugin 'tpope/vim-dispatch'     " Compile asynchronously and show output in splitted pane
-Plugin 'tpope/vim-surround'     " surround.vim: quoting/parenthesizing made simple
-Plugin 'tpope/vim-commentary'   " commentary.vim: comment stuff out
-call vundle#end()
+" Install Vim-Plug if not yet already installed
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+
+" Make sure you use single quotes
+
+" Shorthand notation; fetches https://github.com/dense-analysis/ale
+Plug 'dense-analysis/ale'     " Syntax checker / linter
+Plug 'Raimondi/delimitMate'   " Automatic closing of quotes, parenthesis, brackets, etc
+Plug 'sjl/badwolf'            " Color theme
+Plug 'tpope/vim-surround'     " surround.vim: quoting/parenthesizing made simple
+
+call plug#end()
 
 set laststatus=2 " show the satus line all the time"
 set scrolloff=3 " always show at least 3 lines above and below the cursor
 set statusline+=%F\ line:%l\ col:%c
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+set statusline+=%{LinterStatus()}
 set statusline+=%*
 
 set backupdir=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -34,39 +52,6 @@ set directory=~/.vim/swap,~/.tmp,~/tmp,/var/tmp,/tmp
 " toggle invisible characters
 set list
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
-
-" SETTINGS FOR PLUGIN: Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_ignore_files= ['.asm.js$']
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-" Not sure wheter those next two commands are necessary
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
-
-" http://usevim.com/2016/03/07/linting/
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-
-
-" Don't ask if .ycm_extra_conf.py is safe to be loaded
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = "/home/romain/.ycm_extra_conf.py"
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-"let g:ycm_key_list_select_completion = ['<Enter>']
-" For next line, by default TAB and Top/Down
-"let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Top>']
-
 
 set encoding=utf-8 " The encoding displayed
 set fileencoding=utf-8 " The encoding written to file
@@ -85,7 +70,6 @@ set shiftround              " round indent to a multiple of 'shiftwidth'"
 " set textwidth=100 " maximum width of text that is being inserted (longer lines may be broken after white space)
 
 set diffopt+=vertical
-
 
 function! <SID>StripTrailingWhitespaces()
     let _s=@/
@@ -125,7 +109,6 @@ syntax enable                    " enable syntax highlighting; 'syntax on' would
 set autoread                     " set to auto read when a file is changed from the outside
 set history=9999                 " sets how many lines of history VIM has to remember
 
-
 set ttimeoutlen=0
 set timeoutlen=1000
 au InsertEnter * set timeout
@@ -157,40 +140,6 @@ set synmaxcol=200 " Lines longer than 200 won't get syntax highlighting after th
 let mapleader = ','
 " search for word under the cursor
 nnoremap <leader>/ "fyiw :/<c-r>f<cr>"
-
-" FINDING FILES:
-
-" Search down into subfolders (from current active directory) and ~/git
-" Provides tab-completion for all file-related tasks
-" Command is :find something
-" * can be used to find matching files
-set path+=**,~/git/**
-
-" Display all matching files when we tab complete
-set wildmenu
-set wildmode=list:full " Show the list and cycle throught the items
-
-
-" TAG JUMPING:
-
-" Requires 'ctags' to be installed (via apt-get)
-" Creates the 'tags' file
-command! MakeTags !ctags -R .
-" Now we can use:
-" - ^] to jump to tag under cursor
-" - g^t for ambiguous tags
-" - ^t to jump back up the tag stack
-
-
-" FILE BROWSING:
-
-" Tweaks for browsing
-" Command is :edit <path>
-let g:netrw_banner=0        " Disable annoying top banner
-let g:netrw_browse_split=3  " open selected file in new tab
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view (allow expanding folders), can be change by pressing i
-
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
