@@ -468,7 +468,11 @@ Open the settings manager and do:
 - Set the keyboard layout to US international with dead keys.
 - Set up the xfce panel (top bar): show the battery indicator (if on a laptop), set the date, time and timezone (clock format: `%a %d %b %T %p`), sync the time with the Internet. Add network, RAM and CPU monitor.
 - In `Window Manager` > `Keyboard`, set the keyboard shortcuts (_Tile window to the x_, _Show desktop_).
-- In `Screensaver`, disable Screensaver and Lock Screen altogether.
+- In `Screensaver`:
+
+    - In the tab "Screensaver", enable the screensaver. Pick the "Blank Screen" option, and changes its settings to "never" for both "put display to sleep after" and "switch display off after", we'll handle that through the Power Manager in a sec. Active the screensaver when computer is idle after 1 minutes. Check "Inhibit screensaver for fullscreen applications".
+    - In the tab "Lock Screen", enable everything except "On Screen Keyboard" and "Logout".
+
 - In `Display`, in the tab `Advanced`, create a profile for when connected to a TV for instance, and enable both `Configure new displays when connected` and `Automatically enable profiles when new display is connected`
 - In `Keyboard` > `Application Shortcuts`, set:
 
@@ -489,7 +493,11 @@ Open the settings manager and do:
 
   The layout is likely 105 key (intl) (check with `cat /etc/default/keyboard`). Set the repeat delay to 350ms and the repeat speed to 35.
 
-- In `Power manager`, make sure nothing happens when you close the lid (in both plugged mode or battery mode): no sleep mode, no turning off. Enable status notification. In another tab, disable screen blanking altogether.
+- In `Power manager`:
+
+    - In the tab "General": "disable all switch buttons ("Handle display brightness keys" and all under "Appearance"), set "Do nothing" everywhere except for "When power button is pressed", pick "Ask".
+    - In the tab "System", for both "On battery" and "Plugged in", make sure nothing happens when you close the lid, just switch off display. Set the suspend mode to "Never". Critical battery power level on 3% should suspend. Make sure to tick "Lock screen when system is going to sleep".
+    - In the tab "Display", for both "On battery" and "Plugged in", "Blank after" 1 minute, "Put to sleep after" never, and "Switch off after" never. "Reduce brightness after" never.
 - In `Removable Drives and Media`, uncheck the 3 options about auto-mount and auto-browse.
 - In `Notifications`, log all notifications but not applications.
 - In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling.
