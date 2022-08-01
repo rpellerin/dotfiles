@@ -46,7 +46,6 @@
 	autosquash = true
 [pull]
     ff = only
-	rebase = preserve
 [gpg]
 	program = gpg2
 [branch]
