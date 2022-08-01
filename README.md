@@ -642,3 +642,13 @@ cabal update
 cabal install pandoc --enable-tests
 cabal install pandoc-citeproc
 ```
+
+### Disable auto change of sound output when plugging in an external monitor
+
+In `/etc/pulse/default.pa`, comment these lines:
+
+```text
+#.ifexists module-switch-on-connect.so
+#load-module module-switch-on-connect
+#.endif
+```
