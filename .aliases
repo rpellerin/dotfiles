@@ -107,6 +107,7 @@ function ban() {
 
 # Update + upgrade the system
 function maj() {
+    sudo snap refresh
     sudo apt autoremove && sudo apt clean && sudo apt update && sudo apt upgrade && sudo apt clean && notify-send -t 10000 "Update and upgrade done"
 }
 
