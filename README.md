@@ -355,6 +355,7 @@ code --install-extension "sianglim.slim"
   Make sure to be sending `Do Not Track` at all times.
 
 - Add these extensions:
+  - [Firefox Translations](https://addons.mozilla.org/en-US/firefox/addon/firefox-translations/)
   - [tabliss.io](https://tabliss.io/)
   - [React Developer Tools](https://github.com/facebook/react-devtools)
   - [Redux DevTools](https://github.com/zalmoxisus/redux-devtools-extension)
