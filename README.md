@@ -488,9 +488,9 @@ Open the settings manager and do:
   - Terminal to `Super + T`
   - Slack to `Super + S`
   - Ctrl F8: `xdg-open "https://twitter.com/"`
+  - Ctrl F9: `/home/romain/git/dotfiles/scripts/copy-no-break-line.sh`
   - Ctrl F12: `/home/romain/git/dotfiles/scripts/mprisctl.sh play-pause`
-  - `/home/romain/git/dotfiles/scripts/lock-screen.sh` to `Ctrl+Alt+Delete`.
-  - Remove existing shortcuts for `xflock4`
+  - F8: `/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh`
 
   The layout is likely 105 key (intl) (check with `cat /etc/default/keyboard`). Set the repeat delay to 350ms and the repeat speed to 35.
 
