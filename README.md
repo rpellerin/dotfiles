@@ -9,8 +9,7 @@ Back up, just in case, the following:
   find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > /tmp/pass.backup
   ```
 
-- Bookmarks
-- RSS feeds in Thunderbird
+- Bookmarks in Firefox
 - cron jobs
 - The content of `$HOME/` (except for `.cache` and other non important folders), especially:
 
@@ -18,7 +17,7 @@ Back up, just in case, the following:
   - `.config/`
   - `.password-store/`
   - `.gitconfig_local`
-  - `Documents/`, `Downloads/`, `Pictures/`
+  - `Documents/`, `Downloads/`, `Pictures/`, `~/snap/thunderbird/common/.thunderbird`
   - SSH and GPG keys (`$HOME/.ssh`, `$HOME/.gnupg`)
 
 When reinstalling Xubuntu, use encrypted LVM on a ext4 filesystem (not ZFS). After the install, [we'll resize the SWAP partition](https://romainpellerin.eu/how-to-resize-an-encrypted-swap-partition-lvm.html), as by default it's too small (less than 1G).
@@ -40,23 +39,14 @@ rm Downloads/Latitude_7x80_1.4.6.exe
 
 Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter BIOS setup. Set a password for the BIOS and the hard drive. Don't forget to remove the file from `/boot/efi`.
 
-Then:
-
-```bash
-sudoedit /etc/default/grub
-GRUB_TIMEOUT=0
-sudo update-grub
-```
-
 ## 2. First steps and essential packages
-
-In Thunar, show hidden files.
-
-Then,
 
 ```bash
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+sudo apt purge thunderbird
+sudo snap install thunderbird
 
 sudo apt-add-repository ppa:git-core/ppa
 sudo add-apt-repository ppa:nextcloud-devs/client
@@ -109,10 +99,13 @@ sudo dpkg-reconfigure unattended-upgrades
 # An alternative to autojump is z: https://github.com/rupa/z
 # vim-gtk3 for clipboard support
 # redshift-gtk is an alternative to xflux
-
-# After installing network-manager-openvpn-gnome do `sudo service network-manager restart`
-# Add a .ovpn file to the systray: `nmcli connection import type openvpn file <file>`
 ```
+
+Now copy all the files you backed up.
+
+In Thunar, show hidden files.
+
+Add `.ovpn` files to the systray: `nmcli connection import type openvpn file <file>`
 
 ## 3. Optional packages
 
@@ -123,7 +116,6 @@ sudo apt install texlive-full \
     arandr \
     gigolo \
     mpd mpv \
-    rofi \
     exiftool \
     jhead \
     ncdu \
@@ -139,7 +131,6 @@ sudo apt install texlive-full \
     hyphen-fr \
     hyphen-en-gb \
     hunspell-en-gb \
-    gksu \
     pdf-presenter-console
 
 # libreoffice-pdfimport is for PDF signing
@@ -148,7 +139,6 @@ sudo apt install texlive-full \
 # If there is any compatibility issue, install it from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
 # See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
 
-# Rofi is an app launcher
 # MPD is a music player for terminal, MPV is a video player compatible with Youtube and co.
 # exiftool and jhead are for EXIF data
 # zenity is a simple interactive dialog
@@ -286,16 +276,24 @@ Put the following in `~/.gitconfig_local`:
 
 To get the IDs of available keys, run: `gpg2 --list-secret-keys --keyid-format LONG`. The ID is on a "sec" line, after "rsa4096/".
 
-## 5. Firefox and Google Chrome
+## 5. Google Chrome
 
-In Firefox, [disable the title bar](https://linuxconfig.org/how-to-remove-firefox-title-bar-on-linux).
+### Google Chrome
 
-Download Chrome .deb file and then:
+Download the Chrome `.deb` file and then:
 
 ```bash
 mv Downloads/google-chrome-stable.deb /tmp # Otherwise the line below will emit a warning
 sudo apt install /tmp/google-chrome-stable.deb
 rm -f /tmp/google-chrome-stable.deb
+```
+
+### Chromium
+
+[Note that you won't be able to sync your Google account with Chromium.](https://askubuntu.com/questions/1322559/sync-chromium-with-a-google-account-does-not-work-any-more-solutions)
+
+```bash
+snap install chromium
 ```
 
 ## 6. Visual Studio Code
@@ -316,9 +314,13 @@ code --install-extension "sianglim.slim"
 
 ## 7. Firefox
 
+[Disable the title bar](https://linuxconfig.org/how-to-remove-firefox-title-bar-on-linux).
+
+Log in to your Firefox account.
+
 - In [about:config](about:config), do:
-  - Search for `vaapi` and change the relevant values for both results from `false` to `true`
-  - Disable the HTTP referer: set `network.http.sendRefererHeader` to `0` (note: this will break many websites, from my experience)
+  - Search for `vaapi` and change to `true`
+  - If you want to disable the HTTP referer: set `network.http.sendRefererHeader` to `0` (note: this will break many websites, from my experience)
   - Set `view_source.wrap_long_lines` to `true`.
   - Set `browser.tabs.warnOnClose` to `false`.
   - Set `browser.tabs.closeWindowWithLastTab` to `false`.
@@ -357,16 +359,20 @@ code --install-extension "sianglim.slim"
 - Add these extensions:
   - [Firefox Translations](https://addons.mozilla.org/en-US/firefox/addon/firefox-translations/)
   - [tabliss.io](https://tabliss.io/)
-  - [React Developer Tools](https://github.com/facebook/react-devtools)
-  - [Redux DevTools](https://github.com/zalmoxisus/redux-devtools-extension)
+  - [React Developer Tools](https://addons.mozilla.org/en-US/firefox/addon/react-devtools)
 
 ## 8. Thunderbird
 
-Install it through `apt` is not yet already there.
+If not already done in #2, do
 
-To restore all email accounts, preferences and emails, you can import the directory `~/.thunderbird` from another computer. In _Preferences > Advanced > General > Config Editor_, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
+```bash
+sudo apt purge thunderbird
+sudo snap install thunderbird
+```
 
-To connect it to your Google address book, [follow these instructions](https://support.mozilla.org/en-US/questions/1321916).
+Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/snap/thunderbird/common/.thunderbird` from another computer. In the Settings, General > Config Editor\_, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
+
+To connect it to your Google address book, add a new CardDAV Address Book, and use this URL: `https://www.googleapis.com/carddav/v1/principals/USERNAME@gmail.com/lists/default/`
 
 If using a Gmail account, under "Server Settings, in "Advanced Account Settings", fill "IMAP server directory" with "[Gmail]" (without the double quotes).
 
@@ -396,15 +402,7 @@ nvm install node
 npm i -g tldr peerflix castnow # castnow plays media files on Chromecast (subtitles supported)
 ```
 
-## 11. Battery saver (https://doc.ubuntu-fr.org/tlp)
-
-```bash
-sudo apt install tlp
-sudo systemctl enable tlp
-sudo systemctl enable tlp-sleep
-```
-
-## 12. Firewall
+## 11. Firewall
 
 ```bash
 cd dotfiles # cd to this git repo
@@ -414,7 +412,7 @@ sudo chown root:root /etc/systemd/system/firewall.service
 sudo systemctl enable firewall
 ```
 
-## 13. Custom conf files
+## 12. Custom conf files
 
 ```bash
 cd dotfiles # cd to this git repo
@@ -425,7 +423,6 @@ ln -sf $REPO_DIR/.vimrc $HOME/
 echo "source $REPO_DIR/.rc" >> $HOME/.zshrc
 echo "source $REPO_DIR/.aliases" >> $HOME/.zshrc
 ln -sf $REPO_DIR/.tmux.conf $HOME/
-cp -i "$REPO_DIR/Pictures/pause.png" $HOME/Pictures/pause.png
 mkdir -p $HOME/.config/autostart
 cp $REPO_DIR/.config/autostart/* "$HOME/.config/autostart"
 cp "$REPO_DIR/.config/redshift.conf" $HOME/.config/
@@ -437,12 +434,11 @@ ln -sf "$REPO_DIR/.gitignore_global" $HOME/
 ln -sf $REPO_DIR/.curlrc $HOME/
 ln -sf $REPO_DIR/.less $HOME/
 ln -sf $REPO_DIR/.lesskey $HOME/
-ln -s $REPO_DIR/.config/compton.conf $HOME/.config/
 mkdir -p $HOME/.gnupg
 ln -s $REPO_DIR/.gnupg/gpg.conf $HOME/.gnupg/gpg.conf
 
 source "$REPO_DIR/.rc"
-git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc
+git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc # Check nothing is new/unusual
 ln -s "$REPO_DIR/.zpreztorc" $HOME/
 
 sudo su
@@ -451,17 +447,17 @@ sudo udevadm control --reload-rules
 sudo systemctl restart udev
 ```
 
-## 14. Edit terminal preferences
+## 13. Edit terminal preferences
 
 - In `General`, unlimited scrollback. Disable the scrollbar being shown.
 - In `Appearance`, uncheck menu bar and borders around new windows. Set the font size to 13.
-- In `Colors`, use the `Xubuntu dark` theme, check `Cursor color` and edit colors as you like, or leave the default one.
+- In `Colors`, use the `Xubuntu dark` theme, check `Cursor color` and leave the default one.
 
-## 15. Set up Vim
+## 14. Set up Vim
 
 Just open Vim once and let Vim-Plug install all of the listed plugins.
 
-## 16. All settings
+## 15. All settings
 
 Open the settings manager and do:
 
@@ -471,8 +467,8 @@ Open the settings manager and do:
 - In `Window Manager` > `Keyboard`, set the keyboard shortcuts (_Tile window to the x_, _Show desktop_).
 - In `Screensaver`:
 
-    - In the tab "Screensaver", enable the screensaver. Pick the "Blank Screen" option, and changes its settings to 10 seconds for "put display to sleep after" and 20 seconds for "switch display off after". Active the screensaver when computer is idle after 1 minutes. Check "Inhibit screensaver for fullscreen applications".
-    - In the tab "Lock Screen", enable everything except "On Screen Keyboard" and "Logout".
+  - In the tab "Screensaver", enable the screensaver. Pick the "Blank Screen" option, and changes its settings to 10 seconds for "put display to sleep after" and 20 seconds for "switch display off after". Active the screensaver when computer is idle after 1 minutes. Check "Inhibit screensaver for fullscreen applications".
+  - In the tab "Lock Screen", enable everything except "On Screen Keyboard" and "Logout".
 
 - In `Display`, in the tab `Advanced`, create a profile for when connected to a TV for instance, and enable both `Configure new displays when connected` and `Automatically enable profiles when new display is connected`
 - In `Keyboard` > `Application Shortcuts`, set:
@@ -496,20 +492,21 @@ Open the settings manager and do:
 
 - In `Power manager`:
 
-    - In the tab "General": "disable all switch buttons ("Handle display brightness keys" and all under "Appearance"), set "Do nothing" everywhere except for "When power button is pressed", pick "Ask".
-    - In the tab "System", for both "On battery" and "Plugged in", make sure nothing happens when you close the lid, just switch off display. Set the suspend mode to "Never". Critical battery power level on 3% should suspend. Make sure to tick "Lock screen when system is going to sleep".
-    - In the tab "Display", for both "On battery" and "Plugged in", "Blank after" never, "Put to sleep after" never, and "Switch off after" never. "Reduce brightness after" never. Yet, **leave "Display power management" on, as otherwise the screensaver won't be able to turn off the screen.**
+  - In the tab "General": "disable all switch buttons ("Handle display brightness keys" and all under "Appearance"), set "Do nothing" everywhere except for "When power button is pressed", pick "Ask".
+  - In the tab "System", for both "On battery" and "Plugged in", make sure nothing happens when you close the lid, just switch off display. Set the suspend mode to "Never". Critical battery power level on 3% should suspend. Make sure to tick "Lock screen when system is going to sleep".
+  - In the tab "Display", for both "On battery" and "Plugged in", "Blank after" never, "Put to sleep after" never, and "Switch off after" never. "Reduce brightness after" never. Yet, **leave "Display power management" on, as otherwise the screensaver won't be able to turn off the screen.**
+
 - In `Removable Drives and Media`, uncheck the 3 options about auto-mount and auto-browse.
 - In `Notifications`, log all notifications but not applications.
 - In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling.
 
-## 17. Disabling guest sessions
+## 16. Disabling guest sessions
 
 ```bash
 sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" > /etc/lightdm/lightdm.conf.d/50-no-guest.conf'
 ```
 
-## 18. Disabling Bluetooth on startup
+## 17. Disabling Bluetooth on startup
 
 Disable blueman applet from application autostart cause it turns bluetooth on when starting. Then run `sudo systemctl disable bluetooth`. To check status, run one of the following commands:
 
@@ -517,14 +514,14 @@ Disable blueman applet from application autostart cause it turns bluetooth on wh
     - `rfkill list`
     - `bluetooth`
 
-## 19. Fuzzy finder
+## 18. Fuzzy finder
 
 ```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --no-update-rc
 ```
 
-## 20. Hardening security and checking for malwares
+## 19. Hardening security and checking for malwares
 
 ```bash
 sudo apt install rkhunter lynis chkrootkit
@@ -544,6 +541,14 @@ sudo chkrootkit
 It is advised to run these tools daily as cron jobs.
 
 ## Optional stuff
+
+### Battery saver (https://doc.ubuntu-fr.org/tlp)
+
+```bash
+sudo apt install tlp
+sudo systemctl enable tlp
+sudo systemctl enable tlp-sleep
+```
 
 ### Improving privacy
 

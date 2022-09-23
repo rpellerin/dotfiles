@@ -18,6 +18,9 @@ zstyle ':prezto:*:*' color 'yes'
 # Add additional directories to load prezto modules from
 # zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
 
+# Allow module overrides when pmodule-dirs causes module name collisions
+# zstyle ':prezto:load' pmodule-allow-overrides 'yes'
+
 # Set the Zsh modules to load (man zshmodules).
 # zstyle ':prezto:load' zmodule 'attr' 'stat'
 
@@ -53,7 +56,7 @@ zstyle ':prezto:load' pmodule \
 # Completions
 #
 
-# Set the entries to ignore in static */etc/hosts* for host completion.
+# Set the entries to ignore in static '/etc/hosts' for host completion.
 # zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
 #   '0.0.0.0' '127.0.0.1'
 
@@ -83,6 +86,19 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 
 # Set the command prefix on non-GNU systems.
 # zstyle ':prezto:module:gnu-utility' prefix 'g'
+
+#
+# History
+#
+
+# Set the file to save the history in when an interactive shell exits.
+# zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.zsh_history"
+
+# Set the maximum  number  of  events  stored  in  the  internal history list.
+# zstyle ':prezto:module:history' histsize 10000
+
+# Set the maximum number of history events to save in the history file.
+# zstyle ':prezto:module:history' savehist 10000
 
 #
 # History Substring Search
@@ -130,13 +146,6 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # zstyle ':prezto:module:prompt' show-return-val 'yes'
 
 #
-# Ruby
-#
-
-# Auto switch the Ruby version on directory change.
-# zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
-
-#
 # Python
 #
 
@@ -145,6 +154,13 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Automatically initialize virtualenvwrapper if pre-requisites are met.
 # zstyle ':prezto:module:python:virtualenv' initialize 'yes'
+
+#
+# Ruby
+#
+
+# Auto switch the Ruby version on directory change.
+# zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
 
 #
 # Screen
@@ -196,12 +212,11 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 
 # Set the window title format.
 zstyle ':prezto:module:terminal:window-title' format '%s'
-# %n is the username; %m is the hostname; %s is the name of the program running
-# zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
+# %n is the username; %m is the machine hostname; %s is the name of the program running
 
 # Set the tab title format.
 zstyle ':prezto:module:terminal:tab-title' format '%s'
-# zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
+# %m is the machine hostname, %s is the current working directory path or the currently executing program name
 
 # Set the terminal multiplexer title format.
 zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
