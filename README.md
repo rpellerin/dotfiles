@@ -37,7 +37,7 @@ sudo cp Downloads/Latitude_7x80_1.4.6.exe /boot/efi # Not mv because of permissi
 rm Downloads/Latitude_7x80_1.4.6.exe
 ```
 
-Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter BIOS setup. Set a password for the BIOS and the hard drive. Don't forget to remove the file from `/boot/efi`.
+Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter BIOS setup. Set a password for the BIOS and the hard drive. [Disable Bluetooth in Advanced > Devices > Onboard](https://www.dell.com/community/Inspiron/Disabling-Bluetooth-from-BIOS/td-p/8069806). Don't forget to remove the file from `/boot/efi` on the next boot.
 
 ## 2. First steps and essential packages
 
@@ -467,7 +467,7 @@ Open the settings manager and do:
 - In `Window Manager` > `Keyboard`, set the keyboard shortcuts (_Tile window to the x_, _Show desktop_).
 - In `Screensaver`:
 
-  - In the tab "Screensaver", enable the screensaver. Pick the "Blank Screen" option, and changes its settings to 10 seconds for "put display to sleep after" and 20 seconds for "switch display off after". Active the screensaver when computer is idle after 1 minutes. Check "Inhibit screensaver for fullscreen applications".
+  - In the tab "Screensaver", enable the screensaver. Pick the "Blank Screen" option, and changes its settings to 10 seconds for "After blanking, put display to sleep after" and "Never" for "After sleeping, switch display off after". Active the screensaver when computer is idle after 1 minutes. Check "Inhibit screensaver for fullscreen applications".
   - In the tab "Lock Screen", enable everything except "On Screen Keyboard" and "Logout".
 
 - In `Display`, in the tab `Advanced`, create a profile for when connected to a TV for instance, and enable both `Configure new displays when connected` and `Automatically enable profiles when new display is connected`
@@ -500,13 +500,15 @@ Open the settings manager and do:
 - In `Notifications`, log all notifications but not applications.
 - In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling.
 
-## 16. Disabling guest sessions
+## 16. Disabling guest sessions (not necessary from 22.04 up)
 
 ```bash
 sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" > /etc/lightdm/lightdm.conf.d/50-no-guest.conf'
 ```
 
 ## 17. Disabling Bluetooth on startup
+
+In #1 we saw how to hardware disable it. Here we have a look at software disabling it.
 
 Disable blueman applet from application autostart cause it turns bluetooth on when starting. Then run `sudo systemctl disable bluetooth`. To check status, run one of the following commands:
 
