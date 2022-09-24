@@ -563,7 +563,7 @@ Change the DNS servers to those from FDN (http://blog.fdn.fr/?post/2014/12/07/Fi
 
 Set up your `/etc/hosts`: [https://github.com/rpellerin/safe-hosts](https://github.com/rpellerin/safe-hosts).
 
-[You might want to protect your privacy even further](http://blog.romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading"). Also read [this](https://spreadprivacy.com/linux-privacy-tips/).
+[You might want to protect your privacy even further](https://romainpellerin.eu/yes-privacy-matters.html) (read the section "Further Reading"). Also read [this](https://spreadprivacy.com/linux-privacy-tips/).
 
 ### Hardening security
 
