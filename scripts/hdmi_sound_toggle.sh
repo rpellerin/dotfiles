@@ -22,6 +22,7 @@ extern=HDMI-1
 
 # Get UID of user running pulseaudio (uses the first if more than one)
 PUID=`ps -C pulseaudio -o ruid= | awk '{print $1}'`
+CARD_PROFILE_ID=`pactl list cards short | head -n 1 | cut -c 1`
 
 touch /tmp/debug_xrandr
 echo "$DISPLAY" >> /tmp/debug_xrandr
@@ -39,12 +40,12 @@ if xrandr | grep -q "$extern connected"; then
     #/usr/bin/xrandr --output "$intern" --off --output "$extern" --set audio on --mode 1920x1080 >> /tmp/debug_xrandr 2>&1
     sleep 1
     # Line below not needed because of --set audio on (= forced)
-    sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile 0 output:hdmi-stereo
+    sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo
     sleep 2
     pidof xfce4-display-settings && kill $(pidof xfce4-display-settings)
 else
     sleep 1
     #/usr/bin/xrandr --output "$extern" --off --output "$intern" --auto >> /tmp/debug_xrandr 2>&1
     # Line below not needed because of --set audio on (= forced)
-    sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile 0 output:analog-stereo+input:analog-stereo
+    sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:analog-stereo+input:analog-stereo
 fi
