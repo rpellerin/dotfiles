@@ -55,6 +55,7 @@ sudo apt upgrade
 sudo apt install gnupg2 \
     apt-listchanges \
     tmux \
+    python3-venv \
     xfce4-systemload-plugin \
     xfce4-cpugraph-plugin \
     xfce4-netload-plugin \
@@ -596,15 +597,6 @@ sudo apt install ranger
 mkdir -p ~/.config/ranger
 echo 'set preview_images true' >> ~/.config/ranger/rc.conf
 ranger --copy-config=scope
-```
-
-### Python
-
-You might consider using [Pipenv](https://github.com/pyenv/pyenv-virtualenv) to manage several versions of Python and virtual environments.
-
-```bash
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
 ```
 
 #### Optional Python packages
