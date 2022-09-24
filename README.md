@@ -501,10 +501,14 @@ Open the settings manager and do:
 - In `Notifications`, log all notifications but not applications.
 - In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling.
 
-## 16. Disabling guest sessions (not necessary from 22.04 up)
+## 16. Disable auto change of sound output when plugging in an external monitor
 
-```bash
-sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" > /etc/lightdm/lightdm.conf.d/50-no-guest.conf'
+In `/etc/pulse/default.pa`, comment these lines:
+
+```text
+#.ifexists module-switch-on-connect.so
+#load-module module-switch-on-connect
+#.endif
 ```
 
 ## 17. Disabling Bluetooth on startup
@@ -641,14 +645,4 @@ Then:
 cabal update
 cabal install pandoc --enable-tests
 cabal install pandoc-citeproc
-```
-
-### Disable auto change of sound output when plugging in an external monitor
-
-In `/etc/pulse/default.pa`, comment these lines:
-
-```text
-#.ifexists module-switch-on-connect.so
-#load-module module-switch-on-connect
-#.endif
 ```
