@@ -592,17 +592,6 @@ cargo install exa
 cargo install bat
 ```
 
-### Ranger
-
-File explorer with image preview support:
-
-```bash
-sudo apt install ranger
-mkdir -p ~/.config/ranger
-echo 'set preview_images true' >> ~/.config/ranger/rc.conf
-ranger --copy-config=scope
-```
-
 #### Optional Python packages
 
 Installable with `python3 -m pip install -U <package>`. [Don't run them as `sudo`](https://pages.charlesreid1.com/dont-sudo-pip/).
