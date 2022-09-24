@@ -328,7 +328,7 @@ Log in to your Firefox account.
   - Set `network.prefetch-next` to `false`.
   - Set `network.dns.disablePrefetch` to `true`.
   - Set `datareporting.healthreport.uploadEnabled` to `false`.
-  - Set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
+  - [If you don't care about Firefox remembering the zoom level you picked on a website basis](https://bugzilla.mozilla.org/show_bug.cgi?id=1377820), set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
   - Set `gfx.webrender.enabled` to `true`.
   - Set `geo.enabled` to `false`.
   - Set `browser.safebrowsing.malware.enabled` to `false`.
