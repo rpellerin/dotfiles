@@ -461,6 +461,8 @@ Just open Vim once and let Vim-Plug install all of the listed plugins.
 
 ## 15. All settings
 
+On the desktop, right click, "Desktop Settings". In the tab "Icons", hide the Home folder icon.
+
 Open the settings manager and do:
 
 - Click _Additional Drivers_ to make sure all devices are being used.
