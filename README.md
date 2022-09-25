@@ -63,6 +63,7 @@ sudo apt install gnupg2 \
     git git-extras \
     nextcloud-client \
     htop \
+    evince \
     python3-pip \
     xclip \
     autojump \
@@ -88,6 +89,7 @@ sudo apt install gnupg2 \
     unattended-upgrades \
     redshift-gtk \
     simplescreenrecorder \
+    thunar-archive-plugin \
     openvpn \
     network-manager-openvpn-gnome \
     network-manager-vpnc \
@@ -96,6 +98,7 @@ sudo apt install gnupg2 \
 
 sudo dpkg-reconfigure unattended-upgrades
 
+# evince is a PDF viewer
 # tumbler-plugins-extra is to get Thunar to show video thumbnails
 # An alternative to autojump is z: https://github.com/rupa/z
 # vim-gtk3 for clipboard support
@@ -126,7 +129,6 @@ sudo apt install texlive-full \
     zenity \
     icoutils \
     silversearcher-ag \
-    zathura \
     synaptic \
     libreoffice-pdfimport \
     hyphen-fr \
@@ -144,7 +146,6 @@ sudo apt install texlive-full \
 # exiftool and jhead are for EXIF data
 # zenity is a simple interactive dialog
 # icoutils to create Microsoft Windows(R) icon and cursor files
-# zathura is a PDF viewer
 # synaptic see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
 
 # Gcolor3 is a useful tool that can be downloaded at https://www.hjdskes.nl/projects/gcolor3/
@@ -546,6 +547,18 @@ sudo chkrootkit
 ```
 
 It is advised to run these tools daily as cron jobs.
+
+## 20. Allow PDF edition
+
+In `/etc/ImageMagick-6/policy.xml`, comment out the last 6 lines:
+
+    :::xml
+    <!-- <policy domain="coder" rights="none" pattern="PS" />
+    <policy domain="coder" rights="none" pattern="PS2" />
+    <policy domain="coder" rights="none" pattern="PS3" />
+    <policy domain="coder" rights="none" pattern="EPS" />
+    <policy domain="coder" rights="none" pattern="PDF" />
+    <policy domain="coder" rights="none" pattern="XPS" /> -->
 
 ## Optional stuff
 
