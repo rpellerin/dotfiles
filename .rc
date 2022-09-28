@@ -19,7 +19,8 @@ export GPG_TTY=$(tty)
 
 . /usr/share/autojump/autojump.sh
 
-export PS1="$(date +%H:%M:%S) $PS1"
+# Line below: we need the backslash otherwise the date is not updated with every command
+export PS1="\$(date +%H:%M:%S) $PS1"
 
 # TO DELETE AFTE MAKING SURE IT IS USELESS
 # http://stackoverflow.com/questions/19327836/why-am-i-seeing-only-8-colors-in-terminal-xfce-terminal
