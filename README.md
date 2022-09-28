@@ -485,8 +485,8 @@ Open the settings manager and do:
   - Email client to `Super + M`
   - Browser to `Super + W`
   - File explorer to `Super + F`
-  - Terminal to `Super + T`
-  - Slack to `Super + S`
+  - Super + T: `xfce4-terminal --default-working-directory=/some/path`
+  - Super + S: `slack`
   - Ctrl F8: `xdg-open "https://twitter.com/"`
   - Ctrl F9: `/home/romain/git/dotfiles/scripts/copy-no-break-line.sh`
   - Ctrl F12: `/home/romain/git/dotfiles/scripts/mprisctl.sh play-pause`
