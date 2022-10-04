@@ -487,6 +487,7 @@ Open the settings manager and do:
   - File explorer to `Super + F`
   - Super + T: `xfce4-terminal --default-working-directory=/some/path`
   - Super + S: `slack`
+  - Super + L: `/home/romain/git/dotfiles/scripts/screen-off-and-lock.sh`
   - Ctrl F8: `xdg-open "https://twitter.com/"`
   - Ctrl F9: `/home/romain/git/dotfiles/scripts/copy-no-break-line.sh`
   - Ctrl F12: `/home/romain/git/dotfiles/scripts/mprisctl.sh play-pause`
