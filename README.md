@@ -45,9 +45,6 @@ Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter 
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-sudo apt purge thunderbird
-sudo snap install thunderbird
-
 sudo apt-add-repository ppa:git-core/ppa
 sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt update
@@ -365,14 +362,7 @@ Log in to your Firefox account.
 
 ## 8. Thunderbird
 
-If not already done in #2, do
-
-```bash
-sudo apt purge thunderbird
-sudo snap install thunderbird
-```
-
-Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/snap/thunderbird/common/.thunderbird` from another computer. In the Settings, General > Config Editor\_, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
+Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/.thunderbird` from another computer. In the Settings, General > Config Editor\_, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
 
 To connect it to your Google address book, add a new CardDAV Address Book, and use this URL: `https://www.googleapis.com/carddav/v1/principals/USERNAME@gmail.com/lists/default/`
 
