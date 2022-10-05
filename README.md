@@ -91,7 +91,13 @@ sudo apt install gnupg2 \
     network-manager-openvpn-gnome \
     network-manager-vpnc \
     cryptsetup \
-    ecryptfs-utils # To be able to `sudo mount -t ecryptfs src dist`
+    ecryptfs-utils
+
+# `cryptsetup` is to be able to [open LUKS-encrypted disks](https://romainpellerin.eu/yes-privacy-matters.html#encrypt-external-hdd-with-dm-crypt-and-luks), with:
+#   `sudo cryptsetup luksOpen /dev/sda1 ext-hdd`
+
+# `ecryptfs-utils` is to be able to open ecryptfs-encrypted folders, with:
+#   `sudo mount -t ecryptfs srcFolder destFolder`
 
 sudo dpkg-reconfigure unattended-upgrades
 
