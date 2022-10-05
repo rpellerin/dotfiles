@@ -41,6 +41,11 @@ Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter 
 
 ## 2. First steps and essential packages
 
+1. Copy all the files you backed up.
+2. In Thunar, show hidden files.
+
+### Packages to install
+
 ```bash
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
@@ -93,24 +98,20 @@ sudo apt install gnupg2 \
     cryptsetup \
     ecryptfs-utils
 
-# `cryptsetup` is to be able to [open LUKS-encrypted disks](https://romainpellerin.eu/yes-privacy-matters.html#encrypt-external-hdd-with-dm-crypt-and-luks), with:
-#   `sudo cryptsetup luksOpen /dev/sda1 ext-hdd`
-
-# `ecryptfs-utils` is to be able to open ecryptfs-encrypted folders, with:
-#   `sudo mount -t ecryptfs srcFolder destFolder`
-
 sudo dpkg-reconfigure unattended-upgrades
-
-# evince is a PDF viewer
-# tumbler-plugins-extra is to get Thunar to show video thumbnails
-# An alternative to autojump is z: https://github.com/rupa/z
-# vim-gtk3 for clipboard support
-# redshift-gtk is an alternative to xflux
 ```
 
-Now copy all the files you backed up.
+### Explanations
 
-In Thunar, show hidden files.
+- `cryptsetup` is to be able to [open LUKS-encrypted disks](https://romainpellerin.eu/yes-privacy-matters.html#encrypt-external-hdd-with-dm-crypt-and-luks), with: `sudo cryptsetup luksOpen /dev/sda1 ext-hdd`
+- `ecryptfs-utils` is to be able to open ecryptfs-encrypted folders, with: `sudo mount -t ecryptfs srcFolder destFolder`
+- `evince` is a PDF viewer
+- `tumbler-plugins-extra` is to get Thunar to show video thumbnails
+- An alternative to autojump is `z`: https://github.com/rupa/z
+- `vim-gtk3` brings clipboard support
+- `redshift-gtk` is an alternative to xflux
+
+### VPN files
 
 Add `.ovpn` files to the systray: `nmcli connection import type openvpn file <file>`
 
