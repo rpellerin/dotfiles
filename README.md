@@ -139,21 +139,16 @@ sudo apt install texlive-full \
     hyphen-en-gb \
     hunspell-en-gb \
     pdf-presenter-console
-
-# libreoffice-pdfimport is for PDF signing
-
-# Install biber from apt first and try to compile a PDF document.
-# If there is any compatibility issue, install it from http://biblatex-biber.sourceforge.net/ (sudo cp biber /usr/local/bin)
-# See https://bugs.launchpad.net/ubuntu/+source/biber/+bug/1565842
-
-# MPD is a music player for terminal, MPV is a video player compatible with Youtube and co.
-# exiftool and jhead are for EXIF data
-# zenity is a simple interactive dialog
-# icoutils to create Microsoft Windows(R) icon and cursor files
-# synaptic see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
-
-# Gcolor3 is a useful tool that can be downloaded at https://www.hjdskes.nl/projects/gcolor3/
 ```
+
+### Explanation
+
+- `libreoffice-pdfimport` is for PDF signing
+- `mpd` is a music player for terminal, `mpv` is a video player compatible with Youtube and co.
+- `exiftool` and `jhead` are for EXIF data
+- `zenity` is a simple interactive dialog
+- `icoutils` to create Microsoft Windows(R) icon and cursor files
+- `synaptic`: see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
 
 ## 4. Pass, SSH and GPG keys
 
