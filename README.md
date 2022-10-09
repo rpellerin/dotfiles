@@ -555,6 +555,11 @@ In `/etc/ImageMagick-6/policy.xml`, comment out the last 6 lines:
     <policy domain="coder" rights="none" pattern="PDF" />
     <policy domain="coder" rights="none" pattern="XPS" /> -->
 
+And increase this line to 8GiB:
+
+    :::xml
+    <policy domain="resource" name="disk" value="8GiB"/>
+
 ## Optional stuff
 
 ### Battery saver (https://doc.ubuntu-fr.org/tlp)
