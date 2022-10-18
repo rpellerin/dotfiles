@@ -62,5 +62,8 @@
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "editor.formatOnSave": true,
   "window.zoomLevel": 1,
-  "tailwindCSS.experimental.configFile": "packages/@doctolib/design-system/tailwind.config.cjs"
+  "tailwindCSS.experimental.configFile": "packages/@doctolib/design-system/tailwind.config.cjs",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
