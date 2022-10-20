@@ -21,6 +21,7 @@ if [ ! -d "$HOME/.openssl/openssl-1.1.1q" ]; then
     echo "$ make && make install"
     echo "$ rm -rf ~/.openssl/openssl-1.1.1q/certs"
     echo "$ ln -s /etc/ssl/certs ~/.openssl/openssl-1.1.1q/certs"
+    echo "$ rbenv install # Force the reinstallation of the current version"
 else
     export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$HOME/.openssl/openssl-1.1.1q"
 fi
