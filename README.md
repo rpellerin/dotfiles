@@ -440,6 +440,10 @@ echo 'KERNEL=="card0", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", EN
 echo 'SUBSYSTEM=="bluetooth", ACTION=="add", RUN+="/home/romain/git/dotfiles/scripts/bluetooth_sound_toggle.sh"' > /etc/udev/rules.d/98-bluetooth_sound.rules
 sudo udevadm control --reload-rules
 sudo systemctl restart udev
+
+sudo cp "$REPO_DIR/etc/acpi/headset.sh" /etc/acpi
+sudo cp "$REPO_DIR/etc/acpi/events/headset" /etc/acpi/events
+sudo systemctl restart acpid.service
 ```
 
 ## 13. Edit terminal preferences

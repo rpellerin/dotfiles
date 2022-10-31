@@ -33,7 +33,7 @@
   "[ruby]": {
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "ruby-syntax-tree.vscode-syntax-tree"
   },
   "editor.mouseWheelZoom": true,
   "extensions.ignoreRecommendations": false,

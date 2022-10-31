@@ -1,0 +1,3 @@
+
+event=jack/headphone
+action=/etc/acpi/headset.sh %e
