@@ -65,5 +65,6 @@
   "tailwindCSS.experimental.configFile": "packages/@doctolib/design-system/tailwind.config.cjs",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "diffEditor.maxComputationTime": 0
 }
