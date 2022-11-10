@@ -55,6 +55,7 @@ sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt update
 sudo apt upgrade
 sudo apt install gnupg2 \
+    xsel \
     apt-listchanges \
     tmux \
     python3-venv \
@@ -104,6 +105,7 @@ sudo dpkg-reconfigure unattended-upgrades
 ### Explanations
 
 - `cryptsetup` is to be able to [open LUKS-encrypted disks](https://romainpellerin.eu/yes-privacy-matters.html#encrypt-external-hdd-with-dm-crypt-and-luks), with: `sudo cryptsetup luksOpen /dev/sda1 ext-hdd`
+- `xsel` is for clipboard features
 - `ecryptfs-utils` is to be able to open ecryptfs-encrypted folders, with: `sudo mount -t ecryptfs srcFolder destFolder`
 - `evince` is a PDF viewer
 - `tumbler-plugins-extra` is to get Thunar to show video thumbnails
