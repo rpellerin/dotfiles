@@ -50,6 +50,9 @@ Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter 
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
+# To avoid being spammed with updates during the day
+sudo snap set system refresh.timer=4:00-7:00
+
 sudo apt-add-repository ppa:git-core/ppa
 sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt update
@@ -92,6 +95,7 @@ sudo apt install gnupg2 \
     unattended-upgrades \
     redshift-gtk \
     simplescreenrecorder \
+    zenity \
     thunar-archive-plugin \
     openvpn \
     network-manager-openvpn-gnome \
@@ -112,6 +116,7 @@ sudo dpkg-reconfigure unattended-upgrades
 - An alternative to autojump is `z`: https://github.com/rupa/z
 - `vim-gtk3` brings clipboard support
 - `redshift-gtk` is an alternative to xflux
+- `zenity` is a simple interactive dialog
 
 ### VPN files
 
@@ -132,7 +137,6 @@ sudo apt install texlive-full \
     ntp \
     optipng \
     filezilla
-    zenity \
     icoutils \
     silversearcher-ag \
     synaptic \
@@ -148,7 +152,6 @@ sudo apt install texlive-full \
 - `libreoffice-pdfimport` is for PDF signing
 - `mpd` is a music player for terminal, `mpv` is a video player compatible with Youtube and co.
 - `exiftool` and `jhead` are for EXIF data
-- `zenity` is a simple interactive dialog
 - `icoutils` to create Microsoft Windows(R) icon and cursor files
 - `synaptic`: see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
 

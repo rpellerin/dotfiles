@@ -111,6 +111,8 @@ function update-gh() {
 
 # Update + upgrade the system
 function maj() {
+    pidof firefox >/dev/null
+    [ "$?" -eq 0 ] && zenity --error --text="Please close Firefox\!" --title="Warning\!"
     sudo snap refresh
     sudo apt autoremove && sudo apt clean && sudo apt update && sudo apt upgrade
     pkill xfce4-notifyd # Close Firefox snap notification
