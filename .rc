@@ -14,9 +14,10 @@ bindkey "^x^e" edit-command-line
 if [ ! -d "$HOME/.openssl/openssl-1.1.1q" ]; then
     echo "$HOME/.openssl/openssl-1.1.1q does no exist. Ruby tests with Capybara won't work."
     echo "Do:"
+    echo "cd Downloads"
     echo "$ wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz"
     echo "$ tar zxvf openssl-1.1.1q.tar.gz"
-    echo "$ cd Downloads/openssl-1.1.1q"
+    echo "$ cd openssl-1.1.1q"
     echo "$ ./config --prefix=$HOME/.openssl/openssl-1.1.1q --openssldir=$HOME/.openssl/openssl-1.1.1q"
     echo "$ make && make install"
     echo "$ rm -rf ~/.openssl/openssl-1.1.1q/certs"
