@@ -92,7 +92,7 @@ load-node-modules() {
     if [[ -z "$NO_OUTPUT" ]]; then echo 'npm is in $PATH. Found package.json.'; fi
     NPM_BIN_PATH=$(npm bin)
 
-    if [ "$PREV_NPM_BIN_PATH" != "$NPM_BIN_PATH" ]; then
+    if [ "$?" -eq 0 ] && "$PREV_NPM_BIN_PATH" != "$NPM_BIN_PATH" ]; then
       # Variable PREV_NPM_BIN_PATH is set and not null, and different from NPM_BIN_PATH
       if [ -n "${PREV_NPM_BIN_PATH+x}" ]; then
         # Removes old NPM_BIN_PATH
@@ -109,7 +109,7 @@ load-node-modules() {
       PATH="$NPM_BIN_PATH:$PATH"
       # echo "Exported PATH: $PATH"
     else
-      if [[ -z "$NO_OUTPUT" ]]; then echo '$(npm bin) has not changed. Not touching $PATH.'; fi
+      if [[ -z "$NO_OUTPUT" ]]; then echo '$(npm bin) has not changed or the command failed. Not touching $PATH.'; fi
     fi
   fi
 }
