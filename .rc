@@ -90,9 +90,9 @@ load-nvmrc
 load-node-modules() {
   if [ -f package.json ] && [ -x "$(command -v npm)" ]; then
     if [[ -z "$NO_OUTPUT" ]]; then echo 'npm is in $PATH. Found package.json.'; fi
-    NPM_BIN_PATH=$(npm bin)
+    [ -d node_modules/.bin ] && NPM_BIN_PATH="$(pwd)/node_modules/.bin/"
 
-    if [ "$?" -eq 0 ] && "$PREV_NPM_BIN_PATH" != "$NPM_BIN_PATH" ]; then
+    if [ "$?" -eq 0 ] && [ "$PREV_NPM_BIN_PATH" != "$NPM_BIN_PATH" ]; then
       # Variable PREV_NPM_BIN_PATH is set and not null, and different from NPM_BIN_PATH
       if [ -n "${PREV_NPM_BIN_PATH+x}" ]; then
         # Removes old NPM_BIN_PATH
@@ -100,12 +100,12 @@ load-node-modules() {
         PATH=$(echo $PATH | sed -e "s#${PREV_NPM_BIN_PATH}##g")
         # echo "New PATH: $PATH"
       fi
-      if echo "$PATH" | grep -q "$(npm bin)"; then
+      if echo "$PATH" | grep -q "$NPM_BIN_PATH"; then
         if [[ -z "$NO_OUTPUT" ]]; then echo "Removing npm bin from PATH"; fi
         PATH=$(echo $PATH | sed -e "s#${NPM_BIN_PATH}##g")
       fi
       PREV_NPM_BIN_PATH=$NPM_BIN_PATH
-      if [[ -z "$NO_OUTPUT" ]]; then echo "Adding $(npm bin) to PATH"; fi
+      if [[ -z "$NO_OUTPUT" ]]; then echo "Adding $NPM_BIN_PATH to PATH"; fi
       PATH="$NPM_BIN_PATH:$PATH"
       # echo "Exported PATH: $PATH"
     else
