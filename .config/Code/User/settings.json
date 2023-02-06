@@ -61,7 +61,6 @@
   "stylelint.validate": ["css", "less", "postcss", "scss"],
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "editor.formatOnSave": true,
-  "window.zoomLevel": 1,
   "tailwindCSS.experimental.configFile": "packages/@doctolib/design-system/tailwind.config.cjs",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -69,5 +68,6 @@
   "diffEditor.maxComputationTime": 0,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "window.zoomLevel": 1
 }
