@@ -1,6 +1,6 @@
 ## Foreword on Dell Latitude 7480, 7490
 
-[A known bug](https://www.dell.com/community/Latitude/Anyone-else-having-freezing-issues-with-Dell-Latitude-7490-s/td-p/7307897/page/9) affects the 74xx line of Dell products: when picked up with the left side, the laptop sometimes freezes and crashes. Common answers suggest the following suggestions:
+[A known bug](https://www.dell.com/community/Latitude/Anyone-else-having-freezing-issues-with-Dell-Latitude-7490-s/td-p/7307897/page/9) affects the 74xx line of Dell products: when picked up with the left side, the laptop sometimes freezes and crashes. Common answers suggest the following solutions:
 
 1. Unscrew the back of the laptop (bottom) and reseat the memory modules (RAM)
 1. Same but reseat the SSD
