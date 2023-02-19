@@ -334,6 +334,7 @@ Log in to your Firefox account.
 
 - In [about:config](about:config), do:
   - Search for `vaapi` and change to `true`
+  - Add `places.history.expiration.max_pages` and set it to 10000000
   - If you want to disable the HTTP referer: set `network.http.sendRefererHeader` to `0` (note: this will break many websites, from my experience)
   - Set `view_source.wrap_long_lines` to `true`.
   - Set `browser.tabs.warnOnClose` to `false`.
