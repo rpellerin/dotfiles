@@ -7,19 +7,19 @@ echo "Make sure imagemagick is installed."
 size=$1
 
 if [ "$#" -ne 1 ];then
-    size=700
+    size=1485
 fi
 
 dirr=`mktemp -d`
 echo "Output files will be put in $dirr"
-echo "Resizing to $size pixel wide..."
 echo "Paste here filepaths, one per line."
 
 while read -r file
 do
     if [ -z "$file" ]; then xdg-open $dirr; break; fi
     b_name=`basename "$file"`
-    convert "$file" -resize ${size}x "$dirr/$b_name"
+    convert "$file" -resize x${size} "$dirr/$b_name"
+    mogrify -crop 1050x+32+0 "$dirr/$b_name"
     echo "Next."
 done <&0
 
