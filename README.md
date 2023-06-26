@@ -463,6 +463,9 @@ sudo systemctl restart udev
 sudo cp "$REPO_DIR/etc/acpi/headset.sh" /etc/acpi
 sudo cp "$REPO_DIR/etc/acpi/events/headset" /etc/acpi/events
 sudo systemctl restart acpid.service
+
+# Install Github CLI
+update-gh
 ```
 
 ## 13. Edit terminal preferences
