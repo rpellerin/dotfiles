@@ -427,6 +427,9 @@ cd dotfiles # cd to this git repo
 REPO_DIR=`pwd`
 
 # Custom settings
+chmod og-r $HOME/.ssh/id_rsa
+chmod og-r $HOME/.ssh/known_hosts
+chmod og-r $HOME/.ssh/known_hosts.old
 ln -sf $REPO_DIR/.vimrc $HOME/
 echo "source $REPO_DIR/.rc" >> $HOME/.zshrc
 echo "source $REPO_DIR/.aliases" >> $HOME/.zshrc
