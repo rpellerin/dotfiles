@@ -400,7 +400,7 @@ done
 chsh -s /bin/zsh # Now log out of your session and back in for this to take effect
 ```
 
-At this point, CTRL+R and CTRL+T do not work. Step #22 (Fuzzy finder) will make it work.
+At this point, CTRL+R and CTRL+T do not work. Step #18 (Fuzzy finder) will make it work.
 
 ## 10. NVM + NodeJS + a few packages
 
