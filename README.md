@@ -45,7 +45,7 @@ sudo cp Downloads/Latitude_7x80_1.4.6.exe /boot/efi # Not mv because of permissi
 rm Downloads/Latitude_7x80_1.4.6.exe
 ```
 
-Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter BIOS setup. Set a password for the BIOS and the hard drive. [Disable Bluetooth in Advanced > Devices > Onboard](https://www.dell.com/community/Inspiron/Disabling-Bluetooth-from-BIOS/td-p/8069806). Don't forget to remove the file from `/boot/efi` on the next boot.
+Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter BIOS setup. Set a password for the BIOS and the hard drive. [If you want to disable Bluetooth, Advanced > Devices > Onboard](https://www.dell.com/community/Inspiron/Disabling-Bluetooth-from-BIOS/td-p/8069806). Don't forget to remove the file from `/boot/efi` on the next boot.
 
 ## 2. First steps and essential packages
 
@@ -109,7 +109,8 @@ sudo apt install gnupg2 \
     network-manager-openvpn-gnome \
     network-manager-vpnc \
     cryptsetup \
-    ecryptfs-utils
+    ecryptfs-utils \
+    blueman
 
 sudo dpkg-reconfigure unattended-upgrades
 ```
@@ -503,7 +504,6 @@ Open the settings manager and do:
   - Super + T: `xfce4-terminal --default-working-directory=/some/path`
   - Super + S: `slack`
   - Super + L: `/home/romain/git/dotfiles/scripts/screen-off-and-lock.sh`
-  - Ctrl F8: `xdg-open "https://twitter.com/"`
   - Ctrl F9: `/home/romain/git/dotfiles/scripts/copy-no-break-line.sh`
   - Ctrl F12: `/home/romain/git/dotfiles/scripts/mprisctl.sh play-pause`
   - F8: `/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh`
@@ -512,7 +512,7 @@ Open the settings manager and do:
 
 - In `Power manager`:
 
-  - In the tab "General": "disable all switch buttons ("Handle display brightness keys" and all under "Appearance"), set "Do nothing" everywhere except for "When power button is pressed", pick "Ask".
+  - In the tab "General": disable all switch buttons ("Handle display brightness keys" and all under "Appearance"), set "Do nothing" everywhere except for "When power button is pressed", pick "Ask".
   - In the tab "System", for both "On battery" and "Plugged in", make sure nothing happens when you close the lid, just switch off display. Set the suspend mode to "Never". Critical battery power level on 3% should suspend. Make sure to tick "Lock screen when system is going to sleep".
   - In the tab "Display", for both "On battery" and "Plugged in", "Blank after" never, "Put to sleep after" never, and "Switch off after" never. "Reduce brightness after" never. Yet, **leave "Display power management" on, as otherwise the screensaver won't be able to turn off the screen.**
 
@@ -530,7 +530,7 @@ In `/etc/pulse/default.pa`, comment these lines:
 #.endif
 ```
 
-## 17. Disabling Bluetooth on startup
+## 17. Disabling Bluetooth on startup (optional)
 
 In #1 we saw how to hardware disable it. Here we have a look at software disabling it.
 
@@ -544,7 +544,7 @@ Disable blueman applet from application autostart cause it turns bluetooth on wh
 
 ```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --no-update-rc
+~/.fzf/install --no-update-rc # Reply "no" to "Do you want to enable x" questions, as its already done in our .rc file
 ```
 
 ## 19. Hardening security and checking for malwares
@@ -570,18 +570,20 @@ It is advised to run these tools daily as cron jobs.
 
 In `/etc/ImageMagick-6/policy.xml`, comment out the last 6 lines:
 
-    :::xml
-    <!-- <policy domain="coder" rights="none" pattern="PS" />
-    <policy domain="coder" rights="none" pattern="PS2" />
-    <policy domain="coder" rights="none" pattern="PS3" />
-    <policy domain="coder" rights="none" pattern="EPS" />
-    <policy domain="coder" rights="none" pattern="PDF" />
-    <policy domain="coder" rights="none" pattern="XPS" /> -->
+```xml
+<!-- <policy domain="coder" rights="none" pattern="PS" />
+<policy domain="coder" rights="none" pattern="PS2" />
+<policy domain="coder" rights="none" pattern="PS3" />
+<policy domain="coder" rights="none" pattern="EPS" />
+<policy domain="coder" rights="none" pattern="PDF" />
+<policy domain="coder" rights="none" pattern="XPS" /> -->
+```
 
 And increase this line to 8GiB:
 
-    :::xml
-    <policy domain="resource" name="disk" value="8GiB"/>
+```xml
+<policy domain="resource" name="disk" value="8GiB"/>
+```
 
 ## Optional stuff
 
