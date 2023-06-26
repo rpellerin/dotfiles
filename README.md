@@ -356,7 +356,7 @@ Log in to your Firefox account.
   - OPTIONAL: Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0`
 - In [about:preferences#general](about:preferences#general), check `Open previous windows and tabs` and unckeck `Ctrl+Tab cycles through tabs in recently used order`
 - In [about:preferences#search](about:preferences#search), uncheck `Show search suggestions ahead of browsing history in address bar results`
-- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. For `Enhanced Tracking Protection`, check `Strict`. Optionally, block cookies for trackers and the following domains:
+- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Check `Enable HTTPS-Only Mode in all windows`. For `Enhanced Tracking Protection`, check `Strict`. Optionally, block cookies for trackers and the following domains:
 
   - https://s.ytimg.com
   - https://www.youtube.com
@@ -378,7 +378,7 @@ Log in to your Firefox account.
 
 ## 8. Thunderbird
 
-Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/.thunderbird` from another computer. In the Settings, General > Config Editor\_, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
+Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/.thunderbird` from another computer. In the Settings, General > Config Editor, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
 
 To connect it to your Google address book, add a new CardDAV Address Book, and use this URL: `https://www.googleapis.com/carddav/v1/principals/USERNAME@gmail.com/lists/default/`
 
