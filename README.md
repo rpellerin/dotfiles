@@ -89,6 +89,7 @@ sudo apt install gnupg2 \
     mousepad \
     vlc \
     build-essential \
+    cmake \
     gimp \
     curl \
     ffmpeg \
@@ -588,6 +589,23 @@ And increase this line to 8GiB:
 
 ```xml
 <policy domain="resource" name="disk" value="8GiB"/>
+```
+
+## 21. [Enable fingerprint login](https://askubuntu.com/questions/1393550/enabling-fingerprint-login-in-xubuntu)
+
+If your device is compatible (run `lsusb` and compare with [this list](https://fprint.freedesktop.org/supported-devices.html)), then:
+
+```bash
+sudo apt install fprintd libpam-fprintd
+fprintd-enroll $USER
+fprintd-verify $USER
+```
+
+Edit `/etc/pam.d/common-auth` and insert `auth sufficient pam_fprintd.so` at the top, like this:
+
+```txt
+auth sufficient pam_fprintd.so
+auth    [success=1 default=ignore]      pam_unix.so nullok
 ```
 
 ## Optional stuff
