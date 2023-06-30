@@ -321,6 +321,7 @@ mv Downloads/code_1.27_amd64.deb /tmp # Otherwise the line below will emit a war
 sudo apt install /tmp/code_1.27_amd64.deb
 rm -f /tmp/code_1.27_amd64.deb
 code --install-extension "esbenp.prettier-vscode"
+code --install-extension "ruby-syntax-tree.vscode-syntax-tree"
 code --install-extension "dbaeumer.vscode-eslint"
 code --install-extension "eamodio.gitlens"
 code --install-extension "rebornix.ruby"
