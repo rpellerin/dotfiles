@@ -457,7 +457,6 @@ ln -s "$REPO_DIR/.zpreztorc" $HOME/
 
 sudo su
 echo 'KERNEL=="card0", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/romain/.Xauthority", RUN+="/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh"' > /etc/udev/rules.d/99-hdmi_sound.rules
-echo 'SUBSYSTEM=="bluetooth", ACTION=="add", RUN+="/home/romain/git/dotfiles/scripts/bluetooth_sound_toggle.sh"' > /etc/udev/rules.d/98-bluetooth_sound.rules
 exit
 sudo udevadm control --reload-rules
 sudo systemctl restart udev
@@ -525,21 +524,30 @@ Open the settings manager and do:
 - In `Notifications`, log all notifications but not applications.
 - In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling.
 
-## 16. Disable auto change of sound output when plugging in an external monitor
+## 16. Fine tune PulseAudio
 
-In `/etc/pulse/default.pa`, comment these lines:
+In `/etc/pulse/default.pa`, disable changing the source to the Dell docking station:
 
 ```text
-#.ifexists module-switch-on-connect.so
-#load-module module-switch-on-connect
-#.endif
+.ifexists module-switch-on-connect.so
+load-module module-switch-on-connect blacklist="Dell"
+.endif
+```
+
+Automatically switch between HiFi bluetooth and bluetooth with microphone:
+
+```text
+.ifexists module-bluetooth-policy.so
+load-module module-bluetooth-policy auto_switch=2
+.endif
+
 ```
 
 ## 17. Disabling Bluetooth on startup (optional)
 
 In #1 we saw how to hardware disable it. Here we have a look at software disabling it.
 
-Disable blueman applet from application autostart cause it turns bluetooth on when starting. Then run `sudo systemctl disable bluetooth`. To check status, run one of the following commands:
+Disable blueman applet from application autostart cause it turns bluetooth on when starting (edit: not sure, to be tested. Maybe the next command is enough). Then run `sudo systemctl disable bluetooth`. To check status, run one of the following commands:
 
     - `hcitool dev`
     - `rfkill list`

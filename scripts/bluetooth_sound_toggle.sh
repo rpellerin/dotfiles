@@ -7,6 +7,8 @@
 # systemctl restart udev
 # Debug with `udevadm monitor`
 
+# This script is useless after the commit 0954db1ad35edd53aadb5744c63f91d0c67f84e0
+
 PUID=`ps -C pulseaudio -o ruid= | awk '{print $1}'`
 
 # date >> /tmp/debugg
