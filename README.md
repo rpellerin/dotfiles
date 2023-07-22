@@ -277,7 +277,7 @@ pass init <copied value>
 Set a cronjob to periodically make a backup:
 
 ```bash
-0 20 9 * * tar czfh "/home/romain/$(date -u +"%Y-%m-%dT%H-%M-%SZ")-password-store.tar.gz" -C "$HOME" .password-store
+0 20 9 * * tar czfh "/home/romain/Documents/$(date -u +"%Y-%m-%dT%H-%M-%SZ")-password-store.tar.gz" -C "$HOME" .password-store
 ```
 
 ### GPG + Git: signed commits
