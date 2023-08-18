@@ -25,4 +25,6 @@ done <&0
 
 find "$dirr/" -type f -exec exiftool -all= -TagsFromFile @ -ColorSpaceTags -Orientation '{}' \;
 find "$dirr/" -type f -iname "*_original" -exec rm -f '{}' \;
+convert "$dirr/*.jpg" -density 50 -units pixelspercentimeter "$dirr/output.pdf"
+sync
 echo "Done."
