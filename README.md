@@ -324,9 +324,8 @@ code --install-extension "esbenp.prettier-vscode"
 code --install-extension "ruby-syntax-tree.vscode-syntax-tree"
 code --install-extension "dbaeumer.vscode-eslint"
 code --install-extension "eamodio.gitlens"
-code --install-extension "rebornix.ruby"
+code --install-extension "Shopify.ruby-lsp"
 code --install-extension "noku.rails-run-spec-vscode"
-code --install-extension "sianglim.slim"
 ```
 
 ## 7. Firefox
