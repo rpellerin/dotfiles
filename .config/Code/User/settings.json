@@ -51,6 +51,9 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
   "terminal.integrated.tabs.enabled": false,
   "editor.bracketPairColorization.enabled": true,
   "ruby.specPattern": "test",
@@ -75,5 +78,7 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "python.envFile": "${workspaceFolder}/.vars",
+  "python.terminal.activateEnvironment": false
 }
