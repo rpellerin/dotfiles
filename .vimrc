@@ -109,11 +109,6 @@ syntax enable                    " enable syntax highlighting; 'syntax on' would
 set autoread                     " set to auto read when a file is changed from the outside
 set history=9999                 " sets how many lines of history VIM has to remember
 
-set ttimeoutlen=0
-set timeoutlen=1000
-au InsertEnter * set timeout
-au InsertLeave * set notimeout
-
 " typing consl + space will print console.log()
 imap consl console.log()<Esc>==f(a
 
