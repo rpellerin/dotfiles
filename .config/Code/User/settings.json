@@ -80,11 +80,13 @@
   },
   "window.zoomLevel": 1,
   "python.envFile": "${workspaceFolder}/.vars",
-  "python.terminal.activateEnvironment": false,
   "redhat.telemetry.enabled": false,
   "workbench.editorAssociations": {
     "*.png": "imagePreview.previewEditor"
   },
   "editor.multiCursorLimit": 100000,
-  "editor.stickyScroll.enabled": false
+  "editor.stickyScroll.enabled": false,
+  "python.terminal.activateEnvironment": false,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.testing.pytestEnabled": true
 }
