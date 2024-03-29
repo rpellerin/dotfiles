@@ -350,3 +350,4 @@ alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 #  - http://forum.ubuntu-fr.org/viewtopic.php?id=20437&p=3
 #  - http://www.mercereau.info/partage-de-mon-fichier-bash_aliases/
 
+source "`dirname $0`/.private_aliases"
