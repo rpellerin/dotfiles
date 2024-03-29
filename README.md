@@ -435,6 +435,7 @@ chmod og-r $HOME/.ssh/known_hosts.old
 ln -sf $REPO_DIR/.vimrc $HOME/
 echo "source $REPO_DIR/.rc" >> $HOME/.zshrc
 echo "source $REPO_DIR/.aliases" >> $HOME/.zshrc
+touch "$REPO_DIR/.private_aliases"
 ln -sf $REPO_DIR/.tmux.conf $HOME/
 mkdir -p $HOME/.config/autostart
 cp $REPO_DIR/.config/autostart/* "$HOME/.config/autostart"
