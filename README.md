@@ -510,7 +510,8 @@ Open the settings manager and do:
   - Super + L: `/home/romain/git/dotfiles/scripts/screen-off-and-lock.sh`
   - Ctrl F9: `/home/romain/git/dotfiles/scripts/copy-no-break-line.sh`
   - Ctrl F12: `/home/romain/git/dotfiles/scripts/mprisctl.sh play-pause`
-  - F8: `/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh`
+  - F8: `/home/romain/git/dotfiles/scripts/toggle_sound_sinks.sh`
+  - F9: `/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh`
 
   The layout is likely 105 key (intl) (check with `cat /etc/default/keyboard`). Set the repeat delay to 350ms and the repeat speed to 35.
 
