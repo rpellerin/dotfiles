@@ -30,6 +30,7 @@
 [push]
 	default = simple
 	autoSetupRemote = true
+	useForceIfIncludes = true
 [fetch]
 	prune = true
 [core]
