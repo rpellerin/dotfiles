@@ -26,6 +26,7 @@ PUID=`ps -C pulseaudio -o ruid= | awk '{print $1}'`
 CARD_PROFILE_ID=`pactl list cards short | head -n 1 | cut -c 1`
 
 touch /tmp/debug_xrandr
+date >> /tmp/debug_xrandr
 echo "$DISPLAY" >> /tmp/debug_xrandr
 echo "$XAUTHORITY" >> /tmp/debug_xrandr
 
@@ -37,16 +38,20 @@ sleep 1
 
 # Check whether HDMI-1 and eDP-1 are set to "audio: on" with xrandr --prop
 #if pactl list cards | grep -q 'Active Profile: output:hdmi-stereo';then
-if xrandr | grep -q "$extern connected"; then
+if xrandr | grep -q -E "^(DP-1|HDMI-1) connected"; then
     #/usr/bin/xrandr --output "$intern" --off --output "$extern" --set audio on --mode 1920x1080 >> /tmp/debug_xrandr 2>&1
     sleep 1
-    # Line below not needed because of --set audio on (= forced)
-    sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo
+    if xrandr | grep -q -E "^DP-1 connected"; then
+        sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo-extra1
+        sleep 3 # For some reason it sometimes does not work, maybe too fast? Better to retry
+        sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo-extra1
+    else
+        sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo
+    fi
     sleep 2
     pidof xfce4-display-settings && kill $(pidof xfce4-display-settings)
 else
     sleep 1
     #/usr/bin/xrandr --output "$extern" --off --output "$intern" --auto >> /tmp/debug_xrandr 2>&1
-    # Line below not needed because of --set audio on (= forced)
     sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:analog-stereo+input:analog-stereo
 fi
