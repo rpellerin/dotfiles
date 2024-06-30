@@ -130,7 +130,9 @@ sudo dpkg-reconfigure unattended-upgrades
 
 ### VPN files
 
-Add `.ovpn` files to the systray: `nmcli connection import type openvpn file <file>`
+Add a VPN file through the systray, by clicking on the Wifi icon, then VPN Connections > Configure VPN... > Add a new connection > Import a saved VPN configuration...
+
+Alternatively, add `.ovpn` files to the systray: `nmcli connection import type openvpn file <file>`
 
 ## 3. Optional packages
 
