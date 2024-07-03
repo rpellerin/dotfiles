@@ -38,13 +38,17 @@ sleep 1
 
 # Check whether HDMI-1 and eDP-1 are set to "audio: on" with xrandr --prop
 #if pactl list cards | grep -q 'Active Profile: output:hdmi-stereo';then
-if xrandr | grep -q -E "^(DP-1|HDMI-1) connected"; then
+if xrandr | grep -q -E "^(DP-1|HDMI-1|DisplayPort-0) connected"; then
     #/usr/bin/xrandr --output "$intern" --off --output "$extern" --set audio on --mode 1920x1080 >> /tmp/debug_xrandr 2>&1
     sleep 1
     if xrandr | grep -q -E "^DP-1 connected"; then
         sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo-extra1
         sleep 3 # For some reason it sometimes does not work, maybe too fast? Better to retry
         sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo-extra1
+    elif xrandr | grep -q -E "^DisplayPort-0 connected"; then
+        sleep 2
+        sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-default-sink alsa_output.pci-0000_07_00.1.HiFi__hw_Generic_7__sink
+        sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl move-sink-input 8 alsa_output.pci-0000_07_00.1.HiFi__hw_Generic_7__sink
     else
         sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo
     fi
