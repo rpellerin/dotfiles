@@ -313,6 +313,29 @@ function new-pr {
     gh pr view --web
 }
 
+function wifi_up {
+    wifi_device="$(nmcli --get-values GENERAL.DEVICE,GENERAL.TYPE device show | tr '\n' ',' | grep -Po '([^,]+)(?=,wifi,,)')"
+    nmcli device up $wifi_device
+}
+
+function wifi_down {
+    wifi_device="$(nmcli --get-values GENERAL.DEVICE,GENERAL.TYPE device show | tr '\n' ',' | grep -Po '([^,]+)(?=,wifi,,)')"
+    nmcli device down $wifi_device
+}
+
+function vpn_up {
+    wifi_device="$(nmcli --get-values GENERAL.DEVICE,GENERAL.TYPE device show | tr '\n' ',' | grep -Po '([^,]+)(?=,wifi,,)')"
+    default_device="$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1)"
+    if [ "$wifi_device" != "$default_device" ]; then
+        wifi_down
+    fi
+    nmcli co up $(nmcli co show | grep vpn | cut -d' ' -f1)
+}
+
+function vpn_down {
+    nmcli co down $(nmcli co show | grep vpn | cut -d' ' -f1)
+}
+
 ###########
 # ALIASES #
 ###########
