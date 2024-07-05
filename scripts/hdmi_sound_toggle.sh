@@ -36,6 +36,13 @@ echo "$XAUTHORITY" >> /tmp/debug_xrandr
 
 sleep 1
 
+# sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID systemctl --no-block --user start hdmi-gui.service
+# Where `~/.config/systemd/user/hdmi-gui.service`:
+# [Service]
+# Type=oneshot
+# ExecStart=/path/to/a/gui/program
+
+
 # Check whether HDMI-1 and eDP-1 are set to "audio: on" with xrandr --prop
 #if pactl list cards | grep -q 'Active Profile: output:hdmi-stereo';then
 if xrandr | grep -q -E "^(DP-1|HDMI-1|DisplayPort-0) connected"; then
