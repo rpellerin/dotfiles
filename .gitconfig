@@ -78,5 +78,5 @@
 	reflogExpire = 30
 	reflogExpireUnreachable = 20
 [blame]
-	ignoreRevsFile = .git-blame-ignore-revs
+	# ignoreRevsFile = .git-blame-ignore-revs
 	markIgnoredLines = true
