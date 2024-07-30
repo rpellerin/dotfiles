@@ -67,6 +67,7 @@ sudo apt update
 sudo apt upgrade
 sudo apt install gnupg2 \
     xsel \
+    openjdk-21-jdk \
     apt-listchanges \
     tmux \
     python3-venv \
@@ -429,8 +430,10 @@ sudo systemctl enable firewall
 ```bash
 cd dotfiles # cd to this git repo
 REPO_DIR=`pwd`
+JAVA_HOME=$(readlink -f `which javac` | sed "s:/bin/javac::")
 
 # Custom settings
+echo "export JAVA_HOME=$JAVA_HOME" >> $HOME/.zshrc
 chmod og-r $HOME/.ssh/id_rsa
 chmod og-r $HOME/.ssh/known_hosts
 chmod og-r $HOME/.ssh/known_hosts.old
