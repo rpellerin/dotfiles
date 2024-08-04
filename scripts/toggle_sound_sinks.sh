@@ -7,9 +7,9 @@ fi
 
 # Get UID of user running pulseaudio (uses the first if more than one)
 PUID=`ps -C pulseaudio -o ruid= | awk '{print $1}'`
-SINK_1_ID=`pactl list sinks short | head -n 1 | cut -c 1`
+SINK_1_ID=`pactl list sinks short | head -n 1 | cut -f1`
 SINK_1_NAME=`pactl list sinks short | head -n 1 | awk '{print $2}'`
-SINK_2_ID=`pactl list sinks short | tail -n 1 | cut -c 1`
+SINK_2_ID=`pactl list sinks short | tail -n 1 | cut -f1`
 SINK_2_NAME=`pactl list sinks short | tail -n 1 | awk '{print $2}'`
 
 if pactl info | grep -q "$SINK_1_NAME"; then
