@@ -143,7 +143,8 @@ sudo apt install texlive-full \
     biber \
     arandr \
     gigolo \
-    mpd mpv \
+    mpd \
+    mpv \
     exiftool \
     jhead \
     ncdu \
@@ -163,7 +164,8 @@ sudo apt install texlive-full \
 ### Explanation
 
 - `libreoffice-pdfimport` is for PDF signing
-- `mpd` is a music player for terminal, `mpv` is a video player compatible with Youtube and co.
+- `mpd` is a music player for terminal
+- `mpv` is a video player compatible with Youtube and co. It is also better than VLC when it comes to displaying HDR videos.
 - `exiftool` and `jhead` are for EXIF data
 - `icoutils` to create Microsoft Windows(R) icon and cursor files
 - `synaptic`: see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
