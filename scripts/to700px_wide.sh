@@ -22,7 +22,11 @@ do
     for size in ${sizes}
     do
         b_name=`basename "$file"`
-        convert "$file" -resize ${size}x "$dirr/$size-$b_name"
+        if [ "$#" -gt 1 ];then
+            convert "$file" -resize ${size}x "$dirr/$size-$b_name"
+        else
+            convert "$file" -resize ${size}x "$dirr/$b_name"
+        fi
     done
     echo "Next."
 done <&0
