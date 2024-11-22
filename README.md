@@ -325,7 +325,7 @@ snap install chromium
 
 ## 6. Visual Studio Code
 
-[Download VS code .deb file](https://code.visualstudio.com/docs/setup/linux) and then:
+[Install VS code](https://code.visualstudio.com/docs/setup/linux#_snap): `snap install --classic code`
 
 ```bash
 mv Downloads/code_1.27_amd64.deb /tmp # Otherwise the line below will emit a warning
