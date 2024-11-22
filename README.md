@@ -78,7 +78,7 @@ sudo apt install gnupg2 \
     openjdk-21-jdk \
     apt-listchanges \
     tmux \
-    python3-venv \
+    python3-pip python3-venv \
     xfce4-systemload-plugin \
     xfce4-cpugraph-plugin \
     xfce4-netload-plugin \
@@ -86,7 +86,6 @@ sudo apt install gnupg2 \
     git git-extras \
     htop \
     evince \
-    python3-pip \
     xclip \
     autojump \
     tree \
