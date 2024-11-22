@@ -30,13 +30,17 @@ Back up, just in case, the following:
 
 When reinstalling Xubuntu, use encrypted LVM on a ext4 filesystem (not ZFS). After the install, [we'll resize the SWAP partition](https://romainpellerin.eu/how-to-resize-an-encrypted-swap-partition-lvm.html), as by default it's too small (less than 1G).
 
+# What version of Xubuntu
+
+Download the classic ISO file (not the minimal one). In the wizard, install the minimal Xubuntu, not the full one with useless programs.
+
 # What to do after a fresh install of Xubuntu?
 
 ![How to secure your laptop](https://raw.githubusercontent.com/rpellerin/dotfiles/master/Pictures/secure-laptop.png)
 
 ## 1. BIOS and Grub
 
-_Side note_: leaving Secure Boot on is fine, as long as you select "Enroll MOK" after rebooting, following the install.
+_Side note_: leaving Secure Boot on during the install process is fine, as long as you select "Enroll MOK" after rebooting, following the install.
 
 Upgrade the bios by downloading the latest image from [Dell.com](http://www.dell.com/support/home/us/en/19/product-support/product/latitude-14-7480-laptop/drivers?os=biosa). (Alternatively, you can try to download the image from [this website](https://fwupd.org/lvfs/devicelist) and install it through "Software" (simply open the file).) Then:
 
@@ -49,8 +53,9 @@ Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter 
 
 ## 2. First steps and essential packages
 
-1. Copy all the files you backed up.
+1. Copy all the files you backed up, restore `$HOME/.ssh`.
 2. In Thunar, show hidden files.
+3. `git clone git@github.com:rpellerin/dotfiles.git`
 
 ### Packages to install
 
@@ -62,9 +67,12 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 sudo snap set system refresh.timer=4:00-7:00
 
 sudo apt-add-repository ppa:git-core/ppa
-sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt update
 sudo apt upgrade
+
+snap install firefox
+snpa install thunderbird
+
 sudo apt install gnupg2 \
     xsel \
     openjdk-21-jdk \
@@ -76,7 +84,6 @@ sudo apt install gnupg2 \
     xfce4-netload-plugin \
     ristretto \
     git git-extras \
-    nextcloud-client \
     htop \
     evince \
     python3-pip \
