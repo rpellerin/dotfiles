@@ -547,11 +547,15 @@ load-module module-bluetooth-policy auto_switch=2
 
 In #1 we saw how to hardware disable it. Here we have a look at software disabling it.
 
-Disable blueman applet from application autostart cause it turns bluetooth on when starting (edit: not sure, to be tested. Maybe the next command is enough). Then run `sudo systemctl disable bluetooth`. To check status, run one of the following commands:
+Disable blueman applet from application autostart cause it turns bluetooth on when starting. To check the status, run one of the following commands:
 
     - `hcitool dev`
     - `rfkill list`
     - `bluetooth`
+
+You can always re-enable bluetooth through the icon in the systray.
+
+To permanently disable bluetooth, and have it not even shown in the systray, do: `sudo systemctl disable bluetooth`
 
 ## 18. Fuzzy finder
 
