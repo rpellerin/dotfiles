@@ -17,22 +17,22 @@ Back up, just in case, the following:
   find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > /tmp/pass.backup
   ```
 
-- Bookmarks in Firefox
+- Bookmarks in Firefox (if you're not using Firefox Sync)
 - cron jobs
 - The content of `$HOME/` (except for `.cache` and other non important folders), especially:
 
   - `.zsh_history`
-  - `.config/`
+  - `.config/` (you probably won't need it, just in case)
   - `.password-store/`
   - `.gitconfig_local`
-  - `Documents/`, `Downloads/`, `Pictures/`, `~/snap/thunderbird/common/.thunderbird`
+  - `Documents/`, `Downloads/`, `Pictures/`, `~/snap/thunderbird/common/.thunderbird`, `~/snap/firefox/common/.mozilla/firefox/`
   - SSH and GPG keys (`$HOME/.ssh`, `$HOME/.gnupg`)
 
-When reinstalling Xubuntu, use encrypted LVM on a ext4 filesystem (not ZFS). After the install, [we'll resize the SWAP partition](https://romainpellerin.eu/how-to-resize-an-encrypted-swap-partition-lvm.html), as by default it's too small (less than 1G).
-
-# What version of Xubuntu
+# Installing Xubuntu
 
 Download the classic ISO file (not the minimal one). In the wizard, install the minimal Xubuntu, not the full one with useless programs.
+
+Use encrypted LVM on a ext4 filesystem (not ZFS). After the install, [we'll resize the SWAP partition](https://romainpellerin.eu/how-to-resize-an-encrypted-swap-partition-lvm.html), as by default it's too small (less than 1G).
 
 # What to do after a fresh install of Xubuntu?
 
@@ -64,7 +64,7 @@ Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter 
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 # To avoid being spammed with updates during the day
-sudo snap set system refresh.timer=4:00-7:00
+snap set system refresh.timer=4:00-7:00
 
 sudo apt-add-repository ppa:git-core/ppa
 sudo apt update
@@ -72,6 +72,7 @@ sudo apt upgrade
 
 snap install firefox
 snpa install thunderbird
+snpa install slack
 
 sudo apt install gnupg2 \
     xsel \
@@ -328,9 +329,6 @@ snap install chromium
 [Install VS code](https://code.visualstudio.com/docs/setup/linux#_snap): `snap install --classic code`
 
 ```bash
-mv Downloads/code_1.27_amd64.deb /tmp # Otherwise the line below will emit a warning
-sudo apt install /tmp/code_1.27_amd64.deb
-rm -f /tmp/code_1.27_amd64.deb
 code --install-extension "esbenp.prettier-vscode"
 code --install-extension "ruby-syntax-tree.vscode-syntax-tree"
 code --install-extension "dbaeumer.vscode-eslint"
@@ -346,7 +344,7 @@ code --install-extension "noku.rails-run-spec-vscode"
 Log in to your Firefox account.
 
 - In [about:config](about:config), do:
-  - Search for `vaapi` and change to `true`
+  - Search for `media.ffmpeg.vaapi.enabled` and change to `true`
   - Add `places.history.expiration.max_pages` and set it to 10000000
   - If you want to disable the HTTP referer: set `network.http.sendRefererHeader` to `0` (note: this will break many websites, from my experience)
   - Set `view_source.wrap_long_lines` to `true`.
@@ -369,20 +367,7 @@ Log in to your Firefox account.
   - OPTIONAL: Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0`
 - In [about:preferences#general](about:preferences#general), check `Open previous windows and tabs` and unckeck `Ctrl+Tab cycles through tabs in recently used order`
 - In [about:preferences#search](about:preferences#search), uncheck `Show search suggestions ahead of browsing history in address bar results`
-- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Check `Enable HTTPS-Only Mode in all windows`. For `Enhanced Tracking Protection`, check `Strict`. Optionally, block cookies for trackers and the following domains:
-
-  - https://s.ytimg.com
-  - https://www.youtube.com
-  - https://yt3.ggpht.com
-  - https://www.google.com
-  - https://www.google.fr
-  - https://r5---sn-25glenes.googlevideo.com
-  - https://i.ytimg.com
-  - https://fonts.googleapis.com
-  - https://i9.ytimg.com
-  - https://r1---sn-25ge7ns7.googlevideo.com
-
-  Make sure to be sending `Do Not Track` at all times.
+- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Check `Enable HTTPS-Only Mode in all windows`. For `Enhanced Tracking Protection`, check `Strict`. Make sure to be sending `Do Not Track` at all times.
 
 - Add these extensions:
   - [Firefox Translations](https://addons.mozilla.org/en-US/firefox/addon/firefox-translations/)
@@ -391,7 +376,7 @@ Log in to your Firefox account.
 
 ## 8. Thunderbird
 
-Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/.thunderbird` from another computer. In the Settings, General > Config Editor, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
+Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/snap/thunderbird/common/.thunderbird` from another computer. In the Settings, General > Config Editor, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
 
 To connect it to your Google address book, add a new CardDAV Address Book, and use this URL: `https://www.googleapis.com/carddav/v1/principals/USERNAME@gmail.com/lists/default/`
 
@@ -414,13 +399,12 @@ chsh -s /bin/zsh # Now log out of your session and back in for this to take effe
 
 At this point, CTRL+R and CTRL+T do not work. Step #18 (Fuzzy finder) will make it work.
 
-## 10. NVM + NodeJS + a few packages
+## 10. [NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script) + NodeJS
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 # Make sure ~/.zshrc does not contain code added by nvm install script since it is already present in dotfiles/.rc
 nvm install node
-npm i -g tldr peerflix castnow # castnow plays media files on Chromecast (subtitles supported)
 ```
 
 ## 11. Firewall
@@ -454,7 +438,7 @@ mkdir -p $HOME/.config/autostart
 cp $REPO_DIR/.config/autostart/* "$HOME/.config/autostart"
 cp "$REPO_DIR/.config/redshift.conf" $HOME/.config/
 mkdir -p $HOME/.config/Code/User/
-ln -s $REPO_DIR/.config/Code/User/* $HOME/.config/Code/User/
+ln -sf $REPO_DIR/.config/Code/User/* $HOME/.config/Code/User/
 ln -sf "$REPO_DIR/.gitconfig" $HOME/
 ln -sf "$REPO_DIR/.git-templates" $HOME/
 ln -sf "$REPO_DIR/.gitignore_global" $HOME/
@@ -466,7 +450,7 @@ ln -s $REPO_DIR/.gnupg/gpg.conf $HOME/.gnupg/gpg.conf
 
 source "$REPO_DIR/.rc"
 git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc # Check nothing is new/unusual
-ln -s "$REPO_DIR/.zpreztorc" $HOME/
+ln -sf "$REPO_DIR/.zpreztorc" $HOME/
 
 sudo su
 echo 'KERNEL=="card0", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/romain/.Xauthority", RUN+="/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh"' > /etc/udev/rules.d/99-hdmi_sound.rules
@@ -474,23 +458,26 @@ exit
 sudo udevadm control --reload-rules
 sudo systemctl restart udev
 
+sudo mkdir -p /etc/acpi
 sudo cp "$REPO_DIR/etc/acpi/headset.sh" /etc/acpi
 sudo cp "$REPO_DIR/etc/acpi/events/headset" /etc/acpi/events
 sudo systemctl restart acpid.service
 
 # Install Github CLI
 update-gh
+
+# Bring back your backup of `.zsh_history`, and put it in `$HOME/.zsh_history`.
 ```
 
 ## 13. Edit terminal preferences
 
-- In `General`, unlimited scrollback. Disable the scrollbar being shown.
+- In `General`, unlimited scrollback. Disable the scrollbar being shown (`Scrollbar is: Disabled`).
 - In `Appearance`, uncheck menu bar and borders around new windows. Set the font size to 13.
 - In `Colors`, use the `Xubuntu dark` theme, check `Cursor color` and leave the default one.
 
 ## 14. Set up Vim
 
-Just open Vim once and let Vim-Plug install all of the listed plugins.
+Just open Vim once and let Vim-Plug install all of the listed plugins. Ignore the errors the first time you open Vim, it's because plugins are not yet install. Relaunch it again after, the errors should not appear this time.
 
 ## 15. All settings
 
@@ -500,14 +487,15 @@ Open the settings manager and do:
 
 - Click _Additional Drivers_ to make sure all devices are being used.
 - Set the keyboard layout to US international with dead keys.
-- Set up the xfce panel (top bar): show the battery indicator (if on a laptop), set the date, time and timezone (clock format: `%a %d %b %T %p`), sync the time with the Internet. Add network, RAM and CPU monitor.
+- Set up the xfce panel (top bar): show the battery indicator with percent and time remaining (if on a laptop), set the date, time and timezone (clock format: `%a %d %b %T %p`), sync the time with the Internet. Add, from left to right: CPU, Network and System Load monitors.
 - In `Window Manager` > `Keyboard`, set the keyboard shortcuts (_Tile window to the x_, _Show desktop_).
 - In `Screensaver`:
 
-  - In the tab "Screensaver", enable the screensaver. Pick the "Blank Screen" option, and changes its settings to 10 seconds for "After blanking, put display to sleep after" and "Never" for "After sleeping, switch display off after". Active the screensaver when computer is idle after 1 minutes. Check "Inhibit screensaver for fullscreen applications".
+  - In the tab "Screensaver", enable the screensaver. Pick the "Blank Screen" option, and changes its settings to 5 seconds for "After blanking, put display to sleep after" and "Never" for "After sleeping, switch display off after". Active the screensaver when computer is idle after 1 minutes. Check "Inhibit screensaver for fullscreen applications".
   - In the tab "Lock Screen", enable everything except "On Screen Keyboard" and "Logout".
 
-- In `Display`, in the tab `Advanced`, create a profile for when connected to a TV for instance, and enable both `Configure new displays when connected` and `Automatically enable profiles when new display is connected`
+- In `Display`, in the tab `Advanced`, create a profile for when connected to a TV for instance, and enable `Automatically enable profiles when new display is connected`
+- In `Keyboard` > `Behavior`, enable `Restore num lock state on startup`. Set the repeat delay to 350ms and the repeat speed to 35.
 - In `Keyboard` > `Application Shortcuts`, set:
 
   - Super A: `/home/romain/git/dotfiles/scripts/passmenu`
@@ -515,9 +503,9 @@ Open the settings manager and do:
   - Shift Alt 4: `xfce4-screenshooter -r`
   - Ctrl Shift Alt 4: `xfce4-screenshooter -c -r`
   - Ctrl Q: `true`
-  - Email client to `Super + M`
-  - Browser to `Super + W`
-  - File explorer to `Super + F`
+  - Email client to `Super + M` (should be there by default)
+  - Browser to `Super + W` (should be there by default)
+  - File explorer to `Super + F` (should be there by default)
   - Super + T: `xfce4-terminal --default-working-directory=/some/path`
   - Super + S: `slack`
   - Super + L: `/home/romain/git/dotfiles/scripts/screen-off-and-lock.sh`
@@ -525,8 +513,6 @@ Open the settings manager and do:
   - Ctrl F12: `/home/romain/git/dotfiles/scripts/mprisctl.sh play-pause`
   - F8: `/home/romain/git/dotfiles/scripts/toggle_sound_sinks.sh`
   - F9: `/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh`
-
-  The layout is likely 105 key (intl) (check with `cat /etc/default/keyboard`). Set the repeat delay to 350ms and the repeat speed to 35.
 
 - In `Power manager`:
 
@@ -536,7 +522,7 @@ Open the settings manager and do:
 
 - In `Removable Drives and Media`, uncheck the 3 options about auto-mount and auto-browse.
 - In `Notifications`, log all notifications but not applications.
-- In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling.
+- In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling and `Tap touchpad to click`.
 
 ## 16. Fine tune PulseAudio
 
@@ -638,7 +624,18 @@ auth    [success=1 default=ignore]      pam_unix.so nullok
 ```bash
 sudo apt install tlp
 sudo systemctl enable tlp
-sudo systemctl enable tlp-sleep
+```
+
+`sudo vim /etc/tlp.conf`:
+
+```txt
+START_CHARGE_THRESH_BAT0=55
+STOP_CHARGE_THRESH_BAT0=90
+```
+
+```bash
+sudo tlp start
+sudo tlp-stat
 ```
 
 ### Improving privacy
