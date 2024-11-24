@@ -623,6 +623,17 @@ auth    [success=1 default=ignore]      pam_unix.so nullok
 
 ## Optional stuff
 
+### Install [rbenv](https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout)
+
+```bash
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+# Now open a new terminal, we already have the configuration to load rbenv in our file `.rc`
+# If the configuration is missing somehow, run: ~/.rbenv/bin/rbenv init
+# Then:
+git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+rbenv install
+```
+
 ### Battery saver (https://doc.ubuntu-fr.org/tlp)
 
 ```bash
