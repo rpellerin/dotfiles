@@ -632,6 +632,9 @@ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 # Then:
 git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 rbenv install
+# You might need to `sudo apt install libyaml-dev libffi-dev` to compile Ruby
+rbenv rehash
+gem install bundler
 ```
 
 ### Battery saver (https://doc.ubuntu-fr.org/tlp)
