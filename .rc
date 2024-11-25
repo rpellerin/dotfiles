@@ -11,22 +11,6 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey "^x^e" edit-command-line
 
-if [ ! -d "$HOME/.openssl/openssl-1.1.1q" ]; then
-    echo "$HOME/.openssl/openssl-1.1.1q does no exist. Ruby tests with Capybara won't work."
-    echo "Do:"
-    echo "cd Downloads"
-    echo "$ wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz"
-    echo "$ tar zxvf openssl-1.1.1q.tar.gz"
-    echo "$ cd openssl-1.1.1q"
-    echo "$ ./config --prefix=$HOME/.openssl/openssl-1.1.1q --openssldir=$HOME/.openssl/openssl-1.1.1q"
-    echo "$ make && make install"
-    echo "$ rm -rf ~/.openssl/openssl-1.1.1q/certs"
-    echo "$ ln -s /etc/ssl/certs ~/.openssl/openssl-1.1.1q/certs"
-    echo "$ rbenv install # Force the reinstallation of the current version"
-else
-    export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$HOME/.openssl/openssl-1.1.1q"
-fi
-
 export ANDROID_HOME=/home/romain/Android/Sdk
 export ANDROID_SDK=/home/romain/Android/Sdk
 export ANDROID_NDK=/home/romain/Android/Ndk
