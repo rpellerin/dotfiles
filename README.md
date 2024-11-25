@@ -340,6 +340,8 @@ code --install-extension "noku.rails-run-spec-vscode"
 
 ## 7. Firefox
 
+If Firefox fails to reuse your restored profile(s), launch it with `firefox --ProfileManager`.
+
 [Disable the title bar](https://linuxconfig.org/how-to-remove-firefox-title-bar-on-linux).
 
 Log in to your Firefox account.
@@ -377,7 +379,9 @@ Log in to your Firefox account.
 
 ## 8. Thunderbird
 
-Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/snap/thunderbird/common/.thunderbird` from another computer. In the Settings, General > Config Editor, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
+Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/snap/thunderbird/common/.thunderbird` from another computer. When launching Thunderbird, if it fails to use your restored profile(s), launch it with `thunderbird --ProfileManager`.
+
+In the Settings, General > Config Editor, set `rss.show.content-base` to 1 so that RSS feeds opened in a new tab will always show summaries instead of loading the full web page.
 
 To connect it to your Google address book, add a new CardDAV Address Book, and use this URL: `https://www.googleapis.com/carddav/v1/principals/USERNAME@gmail.com/lists/default/`
 
