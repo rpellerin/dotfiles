@@ -111,11 +111,11 @@ fi
 
 export DEBUG_GIT_HOOKS="1"
 export HUSKY_SKIP_INSTALL="1"
-#export PRY_RESCUE_RAILS="1"
-export PYENV_ROOT="$HOME/.pyenv"
+# https://stackoverflow.com/questions/77870343/getting-externally-managed-environment-error-when-trying-to-install-with-pip
+export PYTHON_LOCAL_VENV="$HOME/python-venv"
 
 # rbenv and pyenv
-export PATH="$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH"
+export PATH="$PYTHON_LOCAL_VENV/bin:$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then
     echo $PATH | grep -q ".rbenv/shims" || eval "$(rbenv init -)"
 fi

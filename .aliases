@@ -117,6 +117,7 @@ function maj() {
     sudo snap refresh
     sudo apt autoremove && sudo apt clean && sudo apt update && sudo apt upgrade
     pkill xfce4-notifyd # Close Firefox snap notification
+    /usr/bin/python3 -m venv --upgrade ~/python-venv/
     python3 -m pip install --upgrade yt-dlp pip
     sudo apt clean
     notify-send -t 10000 "Update and upgrade done"
