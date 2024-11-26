@@ -71,8 +71,10 @@ sudo apt update
 sudo apt upgrade
 
 snap install firefox
-snpa install thunderbird
-snpa install slack
+snap install thunderbird
+# Do not install Slack as snap, as there are two bugs, still unresolved as of 2024:
+# - https://forum.snapcraft.io/t/slack-snap-window-has-no-icon/3589/13
+# - https://www.reddit.com/r/Slack/comments/uw8vxp/when_i_rightclick_to_copy_a_link_slack_hangs_for/
 
 sudo apt install gnupg2 \
     xsel \
