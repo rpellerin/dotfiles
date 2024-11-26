@@ -78,6 +78,7 @@ snap install thunderbird
 
 sudo apt install gnupg2 \
     xsel \
+    libspa-0.2-bluetooth \
     ibus \
     openjdk-21-jdk \
     apt-listchanges \
@@ -130,6 +131,7 @@ python3 -m venv ~/python-venv --system-site-packages
 
 ### Explanations
 
+- `libspa-0.2-bluetooth` might be useless, but on 24.04 I had to install this for my bluetooth earphones to connect
 - `ibus` is to add emojis through `Super+.`
 - `cryptsetup` is to be able to [open LUKS-encrypted disks](https://romainpellerin.eu/yes-privacy-matters.html#encrypt-external-hdd-with-dm-crypt-and-luks), with: `sudo cryptsetup luksOpen /dev/sda1 ext-hdd`
 - `xsel` is for clipboard features
