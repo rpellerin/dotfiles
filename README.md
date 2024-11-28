@@ -342,6 +342,11 @@ code --install-extension "dbaeumer.vscode-eslint"
 code --install-extension "eamodio.gitlens"
 code --install-extension "Shopify.ruby-lsp"
 code --install-extension "noku.rails-run-spec-vscode"
+code --install-extension "GitHub.copilot"
+code --install-extension "jasonnutter.vscode-codeowners"
+code --install-extension "misogi.ruby-rubocop"
+code --install-extension "bradlc.vscode-tailwindcss"
+code --install-extension "sianglim.slim"
 ```
 
 ## 7. Firefox
