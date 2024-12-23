@@ -101,7 +101,7 @@ load-node-modules() {
 add-zsh-hook chpwd load-node-modules
 load-node-modules
 
-add-zsh-hook preexec git-check-should-rebase
+# add-zsh-hook preexec git-check-should-rebase
 
 if [[ -f /home/romain/.ghcup/env ]]; then
     source /home/romain/.ghcup/env
