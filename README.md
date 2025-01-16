@@ -639,7 +639,7 @@ auth    [success=1 default=ignore]      pam_unix.so nullok
 
 ## Optional stuff
 
-### Install [rbenv](https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout)
+### Install [rbenv](https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout) (only personal laptop)
 
 ```bash
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
