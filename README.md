@@ -8,25 +8,27 @@
 
 ## What to do before reformating a computer?
 
-Back up, just in case, the following:
+Back up the following:
 
 - Passwords in clear, just in case the GPG keys restoration fails. VERY UNSAFE, as it exposes your passwords in clear text though.
 
   ```bash
   cd .password-store
-  find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > /tmp/pass.backup
+  find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > ~/Downloads/pass.backup
   ```
 
-- Bookmarks in Firefox (if you're not using Firefox Sync)
-- cron jobs
-- The content of `$HOME/` (except for `.cache` and other non important folders), especially:
+- Back up your [Firefox profile](https://support.mozilla.org/en-US/kb/back-and-restore-information-firefox-profiles) and [Thunderbird profile](https://support.mozilla.org/en-US/kb/thunderbird-export)
+- cron jobs: `crontab -l > ~/Downloads/cronjobs.backup`
+- Some folders/files from `$HOME/`:
 
-  - `.zsh_history`
   - `.config/` (you probably won't need it, just in case)
   - `.password-store/`
-  - `.gitconfig_local`
-  - `Documents/`, `Downloads/`, `Pictures/`, `~/snap/thunderbird/common/.thunderbird`, `~/snap/firefox/common/.mozilla/firefox/`
   - SSH and GPG keys (`$HOME/.ssh`, `$HOME/.gnupg`)
+  - `Desktop/`, `Documents/`, `Downloads/`, `Pictures/`, `Videos/`
+  - `.gitconfig_local`
+  - `.zsh_history`
+  - `~/snap/thunderbird/common/.thunderbird`, `~/snap/firefox/common/.mozilla/firefox/` (just in case the profile import fails later)
+  - `~HOME/git/` does not need to be backed up, everything should be present on GitHub.
 
 # Installing Xubuntu
 
