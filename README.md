@@ -167,7 +167,6 @@ sudo apt install texlive-full \
     ncdu \
     ntp \
     optipng \
-    filezilla
     icoutils \
     silversearcher-ag \
     synaptic \
@@ -176,6 +175,9 @@ sudo apt install texlive-full \
     hyphen-en-gb \
     hunspell-en-gb \
     pdf-presenter-console
+
+# mpv will install yt-dlp (`aptitude why yt-dlp`), we must remove it and install it later through pip
+sudo apt purge yt-dlp
 ```
 
 ### Explanation
@@ -480,7 +482,9 @@ echo 'KERNEL=="card0", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", EN
 exit
 sudo udevadm control --reload-rules
 sudo systemctl restart udev
+systemctl daemon-reload
 
+sudo apt install acpid
 sudo mkdir -p /etc/acpi
 sudo cp "$REPO_DIR/etc/acpi/headset.sh" /etc/acpi
 sudo cp "$REPO_DIR/etc/acpi/events/headset" /etc/acpi/events
@@ -522,7 +526,7 @@ Open the settings manager and do:
 - In `Keyboard` > `Application Shortcuts`, set:
 
   - Super A: `/home/romain/git/dotfiles/scripts/passmenu`
-  - Super C: `google-chrome`
+  - Super C: `google-chrome` / `chromium`
   - Shift Alt 4: `xfce4-screenshooter -r`
   - Ctrl Shift Alt 4: `xfce4-screenshooter -c -r`
   - Ctrl Q: `true`
@@ -531,7 +535,6 @@ Open the settings manager and do:
   - File explorer to `Super + F` (should be there by default)
   - Super + T: `xfce4-terminal --default-working-directory=/some/path`
   - Super + S: `slack`
-  - Super + L: `/home/romain/git/dotfiles/scripts/screen-off-and-lock.sh`
   - Ctrl F9: `/home/romain/git/dotfiles/scripts/copy-no-break-line.sh`
   - Ctrl F12: `/home/romain/git/dotfiles/scripts/mprisctl.sh play-pause`
   - F8: `/home/romain/git/dotfiles/scripts/toggle_sound_sinks.sh`
@@ -547,7 +550,7 @@ Open the settings manager and do:
 - In `Notifications`, log all notifications but not applications.
 - In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling and `Tap touchpad to click`.
 
-## 16. Fine tune PulseAudio
+## 16. Fine tune PulseAudio (for Ubuntu older than 24.04. Since 24.04, Pipewire is the default audio server, replacing Pulseaudio)
 
 In `/etc/pulse/default.pa`, disable changing the source to the Dell docking station:
 
@@ -566,11 +569,43 @@ load-module module-bluetooth-policy auto_switch=2
 
 ```
 
+## 16. Fine tune Pipewire
+
+Automatically switching between HiFi bluetooth and bluetooth with microphone is natively done.
+
+However, we might still need to blacklist some devices. In my tests, this is not needed. But here is how to do it anyways. TODO for myself: delete this section in a few years if this is truly not needed.
+
+```bash
+wpctl status # Identify which audio sink and source you want disabled
+wpctl inspect <their ID> # Identify their `device.name`
+
+mkdir -p ~/.config/wireplumber/policy.lua.d
+touch ~/.config/wireplumber/policy.lua.d/51-blacklist-devices.lua
+
+# Insert the following
+monitor.alsa.rules = [
+  {
+    matches = [
+        { "device.name" = "Dell Universal Dock D6000" },
+        ...
+    ]
+    actions = {
+      update-props = {
+         device.disabled = true
+      }
+    }
+  }
+]
+
+# Restart the service
+systemctl --user restart wireplumber
+```
+
 ## 17. Disabling Bluetooth on startup (optional)
 
 In #1 we saw how to hardware disable it. Here we have a look at software disabling it.
 
-Disable blueman applet from application autostart cause it turns bluetooth on when starting. To check the status, run one of the following commands:
+Untick Blueman Applet from Settings Manager > Session and Startup > Application Autostart, cause it turns bluetooth on when starting. To check the status, run one of the following commands:
 
     - `hcitool dev`
     - `rfkill list`
@@ -660,7 +695,7 @@ rbenv rehash
 gem install bundler
 ```
 
-### Battery saver (https://doc.ubuntu-fr.org/tlp)
+### Battery saver (https://doc.ubuntu-fr.org/tlp) - only on Thinkpads!
 
 ```bash
 sudo apt install tlp
