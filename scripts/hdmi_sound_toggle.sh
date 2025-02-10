@@ -21,9 +21,9 @@
 intern=eDP-1
 extern=HDMI-1
 
-# Get UID of user running pulseaudio (uses the first if more than one)
-PUID=`ps -C pulseaudio -o ruid= | awk '{print $1}'`
-CARD_PROFILE_ID=`pactl list cards short | head -n 1 | cut -c 1`
+# Get UID of user running pipewire (uses the first if more than one)
+PUID=`ps -C pipewire -o ruid= | head -n 1 | awk '{print $1}'`
+CARD_PROFILE_ID=`pactl list cards short | head -n 1 | cut -f1`
 
 touch /tmp/debug_xrandr
 date >> /tmp/debug_xrandr
@@ -49,6 +49,7 @@ if xrandr | grep -q -E "^(DP-1|HDMI-1|DisplayPort-0) connected"; then
     #/usr/bin/xrandr --output "$intern" --off --output "$extern" --set audio on --mode 1920x1080 >> /tmp/debug_xrandr 2>&1
     sleep 1
     if xrandr | grep -q -E "^DP-1 connected"; then
+        # HDMI connected
         sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo-extra1
         sleep 3 # For some reason it sometimes does not work, maybe too fast? Better to retry
         sudo -u "#$PUID" XDG_RUNTIME_DIR=/run/user/$PUID pactl set-card-profile $CARD_PROFILE_ID output:hdmi-stereo-extra1

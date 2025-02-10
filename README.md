@@ -577,7 +577,7 @@ However, we might still need to blacklist some devices. In my tests, this is not
 
 ```bash
 wpctl status # Identify which audio sink and source you want disabled
-wpctl inspect <their ID> # Identify their `device.name`
+wpctl inspect <their ID> # Identify their `node.name`
 
 mkdir -p ~/.config/wireplumber/policy.lua.d
 touch ~/.config/wireplumber/policy.lua.d/51-blacklist-devices.lua
@@ -586,8 +586,8 @@ touch ~/.config/wireplumber/policy.lua.d/51-blacklist-devices.lua
 monitor.alsa.rules = [
   {
     matches = [
-        { "device.name" = "Dell Universal Dock D6000" },
-        ...
+        { "node.name" = "alsa_output.usb-DisplayLink_Dell_Universal_Dock_D6000_1903040272-02.analog-stereo" },
+        { "node.name" = "alsa_input.usb-DisplayLink_Dell_Universal_Dock_D6000_1903040272-02.iec958-stereo" }
     ]
     actions = {
       update-props = {
