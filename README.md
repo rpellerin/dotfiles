@@ -26,6 +26,7 @@ Back up the following:
   - SSH and GPG keys (`$HOME/.ssh`, `$HOME/.gnupg`)
   - `Desktop/`, `Documents/`, `Downloads/`, `Pictures/`, `Videos/`
   - `.gitconfig_local`
+  - `.private_aliases`
   - `.zsh_history`
   - `~/snap/thunderbird/common/.thunderbird`, `~/snap/firefox/common/.mozilla/firefox/` (just in case the profile import fails later)
   - `~HOME/git/` does not need to be backed up, everything should be present on GitHub.
@@ -417,12 +418,15 @@ chsh -s /bin/zsh # Now log out of your session and back in for this to take effe
 
 At this point, CTRL+R and CTRL+T do not work. Step #18 (Fuzzy finder) will make it work.
 
-## 10. [NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script) + NodeJS
+## 10. [mise](https://github.com/jdx/mise) (replaces [NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)) + NodeJS
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-# Make sure ~/.zshrc does not contain code added by nvm install script since it is already present in dotfiles/.rc
-nvm install node
+curl https://mise.run | sh
+# Make sure ~/.zshrc does not contain code added by mise install script since it is already present in dotfiles/.rc
+
+# Open a new terminal
+mise doctor # Check that it works
+mise use --global node
 ```
 
 ## 11. Firewall
@@ -444,6 +448,8 @@ JAVA_HOME=$(readlink -f `which javac` | sed "s:/bin/javac::")
 
 # Custom settings
 echo "export JAVA_HOME=$JAVA_HOME" >> $HOME/.zshrc
+mkdir -p $HOME/.gnupg
+chmod go-rwx .gnupg
 chmod og-r $HOME/.ssh/id_rsa
 chmod og-r $HOME/.ssh/known_hosts
 chmod og-r $HOME/.ssh/known_hosts.old
@@ -463,7 +469,6 @@ ln -sf "$REPO_DIR/.gitignore_global" $HOME/
 ln -sf $REPO_DIR/.curlrc $HOME/
 ln -sf $REPO_DIR/.less $HOME/
 ln -sf $REPO_DIR/.lesskey $HOME/
-mkdir -p $HOME/.gnupg
 ln -s $REPO_DIR/.gnupg/gpg.conf $HOME/.gnupg/gpg.conf
 
 source "$REPO_DIR/.rc"

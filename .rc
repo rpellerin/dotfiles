@@ -52,6 +52,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # place this after nvm initialization!
 load-nvmrc() {
+  if ! command -v nvm 2>&1 >/dev/null; then
+      # nvm is not found.
+      return 0
+  fi
+
   local node_version="$(nvm version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
 
@@ -127,3 +132,5 @@ export TIME_STYLE=long-iso
 if [ ! -d "$HOME/.password-store" ] || [ -z "$(ls -A $HOME/.password-store)" ]; then
     echo '>>> No password store found.'
 fi
+
+eval "$(/home/romain/.local/bin/mise activate zsh)"
