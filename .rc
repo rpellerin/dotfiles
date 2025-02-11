@@ -133,4 +133,6 @@ if [ ! -d "$HOME/.password-store" ] || [ -z "$(ls -A $HOME/.password-store)" ]; 
     echo '>>> No password store found.'
 fi
 
-eval "$(/home/romain/.local/bin/mise activate zsh)"
+if [[ -f /home/romain/.local/bin/mise ]]; then
+  eval "$(/home/romain/.local/bin/mise activate zsh)"
+fi
