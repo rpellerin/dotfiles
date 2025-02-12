@@ -91,5 +91,13 @@
   "python.terminal.activateEnvInCurrentTerminal": true,
   "python.testing.pytestEnabled": true,
   "github.copilot.editor.enableAutoCompletions": true,
-  "git.openRepositoryInParentFolders": "never"
+  "git.openRepositoryInParentFolders": "never",
+  "chat.editing.alwaysSaveWithGeneratedChanges": true,
+  "git.blame.editorDecoration.enabled": true,
+  "git.blame.statusBarItem.enabled": true,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.currentLine.pullRequests.enabled": false,
+  "gitlens.statusBar.pullRequests.enabled": false,
+  "gitlens.hovers.pullRequests.enabled": false,
+  "gitlens.statusBar.enabled": false
 }
