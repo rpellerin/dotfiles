@@ -477,13 +477,33 @@ source "$REPO_DIR/.rc"
 git diff $HOME/.zprezto/runcoms/zpreztorc $REPO_DIR/.zpreztorc # Check nothing is new/unusual
 ln -sf "$REPO_DIR/.zpreztorc" $HOME/
 
-sudo su
-echo 'KERNEL=="card0", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/romain/.Xauthority", RUN+="/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh"' > /etc/udev/rules.d/99-hdmi_sound.rules
-exit
-sudo udevadm control --reload-rules
-sudo systemctl restart udev
-systemctl daemon-reload
+# Bring back your backup of `.zsh_history`, and put it in `$HOME/.zsh_history`.
+```
 
+### Script to switch sound to HDMI when connecting
+
+```bash
+sudo su
+echo 'KERNEL=="card1", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/romain/.Xauthority", RUN+="/home/romain/git/dotfiles/scripts/hdmi_sound_toggle.sh"' > /etc/udev/rules.d/99-hdmi_sound.rules
+exit
+# You might need to swap `card1` with `card0`. Check what card you have:
+ls /dev/dri/
+# or
+ls /run/udev/data/ | grep card
+
+# Now:
+sudo udevadm control --reload-rules # Reload rules to take ours into account
+sudo udevadm trigger # Tells udev to re-process existing devices and generate events for them
+# As a result, check that `/tmp/debug_xrandr`  exists
+cat /tmp/debug_xrandr
+sudo systemctl restart udev # Not sure this is needed
+systemctl daemon-reload # Not sure this is needed
+# Debug with `udevadm monitor --environment`
+```
+
+### Misc
+
+```bash
 sudo apt install acpid
 sudo mkdir -p /etc/acpi
 sudo cp "$REPO_DIR/etc/acpi/headset.sh" /etc/acpi
@@ -492,8 +512,6 @@ sudo systemctl restart acpid.service
 
 # Install Github CLI
 update-gh
-
-# Bring back your backup of `.zsh_history`, and put it in `$HOME/.zsh_history`.
 ```
 
 ## 13. Edit terminal preferences
@@ -521,7 +539,7 @@ Open the settings manager and do:
   - In the tab "Screensaver", enable the screensaver. Pick the "Blank Screen" option, and changes its settings to 5 seconds for "After blanking, put display to sleep after" and "Never" for "After sleeping, switch display off after". Active the screensaver when computer is idle after 1 minutes. Check "Inhibit screensaver for fullscreen applications".
   - In the tab "Lock Screen", enable everything except "On Screen Keyboard" and "Logout".
 
-- In `Display`, in the tab `Advanced`, create a profile for when connected to a TV for instance, and enable `Automatically enable profiles when new display is connected`
+- In `Display`, in the tab `Advanced`, create a profile for when connected to a TV for instance, and disable `Automatically enable profiles when new display is connected` (handled by `scripts/hdmi_sound_toggle.sh`)
 - In `Keyboard` > `Behavior`, enable `Restore num lock state on startup`. Set the repeat delay to 350ms and the repeat speed to 35.
 - In `Keyboard` > `Application Shortcuts`, set:
 
