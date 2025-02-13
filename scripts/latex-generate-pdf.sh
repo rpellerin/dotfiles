@@ -11,8 +11,8 @@
 # Example: ./generate-pdf.sh latex_files/Document (where Document is a .tex file)
 
 EVENTS="create,modify,close_write,moved_to"
-BASEDIR=$(dirname $1)
-FILENAME=$(basename $1 | sed "s/.tex//")
+BASEDIR=$(dirname "$1")
+FILENAME=$(basename "$1" | sed "s/.tex//")
 CURRENT_PATH=$(pwd)
 
 compile() {
@@ -35,7 +35,7 @@ show_error() {
 ############################## BEGINNING OF THE SCRIPT ##############################
 
 # Some checks
-if [ "$#" -ne 1 ] || [ ! -d $BASEDIR ] || [ ! -f $1 ]; then
+if [ "$#" -ne 1 ] || [ ! -d "$BASEDIR" ] || [ ! -f "$1" ]; then
     show_error
     exit 0
 fi
@@ -46,7 +46,7 @@ fi
 
 echo $FILENAME
 # The most interesting part...
-while inotifywait --exclude '(.*\.swp|.*\.swx)' -r -e $EVENTS "$(dirname $1)"; do
+while inotifywait --exclude '(.*\.swp|.*\.swx)' -r -e $EVENTS "$BASEDIR"; do
     cd "$BASEDIR"
     if compile "$FILENAME"; then echo "PDF generated with no error!"; fi
     cd "$CURRENT_PATH"
