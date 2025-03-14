@@ -99,5 +99,6 @@
   "gitlens.currentLine.pullRequests.enabled": false,
   "gitlens.statusBar.pullRequests.enabled": false,
   "gitlens.hovers.pullRequests.enabled": false,
-  "gitlens.statusBar.enabled": false
+  "gitlens.statusBar.enabled": false,
+  "github.copilot.nextEditSuggestions.enabled": true
 }
