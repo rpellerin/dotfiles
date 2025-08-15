@@ -107,7 +107,7 @@ function ban() {
 }
 
 function update-gh() {
-    curl -s https://api.github.com/repos/cli/cli/releases/latest | grep -o -P '(?<=browser_download_url": ")https:.*amd64\.deb' | wget -qi - -O /tmp/gh.deb ; cd /tmp ; sudo apt install ./gh.deb; cd -
+    curl -s "https://api.github.com/repos/cli/cli/releases/latest" | grep -o -P '(?<=browser_download_url": ")https:.*amd64\.deb' | wget -qi - -O /tmp/gh.deb ; cd /tmp ; sudo apt install ./gh.deb; cd -
     gh extension upgrade gh-copilot || gh extension install github/gh-copilot
 }
 
