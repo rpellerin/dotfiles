@@ -124,6 +124,12 @@ function maj() {
     notify-send -t 10000 "Update and upgrade done"
 }
 
+function maj-bios() {
+    fwupdmgr get-updates
+    fwupdmgr refresh --force
+    fwupdmgr update
+}
+
 # Display the content of a directory after a 'cd'
 function custom_cd () {
         \cd $@ && ls
