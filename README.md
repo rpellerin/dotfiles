@@ -360,7 +360,7 @@ code --install-extension "sianglim.slim"
 
 If Firefox fails to reuse your restored profile(s), launch it with `firefox --ProfileManager`.
 
-[Disable the title bar](https://linuxconfig.org/how-to-remove-firefox-title-bar-on-linux).
+[Disable the title bar](https://linuxconfig.org/how-to-remove-firefox-title-bar-on-linux) (no need to change this, as of 2026 it is the default behavior).
 
 Log in to your Firefox account.
 
@@ -420,7 +420,7 @@ done
 chsh -s /bin/zsh # Now log out of your session and back in for this to take effect
 ```
 
-At this point, CTRL+R and CTRL+T do not work. Step #18 (Fuzzy finder) will make it work.
+At this point, CTRL+R and CTRL+T do not work. Step "Fuzzy finder" will make it work.
 
 ## [mise](https://github.com/jdx/mise) (replaces [NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)) + NodeJS
 
@@ -482,12 +482,13 @@ ln -sf "$REPO_DIR/.zpreztorc" $HOME/
 # Bring back your backup of `.zsh_history`, and put it in `$HOME/.zsh_history`.
 ```
 
-## Update BIOS
+## Install Github CLI and update the BIOS
 
 Connec the laptop to AC power, then:
 
 ```bash
-maj-bios
+update-gh # Install Github CLI
+maj-bios # Update BIOS. Needs AC power.
 ```
 
 ### Alternative (old way)
@@ -522,7 +523,7 @@ systemctl daemon-reload # Not sure this is needed
 # Debug with `udevadm monitor --environment`
 ```
 
-## Misc
+## Auto switch audio to/from wired headset when connected
 
 ```bash
 sudo apt install acpid
@@ -530,9 +531,6 @@ sudo mkdir -p /etc/acpi
 sudo cp "$REPO_DIR/etc/acpi/headset.sh" /etc/acpi
 sudo cp "$REPO_DIR/etc/acpi/events/headset" /etc/acpi/events
 sudo systemctl restart acpid.service
-
-# Install Github CLI
-update-gh
 ```
 
 ## Edit terminal preferences
@@ -608,37 +606,11 @@ load-module module-bluetooth-policy auto_switch=2
 
 ```
 
-## Fine tune Pipewire
+## Pipewire
 
 Automatically switching between HiFi bluetooth and bluetooth with microphone is natively done.
 
-However, we might still need to blacklist some devices. In my tests, this is not needed. But here is how to do it anyways. TODO for myself: delete this section in a few years if this is truly not needed.
-
-```bash
-wpctl status # Identify which audio sink and source you want disabled
-wpctl inspect <their ID> # Identify their `node.name`
-
-mkdir -p ~/.config/wireplumber/policy.lua.d
-touch ~/.config/wireplumber/policy.lua.d/51-blacklist-devices.lua
-
-# Insert the following
-monitor.alsa.rules = [
-  {
-    matches = [
-        { "node.name" = "alsa_output.usb-DisplayLink_Dell_Universal_Dock_D6000_1903040272-02.analog-stereo" },
-        { "node.name" = "alsa_input.usb-DisplayLink_Dell_Universal_Dock_D6000_1903040272-02.iec958-stereo" }
-    ]
-    actions = {
-      update-props = {
-         device.disabled = true
-      }
-    }
-  }
-]
-
-# Restart the service
-systemctl --user restart wireplumber
-```
+When connecting to an external monitor with sound capacities for the first time, Pipewire will by default switch to it. Just select back the original audio sink and source, and the next time you connect this monitor, nothing will be switched automatically.
 
 ## Disabling Bluetooth on startup (optional)
 
