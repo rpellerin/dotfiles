@@ -1,4 +1,4 @@
-## Foreword on Dell Latitude 7480, 7490
+# Foreword on Dell Latitude 7480, 7490
 
 [A known bug](https://www.dell.com/community/Latitude/Anyone-else-having-freezing-issues-with-Dell-Latitude-7490-s/td-p/7307897/page/9) affects the 74xx line of Dell products: when picked up with the left side, the laptop sometimes freezes and crashes. Common answers suggest the following solutions:
 
@@ -6,14 +6,14 @@
 1. Same but reseat the SSD
 1. If none of the above worked, set [this kernel parameter](https://wiki.archlinux.org/title/intel_graphics): `i915.enable_dc=0`
 
-## What to do before reformating a computer?
+# What to do before reformating a computer?
 
 Back up the following:
 
 - Passwords in clear, just in case the GPG keys restoration fails. VERY UNSAFE, as it exposes your passwords in clear text though.
 
   ```bash
-  cd .password-store
+  cd ~/.password-store
   find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > ~/Downloads/pass.backup
   ```
 
@@ -33,34 +33,23 @@ Back up the following:
 
 # Installing Xubuntu
 
-Download the classic ISO file (not the minimal one). In the wizard, install the minimal Xubuntu, not the full one with useless programs.
+_Side note_: leaving Secure Boot on during the install process is fine, as long as you select "Enroll MOK" after rebooting, following the install.
+
+Download the minimal Xubuntu ISO file (not the classic one) and copy it onto a USB stick using `dd`.
+
+If using a Lenovo Thinkpad Gen 5 or newer, before booting off the USB stick, you have to enable "Allow Microsoft 3rd Party UEFI CA" in the BIOS -> Security -> Secure Boot. ([source](https://askubuntu.com/a/1528808))
+
+Tick both "third-party software for graphics and Wi-Fi hardware" and "support for additional media formats" during the install.
 
 Use encrypted LVM on a ext4 filesystem (not ZFS). After the install, [we'll resize the SWAP partition](https://romainpellerin.eu/how-to-resize-an-encrypted-swap-partition-lvm.html), as by default it's too small (less than 1G).
 
 # What to do after a fresh install of Xubuntu?
 
-![How to secure your laptop](https://raw.githubusercontent.com/rpellerin/dotfiles/master/Pictures/secure-laptop.png)
-
-## 1. BIOS and Grub
-
-_Side note_: leaving Secure Boot on during the install process is fine, as long as you select "Enroll MOK" after rebooting, following the install.
-
-Upgrade the bios by downloading the latest image from [Dell.com](http://www.dell.com/support/home/us/en/19/product-support/product/latitude-14-7480-laptop/drivers?os=biosa). (Alternatively, you can try to download the image from [this website](https://fwupd.org/lvfs/devicelist) and install it through "Software" (simply open the file).) Then:
-
-```bash
-sudo cp Downloads/Latitude_7x80_1.4.6.exe /boot/efi # Not mv because of permissions
-rm Downloads/Latitude_7x80_1.4.6.exe
-```
-
-Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter BIOS setup. Set a password for the BIOS and the hard drive. [If you want to disable Bluetooth, Advanced > Devices > Onboard](https://www.dell.com/community/Inspiron/Disabling-Bluetooth-from-BIOS/td-p/8069806). Don't forget to remove the file from `/boot/efi` on the next boot.
-
-## 2. First steps and essential packages
-
 1. Copy all the files you backed up, restore `$HOME/.ssh`.
 2. In Thunar, show hidden files.
 3. `git clone git@github.com:rpellerin/dotfiles.git`
 
-### Packages to install
+## Packages to install
 
 ```bash
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
@@ -73,8 +62,10 @@ sudo apt-add-repository ppa:git-core/ppa
 sudo apt update
 sudo apt upgrade
 
+snap refresh
 snap install firefox
 snap install thunderbird
+
 # Do not install Slack as snap, as there are two bugs, still unresolved as of 2024:
 # - https://forum.snapcraft.io/t/slack-snap-window-has-no-icon/3589/13
 # - https://www.reddit.com/r/Slack/comments/uw8vxp/when_i_rightclick_to_copy_a_link_slack_hangs_for/
@@ -146,13 +137,13 @@ python3 -m venv ~/python-venv --system-site-packages
 - `redshift-gtk` is an alternative to xflux
 - `zenity` is a simple interactive dialog
 
-### VPN files
+## VPN files
 
 Add a VPN file through the systray, by clicking on the Wifi icon, then VPN Connections > Configure VPN... > Add a new connection > Import a saved VPN configuration...
 
 Alternatively, add `.ovpn` files to the systray: `nmcli connection import type openvpn file <file>`
 
-## 3. Optional packages
+## Optional packages
 
 ```bash
 sudo apt install texlive-full \
@@ -189,7 +180,7 @@ sudo apt purge yt-dlp
 - `icoutils` to create Microsoft Windows(R) icon and cursor files
 - `synaptic`: see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
 
-## 4. Pass, SSH and GPG keys
+## Pass, SSH and GPG keys
 
 ### Pass
 
@@ -316,7 +307,7 @@ Put the following in `~/.gitconfig_local`:
 
 To get the IDs of available keys, run: `gpg2 --list-secret-keys --keyid-format LONG`. The ID is on a "sec" line, after "rsa4096/".
 
-## 5. Google Chrome
+## Google Chrome
 
 ### Google Chrome
 
@@ -336,7 +327,7 @@ rm -f /tmp/google-chrome-stable.deb
 snap install chromium
 ```
 
-## 6. Visual Studio Code
+## Visual Studio Code
 
 [Install VS code](https://code.visualstudio.com/docs/setup/linux#_snap): `snap install --classic code`
 
@@ -354,7 +345,7 @@ code --install-extension "bradlc.vscode-tailwindcss"
 code --install-extension "sianglim.slim"
 ```
 
-## 7. Firefox
+## Firefox
 
 If Firefox fails to reuse your restored profile(s), launch it with `firefox --ProfileManager`.
 
@@ -393,7 +384,7 @@ Log in to your Firefox account.
   - [tabliss.io](https://tabliss.io/)
   - [React Developer Tools](https://addons.mozilla.org/en-US/firefox/addon/react-devtools)
 
-## 8. Thunderbird
+## Thunderbird
 
 Before opening it up, to restore all email accounts, preferences and emails, you can import the directory `~/snap/thunderbird/common/.thunderbird` from another computer. When launching Thunderbird, if it fails to use your restored profile(s), launch it with `thunderbird --ProfileManager`.
 
@@ -405,7 +396,7 @@ If using a Gmail account, under "Server Settings, in "Advanced Account Settings"
 
 Don't forget to update the retention settings of folders, and where to save sent/draft/archives/deleted/etc emails.
 
-## 9. ZSH + Prezto
+## ZSH + Prezto
 
 ```bash
 zsh
@@ -420,7 +411,7 @@ chsh -s /bin/zsh # Now log out of your session and back in for this to take effe
 
 At this point, CTRL+R and CTRL+T do not work. Step #18 (Fuzzy finder) will make it work.
 
-## 10. [mise](https://github.com/jdx/mise) (replaces [NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)) + NodeJS
+## [mise](https://github.com/jdx/mise) (replaces [NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)) + NodeJS
 
 ```bash
 curl https://mise.run | sh
@@ -431,7 +422,7 @@ mise doctor # Check that it works
 mise use --global node
 ```
 
-## 11. Firewall
+## Firewall (not recommended anymore - fairly useless on a desktop)
 
 ```bash
 cd dotfiles # cd to this git repo
@@ -441,7 +432,7 @@ sudo chown root:root /etc/systemd/system/firewall.service
 sudo systemctl enable firewall
 ```
 
-## 12. Custom conf files
+## Custom conf files
 
 ```bash
 cd dotfiles # cd to this git repo
@@ -480,7 +471,26 @@ ln -sf "$REPO_DIR/.zpreztorc" $HOME/
 # Bring back your backup of `.zsh_history`, and put it in `$HOME/.zsh_history`.
 ```
 
-### Script to switch sound to HDMI when connecting
+## Update BIOS
+
+Connec the laptop to AC power, then:
+
+```bash
+maj-bios
+```
+
+### Alternative (old way)
+
+You can also update the BIOS by downloading the latest image from [Dell.com](http://www.dell.com/support/home/us/en/19/product-support/product/latitude-14-7480-laptop/drivers?os=biosa). (Alternatively, you can try to download the image from [this website](https://fwupd.org/lvfs/devicelist) and install it through "Software" (simply open the file).) Then:
+
+```bash
+sudo cp Downloads/Latitude_7x80_1.4.6.exe /boot/efi # Not mv because of permissions
+rm Downloads/Latitude_7x80_1.4.6.exe
+```
+
+Reboot, hit F12 to initiate the update. Once done, reboot and press F2 to enter BIOS setup. Set a password for the BIOS and the hard drive. [If you want to disable Bluetooth, Advanced > Devices > Onboard](https://www.dell.com/community/Inspiron/Disabling-Bluetooth-from-BIOS/td-p/8069806). Don't forget to remove the file from `/boot/efi` on the next boot.
+
+## Script to switch sound to HDMI when connecting
 
 ```bash
 sudo su
@@ -501,7 +511,7 @@ systemctl daemon-reload # Not sure this is needed
 # Debug with `udevadm monitor --environment`
 ```
 
-### Misc
+## Misc
 
 ```bash
 sudo apt install acpid
@@ -514,17 +524,17 @@ sudo systemctl restart acpid.service
 update-gh
 ```
 
-## 13. Edit terminal preferences
+## Edit terminal preferences
 
 - In `General`, unlimited scrollback. Disable the scrollbar being shown (`Scrollbar is: Disabled`).
 - In `Appearance`, uncheck menu bar and borders around new windows. Set the font size to 13.
 - In `Colors`, use the `Xubuntu dark` theme, check `Cursor color` and leave the default one.
 
-## 14. Set up Vim
+## Set up Vim
 
 Just open Vim once and let Vim-Plug install all of the listed plugins. Ignore the errors the first time you open Vim, it's because plugins are not yet install. Relaunch it again after, the errors should not appear this time.
 
-## 15. All settings
+## All settings
 
 On the desktop, right click, "Desktop Settings". In the tab "Icons", hide the Home folder icon.
 
@@ -568,7 +578,7 @@ Open the settings manager and do:
 - In `Notifications`, log all notifications but not applications.
 - In `Mouse and Touchpad`, set the duration for `Disable touchpad while typing` to 0.4s. Also enable horizontal scrolling and `Tap touchpad to click`.
 
-## 16. Fine tune PulseAudio (for Ubuntu older than 24.04. Since 24.04, Pipewire is the default audio server, replacing Pulseaudio)
+## Fine tune PulseAudio (for Ubuntu older than 24.04. Since 24.04, Pipewire is the default audio server, replacing Pulseaudio)
 
 In `/etc/pulse/default.pa`, disable changing the source to the Dell docking station:
 
@@ -587,7 +597,7 @@ load-module module-bluetooth-policy auto_switch=2
 
 ```
 
-## 16. Fine tune Pipewire
+## Fine tune Pipewire
 
 Automatically switching between HiFi bluetooth and bluetooth with microphone is natively done.
 
@@ -619,7 +629,7 @@ monitor.alsa.rules = [
 systemctl --user restart wireplumber
 ```
 
-## 17. Disabling Bluetooth on startup (optional)
+## Disabling Bluetooth on startup (optional)
 
 In #1 we saw how to hardware disable it. Here we have a look at software disabling it.
 
@@ -633,7 +643,7 @@ You can always re-enable bluetooth through the icon in the systray.
 
 To permanently disable bluetooth, and have it not even shown in the systray, do: `sudo systemctl disable bluetooth`
 
-## 18. Fuzzy finder
+## Fuzzy finder
 
 ```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -642,7 +652,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 # Do you want to enable key bindings? Yes
 ```
 
-## 19. Hardening security and checking for malwares
+## Hardening security and checking for malwares
 
 ```bash
 sudo apt install rkhunter lynis chkrootkit
@@ -661,7 +671,7 @@ sudo chkrootkit
 
 It is advised to run these tools daily as cron jobs.
 
-## 20. Allow PDF edition
+## Allow PDF edition
 
 In `/etc/ImageMagick-6/policy.xml`, comment out the last 6 lines:
 
@@ -680,7 +690,7 @@ And increase this line to 8GiB:
 <policy domain="resource" name="disk" value="8GiB"/>
 ```
 
-## 21. [Enable fingerprint login](https://askubuntu.com/questions/1393550/enabling-fingerprint-login-in-xubuntu)
+## [Enable fingerprint login](https://askubuntu.com/questions/1393550/enabling-fingerprint-login-in-xubuntu)
 
 If your device is compatible (run `lsusb` and compare with [this list](https://fprint.freedesktop.org/supported-devices.html)), then:
 
