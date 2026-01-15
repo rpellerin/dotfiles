@@ -48,9 +48,14 @@ In the install wizard, tick both "third-party software for graphics and Wi-Fi ha
 
 Use encrypted LVM on a ext4 filesystem (not ZFS). After the install, [we'll resize the SWAP partition](https://romainpellerin.eu/how-to-resize-an-encrypted-swap-partition-lvm.html), as by default it's too small (less than 1G).
 
+In the BIOS, do:
+
+- Under `Config`, have the `fn` key disabled by default, set F1-F12 by default instead
+- Under `Security`, add a Power-On password to turn on the laptop, optionally add one to unlock the SDD (NVMe1 Password)
+
 # What to do after a fresh install of Xubuntu?
 
-1. Copy the archive you backed up, in `~/Downloads`, then `tar -xzvf backup_pc.tar.gz`, then restore `$HOME/.ssh` and `$HOME/.gnupg`.
+1. Copy the archive you backed up, in `~/Downloads`, then `tar -xzvf backup_pc.tar.gz`, then restore `$HOME/.ssh` and `$HOME/.gnupg`. Also copy the rest of the backup where the files belong.
 2. In Thunar, show hidden files.
 3. `git clone git@github.com:rpellerin/dotfiles.git`
 
@@ -71,7 +76,7 @@ snap refresh
 snap install firefox
 snap install thunderbird
 
-# Do not install Slack as snap, as there are two bugs, still unresolved as of 2024:
+# Do not install Slack as snap (prefer .deb), as there are two bugs, still unresolved as of 2024:
 # - https://forum.snapcraft.io/t/slack-snap-window-has-no-icon/3589/13
 # - https://www.reddit.com/r/Slack/comments/uw8vxp/when_i_rightclick_to_copy_a_link_slack_hangs_for/
 
@@ -140,12 +145,6 @@ python3 -m venv ~/python-venv --system-site-packages
 - `redshift-gtk` is an alternative to xflux
 - `zenity` is a simple interactive dialog
 
-## VPN files
-
-Add a VPN file through the systray, by clicking on the Wifi icon, then VPN Connections > Configure VPN... > Add a new connection > Import a saved VPN configuration...
-
-Alternatively, add `.ovpn` files to the systray: `nmcli connection import type openvpn file <file>`
-
 ## Optional packages
 
 ```bash
@@ -182,6 +181,12 @@ sudo apt purge yt-dlp
 - `exiftool` and `jhead` are for EXIF data
 - `icoutils` to create Microsoft Windows(R) icon and cursor files
 - `synaptic`: see http://askubuntu.com/questions/76/whats-the-difference-between-package-managers
+
+## VPN files
+
+Add a VPN file through the systray, by clicking on the Wifi icon, then VPN Connections > Configure VPN... > Add a new connection > Import a saved VPN configuration...
+
+Alternatively, add `.ovpn` files to the systray: `nmcli connection import type openvpn file <file>`
 
 ## Pass, SSH and GPG keys
 
@@ -335,16 +340,19 @@ snap install chromium
 [Install VS code](https://code.visualstudio.com/docs/setup/linux#_snap): `snap install --classic code`
 
 ```bash
-code --install-extension "esbenp.prettier-vscode"
-code --install-extension "ruby-syntax-tree.vscode-syntax-tree"
+code --install-extension "Anthropic.claude-code"
+code --install-extension "bradlc.vscode-tailwindcss"
 code --install-extension "dbaeumer.vscode-eslint"
 code --install-extension "eamodio.gitlens"
-code --install-extension "Shopify.ruby-lsp"
-code --install-extension "noku.rails-run-spec-vscode"
+code --install-extension "esbenp.prettier-vscode"
+code --install-extension "GitHub.copilot-chat"
 code --install-extension "GitHub.copilot"
 code --install-extension "jasonnutter.vscode-codeowners"
+code --install-extension "mechatroner.rainbow-csv"
 code --install-extension "misogi.ruby-rubocop"
-code --install-extension "bradlc.vscode-tailwindcss"
+code --install-extension "noku.rails-run-spec-vscode"
+code --install-extension "ruby-syntax-tree.vscode-syntax-tree"
+code --install-extension "Shopify.ruby-lsp"
 code --install-extension "sianglim.slim"
 ```
 
