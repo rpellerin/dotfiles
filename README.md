@@ -8,28 +8,33 @@
 
 # What to do before reformating a computer?
 
+`mkdir -p ~/Downloads/backup_pc/`
+
 Back up the following:
 
-- Passwords in clear, just in case the GPG keys restoration fails. VERY UNSAFE, as it exposes your passwords in clear text though.
-
-  ```bash
-  cd ~/.password-store
-  find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > ~/Downloads/pass.backup
-  ```
-
-- Back up your [Firefox profile](https://support.mozilla.org/en-US/kb/back-and-restore-information-firefox-profiles) and [Thunderbird profile](https://support.mozilla.org/en-US/kb/thunderbird-export)
-- cron jobs: `crontab -l > ~/Downloads/cronjobs.backup`
+- Your [Firefox profile](https://support.mozilla.org/en-US/kb/back-and-restore-information-firefox-profiles) and [Thunderbird profile](https://support.mozilla.org/en-US/kb/thunderbird-export)
+- cron jobs: `crontab -l > ~/Downloads/backup_pc/cronjobs.backup`
 - Some folders/files from `$HOME/`:
 
-  - `.config/` (you probably won't need it, just in case)
   - `.password-store/`
   - SSH and GPG keys (`$HOME/.ssh`, `$HOME/.gnupg`)
-  - `Desktop/`, `Documents/`, `Downloads/`, `Pictures/`, `Videos/`
+  - `Desktop/`, `Documents/`, `Pictures/`, `Videos/`, `Nextcloud/`
   - `.gitconfig_local`
   - `.private_aliases`
   - `.zsh_history`
   - `~/snap/thunderbird/common/.thunderbird`, `~/snap/firefox/common/.mozilla/firefox/` (just in case the profile import fails later)
   - `~HOME/git/` does not need to be backed up, everything should be present on GitHub.
+
+  ==> `cp --parents -r $HOME/{.password-store,.ssh,.gnupg,Desktop,Documents,Pictures,Videos,Nextcloud,.gitconfig_local,.private_aliases,.zsh_history,snap/thunderbird/common/.thunderbird,snap/firefox/common/.mozilla/firefox/} ~/Downloads/backup_pc`
+
+- Passwords in clear, just in case the GPG keys restoration fails. VERY UNSAFE, as it exposes your passwords in clear text though.
+
+  ```bash
+  cd ~/.password-store
+  find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > ~/Downloads/backup_pc/pass.backup
+  ```
+
+Finally: `cd ~/Downloads/ ; tar -czvf backup_pc.tar.gz backup_pc`
 
 # Installing Xubuntu
 
@@ -39,13 +44,13 @@ Download the minimal Xubuntu ISO file (not the classic one) and copy it onto a U
 
 If using a Lenovo Thinkpad Gen 5 or newer, before booting off the USB stick, you have to enable "Allow Microsoft 3rd Party UEFI CA" in the BIOS -> Security -> Secure Boot. ([source](https://askubuntu.com/a/1528808))
 
-Tick both "third-party software for graphics and Wi-Fi hardware" and "support for additional media formats" during the install.
+In the install wizard, tick both "third-party software for graphics and Wi-Fi hardware" and "support for additional media formats" during the install.
 
 Use encrypted LVM on a ext4 filesystem (not ZFS). After the install, [we'll resize the SWAP partition](https://romainpellerin.eu/how-to-resize-an-encrypted-swap-partition-lvm.html), as by default it's too small (less than 1G).
 
 # What to do after a fresh install of Xubuntu?
 
-1. Copy all the files you backed up, restore `$HOME/.ssh`.
+1. Copy the archive you backed up, in `~/Downloads`, then `tar -xzvf backup_pc.tar.gz`, then restore `$HOME/.ssh` and `$HOME/.gnupg`.
 2. In Thunar, show hidden files.
 3. `git clone git@github.com:rpellerin/dotfiles.git`
 
@@ -88,7 +93,6 @@ sudo apt install gnupg2 \
     xclip \
     autojump \
     tree \
-    jq \
     tumbler-plugins-extra \
     imagemagick \
     inotify-tools \
@@ -107,7 +111,6 @@ sudo apt install gnupg2 \
     libreoffice-l10n-en-gb \
     libreoffice-help-en-gb \
     libreoffice-help-fr \
-    unattended-upgrades \
     redshift-gtk \
     simplescreenrecorder \
     zenity \
@@ -196,7 +199,7 @@ sudo apt install oathtool dmenu # oathtool for OTPs, dmenu for passmenu
 sudo apt install pass pass-extension-otp
 ```
 
-### SSH
+### SSH (only if not reusing any from the backup)
 
 ```bash
 ssh-keygen -t rsa -b 4096 -C "<public github email address>" -f .ssh/id_rsa
@@ -205,7 +208,7 @@ cat .ssh/id_rsa.pub | xclip -i -selection clip-board
 
 Paste what you just copied at [https://github.com/settings/keys](https://github.com/settings/keys)
 
-### GPG
+### GPG (only if not reusing any from the backup)
 
 Only if you don't have one already. For Github to verify your commits, mostly. Also useful for `pass`.
 
