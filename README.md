@@ -551,7 +551,7 @@ Open the settings manager and do:
 
 - Click _Additional Drivers_ to make sure all devices are being used.
 - Set the keyboard layout to US international with dead keys.
-- Set up the xfce panel (top bar): show the battery indicator with percent and time remaining (if on a laptop), set the date, time and timezone (clock format: `%a %d %b %T %p`), sync the time with the Internet. Add, from left to right: CPU, Network and System Load monitors.
+- Set up the xfce panel (top bar): show the battery indicator with percent and time remaining (if on a laptop), set the date, time and timezone (clock format: `%a %d %b %T`), sync the time with the Internet. Add, from left to right: CPU, Network and System Load monitors.
 - In `Window Manager` > `Keyboard`, set the keyboard shortcuts (_Tile window to the x_, _Show desktop_).
 - In `Screensaver`:
 
