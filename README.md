@@ -384,7 +384,7 @@ Log in to your Firefox account.
   - OPTIONAL: Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
   - OPTIONAL: Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query`
   - OPTIONAL: Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0`
-- In [about:preferences#general](about:preferences#general), check `Open previous windows and tabs` and unckeck `Ctrl+Tab cycles through tabs in recently used order` (should be already unchecked)
+- In [about:preferences#general](about:preferences#general), check `Open previous windows and tabs` and unckeck `Ctrl+Tab cycles through tabs in recently used order` (should be already unchecked). Also check `Keep playing videos in Picture-in-Picture when switching tabs`.
 - In [about:preferences#search](about:preferences#search), uncheck `Show search suggestions ahead of browsing history in address bar results`
 - In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Check `Enable HTTPS-Only Mode in all windows`. For `Enhanced Tracking Protection`, check `Strict`. Make sure to tick `Tell websites not to sell or share my data` under "Website Privacy Preferences".
 
