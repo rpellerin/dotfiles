@@ -365,8 +365,7 @@ If Firefox fails to reuse your restored profile(s), launch it with `firefox --Pr
 Log in to your Firefox account.
 
 - In [about:config](about:config), do:
-  - Search for `media.ffmpeg.vaapi.enabled` and change to `true`
-  - Add `places.history.expiration.max_pages` and set it to 10000000
+  - Add `places.history.expiration.max_pages` and set it to 10000000 (might not be recommended to change this setting)
   - If you want to disable the HTTP referer: set `network.http.sendRefererHeader` to `0` (note: this will break many websites, from my experience)
   - Set `view_source.wrap_long_lines` to `true`.
   - Set `browser.tabs.warnOnClose` to `false`.
@@ -375,23 +374,22 @@ Log in to your Firefox account.
   - Set `network.dns.disablePrefetch` to `true`.
   - Set `datareporting.healthreport.uploadEnabled` to `false`.
   - [If you don't care about Firefox remembering the zoom level you picked on a website basis](https://bugzilla.mozilla.org/show_bug.cgi?id=1377820), set `privacy.resistFingerprinting` to `true` (this voids the effect of `general.useragent.override`).
-  - Set `gfx.webrender.enabled` to `true`.
   - Set `geo.enabled` to `false`.
   - Set `browser.safebrowsing.malware.enabled` to `false`.
   - Set `browser.safebrowsing.phishing.enabled` to `false`
-  - Set `browser.send_pings` to `false`
+  - Set `browser.send_pings` to `false` (should be `false` by default)
   - Set `dom.battery.enabled` to `false`
-  - Set `media.navigator.enabled` to `false`
+  - Set `media.navigator.enabled` to `false` (might lead to camera and mic not working on some websites)
   - Set `accessibility.blockautorefresh` to `true`
   - OPTIONAL: Set `network.trr.mode` to `2` ([https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/](https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/https://blog.nightly.mozilla.org/2018/06/01/improving-dns-privacy-in-firefox/) + [DNS-over-HTTPS functionality in Firefox](https://gist.github.com/bagder/5e29101079e9ac78920ba2fc718aceec)).
-  - OPTIONAL: Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query` and [`network.security.esni.enabled` to `true`](https://korben.info/comment-activer-les-dns-via-https-dans-firefox.html).
+  - OPTIONAL: Set `network.trr.uri` to `https://mozilla.cloudflare-dns.com/dns-query`
   - OPTIONAL: Set `general.useragent.override` to `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0`
-- In [about:preferences#general](about:preferences#general), check `Open previous windows and tabs` and unckeck `Ctrl+Tab cycles through tabs in recently used order`
+- In [about:preferences#general](about:preferences#general), check `Open previous windows and tabs` and unckeck `Ctrl+Tab cycles through tabs in recently used order` (should be already unchecked)
 - In [about:preferences#search](about:preferences#search), uncheck `Show search suggestions ahead of browsing history in address bar results`
-- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Check `Enable HTTPS-Only Mode in all windows`. For `Enhanced Tracking Protection`, check `Strict`. Make sure to be sending `Do Not Track` at all times.
+- In [about:preferences#privacy](about:preferences#privacy), uncheck everything under `Firefox Data Collection and Use`. Check `Enable HTTPS-Only Mode in all windows`. For `Enhanced Tracking Protection`, check `Strict`. Make sure to tick `Tell websites not to sell or share my data` under "Website Privacy Preferences".
 
 - Add these extensions:
-  - [Firefox Translations](https://addons.mozilla.org/en-US/firefox/addon/firefox-translations/)
+  - [Firefox Translations](https://addons.mozilla.org/en-US/firefox/addon/firefox-translations/) (included by default as of 2026 at least)
   - [tabliss.io](https://tabliss.io/)
   - [React Developer Tools](https://addons.mozilla.org/en-US/firefox/addon/react-devtools)
 
