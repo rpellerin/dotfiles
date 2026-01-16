@@ -57,7 +57,7 @@ In the BIOS, do:
 
 1. Copy the archive you backed up, in `~/Downloads`, then `tar -xzvf backup_pc.tar.gz`, then restore `$HOME/.ssh` and `$HOME/.gnupg`. Also copy the rest of the backup where the files belong.
 2. In Thunar, show hidden files.
-3. `git clone git@github.com:rpellerin/dotfiles.git`
+3. `mkdir -p ~/git ; cd ~/git ; git clone git@github.com:rpellerin/dotfiles.git`
 
 ## Packages to install
 
