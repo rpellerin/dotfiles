@@ -714,8 +714,8 @@ sudo systemctl enable tlp
 `sudo vim /etc/tlp.conf`:
 
 ```txt
-START_CHARGE_THRESH_BAT0=55
-STOP_CHARGE_THRESH_BAT0=90
+START_CHARGE_THRESH_BAT0=45
+STOP_CHARGE_THRESH_BAT0=80
 ```
 
 ```bash
