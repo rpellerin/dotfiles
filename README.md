@@ -458,6 +458,8 @@ sudo chown root:root /etc/systemd/system/firewall.service
 sudo systemctl enable firewall
 ```
 
+A better alternative is to use [ufw](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu).
+
 ## Custom conf files
 
 ```bash
