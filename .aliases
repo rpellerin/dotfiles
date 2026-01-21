@@ -121,6 +121,7 @@ function maj() {
     /usr/bin/python3 -m venv --upgrade ~/python-venv/
     python -m pip install --upgrade yt-dlp pip
     sudo apt clean
+    brew update && brew upgrade
     notify-send -t 10000 "Update and upgrade done"
 }
 
