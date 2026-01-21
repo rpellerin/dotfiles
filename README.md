@@ -34,6 +34,23 @@ Back up the following:
   find . -type f -iname "*.gpg" -printf '%P\n' | sed 's/\.gpg$//' | while read line; do echo "$line:$(pass show $line)"; done > ~/Downloads/backup_pc/pass.backup
   ```
 
+- Wifi passwords:
+
+  ```bash
+  touch ~/Downloads/backup_pc/wifi_list.txt
+  for conn in $(nmcli -t -f NAME connection show); do 
+    PASS=$(sudo nmcli -s -g 802-11-wireless-security.psk connection show "$conn" 2>/dev/null)
+    if [ -n "$PASS" ]; then
+        echo "$conn:$PASS" >> ~/Downloads/backup_pc/wifi_list.txt
+    fi
+  done
+
+  # Later, to import:
+  while IFS=: read -r ssid pass; do
+    sudo nmcli device wifi connect "$ssid" password "$pass"
+  done < ~/Downloads/backup_pc/wifi_list.txt
+  ```
+
 Finally: `cd ~/Downloads/ ; tar -czvf backup_pc.tar.gz backup_pc`
 
 # Installing Xubuntu
