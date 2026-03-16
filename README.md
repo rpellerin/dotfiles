@@ -18,7 +18,7 @@ Back up the following:
 
   - `.password-store/`
   - SSH and GPG keys (`$HOME/.ssh`, `$HOME/.gnupg`)
-  - `Desktop/`, `Documents/`, `Pictures/`, `Videos/`, `Nextcloud/`
+  - `Desktop/`, `Documents/`, `Pictures/`, `Videos/`, `.claude/`
   - `.gitconfig_local`
   - `.private_aliases`
   - `.zsh_history`
