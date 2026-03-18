@@ -499,6 +499,14 @@ ln -sf "$REPO_DIR/.zpreztorc" $HOME/
 # Bring back your backup of `.zsh_history`, and put it in `$HOME/.zsh_history`.
 ```
 
+If you are using Claude Code, you might want to surround the sourcing of Zprezto with a check, to prevent parsing issues when running Claude, like so:
+
+```bash
+if [[ -z "${CLAUDECODE}" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+```
+
 ## Install Github CLI and update the BIOS
 
 Connec the laptop to AC power, then:
