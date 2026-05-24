@@ -354,7 +354,7 @@ snap install chromium
 
 ## Visual Studio Code
 
-[Install VS code](https://code.visualstudio.com/docs/setup/linux#_snap): `snap install --classic code`
+[Install VS code]([https://code.visualstudio.com/docs/setup/linux#_snap](https://code.visualstudio.com/Download)) by downloading the .deb file. Never with `snap`, otherwise the shell environment of terminal inside VS code will always be sandboxed. For instance, Ruby gems will be installed elsewhere when typing `gem install` from withing VS code as opposed to a regular terminal. Snap alawys maintains an isolated environment for user-specific configuration data.
 
 ```bash
 code --install-extension "Anthropic.claude-code"
